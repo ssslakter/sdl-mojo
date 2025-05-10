@@ -14,7 +14,7 @@ def main():
     print("press WASD to move box")
     alias screen_width = 640
     alias screen_height = 480
-    sdl_init(SDL_InitFlags.SDL_INIT_VIDEO | SDL_InitFlags.SDL_INIT_AUDIO | SDL_InitFlags.SDL_INIT_EVENTS | SDL_InitFlags.SDL_INIT_JOYSTICK)
+    sdl_init(SDL_InitFlags.SDL_INIT_VIDEO | SDL_InitFlags.SDL_INIT_AUDIO | SDL_InitFlags.SDL_INIT_EVENTS | SDL_InitFlags.SDL_INIT_JOYSTICK | SDL_InitFlags.SDL_INIT_GAMEPAD)
 
     var window = Ptr[SDL_Window]()
     var renderer = Ptr[SDL_Renderer]()
@@ -53,6 +53,9 @@ def main():
                 print("SDL_EVENT_DROP_BEGIN")
             elif event[SDL_CommonEvent].type == SDL_EventType.SDL_EVENT_DROP_FILE:
                 print("SDL_EVENT_DROP_FILE")
+            elif event[SDL_CommonEvent].type == SDL_EventType.SDL_EVENT_GAMEPAD_ADDED:
+                print("SDL_EVENT_GAMEPAD_ADDED")
+
 
         var acc = SDL_FPoint(0, 0)
         if key_state[SDL_Scancode.SDL_SCANCODE_W]:

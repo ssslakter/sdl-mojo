@@ -13,7 +13,7 @@ commands:
 
 `magic run build` - Generate the bindings
 
-`magic run build` - Run the test file
+`magic run test` - Run the test file
 
 # Notes
 The generator attempts to turn cases of error on null, and error on false, into raising functions. 
