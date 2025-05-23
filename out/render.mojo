@@ -1207,7 +1207,7 @@ fn sdl_update_texture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, m
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_update_yuvtexture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], yplane: Ptr[UInt8, mut=False], ypitch: c_int, uplane: Ptr[UInt8, mut=False], upitch: c_int, vplane: Ptr[UInt8, mut=False], vpitch: c_int) raises:
+fn sdl_update_yuv_texture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uplane: Ptr[UInt8, mut=False], upitch: c_int, vplane: Ptr[UInt8, mut=False], vpitch: c_int) raises:
     """Update a rectangle within a planar YV12 or IYUV texture with new pixel
     data.
 
@@ -1219,9 +1219,9 @@ fn sdl_update_yuvtexture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect
         texture: The texture to update.
         rect: A pointer to the rectangle of pixels to update, or NULL to
               update the entire texture.
-        yplane: The raw pixel data for the Y plane.
-        ypitch: The number of bytes between rows of pixel data for the Y
-                plane.
+        y_plane: The raw pixel data for the Y plane.
+        y_pitch: The number of bytes between rows of pixel data for the Y
+                 plane.
         uplane: The raw pixel data for the U plane.
         upitch: The number of bytes between rows of pixel data for the U
                 plane.
@@ -1239,12 +1239,12 @@ fn sdl_update_yuvtexture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect
     Docs: https://wiki.libsdl.org/SDL3/SDL_UpdateYUVTexture.
     """
 
-    ret = _get_dylib_function[lib, "SDL_UpdateYUVTexture", fn (texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], yplane: Ptr[UInt8, mut=False], ypitch: c_int, uplane: Ptr[UInt8, mut=False], upitch: c_int, vplane: Ptr[UInt8, mut=False], vpitch: c_int) -> Bool]()(texture, rect, yplane, ypitch, uplane, upitch, vplane, vpitch)
+    ret = _get_dylib_function[lib, "SDL_UpdateYUVTexture", fn (texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uplane: Ptr[UInt8, mut=False], upitch: c_int, vplane: Ptr[UInt8, mut=False], vpitch: c_int) -> Bool]()(texture, rect, y_plane, y_pitch, uplane, upitch, vplane, vpitch)
     if not ret:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_update_nvtexture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], yplane: Ptr[UInt8, mut=False], ypitch: c_int, uvplane: Ptr[UInt8, mut=False], uvpitch: c_int) raises:
+fn sdl_update_nv_texture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uv_plane: Ptr[UInt8, mut=False], uv_pitch: c_int) raises:
     """Update a rectangle within a planar NV12 or NV21 texture with new pixels.
 
     You can use SDL_UpdateTexture() as long as your pixel data is a contiguous
@@ -1255,12 +1255,12 @@ fn sdl_update_nvtexture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect,
         texture: The texture to update.
         rect: A pointer to the rectangle of pixels to update, or NULL to
               update the entire texture.
-        yplane: The raw pixel data for the Y plane.
-        ypitch: The number of bytes between rows of pixel data for the Y
-                plane.
-        uvplane: The raw pixel data for the UV plane.
-        uvpitch: The number of bytes between rows of pixel data for the UV
+        y_plane: The raw pixel data for the Y plane.
+        y_pitch: The number of bytes between rows of pixel data for the Y
                  plane.
+        uv_plane: The raw pixel data for the UV plane.
+        uv_pitch: The number of bytes between rows of pixel data for the UV
+                  plane.
 
     Raises:
         Raises on failure; call SDL_GetError() for more
@@ -1272,7 +1272,7 @@ fn sdl_update_nvtexture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect,
     Docs: https://wiki.libsdl.org/SDL3/SDL_UpdateNVTexture.
     """
 
-    ret = _get_dylib_function[lib, "SDL_UpdateNVTexture", fn (texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], yplane: Ptr[UInt8, mut=False], ypitch: c_int, uvplane: Ptr[UInt8, mut=False], uvpitch: c_int) -> Bool]()(texture, rect, yplane, ypitch, uvplane, uvpitch)
+    ret = _get_dylib_function[lib, "SDL_UpdateNVTexture", fn (texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uv_plane: Ptr[UInt8, mut=False], uv_pitch: c_int) -> Bool]()(texture, rect, y_plane, y_pitch, uv_plane, uv_pitch)
     if not ret:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
@@ -2466,7 +2466,7 @@ fn sdl_render_texture_tiled(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_render_texture9grid(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], left_width: c_float, right_width: c_float, top_height: c_float, bottom_height: c_float, scale: c_float, dstrect: Ptr[SDL_FRect, mut=False]) raises:
+fn sdl_render_texture_9grid(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], left_width: c_float, right_width: c_float, top_height: c_float, bottom_height: c_float, scale: c_float, dstrect: Ptr[SDL_FRect, mut=False]) raises:
     """Perform a scaled copy using the 9-grid algorithm to the current rendering
     target at subpixel precision.
 

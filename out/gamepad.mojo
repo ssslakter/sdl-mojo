@@ -680,7 +680,7 @@ fn sdl_get_gamepad_player_index_for_id(instance_id: SDL_JoystickID) -> c_int:
     return _get_dylib_function[lib, "SDL_GetGamepadPlayerIndexForID", fn (instance_id: SDL_JoystickID) -> c_int]()(instance_id)
 
 
-fn sdl_get_gamepad_guidfor_id(instance_id: SDL_JoystickID) -> SDL_GUID:
+fn sdl_get_gamepad_guid_for_id(instance_id: SDL_JoystickID) -> SDL_GUID:
     """Get the implementation-dependent GUID of a gamepad.
 
     This can be called before any gamepads are opened.
@@ -1761,7 +1761,7 @@ fn sdl_close_gamepad(gamepad: Ptr[SDL_Gamepad, mut=True]) -> None:
     return _get_dylib_function[lib, "SDL_CloseGamepad", fn (gamepad: Ptr[SDL_Gamepad, mut=True]) -> None]()(gamepad)
 
 
-fn sdl_get_gamepad_apple_sfsymbols_name_for_button(gamepad: Ptr[SDL_Gamepad, mut=True], button: SDL_GamepadButton) -> Ptr[c_char, mut=False]:
+fn sdl_get_gamepad_apple_sf_symbols_name_for_button(gamepad: Ptr[SDL_Gamepad, mut=True], button: SDL_GamepadButton) -> Ptr[c_char, mut=False]:
     """Return the sfSymbolsName for a given button on a gamepad on Apple
     platforms.
 
@@ -1778,7 +1778,7 @@ fn sdl_get_gamepad_apple_sfsymbols_name_for_button(gamepad: Ptr[SDL_Gamepad, mut
     return _get_dylib_function[lib, "SDL_GetGamepadAppleSFSymbolsNameForButton", fn (gamepad: Ptr[SDL_Gamepad, mut=True], button: SDL_GamepadButton) -> Ptr[c_char, mut=False]]()(gamepad, button)
 
 
-fn sdl_get_gamepad_apple_sfsymbols_name_for_axis(gamepad: Ptr[SDL_Gamepad, mut=True], axis: SDL_GamepadAxis) -> Ptr[c_char, mut=False]:
+fn sdl_get_gamepad_apple_sf_symbols_name_for_axis(gamepad: Ptr[SDL_Gamepad, mut=True], axis: SDL_GamepadAxis) -> Ptr[c_char, mut=False]:
     """Return the sfSymbolsName for a given axis on a gamepad on Apple platforms.
 
     Args:
