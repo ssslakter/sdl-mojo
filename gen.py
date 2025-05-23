@@ -77,7 +77,14 @@ includes = [
 
 
 def snake_case(string: str) -> str:
-    return re.sub('([a-z])([A-Z])', r'\1_\2', string).lower()
+    # these do not follow usual CamelCase
+    no_camel = {'UVplane': 'UVPlane', 'UVpitch': 'UVPitch', 
+                'Yplane': 'YPlane', 'Ypitch': 'YPitch',
+                'VSync': 'Vsync'} 
+    for k, v in no_camel.items():
+        if k not in string: continue
+        string = string.replace(k, v)
+    return re.sub(r'(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])', '_', string).lower()
 
 def capitalize(string: str) -> str:
     return string.capitalize() if len(string) < 2 else (string[0].capitalize() + string[1:])

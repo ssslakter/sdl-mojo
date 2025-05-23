@@ -1205,7 +1205,7 @@ fn sdl_get_window_fullscreen_mode(window: Ptr[SDL_Window, mut=True]) -> Ptr[SDL_
     return _get_dylib_function[lib, "SDL_GetWindowFullscreenMode", fn (window: Ptr[SDL_Window, mut=True]) -> Ptr[SDL_DisplayMode, mut=False]]()(window)
 
 
-fn sdl_get_window_iccprofile(window: Ptr[SDL_Window, mut=True], size: Ptr[c_size_t, mut=True], out ret: Ptr[NoneType, mut=True]) raises:
+fn sdl_get_window_icc_profile(window: Ptr[SDL_Window, mut=True], size: Ptr[c_size_t, mut=True], out ret: Ptr[NoneType, mut=True]) raises:
     """Get the raw ICC profile data for the screen the window is currently on.
 
     Args:

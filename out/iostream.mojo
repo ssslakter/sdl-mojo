@@ -175,7 +175,7 @@ struct SDL_IOStream:
     pass
 
 
-fn sdl_iofrom_file(owned file: String, owned mode: String) -> Ptr[SDL_IOStream, mut=True]:
+fn sdl_io_from_file(owned file: String, owned mode: String) -> Ptr[SDL_IOStream, mut=True]:
     """Use this function to create a new SDL_IOStream structure for reading from
     and/or writing to a named file.
 
@@ -258,7 +258,7 @@ fn sdl_iofrom_file(owned file: String, owned mode: String) -> Ptr[SDL_IOStream, 
     return _get_dylib_function[lib, "SDL_IOFromFile", fn (file: Ptr[c_char, mut=False], mode: Ptr[c_char, mut=False]) -> Ptr[SDL_IOStream, mut=True]]()(file.unsafe_cstr_ptr(), mode.unsafe_cstr_ptr())
 
 
-fn sdl_iofrom_mem(mem: Ptr[NoneType, mut=True], size: c_size_t, out ret: Ptr[SDL_IOStream, mut=True]) raises:
+fn sdl_io_from_mem(mem: Ptr[NoneType, mut=True], size: c_size_t, out ret: Ptr[SDL_IOStream, mut=True]) raises:
     """Use this function to prepare a read-write memory buffer for use with
     SDL_IOStream.
 
@@ -299,7 +299,7 @@ fn sdl_iofrom_mem(mem: Ptr[NoneType, mut=True], size: c_size_t, out ret: Ptr[SDL
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_iofrom_const_mem(mem: Ptr[NoneType, mut=False], size: c_size_t, out ret: Ptr[SDL_IOStream, mut=True]) raises:
+fn sdl_io_from_const_mem(mem: Ptr[NoneType, mut=False], size: c_size_t, out ret: Ptr[SDL_IOStream, mut=True]) raises:
     """Use this function to prepare a read-only memory buffer for use with
     SDL_IOStream.
 
@@ -342,7 +342,7 @@ fn sdl_iofrom_const_mem(mem: Ptr[NoneType, mut=False], size: c_size_t, out ret: 
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_iofrom_dynamic_mem(out ret: Ptr[SDL_IOStream, mut=True]) raises:
+fn sdl_io_from_dynamic_mem(out ret: Ptr[SDL_IOStream, mut=True]) raises:
     """Use this function to create an SDL_IOStream that is backed by dynamically
     allocated memory.
 
@@ -441,7 +441,7 @@ fn sdl_close_io(context: Ptr[SDL_IOStream, mut=True]) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_get_ioproperties(context: Ptr[SDL_IOStream, mut=True]) -> SDL_PropertiesID:
+fn sdl_get_io_properties(context: Ptr[SDL_IOStream, mut=True]) -> SDL_PropertiesID:
     """Get the properties associated with an SDL_IOStream.
 
     Args:
@@ -460,7 +460,7 @@ fn sdl_get_ioproperties(context: Ptr[SDL_IOStream, mut=True]) -> SDL_PropertiesI
     return _get_dylib_function[lib, "SDL_GetIOProperties", fn (context: Ptr[SDL_IOStream, mut=True]) -> SDL_PropertiesID]()(context)
 
 
-fn sdl_get_iostatus(context: Ptr[SDL_IOStream, mut=True]) -> SDL_IOStatus:
+fn sdl_get_io_status(context: Ptr[SDL_IOStream, mut=True]) -> SDL_IOStatus:
     """Query the stream status of an SDL_IOStream.
 
     This information can be useful to decide if a short read or write was due
@@ -486,7 +486,7 @@ fn sdl_get_iostatus(context: Ptr[SDL_IOStream, mut=True]) -> SDL_IOStatus:
     return _get_dylib_function[lib, "SDL_GetIOStatus", fn (context: Ptr[SDL_IOStream, mut=True]) -> SDL_IOStatus]()(context)
 
 
-fn sdl_get_iosize(context: Ptr[SDL_IOStream, mut=True]) -> Int64:
+fn sdl_get_io_size(context: Ptr[SDL_IOStream, mut=True]) -> Int64:
     """Use this function to get the size of the data stream in an SDL_IOStream.
 
     Args:
@@ -812,7 +812,7 @@ fn sdl_read_s8(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int8, mut=True]) rai
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_u16le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt16, mut=True]) raises:
+fn sdl_read_u16_le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt16, mut=True]) raises:
     """Use this function to read 16 bits of little-endian data from an
     SDL_IOStream and return in native format.
 
@@ -843,7 +843,7 @@ fn sdl_read_u16le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt16, mut=True]
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_s16le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int16, mut=True]) raises:
+fn sdl_read_s16_le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int16, mut=True]) raises:
     """Use this function to read 16 bits of little-endian data from an
     SDL_IOStream and return in native format.
 
@@ -874,7 +874,7 @@ fn sdl_read_s16le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int16, mut=True])
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_u16be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt16, mut=True]) raises:
+fn sdl_read_u16_be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt16, mut=True]) raises:
     """Use this function to read 16 bits of big-endian data from an SDL_IOStream
     and return in native format.
 
@@ -905,7 +905,7 @@ fn sdl_read_u16be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt16, mut=True]
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_s16be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int16, mut=True]) raises:
+fn sdl_read_s16_be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int16, mut=True]) raises:
     """Use this function to read 16 bits of big-endian data from an SDL_IOStream
     and return in native format.
 
@@ -936,7 +936,7 @@ fn sdl_read_s16be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int16, mut=True])
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_u32le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt32, mut=True]) raises:
+fn sdl_read_u32_le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt32, mut=True]) raises:
     """Use this function to read 32 bits of little-endian data from an
     SDL_IOStream and return in native format.
 
@@ -967,7 +967,7 @@ fn sdl_read_u32le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt32, mut=True]
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_s32le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int32, mut=True]) raises:
+fn sdl_read_s32_le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int32, mut=True]) raises:
     """Use this function to read 32 bits of little-endian data from an
     SDL_IOStream and return in native format.
 
@@ -998,7 +998,7 @@ fn sdl_read_s32le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int32, mut=True])
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_u32be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt32, mut=True]) raises:
+fn sdl_read_u32_be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt32, mut=True]) raises:
     """Use this function to read 32 bits of big-endian data from an SDL_IOStream
     and return in native format.
 
@@ -1029,7 +1029,7 @@ fn sdl_read_u32be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt32, mut=True]
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_s32be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int32, mut=True]) raises:
+fn sdl_read_s32_be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int32, mut=True]) raises:
     """Use this function to read 32 bits of big-endian data from an SDL_IOStream
     and return in native format.
 
@@ -1060,7 +1060,7 @@ fn sdl_read_s32be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int32, mut=True])
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_u64le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt64, mut=True]) raises:
+fn sdl_read_u64_le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt64, mut=True]) raises:
     """Use this function to read 64 bits of little-endian data from an
     SDL_IOStream and return in native format.
 
@@ -1091,7 +1091,7 @@ fn sdl_read_u64le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt64, mut=True]
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_s64le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int64, mut=True]) raises:
+fn sdl_read_s64_le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int64, mut=True]) raises:
     """Use this function to read 64 bits of little-endian data from an
     SDL_IOStream and return in native format.
 
@@ -1122,7 +1122,7 @@ fn sdl_read_s64le(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int64, mut=True])
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_u64be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt64, mut=True]) raises:
+fn sdl_read_u64_be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt64, mut=True]) raises:
     """Use this function to read 64 bits of big-endian data from an SDL_IOStream
     and return in native format.
 
@@ -1153,7 +1153,7 @@ fn sdl_read_u64be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[UInt64, mut=True]
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_read_s64be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int64, mut=True]) raises:
+fn sdl_read_s64_be(src: Ptr[SDL_IOStream, mut=True], value: Ptr[Int64, mut=True]) raises:
     """Use this function to read 64 bits of big-endian data from an SDL_IOStream
     and return in native format.
 
@@ -1228,7 +1228,7 @@ fn sdl_write_s8(dst: Ptr[SDL_IOStream, mut=True], value: Int8) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_u16le(dst: Ptr[SDL_IOStream, mut=True], value: UInt16) raises:
+fn sdl_write_u16_le(dst: Ptr[SDL_IOStream, mut=True], value: UInt16) raises:
     """Use this function to write 16 bits in native format to an SDL_IOStream as
     little-endian data.
 
@@ -1255,7 +1255,7 @@ fn sdl_write_u16le(dst: Ptr[SDL_IOStream, mut=True], value: UInt16) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_s16le(dst: Ptr[SDL_IOStream, mut=True], value: Int16) raises:
+fn sdl_write_s16_le(dst: Ptr[SDL_IOStream, mut=True], value: Int16) raises:
     """Use this function to write 16 bits in native format to an SDL_IOStream as
     little-endian data.
 
@@ -1282,7 +1282,7 @@ fn sdl_write_s16le(dst: Ptr[SDL_IOStream, mut=True], value: Int16) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_u16be(dst: Ptr[SDL_IOStream, mut=True], value: UInt16) raises:
+fn sdl_write_u16_be(dst: Ptr[SDL_IOStream, mut=True], value: UInt16) raises:
     """Use this function to write 16 bits in native format to an SDL_IOStream as
     big-endian data.
 
@@ -1308,7 +1308,7 @@ fn sdl_write_u16be(dst: Ptr[SDL_IOStream, mut=True], value: UInt16) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_s16be(dst: Ptr[SDL_IOStream, mut=True], value: Int16) raises:
+fn sdl_write_s16_be(dst: Ptr[SDL_IOStream, mut=True], value: Int16) raises:
     """Use this function to write 16 bits in native format to an SDL_IOStream as
     big-endian data.
 
@@ -1334,7 +1334,7 @@ fn sdl_write_s16be(dst: Ptr[SDL_IOStream, mut=True], value: Int16) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_u32le(dst: Ptr[SDL_IOStream, mut=True], value: UInt32) raises:
+fn sdl_write_u32_le(dst: Ptr[SDL_IOStream, mut=True], value: UInt32) raises:
     """Use this function to write 32 bits in native format to an SDL_IOStream as
     little-endian data.
 
@@ -1361,7 +1361,7 @@ fn sdl_write_u32le(dst: Ptr[SDL_IOStream, mut=True], value: UInt32) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_s32le(dst: Ptr[SDL_IOStream, mut=True], value: Int32) raises:
+fn sdl_write_s32_le(dst: Ptr[SDL_IOStream, mut=True], value: Int32) raises:
     """Use this function to write 32 bits in native format to an SDL_IOStream as
     little-endian data.
 
@@ -1388,7 +1388,7 @@ fn sdl_write_s32le(dst: Ptr[SDL_IOStream, mut=True], value: Int32) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_u32be(dst: Ptr[SDL_IOStream, mut=True], value: UInt32) raises:
+fn sdl_write_u32_be(dst: Ptr[SDL_IOStream, mut=True], value: UInt32) raises:
     """Use this function to write 32 bits in native format to an SDL_IOStream as
     big-endian data.
 
@@ -1414,7 +1414,7 @@ fn sdl_write_u32be(dst: Ptr[SDL_IOStream, mut=True], value: UInt32) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_s32be(dst: Ptr[SDL_IOStream, mut=True], value: Int32) raises:
+fn sdl_write_s32_be(dst: Ptr[SDL_IOStream, mut=True], value: Int32) raises:
     """Use this function to write 32 bits in native format to an SDL_IOStream as
     big-endian data.
 
@@ -1440,7 +1440,7 @@ fn sdl_write_s32be(dst: Ptr[SDL_IOStream, mut=True], value: Int32) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_u64le(dst: Ptr[SDL_IOStream, mut=True], value: UInt64) raises:
+fn sdl_write_u64_le(dst: Ptr[SDL_IOStream, mut=True], value: UInt64) raises:
     """Use this function to write 64 bits in native format to an SDL_IOStream as
     little-endian data.
 
@@ -1467,7 +1467,7 @@ fn sdl_write_u64le(dst: Ptr[SDL_IOStream, mut=True], value: UInt64) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_s64le(dst: Ptr[SDL_IOStream, mut=True], value: Int64) raises:
+fn sdl_write_s64_le(dst: Ptr[SDL_IOStream, mut=True], value: Int64) raises:
     """Use this function to write 64 bits in native format to an SDL_IOStream as
     little-endian data.
 
@@ -1494,7 +1494,7 @@ fn sdl_write_s64le(dst: Ptr[SDL_IOStream, mut=True], value: Int64) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_u64be(dst: Ptr[SDL_IOStream, mut=True], value: UInt64) raises:
+fn sdl_write_u64_be(dst: Ptr[SDL_IOStream, mut=True], value: UInt64) raises:
     """Use this function to write 64 bits in native format to an SDL_IOStream as
     big-endian data.
 
@@ -1520,7 +1520,7 @@ fn sdl_write_u64be(dst: Ptr[SDL_IOStream, mut=True], value: UInt64) raises:
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_write_s64be(dst: Ptr[SDL_IOStream, mut=True], value: Int64) raises:
+fn sdl_write_s64_be(dst: Ptr[SDL_IOStream, mut=True], value: Int64) raises:
     """Use this function to write 64 bits in native format to an SDL_IOStream as
     big-endian data.
 

@@ -52,7 +52,7 @@ struct SDL_GUID:
     var data: ArrayHelper[UInt8, 16, mut=True].result
 
 
-fn sdl_guidto_string(guid: SDL_GUID, psz_guid: Ptr[c_char, mut=True], cb_guid: c_int) -> None:
+fn sdl_guid_to_string(guid: SDL_GUID, psz_guid: Ptr[c_char, mut=True], cb_guid: c_int) -> None:
     """Get an ASCII string representation for a given SDL_GUID.
 
     Args:

@@ -261,7 +261,7 @@ fn sdl_get_joystick_player_index_for_id(instance_id: SDL_JoystickID) -> c_int:
     return _get_dylib_function[lib, "SDL_GetJoystickPlayerIndexForID", fn (instance_id: SDL_JoystickID) -> c_int]()(instance_id)
 
 
-fn sdl_get_joystick_guidfor_id(instance_id: SDL_JoystickID) -> SDL_GUID:
+fn sdl_get_joystick_guid_for_id(instance_id: SDL_JoystickID) -> SDL_GUID:
     """Get the implementation-dependent GUID of a joystick.
 
     This can be called before any joysticks are opened.
@@ -943,7 +943,7 @@ fn sdl_get_joystick_type(joystick: Ptr[SDL_Joystick, mut=True]) -> SDL_JoystickT
     return _get_dylib_function[lib, "SDL_GetJoystickType", fn (joystick: Ptr[SDL_Joystick, mut=True]) -> SDL_JoystickType]()(joystick)
 
 
-fn sdl_get_joystick_guidinfo(guid: SDL_GUID, vendor: Ptr[UInt16, mut=True], product: Ptr[UInt16, mut=True], version: Ptr[UInt16, mut=True], crc16: Ptr[UInt16, mut=True]) -> None:
+fn sdl_get_joystick_guid_info(guid: SDL_GUID, vendor: Ptr[UInt16, mut=True], product: Ptr[UInt16, mut=True], version: Ptr[UInt16, mut=True], crc16: Ptr[UInt16, mut=True]) -> None:
     """Get the device information encoded in a SDL_GUID structure.
 
     Args:
