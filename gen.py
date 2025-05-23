@@ -77,14 +77,20 @@ includes = [
 
 
 def snake_case(string: str) -> str:
-    # these do not follow usual CamelCase
-    no_camel = {'UVplane': 'UVPlane', 'UVpitch': 'UVPitch', 
-                'Yplane': 'YPlane', 'Ypitch': 'YPitch',
-                'VSync': 'Vsync'} 
-    for k, v in no_camel.items():
+    # these do not follow the rules like the rest of the code or just would look weird otherwise
+    special_cases = {
+        "UVplane": "UVPlane",
+        "UVpitch": "UVPitch",
+        "Yplane": "YPlane",
+        "Ypitch": "YPitch",
+        "VSync": "Vsync",
+        "9Grid": "_9grid",
+    }
+    for k, v in special_cases.items():
         if k not in string: continue
         string = string.replace(k, v)
-    return re.sub(r'(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])', '_', string).lower()
+    return re.sub(r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])", "_", string).lower()
+
 
 def capitalize(string: str) -> str:
     return string.capitalize() if len(string) < 2 else (string[0].capitalize() + string[1:])

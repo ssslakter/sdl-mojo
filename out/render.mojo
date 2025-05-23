@@ -2466,7 +2466,7 @@ fn sdl_render_texture_tiled(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_render_texture9_grid(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], left_width: c_float, right_width: c_float, top_height: c_float, bottom_height: c_float, scale: c_float, dstrect: Ptr[SDL_FRect, mut=False]) raises:
+fn sdl_render_texture_9grid(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], left_width: c_float, right_width: c_float, top_height: c_float, bottom_height: c_float, scale: c_float, dstrect: Ptr[SDL_FRect, mut=False]) raises:
     """Perform a scaled copy using the 9-grid algorithm to the current rendering
     target at subpixel precision.
 

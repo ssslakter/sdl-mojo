@@ -1620,7 +1620,7 @@ fn sdl_blit_surface_tiled_with_scale(src: Ptr[SDL_Surface, mut=True], srcrect: P
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-fn sdl_blit_surface9_grid(src: Ptr[SDL_Surface, mut=True], srcrect: Ptr[SDL_Rect, mut=False], left_width: c_int, right_width: c_int, top_height: c_int, bottom_height: c_int, scale: c_float, scale_mode: SDL_ScaleMode, dst: Ptr[SDL_Surface, mut=True], dstrect: Ptr[SDL_Rect, mut=False]) raises:
+fn sdl_blit_surface_9grid(src: Ptr[SDL_Surface, mut=True], srcrect: Ptr[SDL_Rect, mut=False], left_width: c_int, right_width: c_int, top_height: c_int, bottom_height: c_int, scale: c_float, scale_mode: SDL_ScaleMode, dst: Ptr[SDL_Surface, mut=True], dstrect: Ptr[SDL_Rect, mut=False]) raises:
     """Perform a scaled blit using the 9-grid algorithm to a destination surface,
     which may be of a different format.
 
