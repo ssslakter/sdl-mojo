@@ -1532,10 +1532,11 @@ fn sdl_stretch_surface(src: Ptr[SDL_Surface, mut=True], srcrect: Ptr[SDL_Rect, m
     Args:
         src: The SDL_Surface structure to be copied from.
         srcrect: The SDL_Rect structure representing the rectangle to be
-                 copied, may not be NULL.
+                 copied, or NULL to copy the entire surface.
         dst: The SDL_Surface structure that is the blit target.
         dstrect: The SDL_Rect structure representing the target rectangle in
-                 the destination surface, may not be NULL.
+                 the destination surface, or NULL to fill the entire
+                 destination surface.
         scale_mode: The SDL_ScaleMode to be used.
 
     Raises:

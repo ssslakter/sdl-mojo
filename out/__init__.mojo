@@ -53,9 +53,9 @@ fn _init_sdl_handle() -> _OwnedDLHandle:
 
         @parameter
         if os_is_macos():
-            return _OwnedDLHandle(".magic/envs/default/lib/libSDL3.dylib")
+            return _OwnedDLHandle(".pixi/envs/default/lib/libSDL3.dylib")
         elif os_is_linux():
-            return _OwnedDLHandle(".magic/envs/default/lib/libSDL3.so")
+            return _OwnedDLHandle(".pixi/envs/default/lib/libSDL3.so")
         else:
             constrained[False, "OS is not supported"]()
             return _uninit[_OwnedDLHandle]()

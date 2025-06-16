@@ -77,7 +77,7 @@ struct SDL_InitFlags:
     alias SDL_INIT_VIDEO = Self(0x00000020)
     """`SDL_INIT_VIDEO` implies `SDL_INIT_EVENTS`, should be initialized on the main thread."""
     alias SDL_INIT_JOYSTICK = Self(0x00000200)
-    """`SDL_INIT_JOYSTICK` implies `SDL_INIT_EVENTS`, should be initialized on the same thread as SDL_INIT_VIDEO on Windows if you don't set SDL_HINT_JOYSTICK_THREAD."""
+    """`SDL_INIT_JOYSTICK` implies `SDL_INIT_EVENTS`."""
     alias SDL_INIT_HAPTIC = Self(0x00001000)
     alias SDL_INIT_GAMEPAD = Self(0x00002000)
     """`SDL_INIT_GAMEPAD` implies `SDL_INIT_JOYSTICK`."""
