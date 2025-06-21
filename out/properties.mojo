@@ -48,7 +48,7 @@ Properties can be removed from a group by using SDL_ClearProperty.
 
 
 @register_passable("trivial")
-struct SDL_PropertiesID:
+struct SDL_PropertiesID(Intable):
     """SDL properties ID.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PropertiesID.
@@ -70,7 +70,7 @@ struct SDL_PropertiesID:
 
 
 @register_passable("trivial")
-struct SDL_PropertyType:
+struct SDL_PropertyType(Intable):
     """SDL property type.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PropertyType.

@@ -80,7 +80,7 @@ The matrix coefficients are used to convert between YCbCr and RGB colors.
 
 
 @register_passable("trivial")
-struct SDL_PixelType:
+struct SDL_PixelType(Intable):
     """Pixel type.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PixelType.
@@ -113,7 +113,7 @@ struct SDL_PixelType:
 
 
 @register_passable("trivial")
-struct SDL_BitmapOrder:
+struct SDL_BitmapOrder(Intable):
     """Bitmap pixel order, high bit -> low bit.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_BitmapOrder.
@@ -135,7 +135,7 @@ struct SDL_BitmapOrder:
 
 
 @register_passable("trivial")
-struct SDL_PackedOrder:
+struct SDL_PackedOrder(Intable):
     """Packed component order, high bit -> low bit.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PackedOrder.
@@ -163,7 +163,7 @@ struct SDL_PackedOrder:
 
 
 @register_passable("trivial")
-struct SDL_ArrayOrder:
+struct SDL_ArrayOrder(Intable):
     """Array component order, low byte -> high byte.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_ArrayOrder.
@@ -189,7 +189,7 @@ struct SDL_ArrayOrder:
 
 
 @register_passable("trivial")
-struct SDL_PackedLayout:
+struct SDL_PackedLayout(Intable):
     """Packed component layout.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PackedLayout.
@@ -217,7 +217,7 @@ struct SDL_PackedLayout:
 
 
 @register_passable("trivial")
-struct SDL_PixelFormat:
+struct SDL_PixelFormat(Intable):
     """Pixel format.
 
     SDL's pixel formats have the following naming convention:
@@ -419,7 +419,7 @@ struct SDL_PixelFormat:
 
 
 @register_passable("trivial")
-struct SDL_ColorType:
+struct SDL_ColorType(Intable):
     """Colorspace color type.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_ColorType.
@@ -441,7 +441,7 @@ struct SDL_ColorType:
 
 
 @register_passable("trivial")
-struct SDL_ColorRange:
+struct SDL_ColorRange(Intable):
     """Colorspace color range, as described by
     https://www.itu.int/rec/R-REC-BT.2100-2-201807-I/en.
 
@@ -466,7 +466,7 @@ struct SDL_ColorRange:
 
 
 @register_passable("trivial")
-struct SDL_ColorPrimaries:
+struct SDL_ColorPrimaries(Intable):
     """Colorspace color primaries, as described by
     https://www.itu.int/rec/T-REC-H.273-201612-S/en.
 
@@ -511,7 +511,7 @@ struct SDL_ColorPrimaries:
 
 
 @register_passable("trivial")
-struct SDL_TransferCharacteristics:
+struct SDL_TransferCharacteristics(Intable):
     """Colorspace transfer characteristics.
 
     These are as described by https://www.itu.int/rec/T-REC-H.273-201612-S/en
@@ -564,7 +564,7 @@ struct SDL_TransferCharacteristics:
 
 
 @register_passable("trivial")
-struct SDL_MatrixCoefficients:
+struct SDL_MatrixCoefficients(Intable):
     """Colorspace matrix coefficients.
 
     These are as described by https://www.itu.int/rec/T-REC-H.273-201612-S/en
@@ -609,7 +609,7 @@ struct SDL_MatrixCoefficients:
 
 
 @register_passable("trivial")
-struct SDL_ChromaLocation:
+struct SDL_ChromaLocation(Intable):
     """Colorspace chroma sample location.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_ChromaLocation.
@@ -636,7 +636,7 @@ struct SDL_ChromaLocation:
 
 
 @register_passable("trivial")
-struct SDL_Colorspace:
+struct SDL_Colorspace(Intable):
     """Colorspace definitions.
 
     Since similar colorspaces may vary in their details (matrix, transfer
@@ -757,8 +757,8 @@ struct SDL_Colorspace:
     """The default colorspace for YUV surfaces if no colorspace is specified."""
 
 
-@value
-struct SDL_Color:
+@fieldwise_init
+struct SDL_Color(Copyable, Movable):
     """A structure that represents a color as RGBA components.
 
     The bits of this structure can be directly reinterpreted as an
@@ -775,8 +775,8 @@ struct SDL_Color:
     var a: UInt8
 
 
-@value
-struct SDL_FColor:
+@fieldwise_init
+struct SDL_FColor(Copyable, Movable):
     """The bits of this structure can be directly reinterpreted as a float-packed
     color which uses the SDL_PIXELFORMAT_RGBA128_FLOAT format.
 
@@ -789,8 +789,8 @@ struct SDL_FColor:
     var a: c_float
 
 
-@value
-struct SDL_Palette:
+@fieldwise_init
+struct SDL_Palette(Copyable, Movable):
     """A set of indexed colors representing a palette.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Palette.
@@ -806,8 +806,8 @@ struct SDL_Palette:
     """Internal use only, do not touch."""
 
 
-@value
-struct SDL_PixelFormatDetails:
+@fieldwise_init
+struct SDL_PixelFormatDetails(Copyable, Movable):
     """Details about the format of a pixel.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PixelFormatDetails.

@@ -49,7 +49,7 @@ SDL_SetAppMetadataProperty().
 
 
 @register_passable("trivial")
-struct SDL_InitFlags:
+struct SDL_InitFlags(Intable):
     """Initialization flags for SDL_Init and/or SDL_InitSubSystem.
 
     These are the flags which may be passed to SDL_Init(). You should specify
@@ -89,7 +89,7 @@ struct SDL_InitFlags:
 
 
 @register_passable("trivial")
-struct SDL_AppResult:
+struct SDL_AppResult(Intable):
     """Return values for optional main callbacks.
 
     Returning SDL_APP_SUCCESS or SDL_APP_FAILURE from SDL_AppInit,

@@ -73,8 +73,8 @@ come in at some point after you've started processing events.
 """
 
 
-@value
-struct SDL_Gamepad:
+@fieldwise_init
+struct SDL_Gamepad(Copyable, Movable):
     """The structure used to identify an SDL gamepad.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Gamepad.
@@ -84,7 +84,7 @@ struct SDL_Gamepad:
 
 
 @register_passable("trivial")
-struct SDL_GamepadType:
+struct SDL_GamepadType(Intable):
     """Standard gamepad types.
 
     This type does not necessarily map to first-party controllers from
@@ -121,7 +121,7 @@ struct SDL_GamepadType:
 
 
 @register_passable("trivial")
-struct SDL_GamepadButton:
+struct SDL_GamepadButton(Intable):
     """The list of buttons available on a gamepad.
 
     For controllers that use a diamond pattern for the face buttons, the
@@ -201,7 +201,7 @@ struct SDL_GamepadButton:
 
 
 @register_passable("trivial")
-struct SDL_GamepadButtonLabel:
+struct SDL_GamepadButtonLabel(Intable):
     """The set of gamepad button labels.
 
     This isn't a complete set, just the face buttons to make it easy to show
@@ -235,7 +235,7 @@ struct SDL_GamepadButtonLabel:
 
 
 @register_passable("trivial")
-struct SDL_GamepadAxis:
+struct SDL_GamepadAxis(Intable):
     """The list of axes available on a gamepad.
 
     Thumbstick axis values range from SDL_JOYSTICK_AXIS_MIN to
@@ -271,7 +271,7 @@ struct SDL_GamepadAxis:
 
 
 @register_passable("trivial")
-struct SDL_GamepadBindingType:
+struct SDL_GamepadBindingType(Intable):
     """Types of gamepad control bindings.
 
     A gamepad is a collection of bindings that map arbitrary joystick buttons,
@@ -298,24 +298,24 @@ struct SDL_GamepadBindingType:
     alias SDL_GAMEPAD_BINDTYPE_HAT = 3
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingInputAxis:
+struct SDL_GamepadBindingInputAxis(Copyable, Movable):
     var axis: c_int
     var axis_min: c_int
     var axis_max: c_int
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingInputHat:
+struct SDL_GamepadBindingInputHat(Copyable, Movable):
     var hat: c_int
     var hat_mask: c_int
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingInput:
+struct SDL_GamepadBindingInput(Copyable, Movable):
     alias _mlir_type = __mlir_type[`!pop.union<`, SDL_GamepadBindingInputAxis, `, `, SDL_GamepadBindingInputHat, `>`]
     var _impl: Self._mlir_type
 
@@ -327,17 +327,17 @@ struct SDL_GamepadBindingInput:
         return rebind[Ptr[T]](Ptr(to=self._impl))[]
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingOutputAxis:
+struct SDL_GamepadBindingOutputAxis(Copyable, Movable):
     var axis: SDL_GamepadAxis
     var axis_min: c_int
     var axis_max: c_int
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingOutput:
+struct SDL_GamepadBindingOutput(Copyable, Movable):
     alias _mlir_type = __mlir_type[`!pop.union<`, SDL_GamepadButton, `, `, SDL_GamepadBindingOutputAxis, `>`]
     var _impl: Self._mlir_type
 
@@ -349,9 +349,9 @@ struct SDL_GamepadBindingOutput:
         return rebind[Ptr[T]](Ptr(to=self._impl))[]
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBinding:
+struct SDL_GamepadBinding(Copyable, Movable):
     """A mapping between one joystick input to a gamepad control.
 
     A gamepad has a collection of several bindings, to say, for example, when

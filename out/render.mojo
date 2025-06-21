@@ -49,8 +49,8 @@ details: https://github.com/libsdl-org/SDL/issues/986
 """
 
 
-@value
-struct SDL_Vertex:
+@fieldwise_init
+struct SDL_Vertex(Copyable, Movable):
     """Vertex structure.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Vertex.
@@ -65,7 +65,7 @@ struct SDL_Vertex:
 
 
 @register_passable("trivial")
-struct SDL_TextureAccess:
+struct SDL_TextureAccess(Intable):
     """The access pattern allowed for a texture.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_TextureAccess.
@@ -90,7 +90,7 @@ struct SDL_TextureAccess:
 
 
 @register_passable("trivial")
-struct SDL_RendererLogicalPresentation:
+struct SDL_RendererLogicalPresentation(Intable):
     """How the logical size is mapped to the output.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_RendererLogicalPresentation.
@@ -118,8 +118,8 @@ struct SDL_RendererLogicalPresentation:
     """The rendered content is scaled up by integer multiples to fit the output resolution."""
 
 
-@value
-struct SDL_Renderer:
+@fieldwise_init
+struct SDL_Renderer(Copyable, Movable):
     """A structure representing rendering state.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Renderer.
@@ -128,8 +128,8 @@ struct SDL_Renderer:
     pass
 
 
-@value
-struct SDL_Texture:
+@fieldwise_init
+struct SDL_Texture(Copyable, Movable):
     """An efficient driver-specific representation of pixel data.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Texture.

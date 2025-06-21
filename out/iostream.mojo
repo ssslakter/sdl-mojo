@@ -33,7 +33,7 @@ both are abstract interfaces to read/write data.
 
 
 @register_passable("trivial")
-struct SDL_IOStatus:
+struct SDL_IOStatus(Intable):
     """SDL_IOStream status, set by a read or write operation.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_IOStatus.
@@ -64,7 +64,7 @@ struct SDL_IOStatus:
 
 
 @register_passable("trivial")
-struct SDL_IOWhence:
+struct SDL_IOWhence(Intable):
     """Possible `whence` values for SDL_IOStream seeking.
 
     These map to the same "whence" concept that `fseek` or `lseek` use in the
@@ -91,8 +91,8 @@ struct SDL_IOWhence:
     """Seek relative to the end of data."""
 
 
-@value
-struct SDL_IOStreamInterface:
+@fieldwise_init
+struct SDL_IOStreamInterface(Copyable, Movable):
     """The function pointers that drive an SDL_IOStream.
 
     Applications can provide this struct to SDL_OpenIO() to create their own
@@ -160,8 +160,8 @@ struct SDL_IOStreamInterface:
      \\return true if successful or false on write error when flushing data."""
 
 
-@value
-struct SDL_IOStream:
+@fieldwise_init
+struct SDL_IOStream(Copyable, Movable):
     """The read/write operation structure.
 
     This operates as an opaque handle. There are several APIs to create various

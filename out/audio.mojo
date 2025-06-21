@@ -128,7 +128,7 @@ to whatever is necessary, in other audio processing scenarios.
 
 
 @register_passable("trivial")
-struct SDL_AudioFormat:
+struct SDL_AudioFormat(Intable):
     """Audio format.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_AudioFormat.
@@ -178,7 +178,7 @@ struct SDL_AudioFormat:
 
 
 @register_passable("trivial")
-struct SDL_AudioDeviceID:
+struct SDL_AudioDeviceID(Intable):
     """SDL Audio Device instance IDs.
 
     Zero is used to signify an invalid/null device.
@@ -201,8 +201,8 @@ struct SDL_AudioDeviceID:
         return Self(lhs.value | rhs.value)
 
 
-@value
-struct SDL_AudioSpec:
+@fieldwise_init
+struct SDL_AudioSpec(Copyable, Movable):
     """Format specifier for audio data.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_AudioSpec.
@@ -216,8 +216,8 @@ struct SDL_AudioSpec:
     """Sample rate: sample frames per second."""
 
 
-@value
-struct SDL_AudioStream:
+@fieldwise_init
+struct SDL_AudioStream(Copyable, Movable):
     """The opaque handle that represents an audio stream.
 
     SDL_AudioStream is an audio conversion interface.
@@ -898,7 +898,7 @@ fn sdl_unbind_audio_stream(stream: Ptr[SDL_AudioStream, mut=True]) -> None:
 fn sdl_get_audio_stream_device(stream: Ptr[SDL_AudioStream, mut=True]) -> SDL_AudioDeviceID:
     """Query an audio stream for its currently-bound device.
 
-    This reports the audio device that an audio stream is currently bound to.
+    This reports the logical audio device that an audio stream is currently bound to.
 
     If not bound, or invalid, this returns zero, which is not a valid device
     ID.

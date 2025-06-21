@@ -33,8 +33,8 @@ load appropriate drivers.
 """
 
 
-@value
-struct SDL_Sensor:
+@fieldwise_init
+struct SDL_Sensor(Copyable, Movable):
     """The opaque structure used to identify an opened SDL sensor.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Sensor.
@@ -44,7 +44,7 @@ struct SDL_Sensor:
 
 
 @register_passable("trivial")
-struct SDL_SensorID:
+struct SDL_SensorID(Intable):
     """This is a unique ID for a sensor for the time it is connected to the
     system, and is never reused for the lifetime of the application.
 
@@ -69,7 +69,7 @@ struct SDL_SensorID:
 
 
 @register_passable("trivial")
-struct SDL_SensorType:
+struct SDL_SensorType(Intable):
     """The different sensors defined by SDL.
 
     Additional sensors may be available, using platform dependent semantics.

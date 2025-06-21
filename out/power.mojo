@@ -37,7 +37,7 @@ they can save their game.
 
 
 @register_passable("trivial")
-struct SDL_PowerState:
+struct SDL_PowerState(Intable):
     """The basic state for the system's power supply.
 
     These are results returned by SDL_GetPowerInfo().

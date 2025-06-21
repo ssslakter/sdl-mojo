@@ -242,8 +242,8 @@ refuse to create files with those names, etc.
 """
 
 
-@value
-struct SDL_StorageInterface:
+@fieldwise_init
+struct SDL_StorageInterface(Copyable, Movable):
     """Function interface for SDL_Storage.
 
     Apps that want to supply a custom implementation of SDL_Storage will fill
@@ -295,8 +295,8 @@ struct SDL_StorageInterface:
     """Get the space remaining, optional for read-only storage."""
 
 
-@value
-struct SDL_Storage:
+@fieldwise_init
+struct SDL_Storage(Copyable, Movable):
     """An abstract interface for filesystem access.
 
     This is an opaque datatype. One can create this object using standard SDL

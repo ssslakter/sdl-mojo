@@ -37,7 +37,7 @@ work.
 
 
 @register_passable("trivial")
-struct SDL_HintPriority:
+struct SDL_HintPriority(Intable):
     """An enumeration of hint priorities.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_HintPriority.

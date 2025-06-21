@@ -166,7 +166,7 @@ fn sdl_delay_precise(ns: UInt64) -> None:
 
 
 @register_passable("trivial")
-struct SDL_TimerID:
+struct SDL_TimerID(Intable):
     """Definition of the timer ID type.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_TimerID.

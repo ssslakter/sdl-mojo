@@ -28,8 +28,8 @@ integer and floating point versions.
 """
 
 
-@value
-struct SDL_Point:
+@fieldwise_init
+struct SDL_Point(Copyable, Movable):
     """The structure that defines a point (using integers).
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Point.
@@ -39,8 +39,8 @@ struct SDL_Point:
     var y: c_int
 
 
-@value
-struct SDL_FPoint:
+@fieldwise_init
+struct SDL_FPoint(Copyable, Movable):
     """The structure that defines a point (using floating point values).
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_FPoint.
@@ -50,8 +50,8 @@ struct SDL_FPoint:
     var y: c_float
 
 
-@value
-struct SDL_Rect:
+@fieldwise_init
+struct SDL_Rect(Copyable, Movable):
     """A rectangle, with the origin at the upper left (using integers).
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Rect.
@@ -64,8 +64,8 @@ struct SDL_Rect:
     var h: c_int
 
 
-@value
-struct SDL_FRect:
+@fieldwise_init
+struct SDL_FRect(Copyable, Movable):
     """A rectangle, with the origin at the upper left (using floating point
     values).
 

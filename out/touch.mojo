@@ -39,7 +39,7 @@ SDL_TOUCH_MOUSEID.
 
 
 @register_passable("trivial")
-struct SDL_TouchID:
+struct SDL_TouchID(Intable):
     """A unique ID for a touch device.
 
     This ID is valid for the time the device is connected to the system, and is
@@ -66,7 +66,7 @@ struct SDL_TouchID:
 
 
 @register_passable("trivial")
-struct SDL_FingerID:
+struct SDL_FingerID(Intable):
     """A unique ID for a single finger on a touch device.
 
     This ID is valid for the time the finger (stylus, etc) is touching and will
@@ -95,7 +95,7 @@ struct SDL_FingerID:
 
 
 @register_passable("trivial")
-struct SDL_TouchDeviceType:
+struct SDL_TouchDeviceType(Intable):
     """An enum that describes the type of a touch device.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_TouchDeviceType.
@@ -120,8 +120,8 @@ struct SDL_TouchDeviceType:
     """Trackpad with screen cursor-relative coordinates."""
 
 
-@value
-struct SDL_Finger:
+@fieldwise_init
+struct SDL_Finger(Copyable, Movable):
     """Data about a single finger in a multitouch event.
 
     Each touch event is a collection of fingers that are simultaneously in

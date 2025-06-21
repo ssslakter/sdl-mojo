@@ -289,7 +289,7 @@ f'''
     return (
 f'''
 @register_passable("trivial")
-struct {name}:
+struct {name}(Intable):
     {doc_template(doc, name, '    ')}
     var value: {type}
 
@@ -382,7 +382,7 @@ def translate_enum(m: re.Match) -> str:
     return (
 f'''
 @register_passable("trivial")
-struct {name}:
+struct {name}(Intable):
     {doc_template(doc, name, '    ')}
     var value: UInt32
 
@@ -422,8 +422,8 @@ def translate_struct(m: re.Match) -> str:
     body = re.sub(match_field, translate_field, m['s_body'])
     return (
 f'''
-@value
-struct {name}:
+@fieldwise_init
+struct {name}(Copyable, Movable):
     {doc_template(doc, name, '    ')}
     
 {body}
@@ -435,8 +435,8 @@ struct {name}:
 def translate_opaque_struct(m: re.Match) -> str:
     return (
 f'''
-@value
-struct {m['os_name']}:
+@fieldwise_init
+struct {m['os_name']}(Copyable, Movable):
     {doc_template(format_docblock(m['doc']), m['os_name'], '    ')}
     pass
 ''')
@@ -468,8 +468,8 @@ def translate_typedef_struct(m: re.Match) -> str:
         body = body.replace('var copy: fn', 'var copy_file: fn')
     return (
 f'''
-@value
-struct {name}:
+@fieldwise_init
+struct {name}(Copyable, Movable):
     {doc_template(doc, name, '    ')}
     
 {body}
@@ -588,24 +588,24 @@ def translate_gamepadbinding(doc: str) -> str:
     # nested structs
     return (
 f'''
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingInputAxis:
+struct SDL_GamepadBindingInputAxis(Copyable, Movable):
     var axis: c_int
     var axis_min: c_int
     var axis_max: c_int
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingInputHat:
+struct SDL_GamepadBindingInputHat(Copyable, Movable):
     var hat: c_int
     var hat_mask: c_int
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingInput:
+struct SDL_GamepadBindingInput(Copyable, Movable):
     alias _mlir_type = __mlir_type[`!pop.union<`, SDL_GamepadBindingInputAxis, `, `, SDL_GamepadBindingInputHat, `>`]
     var _impl: Self._mlir_type
 
@@ -617,17 +617,17 @@ struct SDL_GamepadBindingInput:
         return rebind[Ptr[T]](Ptr(to=self._impl))[]
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingOutputAxis:
+struct SDL_GamepadBindingOutputAxis(Copyable, Movable):
     var axis: SDL_GamepadAxis
     var axis_min: c_int
     var axis_max: c_int
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingOutput:
+struct SDL_GamepadBindingOutput(Copyable, Movable):
     alias _mlir_type = __mlir_type[`!pop.union<`, SDL_GamepadButton, `, `, SDL_GamepadBindingOutputAxis, `>`]
     var _impl: Self._mlir_type
 
@@ -639,9 +639,9 @@ struct SDL_GamepadBindingOutput:
         return rebind[Ptr[T]](Ptr(to=self._impl))[]
 
 
-@value
+@fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBinding:
+struct SDL_GamepadBinding(Copyable, Movable):
     """{doc}
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadBinding.

@@ -144,7 +144,7 @@ fn sdl_get_pref_path(owned org: String, owned app: String) -> Ptr[c_char, mut=Tr
 
 
 @register_passable("trivial")
-struct SDL_Folder:
+struct SDL_Folder(Intable):
     """The type of the OS-provided default folder for a specific purpose.
 
     Note that the Trash folder isn't included here, because trashing files
@@ -239,7 +239,7 @@ fn sdl_get_user_folder(folder: SDL_Folder) -> Ptr[c_char, mut=False]:
 
 
 @register_passable("trivial")
-struct SDL_PathType:
+struct SDL_PathType(Intable):
     """Types of filesystem entries.
 
     Note that there may be other sorts of items on a filesystem: devices,
@@ -269,8 +269,8 @@ struct SDL_PathType:
     """Something completely different like a device node (not a symlink, those are always followed)."""
 
 
-@value
-struct SDL_PathInfo:
+@fieldwise_init
+struct SDL_PathInfo(Copyable, Movable):
     """Information about a path on the filesystem.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PathInfo.
@@ -289,7 +289,7 @@ struct SDL_PathInfo:
 
 
 @register_passable("trivial")
-struct SDL_GlobFlags:
+struct SDL_GlobFlags(Intable):
     """Flags for path matching.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GlobFlags.
@@ -336,7 +336,7 @@ fn sdl_create_directory(owned path: String) raises:
 
 
 @register_passable("trivial")
-struct SDL_EnumerationResult:
+struct SDL_EnumerationResult(Intable):
     """Possible results from an enumeration callback.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_EnumerationResult.

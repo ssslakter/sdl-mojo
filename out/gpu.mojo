@@ -303,8 +303,8 @@ results.
 """
 
 
-@value
-struct SDL_GPUDevice:
+@fieldwise_init
+struct SDL_GPUDevice(Copyable, Movable):
     """An opaque handle representing the SDL_GPU context.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUDevice.
@@ -313,8 +313,8 @@ struct SDL_GPUDevice:
     pass
 
 
-@value
-struct SDL_GPUBuffer:
+@fieldwise_init
+struct SDL_GPUBuffer(Copyable, Movable):
     """An opaque handle representing a buffer.
 
     Used for vertices, indices, indirect draw commands, and general compute
@@ -326,8 +326,8 @@ struct SDL_GPUBuffer:
     pass
 
 
-@value
-struct SDL_GPUTransferBuffer:
+@fieldwise_init
+struct SDL_GPUTransferBuffer(Copyable, Movable):
     """An opaque handle representing a transfer buffer.
 
     Used for transferring data to and from the device.
@@ -338,8 +338,8 @@ struct SDL_GPUTransferBuffer:
     pass
 
 
-@value
-struct SDL_GPUTexture:
+@fieldwise_init
+struct SDL_GPUTexture(Copyable, Movable):
     """An opaque handle representing a texture.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTexture.
@@ -348,8 +348,8 @@ struct SDL_GPUTexture:
     pass
 
 
-@value
-struct SDL_GPUSampler:
+@fieldwise_init
+struct SDL_GPUSampler(Copyable, Movable):
     """An opaque handle representing a sampler.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUSampler.
@@ -358,8 +358,8 @@ struct SDL_GPUSampler:
     pass
 
 
-@value
-struct SDL_GPUShader:
+@fieldwise_init
+struct SDL_GPUShader(Copyable, Movable):
     """An opaque handle representing a compiled shader object.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUShader.
@@ -368,8 +368,8 @@ struct SDL_GPUShader:
     pass
 
 
-@value
-struct SDL_GPUComputePipeline:
+@fieldwise_init
+struct SDL_GPUComputePipeline(Copyable, Movable):
     """An opaque handle representing a compute pipeline.
 
     Used during compute passes.
@@ -380,8 +380,8 @@ struct SDL_GPUComputePipeline:
     pass
 
 
-@value
-struct SDL_GPUGraphicsPipeline:
+@fieldwise_init
+struct SDL_GPUGraphicsPipeline(Copyable, Movable):
     """An opaque handle representing a graphics pipeline.
 
     Used during render passes.
@@ -392,8 +392,8 @@ struct SDL_GPUGraphicsPipeline:
     pass
 
 
-@value
-struct SDL_GPUCommandBuffer:
+@fieldwise_init
+struct SDL_GPUCommandBuffer(Copyable, Movable):
     """An opaque handle representing a command buffer.
 
     Most state is managed via command buffers. When setting state using a
@@ -416,8 +416,8 @@ struct SDL_GPUCommandBuffer:
     pass
 
 
-@value
-struct SDL_GPURenderPass:
+@fieldwise_init
+struct SDL_GPURenderPass(Copyable, Movable):
     """An opaque handle representing a render pass.
 
     This handle is transient and should not be held or referenced after
@@ -429,8 +429,8 @@ struct SDL_GPURenderPass:
     pass
 
 
-@value
-struct SDL_GPUComputePass:
+@fieldwise_init
+struct SDL_GPUComputePass(Copyable, Movable):
     """An opaque handle representing a compute pass.
 
     This handle is transient and should not be held or referenced after
@@ -442,8 +442,8 @@ struct SDL_GPUComputePass:
     pass
 
 
-@value
-struct SDL_GPUCopyPass:
+@fieldwise_init
+struct SDL_GPUCopyPass(Copyable, Movable):
     """An opaque handle representing a copy pass.
 
     This handle is transient and should not be held or referenced after
@@ -455,8 +455,8 @@ struct SDL_GPUCopyPass:
     pass
 
 
-@value
-struct SDL_GPUFence:
+@fieldwise_init
+struct SDL_GPUFence(Copyable, Movable):
     """An opaque handle representing a fence.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUFence.
@@ -466,7 +466,7 @@ struct SDL_GPUFence:
 
 
 @register_passable("trivial")
-struct SDL_GPUPrimitiveType:
+struct SDL_GPUPrimitiveType(Intable):
     """Specifies the primitive topology of a graphics pipeline.
 
     If you are using POINTLIST you must include a point size output in the
@@ -509,7 +509,7 @@ struct SDL_GPUPrimitiveType:
 
 
 @register_passable("trivial")
-struct SDL_GPULoadOp:
+struct SDL_GPULoadOp(Intable):
     """Specifies how the contents of a texture attached to a render pass are
     treated at the beginning of the render pass.
 
@@ -535,7 +535,7 @@ struct SDL_GPULoadOp:
 
 
 @register_passable("trivial")
-struct SDL_GPUStoreOp:
+struct SDL_GPUStoreOp(Intable):
     """Specifies how the contents of a texture attached to a render pass are
     treated at the end of the render pass.
 
@@ -563,7 +563,7 @@ struct SDL_GPUStoreOp:
 
 
 @register_passable("trivial")
-struct SDL_GPUIndexElementSize:
+struct SDL_GPUIndexElementSize(Intable):
     """Specifies the size of elements in an index buffer.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUIndexElementSize.
@@ -586,7 +586,7 @@ struct SDL_GPUIndexElementSize:
 
 
 @register_passable("trivial")
-struct SDL_GPUTextureFormat:
+struct SDL_GPUTextureFormat(Intable):
     """Specifies the pixel format of a texture.
 
     Texture format support varies depending on driver, hardware, and usage
@@ -803,7 +803,7 @@ struct SDL_GPUTextureFormat:
 
 
 @register_passable("trivial")
-struct SDL_GPUTextureUsageFlags:
+struct SDL_GPUTextureUsageFlags(Intable):
     """Specifies how a texture is intended to be used by the client.
 
     A texture must have at least one usage flag. Note that some usage flag
@@ -853,7 +853,7 @@ struct SDL_GPUTextureUsageFlags:
 
 
 @register_passable("trivial")
-struct SDL_GPUTextureType:
+struct SDL_GPUTextureType(Intable):
     """Specifies the type of a texture.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureType.
@@ -882,7 +882,7 @@ struct SDL_GPUTextureType:
 
 
 @register_passable("trivial")
-struct SDL_GPUSampleCount:
+struct SDL_GPUSampleCount(Intable):
     """Specifies the sample count of a texture.
 
     Used in multisampling. Note that this value only applies when the texture
@@ -912,7 +912,7 @@ struct SDL_GPUSampleCount:
 
 
 @register_passable("trivial")
-struct SDL_GPUCubeMapFace:
+struct SDL_GPUCubeMapFace(Intable):
     """Specifies the face of a cube map.
 
     Can be passed in as the layer field in texture-related structs.
@@ -939,7 +939,7 @@ struct SDL_GPUCubeMapFace:
 
 
 @register_passable("trivial")
-struct SDL_GPUBufferUsageFlags:
+struct SDL_GPUBufferUsageFlags(Intable):
     """Specifies how a buffer is intended to be used by the client.
 
     A buffer must have at least one usage flag. Note that some usage flag
@@ -984,7 +984,7 @@ struct SDL_GPUBufferUsageFlags:
 
 
 @register_passable("trivial")
-struct SDL_GPUTransferBufferUsage:
+struct SDL_GPUTransferBufferUsage(Intable):
     """Specifies how a transfer buffer is intended to be used by the client.
 
     Note that mapping and copying FROM an upload transfer buffer or TO a
@@ -1008,7 +1008,7 @@ struct SDL_GPUTransferBufferUsage:
 
 
 @register_passable("trivial")
-struct SDL_GPUShaderStage:
+struct SDL_GPUShaderStage(Intable):
     """Specifies which stage a shader program corresponds to.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUShaderStage.
@@ -1029,7 +1029,7 @@ struct SDL_GPUShaderStage:
 
 
 @register_passable("trivial")
-struct SDL_GPUShaderFormat:
+struct SDL_GPUShaderFormat(Intable):
     """Specifies the format of shader code.
 
     Each format corresponds to a specific backend that accepts it.
@@ -1067,7 +1067,7 @@ struct SDL_GPUShaderFormat:
 
 
 @register_passable("trivial")
-struct SDL_GPUVertexElementFormat:
+struct SDL_GPUVertexElementFormat(Intable):
     """Specifies the format of a vertex attribute.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexElementFormat.
@@ -1141,7 +1141,7 @@ struct SDL_GPUVertexElementFormat:
 
 
 @register_passable("trivial")
-struct SDL_GPUVertexInputRate:
+struct SDL_GPUVertexInputRate(Intable):
     """Specifies the rate at which vertex attributes are pulled from buffers.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexInputRate.
@@ -1164,7 +1164,7 @@ struct SDL_GPUVertexInputRate:
 
 
 @register_passable("trivial")
-struct SDL_GPUFillMode:
+struct SDL_GPUFillMode(Intable):
     """Specifies the fill mode of the graphics pipeline.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUFillMode.
@@ -1187,7 +1187,7 @@ struct SDL_GPUFillMode:
 
 
 @register_passable("trivial")
-struct SDL_GPUCullMode:
+struct SDL_GPUCullMode(Intable):
     """Specifies the facing direction in which triangle faces will be culled.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUCullMode.
@@ -1212,7 +1212,7 @@ struct SDL_GPUCullMode:
 
 
 @register_passable("trivial")
-struct SDL_GPUFrontFace:
+struct SDL_GPUFrontFace(Intable):
     """Specifies the vertex winding that will cause a triangle to be determined to
     be front-facing.
 
@@ -1236,7 +1236,7 @@ struct SDL_GPUFrontFace:
 
 
 @register_passable("trivial")
-struct SDL_GPUCompareOp:
+struct SDL_GPUCompareOp(Intable):
     """Specifies a comparison operator for depth, stencil and sampler operations.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUCompareOp.
@@ -1272,7 +1272,7 @@ struct SDL_GPUCompareOp:
 
 
 @register_passable("trivial")
-struct SDL_GPUStencilOp:
+struct SDL_GPUStencilOp(Intable):
     """Specifies what happens to a stored stencil value if stencil tests fail or
     pass.
 
@@ -1309,7 +1309,7 @@ struct SDL_GPUStencilOp:
 
 
 @register_passable("trivial")
-struct SDL_GPUBlendOp:
+struct SDL_GPUBlendOp(Intable):
     """Specifies the operator to be used when pixels in a render target are
     blended with existing pixels in the texture.
 
@@ -1343,7 +1343,7 @@ struct SDL_GPUBlendOp:
 
 
 @register_passable("trivial")
-struct SDL_GPUBlendFactor:
+struct SDL_GPUBlendFactor(Intable):
     """Specifies a blending factor to be used when pixels in a render target are
     blended with existing pixels in the texture.
 
@@ -1393,7 +1393,7 @@ struct SDL_GPUBlendFactor:
 
 
 @register_passable("trivial")
-struct SDL_GPUColorComponentFlags:
+struct SDL_GPUColorComponentFlags(Intable):
     """Specifies which color components are written in a graphics pipeline.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUColorComponentFlags.
@@ -1424,7 +1424,7 @@ struct SDL_GPUColorComponentFlags:
 
 
 @register_passable("trivial")
-struct SDL_GPUFilter:
+struct SDL_GPUFilter(Intable):
     """Specifies a filter operation used by a sampler.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUFilter.
@@ -1447,7 +1447,7 @@ struct SDL_GPUFilter:
 
 
 @register_passable("trivial")
-struct SDL_GPUSamplerMipmapMode:
+struct SDL_GPUSamplerMipmapMode(Intable):
     """Specifies a mipmap mode used by a sampler.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUSamplerMipmapMode.
@@ -1470,7 +1470,7 @@ struct SDL_GPUSamplerMipmapMode:
 
 
 @register_passable("trivial")
-struct SDL_GPUSamplerAddressMode:
+struct SDL_GPUSamplerAddressMode(Intable):
     """Specifies behavior of texture sampling when the coordinates exceed the 0-1
     range.
 
@@ -1496,7 +1496,7 @@ struct SDL_GPUSamplerAddressMode:
 
 
 @register_passable("trivial")
-struct SDL_GPUPresentMode:
+struct SDL_GPUPresentMode(Intable):
     """Specifies the timing that will be used to present swapchain textures to the
     OS.
 
@@ -1534,7 +1534,7 @@ struct SDL_GPUPresentMode:
 
 
 @register_passable("trivial")
-struct SDL_GPUSwapchainComposition:
+struct SDL_GPUSwapchainComposition(Intable):
     """Specifies the texture format and colorspace of the swapchain textures.
 
     SDR will always be supported. Other compositions may not be supported on
@@ -1573,8 +1573,8 @@ struct SDL_GPUSwapchainComposition:
     alias SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084 = 3
 
 
-@value
-struct SDL_GPUViewport:
+@fieldwise_init
+struct SDL_GPUViewport(Copyable, Movable):
     """A structure specifying a viewport.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUViewport.
@@ -1594,8 +1594,8 @@ struct SDL_GPUViewport:
     """The maximum depth of the viewport."""
 
 
-@value
-struct SDL_GPUTextureTransferInfo:
+@fieldwise_init
+struct SDL_GPUTextureTransferInfo(Copyable, Movable):
     """A structure specifying parameters related to transferring data to or from a
     texture.
 
@@ -1612,8 +1612,8 @@ struct SDL_GPUTextureTransferInfo:
     """The number of rows from one layer/depth-slice to the next."""
 
 
-@value
-struct SDL_GPUTransferBufferLocation:
+@fieldwise_init
+struct SDL_GPUTransferBufferLocation(Copyable, Movable):
     """A structure specifying a location in a transfer buffer.
 
     Used when transferring buffer data to or from a transfer buffer.
@@ -1627,8 +1627,8 @@ struct SDL_GPUTransferBufferLocation:
     """The starting byte of the buffer data in the transfer buffer."""
 
 
-@value
-struct SDL_GPUTextureLocation:
+@fieldwise_init
+struct SDL_GPUTextureLocation(Copyable, Movable):
     """A structure specifying a location in a texture.
 
     Used when copying data from one texture to another.
@@ -1650,8 +1650,8 @@ struct SDL_GPUTextureLocation:
     """The front offset of the location."""
 
 
-@value
-struct SDL_GPUTextureRegion:
+@fieldwise_init
+struct SDL_GPUTextureRegion(Copyable, Movable):
     """A structure specifying a region of a texture.
 
     Used when transferring data to or from a texture.
@@ -1679,8 +1679,8 @@ struct SDL_GPUTextureRegion:
     """The depth of the region."""
 
 
-@value
-struct SDL_GPUBlitRegion:
+@fieldwise_init
+struct SDL_GPUBlitRegion(Copyable, Movable):
     """A structure specifying a region of a texture used in the blit operation.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBlitRegion.
@@ -1702,8 +1702,8 @@ struct SDL_GPUBlitRegion:
     """The height of the region."""
 
 
-@value
-struct SDL_GPUBufferLocation:
+@fieldwise_init
+struct SDL_GPUBufferLocation(Copyable, Movable):
     """A structure specifying a location in a buffer.
 
     Used when copying data between buffers.
@@ -1717,8 +1717,8 @@ struct SDL_GPUBufferLocation:
     """The starting byte within the buffer."""
 
 
-@value
-struct SDL_GPUBufferRegion:
+@fieldwise_init
+struct SDL_GPUBufferRegion(Copyable, Movable):
     """A structure specifying a region of a buffer.
 
     Used when transferring data to or from buffers.
@@ -1734,8 +1734,8 @@ struct SDL_GPUBufferRegion:
     """The size in bytes of the region."""
 
 
-@value
-struct SDL_GPUIndirectDrawCommand:
+@fieldwise_init
+struct SDL_GPUIndirectDrawCommand(Copyable, Movable):
     """A structure specifying the parameters of an indirect draw command.
 
     Note that the `first_vertex` and `first_instance` parameters are NOT
@@ -1758,8 +1758,8 @@ struct SDL_GPUIndirectDrawCommand:
     """The ID of the first instance to draw."""
 
 
-@value
-struct SDL_GPUIndexedIndirectDrawCommand:
+@fieldwise_init
+struct SDL_GPUIndexedIndirectDrawCommand(Copyable, Movable):
     """A structure specifying the parameters of an indexed indirect draw command.
 
     Note that the `first_vertex` and `first_instance` parameters are NOT
@@ -1784,8 +1784,8 @@ struct SDL_GPUIndexedIndirectDrawCommand:
     """The ID of the first instance to draw."""
 
 
-@value
-struct SDL_GPUIndirectDispatchCommand:
+@fieldwise_init
+struct SDL_GPUIndirectDispatchCommand(Copyable, Movable):
     """A structure specifying the parameters of an indexed dispatch command.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUIndirectDispatchCommand.
@@ -1799,8 +1799,8 @@ struct SDL_GPUIndirectDispatchCommand:
     """The number of local workgroups to dispatch in the Z dimension."""
 
 
-@value
-struct SDL_GPUSamplerCreateInfo:
+@fieldwise_init
+struct SDL_GPUSamplerCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a sampler.
 
     Note that mip_lod_bias is a no-op for the Metal driver. For Metal, LOD bias
@@ -1842,8 +1842,8 @@ struct SDL_GPUSamplerCreateInfo:
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
-@value
-struct SDL_GPUVertexBufferDescription:
+@fieldwise_init
+struct SDL_GPUVertexBufferDescription(Copyable, Movable):
     """A structure specifying the parameters of vertex buffers used in a graphics
     pipeline.
 
@@ -1869,8 +1869,8 @@ struct SDL_GPUVertexBufferDescription:
     """Reserved for future use. Must be set to 0."""
 
 
-@value
-struct SDL_GPUVertexAttribute:
+@fieldwise_init
+struct SDL_GPUVertexAttribute(Copyable, Movable):
     """A structure specifying a vertex attribute.
 
     All vertex attribute locations provided to an SDL_GPUVertexInputState must
@@ -1889,8 +1889,8 @@ struct SDL_GPUVertexAttribute:
     """The byte offset of this attribute relative to the start of the vertex element."""
 
 
-@value
-struct SDL_GPUVertexInputState:
+@fieldwise_init
+struct SDL_GPUVertexInputState(Copyable, Movable):
     """A structure specifying the parameters of a graphics pipeline vertex input
     state.
 
@@ -1907,8 +1907,8 @@ struct SDL_GPUVertexInputState:
     """The number of vertex attribute descriptions in the above array."""
 
 
-@value
-struct SDL_GPUStencilOpState:
+@fieldwise_init
+struct SDL_GPUStencilOpState(Copyable, Movable):
     """A structure specifying the stencil operation state of a graphics pipeline.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUStencilOpState.
@@ -1924,8 +1924,8 @@ struct SDL_GPUStencilOpState:
     """The comparison operator used in the stencil test."""
 
 
-@value
-struct SDL_GPUColorTargetBlendState:
+@fieldwise_init
+struct SDL_GPUColorTargetBlendState(Copyable, Movable):
     """A structure specifying the blend state of a color target.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUColorTargetBlendState.
@@ -1953,8 +1953,8 @@ struct SDL_GPUColorTargetBlendState:
     var padding2: UInt8
 
 
-@value
-struct SDL_GPUShaderCreateInfo:
+@fieldwise_init
+struct SDL_GPUShaderCreateInfo(Copyable, Movable):
     """A structure specifying code and metadata for creating a shader object.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUShaderCreateInfo.
@@ -1983,8 +1983,8 @@ struct SDL_GPUShaderCreateInfo:
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
-@value
-struct SDL_GPUTextureCreateInfo:
+@fieldwise_init
+struct SDL_GPUTextureCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a texture.
 
     Usage flags can be bitwise OR'd together for combinations of usages. Note
@@ -2015,8 +2015,8 @@ struct SDL_GPUTextureCreateInfo:
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
-@value
-struct SDL_GPUBufferCreateInfo:
+@fieldwise_init
+struct SDL_GPUBufferCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a buffer.
 
     Usage flags can be bitwise OR'd together for combinations of usages. Note
@@ -2034,8 +2034,8 @@ struct SDL_GPUBufferCreateInfo:
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
-@value
-struct SDL_GPUTransferBufferCreateInfo:
+@fieldwise_init
+struct SDL_GPUTransferBufferCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a transfer buffer.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTransferBufferCreateInfo.
@@ -2050,8 +2050,8 @@ struct SDL_GPUTransferBufferCreateInfo:
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
-@value
-struct SDL_GPURasterizerState:
+@fieldwise_init
+struct SDL_GPURasterizerState(Copyable, Movable):
     """A structure specifying the parameters of the graphics pipeline rasterizer
     state.
 
@@ -2086,8 +2086,8 @@ struct SDL_GPURasterizerState:
     var padding2: UInt8
 
 
-@value
-struct SDL_GPUMultisampleState:
+@fieldwise_init
+struct SDL_GPUMultisampleState(Copyable, Movable):
     """A structure specifying the parameters of the graphics pipeline multisample
     state.
 
@@ -2105,8 +2105,8 @@ struct SDL_GPUMultisampleState:
     var padding3: UInt8
 
 
-@value
-struct SDL_GPUDepthStencilState:
+@fieldwise_init
+struct SDL_GPUDepthStencilState(Copyable, Movable):
     """A structure specifying the parameters of the graphics pipeline depth
     stencil state.
 
@@ -2134,8 +2134,8 @@ struct SDL_GPUDepthStencilState:
     var padding3: UInt8
 
 
-@value
-struct SDL_GPUColorTargetDescription:
+@fieldwise_init
+struct SDL_GPUColorTargetDescription(Copyable, Movable):
     """A structure specifying the parameters of color targets used in a graphics
     pipeline.
 
@@ -2148,8 +2148,8 @@ struct SDL_GPUColorTargetDescription:
     """The blend state to be used for the color target."""
 
 
-@value
-struct SDL_GPUGraphicsPipelineTargetInfo:
+@fieldwise_init
+struct SDL_GPUGraphicsPipelineTargetInfo(Copyable, Movable):
     """A structure specifying the descriptions of render targets used in a
     graphics pipeline.
 
@@ -2169,8 +2169,8 @@ struct SDL_GPUGraphicsPipelineTargetInfo:
     var padding3: UInt8
 
 
-@value
-struct SDL_GPUGraphicsPipelineCreateInfo:
+@fieldwise_init
+struct SDL_GPUGraphicsPipelineCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a graphics pipeline state.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUGraphicsPipelineCreateInfo.
@@ -2197,8 +2197,8 @@ struct SDL_GPUGraphicsPipelineCreateInfo:
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
-@value
-struct SDL_GPUComputePipelineCreateInfo:
+@fieldwise_init
+struct SDL_GPUComputePipelineCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a compute pipeline state.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUComputePipelineCreateInfo.
@@ -2235,8 +2235,8 @@ struct SDL_GPUComputePipelineCreateInfo:
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
-@value
-struct SDL_GPUColorTargetInfo:
+@fieldwise_init
+struct SDL_GPUColorTargetInfo(Copyable, Movable):
     """A structure specifying the parameters of a color target used by a render
     pass.
 
@@ -2296,8 +2296,8 @@ struct SDL_GPUColorTargetInfo:
     var padding2: UInt8
 
 
-@value
-struct SDL_GPUDepthStencilTargetInfo:
+@fieldwise_init
+struct SDL_GPUDepthStencilTargetInfo(Copyable, Movable):
     """A structure specifying the parameters of a depth-stencil target used by a
     render pass.
 
@@ -2360,8 +2360,8 @@ struct SDL_GPUDepthStencilTargetInfo:
     var padding2: UInt8
 
 
-@value
-struct SDL_GPUBlitInfo:
+@fieldwise_init
+struct SDL_GPUBlitInfo(Copyable, Movable):
     """A structure containing parameters for a blit command.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBlitInfo.
@@ -2386,8 +2386,8 @@ struct SDL_GPUBlitInfo:
     var padding3: UInt8
 
 
-@value
-struct SDL_GPUBufferBinding:
+@fieldwise_init
+struct SDL_GPUBufferBinding(Copyable, Movable):
     """A structure specifying parameters in a buffer binding call.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBufferBinding.
@@ -2399,8 +2399,8 @@ struct SDL_GPUBufferBinding:
     """The starting byte of the data to bind in the buffer."""
 
 
-@value
-struct SDL_GPUTextureSamplerBinding:
+@fieldwise_init
+struct SDL_GPUTextureSamplerBinding(Copyable, Movable):
     """A structure specifying parameters in a sampler binding call.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureSamplerBinding.
@@ -2412,8 +2412,8 @@ struct SDL_GPUTextureSamplerBinding:
     """The sampler to bind."""
 
 
-@value
-struct SDL_GPUStorageBufferReadWriteBinding:
+@fieldwise_init
+struct SDL_GPUStorageBufferReadWriteBinding(Copyable, Movable):
     """A structure specifying parameters related to binding buffers in a compute
     pass.
 
@@ -2429,8 +2429,8 @@ struct SDL_GPUStorageBufferReadWriteBinding:
     var padding3: UInt8
 
 
-@value
-struct SDL_GPUStorageTextureReadWriteBinding:
+@fieldwise_init
+struct SDL_GPUStorageTextureReadWriteBinding(Copyable, Movable):
     """A structure specifying parameters related to binding textures in a compute
     pass.
 

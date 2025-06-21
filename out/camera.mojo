@@ -68,7 +68,7 @@ frames!) before using images from a camera.
 
 
 @register_passable("trivial")
-struct SDL_CameraID:
+struct SDL_CameraID(Intable):
     """This is a unique ID for a camera device for the time it is connected to the
     system, and is never reused for the lifetime of the application.
 
@@ -94,8 +94,8 @@ struct SDL_CameraID:
         return Self(lhs.value | rhs.value)
 
 
-@value
-struct SDL_Camera:
+@fieldwise_init
+struct SDL_Camera(Copyable, Movable):
     """The opaque structure used to identify an opened SDL camera.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Camera.
@@ -104,8 +104,8 @@ struct SDL_Camera:
     pass
 
 
-@value
-struct SDL_CameraSpec:
+@fieldwise_init
+struct SDL_CameraSpec(Copyable, Movable):
     """The details of an output format for a camera device.
 
     Cameras often support multiple formats; each one will be encapsulated in
@@ -129,7 +129,7 @@ struct SDL_CameraSpec:
 
 
 @register_passable("trivial")
-struct SDL_CameraPosition:
+struct SDL_CameraPosition(Intable):
     """The position of camera in relation to system device.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_CameraPosition.

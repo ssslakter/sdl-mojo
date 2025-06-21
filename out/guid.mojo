@@ -30,8 +30,8 @@ SDL provides functions to convert a GUID to/from a string.
 """
 
 
-@value
-struct SDL_GUID:
+@fieldwise_init
+struct SDL_GUID(Copyable, Movable):
     """An SDL_GUID is a 128-bit identifier for an input device that identifies
     that device across runs of SDL programs on the same platform.
 

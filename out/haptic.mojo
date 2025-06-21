@@ -115,8 +115,8 @@ Note that the SDL haptic subsystem is not thread-safe.
 """
 
 
-@value
-struct SDL_Haptic:
+@fieldwise_init
+struct SDL_Haptic(Copyable, Movable):
     """The haptic structure used to identify an SDL haptic.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Haptic.
@@ -125,8 +125,8 @@ struct SDL_Haptic:
     pass
 
 
-@value
-struct SDL_HapticDirection:
+@fieldwise_init
+struct SDL_HapticDirection(Copyable, Movable):
     """Structure that represents a haptic direction.
 
     This is the direction where the force comes from, instead of the direction
@@ -227,8 +227,8 @@ struct SDL_HapticDirection:
     """The encoded direction."""
 
 
-@value
-struct SDL_HapticConstant:
+@fieldwise_init
+struct SDL_HapticConstant(Copyable, Movable):
     """A structure containing a template for a Constant effect.
 
     This struct is exclusively for the SDL_HAPTIC_CONSTANT effect.
@@ -267,8 +267,8 @@ struct SDL_HapticConstant:
     """Level at the end of the fade."""
 
 
-@value
-struct SDL_HapticPeriodic:
+@fieldwise_init
+struct SDL_HapticPeriodic(Copyable, Movable):
     """A structure containing a template for a Periodic effect.
     
     The struct handles the following effects:
@@ -358,8 +358,8 @@ struct SDL_HapticPeriodic:
     """Level at the end of the fade."""
 
 
-@value
-struct SDL_HapticCondition:
+@fieldwise_init
+struct SDL_HapticCondition(Copyable, Movable):
     """A structure containing a template for a Condition effect.
 
     The struct handles the following effects:
@@ -409,8 +409,8 @@ struct SDL_HapticCondition:
     """Position of the dead zone."""
 
 
-@value
-struct SDL_HapticRamp:
+@fieldwise_init
+struct SDL_HapticRamp(Copyable, Movable):
     """A structure containing a template for a Ramp effect.
 
     This struct is exclusively for the SDL_HAPTIC_RAMP effect.
@@ -453,8 +453,8 @@ struct SDL_HapticRamp:
     """Level at the end of the fade."""
 
 
-@value
-struct SDL_HapticLeftRight:
+@fieldwise_init
+struct SDL_HapticLeftRight(Copyable, Movable):
     """A structure containing a template for a Left/Right effect.
 
     This struct is exclusively for the SDL_HAPTIC_LEFTRIGHT effect.
@@ -478,8 +478,8 @@ struct SDL_HapticLeftRight:
     """Control of the small controller motor."""
 
 
-@value
-struct SDL_HapticCustom:
+@fieldwise_init
+struct SDL_HapticCustom(Copyable, Movable):
     """A structure containing a template for the SDL_HAPTIC_CUSTOM effect.
 
     This struct is exclusively for the SDL_HAPTIC_CUSTOM effect.
@@ -541,7 +541,7 @@ struct SDL_HapticEffect:
 
 
 @register_passable("trivial")
-struct SDL_HapticID:
+struct SDL_HapticID(Intable):
     """This is a unique ID for a haptic device for the time it is connected to the
     system, and is never reused for the lifetime of the application.
 

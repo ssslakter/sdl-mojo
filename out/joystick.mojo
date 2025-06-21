@@ -52,8 +52,8 @@ SDL_Init(): SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS
 """
 
 
-@value
-struct SDL_Joystick:
+@fieldwise_init
+struct SDL_Joystick(Copyable, Movable):
     """The joystick structure used to identify an SDL joystick.
 
     This is opaque data.
@@ -65,7 +65,7 @@ struct SDL_Joystick:
 
 
 @register_passable("trivial")
-struct SDL_JoystickID:
+struct SDL_JoystickID(Intable):
     """This is a unique ID for a joystick for the time it is connected to the
     system, and is never reused for the lifetime of the application.
 
@@ -92,7 +92,7 @@ struct SDL_JoystickID:
 
 
 @register_passable("trivial")
-struct SDL_JoystickType:
+struct SDL_JoystickType(Intable):
     """An enum of some common joystick types.
 
     In some cases, SDL can identify a low-level joystick as being a certain
@@ -129,7 +129,7 @@ struct SDL_JoystickType:
 
 
 @register_passable("trivial")
-struct SDL_JoystickConnectionState:
+struct SDL_JoystickConnectionState(Intable):
     """Possible connection states for a joystick device.
 
     This is used by SDL_GetJoystickConnectionState to report how a device is
@@ -410,8 +410,8 @@ fn sdl_get_joystick_from_player_index(player_index: c_int, out ret: Ptr[SDL_Joys
         raise String(unsafe_from_utf8_ptr=sdl_get_error())
 
 
-@value
-struct SDL_VirtualJoystickTouchpadDesc:
+@fieldwise_init
+struct SDL_VirtualJoystickTouchpadDesc(Copyable, Movable):
     """The structure that describes a virtual joystick touchpad.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_VirtualJoystickTouchpadDesc.
@@ -422,8 +422,8 @@ struct SDL_VirtualJoystickTouchpadDesc:
     var padding: ArrayHelper[UInt16, 3, mut=True].result
 
 
-@value
-struct SDL_VirtualJoystickSensorDesc:
+@fieldwise_init
+struct SDL_VirtualJoystickSensorDesc(Copyable, Movable):
     """The structure that describes a virtual joystick sensor.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_VirtualJoystickSensorDesc.
@@ -435,8 +435,8 @@ struct SDL_VirtualJoystickSensorDesc:
     """The update frequency of this sensor, may be 0.0f."""
 
 
-@value
-struct SDL_VirtualJoystickDesc:
+@fieldwise_init
+struct SDL_VirtualJoystickDesc(Copyable, Movable):
     """The structure that describes a virtual joystick.
 
     This structure should be initialized using SDL_INIT_INTERFACE(). All

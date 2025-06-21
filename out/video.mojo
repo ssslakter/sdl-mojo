@@ -49,7 +49,7 @@ events, so start with SDL_CreateWindow() and SDL_PollEvent().
 
 
 @register_passable("trivial")
-struct SDL_DisplayID:
+struct SDL_DisplayID(Intable):
     """This is a unique ID for a display for the time it is connected to the
     system, and is never reused for the lifetime of the application.
 
@@ -76,7 +76,7 @@ struct SDL_DisplayID:
 
 
 @register_passable("trivial")
-struct SDL_WindowID:
+struct SDL_WindowID(Intable):
     """This is a unique ID for a window.
 
     The value 0 is an invalid ID.
@@ -100,7 +100,7 @@ struct SDL_WindowID:
 
 
 @register_passable("trivial")
-struct SDL_SystemTheme:
+struct SDL_SystemTheme(Intable):
     """System theme.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_SystemTheme.
@@ -124,8 +124,8 @@ struct SDL_SystemTheme:
     """Dark colored system theme."""
 
 
-@value
-struct SDL_DisplayModeData:
+@fieldwise_init
+struct SDL_DisplayModeData(Copyable, Movable):
     """Internal display mode data.
 
     This lives as a field in SDL_DisplayMode, as opaque data.
@@ -136,8 +136,8 @@ struct SDL_DisplayModeData:
     pass
 
 
-@value
-struct SDL_DisplayMode:
+@fieldwise_init
+struct SDL_DisplayMode(Copyable, Movable):
     """The structure that defines a display mode.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_DisplayMode.
@@ -165,7 +165,7 @@ struct SDL_DisplayMode:
 
 
 @register_passable("trivial")
-struct SDL_DisplayOrientation:
+struct SDL_DisplayOrientation(Intable):
     """Display orientation values; the way a display is rotated.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_DisplayOrientation.
@@ -193,8 +193,8 @@ struct SDL_DisplayOrientation:
     """The display is in portrait mode, upside down."""
 
 
-@value
-struct SDL_Window:
+@fieldwise_init
+struct SDL_Window(Copyable, Movable):
     """The struct used as an opaque handle to a window.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Window.
@@ -204,7 +204,7 @@ struct SDL_Window:
 
 
 @register_passable("trivial")
-struct SDL_WindowFlags:
+struct SDL_WindowFlags(Intable):
     """The flags on a window.
 
     These cover a lot of true/false, or on/off, window state. Some of it is
@@ -282,7 +282,7 @@ struct SDL_WindowFlags:
 
 
 @register_passable("trivial")
-struct SDL_FlashOperation:
+struct SDL_FlashOperation(Intable):
     """Window flash operation.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_FlashOperation.
@@ -330,7 +330,7 @@ Docs: https://wiki.libsdl.org/SDL3/SDL_EGLSurface.
 
 
 @register_passable("trivial")
-struct SDL_EGLAttrib:
+struct SDL_EGLAttrib(Intable):
     """An EGL attribute, used when creating an EGL context.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_EGLAttrib.
@@ -352,7 +352,7 @@ struct SDL_EGLAttrib:
 
 
 @register_passable("trivial")
-struct SDL_EGLint:
+struct SDL_EGLint(Intable):
     """An EGL integer attribute, used when creating an EGL surface.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_EGLint.
@@ -432,7 +432,7 @@ Docs: https://wiki.libsdl.org/SDL3/SDL_EGLIntArrayCallback.
 
 
 @register_passable("trivial")
-struct SDL_GLAttr:
+struct SDL_GLAttr(Intable):
     """An enumeration of OpenGL configuration attributes.
 
     While you can set most OpenGL attributes normally, the attributes listed
@@ -516,7 +516,7 @@ struct SDL_GLAttr:
 
 
 @register_passable("trivial")
-struct SDL_GLProfile:
+struct SDL_GLProfile(Intable):
     """Possible values to be set for the SDL_GL_CONTEXT_PROFILE_MASK attribute.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GLProfile.
@@ -545,7 +545,7 @@ struct SDL_GLProfile:
 
 
 @register_passable("trivial")
-struct SDL_GLContextFlag:
+struct SDL_GLContextFlag(Intable):
     """Possible flags to be set for the SDL_GL_CONTEXT_FLAGS attribute.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GLContextFlag.
@@ -572,7 +572,7 @@ struct SDL_GLContextFlag:
 
 
 @register_passable("trivial")
-struct SDL_GLContextReleaseFlag:
+struct SDL_GLContextReleaseFlag(Intable):
     """Possible values to be set for the SDL_GL_CONTEXT_RELEASE_BEHAVIOR
     attribute.
 
@@ -598,7 +598,7 @@ struct SDL_GLContextReleaseFlag:
 
 
 @register_passable("trivial")
-struct SDL_GLContextResetNotification:
+struct SDL_GLContextResetNotification(Intable):
     """Possible values to be set SDL_GL_CONTEXT_RESET_NOTIFICATION attribute.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GLContextResetNotification.
@@ -3094,7 +3094,7 @@ fn sdl_show_window_system_menu(window: Ptr[SDL_Window, mut=True], x: c_int, y: c
 
 
 @register_passable("trivial")
-struct SDL_HitTestResult:
+struct SDL_HitTestResult(Intable):
     """Possible return values from the SDL_HitTest callback.
 
     Safety:

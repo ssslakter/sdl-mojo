@@ -39,7 +39,7 @@ such as pressure, tilt, rotation, etc.
 
 
 @register_passable("trivial")
-struct SDL_PenID:
+struct SDL_PenID(Intable):
     """SDL pen instance IDs.
 
     Zero is used to signify an invalid/null device.
@@ -67,7 +67,7 @@ struct SDL_PenID:
 
 
 @register_passable("trivial")
-struct SDL_PenInputFlags:
+struct SDL_PenInputFlags(Intable):
     """Pen input flags, as reported by various pen events' `pen_state` field.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PenInputFlags.
@@ -104,7 +104,7 @@ struct SDL_PenInputFlags:
 
 
 @register_passable("trivial")
-struct SDL_PenAxis:
+struct SDL_PenAxis(Intable):
     """Pen axis indices.
 
     These are the valid values for the `axis` field in SDL_PenAxisEvent. All

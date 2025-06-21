@@ -30,7 +30,7 @@ dictating what sort of math to do on what color components.
 
 
 @register_passable("trivial")
-struct SDL_BlendMode:
+struct SDL_BlendMode(Intable):
     """A set of blend modes used in drawing operations.
 
     These predefined blend modes are supported everywhere.
@@ -72,7 +72,7 @@ struct SDL_BlendMode:
 
 
 @register_passable("trivial")
-struct SDL_BlendOperation:
+struct SDL_BlendOperation(Intable):
     """The blend operation used when combining source and destination pixel
     components.
 
@@ -102,7 +102,7 @@ struct SDL_BlendOperation:
 
 
 @register_passable("trivial")
-struct SDL_BlendFactor:
+struct SDL_BlendFactor(Intable):
     """The normalized factor used to multiply pixel components.
 
     The blend factors are multiplied with the pixels from a drawing operation

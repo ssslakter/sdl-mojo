@@ -33,7 +33,7 @@ https://wiki.libsdl.org/SDL3/BestKeyboardPractices
 
 
 @register_passable("trivial")
-struct SDL_KeyboardID:
+struct SDL_KeyboardID(Intable):
     """This is a unique ID for a keyboard for the time it is connected to the
     system, and is never reused for the lifetime of the application.
 
@@ -424,7 +424,7 @@ fn sdl_start_text_input(window: Ptr[SDL_Window, mut=True]) raises:
 
 
 @register_passable("trivial")
-struct SDL_TextInputType:
+struct SDL_TextInputType(Intable):
     """Text input type.
 
     These are the valid values for SDL_PROP_TEXTINPUT_TYPE_NUMBER. Not every
@@ -465,7 +465,7 @@ struct SDL_TextInputType:
 
 
 @register_passable("trivial")
-struct SDL_Capitalization:
+struct SDL_Capitalization(Intable):
     """Auto capitalization type.
 
     These are the valid values for SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER.

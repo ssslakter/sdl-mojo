@@ -35,8 +35,8 @@ other useful forms.
 """
 
 
-@value
-struct SDL_DateTime:
+@fieldwise_init
+struct SDL_DateTime(Copyable, Movable):
     """A structure holding a calendar date and time broken down into its
     components.
 
@@ -64,7 +64,7 @@ struct SDL_DateTime:
 
 
 @register_passable("trivial")
-struct SDL_DateFormat:
+struct SDL_DateFormat(Intable):
     """The preferred date format of the current system locale.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_DateFormat.
@@ -89,7 +89,7 @@ struct SDL_DateFormat:
 
 
 @register_passable("trivial")
-struct SDL_TimeFormat:
+struct SDL_TimeFormat(Intable):
     """The preferred time format of the current system locale.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_TimeFormat.

@@ -33,7 +33,7 @@ https://wiki.libsdl.org/SDL3/BestKeyboardPractices
 
 
 @register_passable("trivial")
-struct SDL_Keycode:
+struct SDL_Keycode(Intable):
     """The SDL virtual key representation.
 
     Values of this type are used to represent keyboard keys using the current
@@ -587,7 +587,7 @@ struct SDL_Keycode:
 
 
 @register_passable("trivial")
-struct SDL_Keymod:
+struct SDL_Keymod(Intable):
     """Valid key modifiers (possibly OR'd together).
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Keymod.

@@ -57,7 +57,7 @@ with a `which` field of SDL_TOUCH_MOUSEID/SDL_PEN_MOUSEID.
 
 
 @register_passable("trivial")
-struct SDL_MouseID:
+struct SDL_MouseID(Intable):
     """This is a unique ID for a mouse for the time it is connected to the system,
     and is never reused for the lifetime of the application.
 
@@ -83,8 +83,8 @@ struct SDL_MouseID:
         return Self(lhs.value | rhs.value)
 
 
-@value
-struct SDL_Cursor:
+@fieldwise_init
+struct SDL_Cursor(Copyable, Movable):
     """The structure used to identify an SDL cursor.
 
     This is opaque data.
@@ -96,7 +96,7 @@ struct SDL_Cursor:
 
 
 @register_passable("trivial")
-struct SDL_SystemCursor:
+struct SDL_SystemCursor(Intable):
     """Cursor types for SDL_CreateSystemCursor().
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_SystemCursor.
@@ -156,7 +156,7 @@ struct SDL_SystemCursor:
 
 
 @register_passable("trivial")
-struct SDL_MouseWheelDirection:
+struct SDL_MouseWheelDirection(Intable):
     """Scroll direction types for the Scroll event.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_MouseWheelDirection.
@@ -179,7 +179,7 @@ struct SDL_MouseWheelDirection:
 
 
 @register_passable("trivial")
-struct SDL_MouseButtonFlags:
+struct SDL_MouseButtonFlags(Intable):
     """A bitmask of pressed mouse buttons, as reported by SDL_GetMouseState, etc.
 
     - Button 1: Left mouse button

@@ -40,7 +40,7 @@ https://github.com/libsdl-org/SDL_image
 
 
 @register_passable("trivial")
-struct SDL_SurfaceFlags:
+struct SDL_SurfaceFlags(Intable):
     """The flags on an SDL_Surface.
 
     These are generally considered read-only.
@@ -73,7 +73,7 @@ struct SDL_SurfaceFlags:
 
 
 @register_passable("trivial")
-struct SDL_ScaleMode:
+struct SDL_ScaleMode(Intable):
     """The scaling mode.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_ScaleMode.
@@ -97,7 +97,7 @@ struct SDL_ScaleMode:
 
 
 @register_passable("trivial")
-struct SDL_FlipMode:
+struct SDL_FlipMode(Intable):
     """The flip mode.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_FlipMode.
@@ -121,8 +121,8 @@ struct SDL_FlipMode:
     """Flip vertically."""
 
 
-@value
-struct SDL_Surface:
+@fieldwise_init
+struct SDL_Surface(Copyable, Movable):
     """A collection of pixels used in software blitting.
 
     Pixels are arranged in memory in rows, with the top row first. Each row
