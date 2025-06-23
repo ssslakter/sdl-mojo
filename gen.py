@@ -701,7 +701,7 @@ with open(out_dir / '__init__.mojo', 'w') as imp:
 
 ''')
     for include in includes:
-        out = out_dir / (include.removeprefix('SDL_').removesuffix('.h') + '.mojo')
+        out = out_dir / (include.lower().removesuffix('.h') + '.mojo')
         get_src(include, out)
         print('translating ' + str(out))
         imp.write(f'from .{out.stem} import *\n')
