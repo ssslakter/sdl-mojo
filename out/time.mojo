@@ -36,11 +36,11 @@ other useful forms.
 
 
 @fieldwise_init
-struct SDL_DateTime(Copyable, Movable):
+struct DateTime(Copyable, Movable):
     """A structure holding a calendar date and time broken down into its
     components.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_DateTime.
+    Docs: https://wiki.libsdl.org/SDL3/DateTime.
     """
 
     var year: c_int
@@ -64,7 +64,7 @@ struct SDL_DateTime(Copyable, Movable):
 
 
 @register_passable("trivial")
-struct SDL_DateFormat(Intable):
+struct DateFormat(Intable):
     """The preferred date format of the current system locale.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_DateFormat.
@@ -80,16 +80,16 @@ struct SDL_DateFormat(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_DATE_FORMAT_YYYYMMDD = 0
+    alias DATE_FORMAT_YYYYMMDD = Self(0)
     """Year/Month/Day."""
-    alias SDL_DATE_FORMAT_DDMMYYYY = 1
+    alias DATE_FORMAT_DDMMYYYY = Self(1)
     """Day/Month/Year."""
-    alias SDL_DATE_FORMAT_MMDDYYYY = 2
+    alias DATE_FORMAT_MMDDYYYY = Self(2)
     """Month/Day/Year."""
 
 
 @register_passable("trivial")
-struct SDL_TimeFormat(Intable):
+struct TimeFormat(Intable):
     """The preferred time format of the current system locale.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_TimeFormat.
@@ -105,13 +105,13 @@ struct SDL_TimeFormat(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_TIME_FORMAT_24HR = 0
+    alias TIME_FORMAT_24HR = Self(0)
     """24 hour time."""
-    alias SDL_TIME_FORMAT_12HR = 1
+    alias TIME_FORMAT_12HR = Self(1)
     """12 hour time."""
 
 
-fn sdl_get_date_time_locale_preferences(date_format: Ptr[SDL_DateFormat, mut=True], time_format: Ptr[SDL_TimeFormat, mut=True]) raises:
+fn get_date_time_locale_preferences(date_format: Ptr[DateFormat, mut=True], time_format: Ptr[TimeFormat, mut=True]) raises:
     """Gets the current preferred date and time format for the system locale.
 
     This might be a "slow" call that has to query the operating system. It's
@@ -132,12 +132,12 @@ fn sdl_get_date_time_locale_preferences(date_format: Ptr[SDL_DateFormat, mut=Tru
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetDateTimeLocalePreferences.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetDateTimeLocalePreferences", fn (date_format: Ptr[SDL_DateFormat, mut=True], time_format: Ptr[SDL_TimeFormat, mut=True]) -> Bool]()(date_format, time_format)
+    ret = _get_dylib_function[lib, "SDL_GetDateTimeLocalePreferences", fn (date_format: Ptr[DateFormat, mut=True], time_format: Ptr[TimeFormat, mut=True]) -> Bool]()(date_format, time_format)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_current_time(ticks: Ptr[Int64, mut=True]) raises:
+fn get_current_time(ticks: Ptr[Int64, mut=True]) raises:
     """Gets the current value of the system realtime clock in nanoseconds since
     Jan 1, 1970 in Universal Coordinated Time (UTC).
 
@@ -153,10 +153,10 @@ fn sdl_get_current_time(ticks: Ptr[Int64, mut=True]) raises:
 
     ret = _get_dylib_function[lib, "SDL_GetCurrentTime", fn (ticks: Ptr[Int64, mut=True]) -> Bool]()(ticks)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_time_to_date_time(ticks: Int64, dt: Ptr[SDL_DateTime, mut=True], local_time: Bool) raises:
+fn time_to_date_time(ticks: Int64, dt: Ptr[DateTime, mut=True], local_time: Bool) raises:
     """Converts an SDL_Time in nanoseconds since the epoch to a calendar time in
     the SDL_DateTime format.
 
@@ -174,12 +174,12 @@ fn sdl_time_to_date_time(ticks: Int64, dt: Ptr[SDL_DateTime, mut=True], local_ti
     Docs: https://wiki.libsdl.org/SDL3/SDL_TimeToDateTime.
     """
 
-    ret = _get_dylib_function[lib, "SDL_TimeToDateTime", fn (ticks: Int64, dt: Ptr[SDL_DateTime, mut=True], local_time: Bool) -> Bool]()(ticks, dt, local_time)
+    ret = _get_dylib_function[lib, "SDL_TimeToDateTime", fn (ticks: Int64, dt: Ptr[DateTime, mut=True], local_time: Bool) -> Bool]()(ticks, dt, local_time)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_date_time_to_time(dt: Ptr[SDL_DateTime, mut=False], ticks: Ptr[Int64, mut=True]) raises:
+fn date_time_to_time(dt: Ptr[DateTime, mut=False], ticks: Ptr[Int64, mut=True]) raises:
     """Converts a calendar time to an SDL_Time in nanoseconds since the epoch.
 
     This function ignores the day_of_week member of the SDL_DateTime struct, so
@@ -196,12 +196,12 @@ fn sdl_date_time_to_time(dt: Ptr[SDL_DateTime, mut=False], ticks: Ptr[Int64, mut
     Docs: https://wiki.libsdl.org/SDL3/SDL_DateTimeToTime.
     """
 
-    ret = _get_dylib_function[lib, "SDL_DateTimeToTime", fn (dt: Ptr[SDL_DateTime, mut=False], ticks: Ptr[Int64, mut=True]) -> Bool]()(dt, ticks)
+    ret = _get_dylib_function[lib, "SDL_DateTimeToTime", fn (dt: Ptr[DateTime, mut=False], ticks: Ptr[Int64, mut=True]) -> Bool]()(dt, ticks)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_time_to_windows(ticks: Int64, dw_low_date_time: Ptr[UInt32, mut=True], dw_high_date_time: Ptr[UInt32, mut=True]) -> None:
+fn time_to_windows(ticks: Int64, dw_low_date_time: Ptr[UInt32, mut=True], dw_high_date_time: Ptr[UInt32, mut=True]) -> None:
     """Converts an SDL time into a Windows FILETIME (100-nanosecond intervals
     since January 1, 1601).
 
@@ -220,7 +220,7 @@ fn sdl_time_to_windows(ticks: Int64, dw_low_date_time: Ptr[UInt32, mut=True], dw
     return _get_dylib_function[lib, "SDL_TimeToWindows", fn (ticks: Int64, dw_low_date_time: Ptr[UInt32, mut=True], dw_high_date_time: Ptr[UInt32, mut=True]) -> None]()(ticks, dw_low_date_time, dw_high_date_time)
 
 
-fn sdl_time_from_windows(dw_low_date_time: UInt32, dw_high_date_time: UInt32) -> Int64:
+fn time_from_windows(dw_low_date_time: UInt32, dw_high_date_time: UInt32) -> Int64:
     """Converts a Windows FILETIME (100-nanosecond intervals since January 1,
     1601) to an SDL time.
 
@@ -240,7 +240,7 @@ fn sdl_time_from_windows(dw_low_date_time: UInt32, dw_high_date_time: UInt32) ->
     return _get_dylib_function[lib, "SDL_TimeFromWindows", fn (dw_low_date_time: UInt32, dw_high_date_time: UInt32) -> Int64]()(dw_low_date_time, dw_high_date_time)
 
 
-fn sdl_get_days_in_month(year: c_int, month: c_int) -> c_int:
+fn get_days_in_month(year: c_int, month: c_int) -> c_int:
     """Get the number of days in a month for a given year.
 
     Args:
@@ -257,7 +257,7 @@ fn sdl_get_days_in_month(year: c_int, month: c_int) -> c_int:
     return _get_dylib_function[lib, "SDL_GetDaysInMonth", fn (year: c_int, month: c_int) -> c_int]()(year, month)
 
 
-fn sdl_get_day_of_year(year: c_int, month: c_int, day: c_int) -> c_int:
+fn get_day_of_year(year: c_int, month: c_int, day: c_int) -> c_int:
     """Get the day of year for a calendar date.
 
     Args:
@@ -275,7 +275,7 @@ fn sdl_get_day_of_year(year: c_int, month: c_int, day: c_int) -> c_int:
     return _get_dylib_function[lib, "SDL_GetDayOfYear", fn (year: c_int, month: c_int, day: c_int) -> c_int]()(year, month, day)
 
 
-fn sdl_get_day_of_week(year: c_int, month: c_int, day: c_int) -> c_int:
+fn get_day_of_week(year: c_int, month: c_int, day: c_int) -> c_int:
     """Get the day of week for a calendar date.
 
     Args:

@@ -304,96 +304,96 @@ results.
 
 
 @fieldwise_init
-struct SDL_GPUDevice(Copyable, Movable):
+struct GPUDevice(Copyable, Movable):
     """An opaque handle representing the SDL_GPU context.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUDevice.
+    Docs: https://wiki.libsdl.org/SDL3/GPUDevice.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPUBuffer(Copyable, Movable):
+struct GPUBuffer(Copyable, Movable):
     """An opaque handle representing a buffer.
 
     Used for vertices, indices, indirect draw commands, and general compute
     data.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBuffer.
+    Docs: https://wiki.libsdl.org/SDL3/GPUBuffer.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPUTransferBuffer(Copyable, Movable):
+struct GPUTransferBuffer(Copyable, Movable):
     """An opaque handle representing a transfer buffer.
 
     Used for transferring data to and from the device.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTransferBuffer.
+    Docs: https://wiki.libsdl.org/SDL3/GPUTransferBuffer.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPUTexture(Copyable, Movable):
+struct GPUTexture(Copyable, Movable):
     """An opaque handle representing a texture.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTexture.
+    Docs: https://wiki.libsdl.org/SDL3/GPUTexture.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPUSampler(Copyable, Movable):
+struct GPUSampler(Copyable, Movable):
     """An opaque handle representing a sampler.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUSampler.
+    Docs: https://wiki.libsdl.org/SDL3/GPUSampler.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPUShader(Copyable, Movable):
+struct GPUShader(Copyable, Movable):
     """An opaque handle representing a compiled shader object.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUShader.
+    Docs: https://wiki.libsdl.org/SDL3/GPUShader.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPUComputePipeline(Copyable, Movable):
+struct GPUComputePipeline(Copyable, Movable):
     """An opaque handle representing a compute pipeline.
 
     Used during compute passes.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUComputePipeline.
+    Docs: https://wiki.libsdl.org/SDL3/GPUComputePipeline.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPUGraphicsPipeline(Copyable, Movable):
+struct GPUGraphicsPipeline(Copyable, Movable):
     """An opaque handle representing a graphics pipeline.
 
     Used during render passes.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUGraphicsPipeline.
+    Docs: https://wiki.libsdl.org/SDL3/GPUGraphicsPipeline.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPUCommandBuffer(Copyable, Movable):
+struct GPUCommandBuffer(Copyable, Movable):
     """An opaque handle representing a command buffer.
 
     Most state is managed via command buffers. When setting state using a
@@ -410,63 +410,63 @@ struct SDL_GPUCommandBuffer(Copyable, Movable):
     In multi-threading scenarios, you should only access a command buffer on
     the thread you acquired it from.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUCommandBuffer.
+    Docs: https://wiki.libsdl.org/SDL3/GPUCommandBuffer.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPURenderPass(Copyable, Movable):
+struct GPURenderPass(Copyable, Movable):
     """An opaque handle representing a render pass.
 
     This handle is transient and should not be held or referenced after
     SDL_EndGPURenderPass is called.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPURenderPass.
+    Docs: https://wiki.libsdl.org/SDL3/GPURenderPass.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPUComputePass(Copyable, Movable):
+struct GPUComputePass(Copyable, Movable):
     """An opaque handle representing a compute pass.
 
     This handle is transient and should not be held or referenced after
     SDL_EndGPUComputePass is called.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUComputePass.
+    Docs: https://wiki.libsdl.org/SDL3/GPUComputePass.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPUCopyPass(Copyable, Movable):
+struct GPUCopyPass(Copyable, Movable):
     """An opaque handle representing a copy pass.
 
     This handle is transient and should not be held or referenced after
     SDL_EndGPUCopyPass is called.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUCopyPass.
+    Docs: https://wiki.libsdl.org/SDL3/GPUCopyPass.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_GPUFence(Copyable, Movable):
+struct GPUFence(Copyable, Movable):
     """An opaque handle representing a fence.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUFence.
+    Docs: https://wiki.libsdl.org/SDL3/GPUFence.
     """
 
     pass
 
 
 @register_passable("trivial")
-struct SDL_GPUPrimitiveType(Intable):
+struct GPUPrimitiveType(Intable):
     """Specifies the primitive topology of a graphics pipeline.
 
     If you are using POINTLIST you must include a point size output in the
@@ -496,20 +496,20 @@ struct SDL_GPUPrimitiveType(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_PRIMITIVETYPE_TRIANGLELIST = 0
+    alias GPU_PRIMITIVETYPE_TRIANGLELIST = Self(0)
     """A series of separate triangles."""
-    alias SDL_GPU_PRIMITIVETYPE_TRIANGLESTRIP = 1
+    alias GPU_PRIMITIVETYPE_TRIANGLESTRIP = Self(1)
     """A series of connected triangles."""
-    alias SDL_GPU_PRIMITIVETYPE_LINELIST = 2
+    alias GPU_PRIMITIVETYPE_LINELIST = Self(2)
     """A series of separate lines."""
-    alias SDL_GPU_PRIMITIVETYPE_LINESTRIP = 3
+    alias GPU_PRIMITIVETYPE_LINESTRIP = Self(3)
     """A series of connected lines."""
-    alias SDL_GPU_PRIMITIVETYPE_POINTLIST = 4
+    alias GPU_PRIMITIVETYPE_POINTLIST = Self(4)
     """A series of separate points."""
 
 
 @register_passable("trivial")
-struct SDL_GPULoadOp(Intable):
+struct GPULoadOp(Intable):
     """Specifies how the contents of a texture attached to a render pass are
     treated at the beginning of the render pass.
 
@@ -526,16 +526,16 @@ struct SDL_GPULoadOp(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_LOADOP_LOAD = 0
+    alias GPU_LOADOP_LOAD = Self(0)
     """The previous contents of the texture will be preserved."""
-    alias SDL_GPU_LOADOP_CLEAR = 1
+    alias GPU_LOADOP_CLEAR = Self(1)
     """The contents of the texture will be cleared to a color."""
-    alias SDL_GPU_LOADOP_DONT_CARE = 2
+    alias GPU_LOADOP_DONT_CARE = Self(2)
     """The previous contents of the texture need not be preserved. The contents will be undefined."""
 
 
 @register_passable("trivial")
-struct SDL_GPUStoreOp(Intable):
+struct GPUStoreOp(Intable):
     """Specifies how the contents of a texture attached to a render pass are
     treated at the end of the render pass.
 
@@ -552,18 +552,18 @@ struct SDL_GPUStoreOp(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_STOREOP_STORE = 0
+    alias GPU_STOREOP_STORE = Self(0)
     """The contents generated during the render pass will be written to memory."""
-    alias SDL_GPU_STOREOP_DONT_CARE = 1
+    alias GPU_STOREOP_DONT_CARE = Self(1)
     """The contents generated during the render pass are not needed and may be discarded. The contents will be undefined."""
-    alias SDL_GPU_STOREOP_RESOLVE = 2
+    alias GPU_STOREOP_RESOLVE = Self(2)
     """The multisample contents generated during the render pass will be resolved to a non-multisample texture. The contents in the multisample texture may then be discarded and will be undefined."""
-    alias SDL_GPU_STOREOP_RESOLVE_AND_STORE = 3
+    alias GPU_STOREOP_RESOLVE_AND_STORE = Self(3)
     """The multisample contents generated during the render pass will be resolved to a non-multisample texture. The contents in the multisample texture will be written to memory."""
 
 
 @register_passable("trivial")
-struct SDL_GPUIndexElementSize(Intable):
+struct GPUIndexElementSize(Intable):
     """Specifies the size of elements in an index buffer.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUIndexElementSize.
@@ -579,14 +579,14 @@ struct SDL_GPUIndexElementSize(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_INDEXELEMENTSIZE_16BIT = 0
+    alias GPU_INDEXELEMENTSIZE_16BIT = Self(0)
     """The index elements are 16-bit."""
-    alias SDL_GPU_INDEXELEMENTSIZE_32BIT = 1
+    alias GPU_INDEXELEMENTSIZE_32BIT = Self(1)
     """The index elements are 32-bit."""
 
 
 @register_passable("trivial")
-struct SDL_GPUTextureFormat(Intable):
+struct GPUTextureFormat(Intable):
     """Specifies the pixel format of a texture.
 
     Texture format support varies depending on driver, hardware, and usage
@@ -679,131 +679,131 @@ struct SDL_GPUTextureFormat(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_TEXTUREFORMAT_INVALID = 0
+    alias GPU_TEXTUREFORMAT_INVALID = Self(0)
 
     # Unsigned Normalized Float Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_A8_UNORM = 1
-    alias SDL_GPU_TEXTUREFORMAT_R8_UNORM = 2
-    alias SDL_GPU_TEXTUREFORMAT_R8G8_UNORM = 3
-    alias SDL_GPU_TEXTUREFORMAT_R8G8B8A8_UNORM = 4
-    alias SDL_GPU_TEXTUREFORMAT_R16_UNORM = 5
-    alias SDL_GPU_TEXTUREFORMAT_R16G16_UNORM = 6
-    alias SDL_GPU_TEXTUREFORMAT_R16G16B16A16_UNORM = 7
-    alias SDL_GPU_TEXTUREFORMAT_R10G10B10A2_UNORM = 8
-    alias SDL_GPU_TEXTUREFORMAT_B5G6R5_UNORM = 9
-    alias SDL_GPU_TEXTUREFORMAT_B5G5R5A1_UNORM = 10
-    alias SDL_GPU_TEXTUREFORMAT_B4G4R4A4_UNORM = 11
-    alias SDL_GPU_TEXTUREFORMAT_B8G8R8A8_UNORM = 12
+    alias GPU_TEXTUREFORMAT_A8_UNORM = Self(1)
+    alias GPU_TEXTUREFORMAT_R8_UNORM = Self(2)
+    alias GPU_TEXTUREFORMAT_R8G8_UNORM = Self(3)
+    alias GPU_TEXTUREFORMAT_R8G8B8A8_UNORM = Self(4)
+    alias GPU_TEXTUREFORMAT_R16_UNORM = Self(5)
+    alias GPU_TEXTUREFORMAT_R16G16_UNORM = Self(6)
+    alias GPU_TEXTUREFORMAT_R16G16B16A16_UNORM = Self(7)
+    alias GPU_TEXTUREFORMAT_R10G10B10A2_UNORM = Self(8)
+    alias GPU_TEXTUREFORMAT_B5G6R5_UNORM = Self(9)
+    alias GPU_TEXTUREFORMAT_B5G5R5A1_UNORM = Self(10)
+    alias GPU_TEXTUREFORMAT_B4G4R4A4_UNORM = Self(11)
+    alias GPU_TEXTUREFORMAT_B8G8R8A8_UNORM = Self(12)
     # Compressed Unsigned Normalized Float Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_BC1_RGBA_UNORM = 13
-    alias SDL_GPU_TEXTUREFORMAT_BC2_RGBA_UNORM = 14
-    alias SDL_GPU_TEXTUREFORMAT_BC3_RGBA_UNORM = 15
-    alias SDL_GPU_TEXTUREFORMAT_BC4_R_UNORM = 16
-    alias SDL_GPU_TEXTUREFORMAT_BC5_RG_UNORM = 17
-    alias SDL_GPU_TEXTUREFORMAT_BC7_RGBA_UNORM = 18
+    alias GPU_TEXTUREFORMAT_BC1_RGBA_UNORM = Self(13)
+    alias GPU_TEXTUREFORMAT_BC2_RGBA_UNORM = Self(14)
+    alias GPU_TEXTUREFORMAT_BC3_RGBA_UNORM = Self(15)
+    alias GPU_TEXTUREFORMAT_BC4_R_UNORM = Self(16)
+    alias GPU_TEXTUREFORMAT_BC5_RG_UNORM = Self(17)
+    alias GPU_TEXTUREFORMAT_BC7_RGBA_UNORM = Self(18)
     # Compressed Signed Float Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_BC6H_RGB_FLOAT = 19
+    alias GPU_TEXTUREFORMAT_BC6H_RGB_FLOAT = Self(19)
     # Compressed Unsigned Float Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_BC6H_RGB_UFLOAT = 20
+    alias GPU_TEXTUREFORMAT_BC6H_RGB_UFLOAT = Self(20)
     # Signed Normalized Float Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_R8_SNORM = 21
-    alias SDL_GPU_TEXTUREFORMAT_R8G8_SNORM = 22
-    alias SDL_GPU_TEXTUREFORMAT_R8G8B8A8_SNORM = 23
-    alias SDL_GPU_TEXTUREFORMAT_R16_SNORM = 24
-    alias SDL_GPU_TEXTUREFORMAT_R16G16_SNORM = 25
-    alias SDL_GPU_TEXTUREFORMAT_R16G16B16A16_SNORM = 26
+    alias GPU_TEXTUREFORMAT_R8_SNORM = Self(21)
+    alias GPU_TEXTUREFORMAT_R8G8_SNORM = Self(22)
+    alias GPU_TEXTUREFORMAT_R8G8B8A8_SNORM = Self(23)
+    alias GPU_TEXTUREFORMAT_R16_SNORM = Self(24)
+    alias GPU_TEXTUREFORMAT_R16G16_SNORM = Self(25)
+    alias GPU_TEXTUREFORMAT_R16G16B16A16_SNORM = Self(26)
     # Signed Float Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_R16_FLOAT = 27
-    alias SDL_GPU_TEXTUREFORMAT_R16G16_FLOAT = 28
-    alias SDL_GPU_TEXTUREFORMAT_R16G16B16A16_FLOAT = 29
-    alias SDL_GPU_TEXTUREFORMAT_R32_FLOAT = 30
-    alias SDL_GPU_TEXTUREFORMAT_R32G32_FLOAT = 31
-    alias SDL_GPU_TEXTUREFORMAT_R32G32B32A32_FLOAT = 32
+    alias GPU_TEXTUREFORMAT_R16_FLOAT = Self(27)
+    alias GPU_TEXTUREFORMAT_R16G16_FLOAT = Self(28)
+    alias GPU_TEXTUREFORMAT_R16G16B16A16_FLOAT = Self(29)
+    alias GPU_TEXTUREFORMAT_R32_FLOAT = Self(30)
+    alias GPU_TEXTUREFORMAT_R32G32_FLOAT = Self(31)
+    alias GPU_TEXTUREFORMAT_R32G32B32A32_FLOAT = Self(32)
     # Unsigned Float Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_R11G11B10_UFLOAT = 33
+    alias GPU_TEXTUREFORMAT_R11G11B10_UFLOAT = Self(33)
     # Unsigned Integer Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_R8_UINT = 34
-    alias SDL_GPU_TEXTUREFORMAT_R8G8_UINT = 35
-    alias SDL_GPU_TEXTUREFORMAT_R8G8B8A8_UINT = 36
-    alias SDL_GPU_TEXTUREFORMAT_R16_UINT = 37
-    alias SDL_GPU_TEXTUREFORMAT_R16G16_UINT = 38
-    alias SDL_GPU_TEXTUREFORMAT_R16G16B16A16_UINT = 39
-    alias SDL_GPU_TEXTUREFORMAT_R32_UINT = 40
-    alias SDL_GPU_TEXTUREFORMAT_R32G32_UINT = 41
-    alias SDL_GPU_TEXTUREFORMAT_R32G32B32A32_UINT = 42
+    alias GPU_TEXTUREFORMAT_R8_UINT = Self(34)
+    alias GPU_TEXTUREFORMAT_R8G8_UINT = Self(35)
+    alias GPU_TEXTUREFORMAT_R8G8B8A8_UINT = Self(36)
+    alias GPU_TEXTUREFORMAT_R16_UINT = Self(37)
+    alias GPU_TEXTUREFORMAT_R16G16_UINT = Self(38)
+    alias GPU_TEXTUREFORMAT_R16G16B16A16_UINT = Self(39)
+    alias GPU_TEXTUREFORMAT_R32_UINT = Self(40)
+    alias GPU_TEXTUREFORMAT_R32G32_UINT = Self(41)
+    alias GPU_TEXTUREFORMAT_R32G32B32A32_UINT = Self(42)
     # Signed Integer Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_R8_INT = 43
-    alias SDL_GPU_TEXTUREFORMAT_R8G8_INT = 44
-    alias SDL_GPU_TEXTUREFORMAT_R8G8B8A8_INT = 45
-    alias SDL_GPU_TEXTUREFORMAT_R16_INT = 46
-    alias SDL_GPU_TEXTUREFORMAT_R16G16_INT = 47
-    alias SDL_GPU_TEXTUREFORMAT_R16G16B16A16_INT = 48
-    alias SDL_GPU_TEXTUREFORMAT_R32_INT = 49
-    alias SDL_GPU_TEXTUREFORMAT_R32G32_INT = 50
-    alias SDL_GPU_TEXTUREFORMAT_R32G32B32A32_INT = 51
+    alias GPU_TEXTUREFORMAT_R8_INT = Self(43)
+    alias GPU_TEXTUREFORMAT_R8G8_INT = Self(44)
+    alias GPU_TEXTUREFORMAT_R8G8B8A8_INT = Self(45)
+    alias GPU_TEXTUREFORMAT_R16_INT = Self(46)
+    alias GPU_TEXTUREFORMAT_R16G16_INT = Self(47)
+    alias GPU_TEXTUREFORMAT_R16G16B16A16_INT = Self(48)
+    alias GPU_TEXTUREFORMAT_R32_INT = Self(49)
+    alias GPU_TEXTUREFORMAT_R32G32_INT = Self(50)
+    alias GPU_TEXTUREFORMAT_R32G32B32A32_INT = Self(51)
     # SRGB Unsigned Normalized Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_R8G8B8A8_UNORM_SRGB = 52
-    alias SDL_GPU_TEXTUREFORMAT_B8G8R8A8_UNORM_SRGB = 53
+    alias GPU_TEXTUREFORMAT_R8G8B8A8_UNORM_SRGB = Self(52)
+    alias GPU_TEXTUREFORMAT_B8G8R8A8_UNORM_SRGB = Self(53)
     # Compressed SRGB Unsigned Normalized Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_BC1_RGBA_UNORM_SRGB = 54
-    alias SDL_GPU_TEXTUREFORMAT_BC2_RGBA_UNORM_SRGB = 55
-    alias SDL_GPU_TEXTUREFORMAT_BC3_RGBA_UNORM_SRGB = 56
-    alias SDL_GPU_TEXTUREFORMAT_BC7_RGBA_UNORM_SRGB = 57
+    alias GPU_TEXTUREFORMAT_BC1_RGBA_UNORM_SRGB = Self(54)
+    alias GPU_TEXTUREFORMAT_BC2_RGBA_UNORM_SRGB = Self(55)
+    alias GPU_TEXTUREFORMAT_BC3_RGBA_UNORM_SRGB = Self(56)
+    alias GPU_TEXTUREFORMAT_BC7_RGBA_UNORM_SRGB = Self(57)
     # Depth Formats
-    alias SDL_GPU_TEXTUREFORMAT_D16_UNORM = 58
-    alias SDL_GPU_TEXTUREFORMAT_D24_UNORM = 59
-    alias SDL_GPU_TEXTUREFORMAT_D32_FLOAT = 60
-    alias SDL_GPU_TEXTUREFORMAT_D24_UNORM_S8_UINT = 61
-    alias SDL_GPU_TEXTUREFORMAT_D32_FLOAT_S8_UINT = 62
+    alias GPU_TEXTUREFORMAT_D16_UNORM = Self(58)
+    alias GPU_TEXTUREFORMAT_D24_UNORM = Self(59)
+    alias GPU_TEXTUREFORMAT_D32_FLOAT = Self(60)
+    alias GPU_TEXTUREFORMAT_D24_UNORM_S8_UINT = Self(61)
+    alias GPU_TEXTUREFORMAT_D32_FLOAT_S8_UINT = Self(62)
     # Compressed ASTC Normalized Float Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_4x4_UNORM = 63
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_5x4_UNORM = 64
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_5x5_UNORM = 65
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_6x5_UNORM = 66
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_6x6_UNORM = 67
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_8x5_UNORM = 68
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_8x6_UNORM = 69
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_8x8_UNORM = 70
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x5_UNORM = 71
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x6_UNORM = 72
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x8_UNORM = 73
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x10_UNORM = 74
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_12x10_UNORM = 75
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_12x12_UNORM = 76
+    alias GPU_TEXTUREFORMAT_ASTC_4x4_UNORM = Self(63)
+    alias GPU_TEXTUREFORMAT_ASTC_5x4_UNORM = Self(64)
+    alias GPU_TEXTUREFORMAT_ASTC_5x5_UNORM = Self(65)
+    alias GPU_TEXTUREFORMAT_ASTC_6x5_UNORM = Self(66)
+    alias GPU_TEXTUREFORMAT_ASTC_6x6_UNORM = Self(67)
+    alias GPU_TEXTUREFORMAT_ASTC_8x5_UNORM = Self(68)
+    alias GPU_TEXTUREFORMAT_ASTC_8x6_UNORM = Self(69)
+    alias GPU_TEXTUREFORMAT_ASTC_8x8_UNORM = Self(70)
+    alias GPU_TEXTUREFORMAT_ASTC_10x5_UNORM = Self(71)
+    alias GPU_TEXTUREFORMAT_ASTC_10x6_UNORM = Self(72)
+    alias GPU_TEXTUREFORMAT_ASTC_10x8_UNORM = Self(73)
+    alias GPU_TEXTUREFORMAT_ASTC_10x10_UNORM = Self(74)
+    alias GPU_TEXTUREFORMAT_ASTC_12x10_UNORM = Self(75)
+    alias GPU_TEXTUREFORMAT_ASTC_12x12_UNORM = Self(76)
     # Compressed SRGB ASTC Normalized Float Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_4x4_UNORM_SRGB = 77
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_5x4_UNORM_SRGB = 78
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_5x5_UNORM_SRGB = 79
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_6x5_UNORM_SRGB = 80
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_6x6_UNORM_SRGB = 81
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_8x5_UNORM_SRGB = 82
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_8x6_UNORM_SRGB = 83
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_8x8_UNORM_SRGB = 84
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x5_UNORM_SRGB = 85
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x6_UNORM_SRGB = 86
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x8_UNORM_SRGB = 87
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x10_UNORM_SRGB = 88
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_12x10_UNORM_SRGB = 89
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_12x12_UNORM_SRGB = 90
+    alias GPU_TEXTUREFORMAT_ASTC_4x4_UNORM_SRGB = Self(77)
+    alias GPU_TEXTUREFORMAT_ASTC_5x4_UNORM_SRGB = Self(78)
+    alias GPU_TEXTUREFORMAT_ASTC_5x5_UNORM_SRGB = Self(79)
+    alias GPU_TEXTUREFORMAT_ASTC_6x5_UNORM_SRGB = Self(80)
+    alias GPU_TEXTUREFORMAT_ASTC_6x6_UNORM_SRGB = Self(81)
+    alias GPU_TEXTUREFORMAT_ASTC_8x5_UNORM_SRGB = Self(82)
+    alias GPU_TEXTUREFORMAT_ASTC_8x6_UNORM_SRGB = Self(83)
+    alias GPU_TEXTUREFORMAT_ASTC_8x8_UNORM_SRGB = Self(84)
+    alias GPU_TEXTUREFORMAT_ASTC_10x5_UNORM_SRGB = Self(85)
+    alias GPU_TEXTUREFORMAT_ASTC_10x6_UNORM_SRGB = Self(86)
+    alias GPU_TEXTUREFORMAT_ASTC_10x8_UNORM_SRGB = Self(87)
+    alias GPU_TEXTUREFORMAT_ASTC_10x10_UNORM_SRGB = Self(88)
+    alias GPU_TEXTUREFORMAT_ASTC_12x10_UNORM_SRGB = Self(89)
+    alias GPU_TEXTUREFORMAT_ASTC_12x12_UNORM_SRGB = Self(90)
     # Compressed ASTC Signed Float Color Formats
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_4x4_FLOAT = 91
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_5x4_FLOAT = 92
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_5x5_FLOAT = 93
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_6x5_FLOAT = 94
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_6x6_FLOAT = 95
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_8x5_FLOAT = 96
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_8x6_FLOAT = 97
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_8x8_FLOAT = 98
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x5_FLOAT = 99
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x6_FLOAT = 100
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x8_FLOAT = 101
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_10x10_FLOAT = 102
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_12x10_FLOAT = 103
-    alias SDL_GPU_TEXTUREFORMAT_ASTC_12x12_FLOAT = 104
+    alias GPU_TEXTUREFORMAT_ASTC_4x4_FLOAT = Self(91)
+    alias GPU_TEXTUREFORMAT_ASTC_5x4_FLOAT = Self(92)
+    alias GPU_TEXTUREFORMAT_ASTC_5x5_FLOAT = Self(93)
+    alias GPU_TEXTUREFORMAT_ASTC_6x5_FLOAT = Self(94)
+    alias GPU_TEXTUREFORMAT_ASTC_6x6_FLOAT = Self(95)
+    alias GPU_TEXTUREFORMAT_ASTC_8x5_FLOAT = Self(96)
+    alias GPU_TEXTUREFORMAT_ASTC_8x6_FLOAT = Self(97)
+    alias GPU_TEXTUREFORMAT_ASTC_8x8_FLOAT = Self(98)
+    alias GPU_TEXTUREFORMAT_ASTC_10x5_FLOAT = Self(99)
+    alias GPU_TEXTUREFORMAT_ASTC_10x6_FLOAT = Self(100)
+    alias GPU_TEXTUREFORMAT_ASTC_10x8_FLOAT = Self(101)
+    alias GPU_TEXTUREFORMAT_ASTC_10x10_FLOAT = Self(102)
+    alias GPU_TEXTUREFORMAT_ASTC_12x10_FLOAT = Self(103)
+    alias GPU_TEXTUREFORMAT_ASTC_12x12_FLOAT = Self(104)
 
 
 @register_passable("trivial")
-struct SDL_GPUTextureUsageFlags(Intable):
+struct GPUTextureUsageFlags(Intable):
     """Specifies how a texture is intended to be used by the client.
 
     A texture must have at least one usage flag. Note that some usage flag
@@ -836,24 +836,24 @@ struct SDL_GPUTextureUsageFlags(Intable):
     fn __or__(lhs, rhs: Self) -> Self:
         return Self(lhs.value | rhs.value)
 
-    alias SDL_GPU_TEXTUREUSAGE_SAMPLER = Self(1 << 0)
+    alias GPU_TEXTUREUSAGE_SAMPLER = Self(1 << 0)
     """Texture supports sampling."""
-    alias SDL_GPU_TEXTUREUSAGE_COLOR_TARGET = Self(1 << 1)
+    alias GPU_TEXTUREUSAGE_COLOR_TARGET = Self(1 << 1)
     """Texture is a color render target."""
-    alias SDL_GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET = Self(1 << 2)
+    alias GPU_TEXTUREUSAGE_DEPTH_STENCIL_TARGET = Self(1 << 2)
     """Texture is a depth stencil target."""
-    alias SDL_GPU_TEXTUREUSAGE_GRAPHICS_STORAGE_READ = Self(1 << 3)
+    alias GPU_TEXTUREUSAGE_GRAPHICS_STORAGE_READ = Self(1 << 3)
     """Texture supports storage reads in graphics stages."""
-    alias SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_READ = Self(1 << 4)
+    alias GPU_TEXTUREUSAGE_COMPUTE_STORAGE_READ = Self(1 << 4)
     """Texture supports storage reads in the compute stage."""
-    alias SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE = Self(1 << 5)
+    alias GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE = Self(1 << 5)
     """Texture supports storage writes in the compute stage."""
-    alias SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE = Self(1 << 6)
+    alias GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE = Self(1 << 6)
     """Texture supports reads and writes in the same compute shader. This is NOT equivalent to READ | WRITE."""
 
 
 @register_passable("trivial")
-struct SDL_GPUTextureType(Intable):
+struct GPUTextureType(Intable):
     """Specifies the type of a texture.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureType.
@@ -869,20 +869,20 @@ struct SDL_GPUTextureType(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_TEXTURETYPE_2D = 0
+    alias GPU_TEXTURETYPE_2D = Self(0)
     """The texture is a 2-dimensional image."""
-    alias SDL_GPU_TEXTURETYPE_2D_ARRAY = 1
+    alias GPU_TEXTURETYPE_2D_ARRAY = Self(1)
     """The texture is a 2-dimensional array image."""
-    alias SDL_GPU_TEXTURETYPE_3D = 2
+    alias GPU_TEXTURETYPE_3D = Self(2)
     """The texture is a 3-dimensional image."""
-    alias SDL_GPU_TEXTURETYPE_CUBE = 3
+    alias GPU_TEXTURETYPE_CUBE = Self(3)
     """The texture is a cube image."""
-    alias SDL_GPU_TEXTURETYPE_CUBE_ARRAY = 4
+    alias GPU_TEXTURETYPE_CUBE_ARRAY = Self(4)
     """The texture is a cube array image."""
 
 
 @register_passable("trivial")
-struct SDL_GPUSampleCount(Intable):
+struct GPUSampleCount(Intable):
     """Specifies the sample count of a texture.
 
     Used in multisampling. Note that this value only applies when the texture
@@ -901,18 +901,18 @@ struct SDL_GPUSampleCount(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_SAMPLECOUNT_1 = 0
+    alias GPU_SAMPLECOUNT_1 = Self(0)
     """No multisampling."""
-    alias SDL_GPU_SAMPLECOUNT_2 = 1
+    alias GPU_SAMPLECOUNT_2 = Self(1)
     """MSAA 2x."""
-    alias SDL_GPU_SAMPLECOUNT_4 = 2
+    alias GPU_SAMPLECOUNT_4 = Self(2)
     """MSAA 4x."""
-    alias SDL_GPU_SAMPLECOUNT_8 = 3
+    alias GPU_SAMPLECOUNT_8 = Self(3)
     """MSAA 8x."""
 
 
 @register_passable("trivial")
-struct SDL_GPUCubeMapFace(Intable):
+struct GPUCubeMapFace(Intable):
     """Specifies the face of a cube map.
 
     Can be passed in as the layer field in texture-related structs.
@@ -930,16 +930,16 @@ struct SDL_GPUCubeMapFace(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_CUBEMAPFACE_POSITIVEX = 0
-    alias SDL_GPU_CUBEMAPFACE_NEGATIVEX = 1
-    alias SDL_GPU_CUBEMAPFACE_POSITIVEY = 2
-    alias SDL_GPU_CUBEMAPFACE_NEGATIVEY = 3
-    alias SDL_GPU_CUBEMAPFACE_POSITIVEZ = 4
-    alias SDL_GPU_CUBEMAPFACE_NEGATIVEZ = 5
+    alias GPU_CUBEMAPFACE_POSITIVEX = Self(0)
+    alias GPU_CUBEMAPFACE_NEGATIVEX = Self(1)
+    alias GPU_CUBEMAPFACE_POSITIVEY = Self(2)
+    alias GPU_CUBEMAPFACE_NEGATIVEY = Self(3)
+    alias GPU_CUBEMAPFACE_POSITIVEZ = Self(4)
+    alias GPU_CUBEMAPFACE_NEGATIVEZ = Self(5)
 
 
 @register_passable("trivial")
-struct SDL_GPUBufferUsageFlags(Intable):
+struct GPUBufferUsageFlags(Intable):
     """Specifies how a buffer is intended to be used by the client.
 
     A buffer must have at least one usage flag. Note that some usage flag
@@ -969,22 +969,22 @@ struct SDL_GPUBufferUsageFlags(Intable):
     fn __or__(lhs, rhs: Self) -> Self:
         return Self(lhs.value | rhs.value)
 
-    alias SDL_GPU_BUFFERUSAGE_VERTEX = Self(1 << 0)
+    alias GPU_BUFFERUSAGE_VERTEX = Self(1 << 0)
     """Buffer is a vertex buffer."""
-    alias SDL_GPU_BUFFERUSAGE_INDEX = Self(1 << 1)
+    alias GPU_BUFFERUSAGE_INDEX = Self(1 << 1)
     """Buffer is an index buffer."""
-    alias SDL_GPU_BUFFERUSAGE_INDIRECT = Self(1 << 2)
+    alias GPU_BUFFERUSAGE_INDIRECT = Self(1 << 2)
     """Buffer is an indirect buffer."""
-    alias SDL_GPU_BUFFERUSAGE_GRAPHICS_STORAGE_READ = Self(1 << 3)
+    alias GPU_BUFFERUSAGE_GRAPHICS_STORAGE_READ = Self(1 << 3)
     """Buffer supports storage reads in graphics stages."""
-    alias SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_READ = Self(1 << 4)
+    alias GPU_BUFFERUSAGE_COMPUTE_STORAGE_READ = Self(1 << 4)
     """Buffer supports storage reads in the compute stage."""
-    alias SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_WRITE = Self(1 << 5)
+    alias GPU_BUFFERUSAGE_COMPUTE_STORAGE_WRITE = Self(1 << 5)
     """Buffer supports storage writes in the compute stage."""
 
 
 @register_passable("trivial")
-struct SDL_GPUTransferBufferUsage(Intable):
+struct GPUTransferBufferUsage(Intable):
     """Specifies how a transfer buffer is intended to be used by the client.
 
     Note that mapping and copying FROM an upload transfer buffer or TO a
@@ -1003,12 +1003,12 @@ struct SDL_GPUTransferBufferUsage(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_TRANSFERBUFFERUSAGE_UPLOAD = 0
-    alias SDL_GPU_TRANSFERBUFFERUSAGE_DOWNLOAD = 1
+    alias GPU_TRANSFERBUFFERUSAGE_UPLOAD = Self(0)
+    alias GPU_TRANSFERBUFFERUSAGE_DOWNLOAD = Self(1)
 
 
 @register_passable("trivial")
-struct SDL_GPUShaderStage(Intable):
+struct GPUShaderStage(Intable):
     """Specifies which stage a shader program corresponds to.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUShaderStage.
@@ -1024,12 +1024,12 @@ struct SDL_GPUShaderStage(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_SHADERSTAGE_VERTEX = 0
-    alias SDL_GPU_SHADERSTAGE_FRAGMENT = 1
+    alias GPU_SHADERSTAGE_VERTEX = Self(0)
+    alias GPU_SHADERSTAGE_FRAGMENT = Self(1)
 
 
 @register_passable("trivial")
-struct SDL_GPUShaderFormat(Intable):
+struct GPUShaderFormat(Intable):
     """Specifies the format of shader code.
 
     Each format corresponds to a specific backend that accepts it.
@@ -1051,23 +1051,23 @@ struct SDL_GPUShaderFormat(Intable):
     fn __or__(lhs, rhs: Self) -> Self:
         return Self(lhs.value | rhs.value)
 
-    alias SDL_GPU_SHADERFORMAT_INVALID = Self(0)
-    alias SDL_GPU_SHADERFORMAT_PRIVATE = Self(1 << 0)
+    alias GPU_SHADERFORMAT_INVALID = Self(0)
+    alias GPU_SHADERFORMAT_PRIVATE = Self(1 << 0)
     """Shaders for NDA'd platforms."""
-    alias SDL_GPU_SHADERFORMAT_SPIRV = Self(1 << 1)
+    alias GPU_SHADERFORMAT_SPIRV = Self(1 << 1)
     """SPIR-V shaders for Vulkan."""
-    alias SDL_GPU_SHADERFORMAT_DXBC = Self(1 << 2)
+    alias GPU_SHADERFORMAT_DXBC = Self(1 << 2)
     """DXBC SM5_1 shaders for D3D12."""
-    alias SDL_GPU_SHADERFORMAT_DXIL = Self(1 << 3)
+    alias GPU_SHADERFORMAT_DXIL = Self(1 << 3)
     """DXIL SM6_0 shaders for D3D12."""
-    alias SDL_GPU_SHADERFORMAT_MSL = Self(1 << 4)
+    alias GPU_SHADERFORMAT_MSL = Self(1 << 4)
     """MSL shaders for Metal."""
-    alias SDL_GPU_SHADERFORMAT_METALLIB = Self(1 << 5)
+    alias GPU_SHADERFORMAT_METALLIB = Self(1 << 5)
     """Precompiled metallib shaders for Metal."""
 
 
 @register_passable("trivial")
-struct SDL_GPUVertexElementFormat(Intable):
+struct GPUVertexElementFormat(Intable):
     """Specifies the format of a vertex attribute.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexElementFormat.
@@ -1083,65 +1083,65 @@ struct SDL_GPUVertexElementFormat(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_VERTEXELEMENTFORMAT_INVALID = 0
+    alias GPU_VERTEXELEMENTFORMAT_INVALID = Self(0)
 
     # 32-bit Signed Integers
-    alias SDL_GPU_VERTEXELEMENTFORMAT_INT = 1
-    alias SDL_GPU_VERTEXELEMENTFORMAT_INT2 = 2
-    alias SDL_GPU_VERTEXELEMENTFORMAT_INT3 = 3
-    alias SDL_GPU_VERTEXELEMENTFORMAT_INT4 = 4
+    alias GPU_VERTEXELEMENTFORMAT_INT = Self(1)
+    alias GPU_VERTEXELEMENTFORMAT_INT2 = Self(2)
+    alias GPU_VERTEXELEMENTFORMAT_INT3 = Self(3)
+    alias GPU_VERTEXELEMENTFORMAT_INT4 = Self(4)
 
     # 32-bit Unsigned Integers
-    alias SDL_GPU_VERTEXELEMENTFORMAT_UINT = 5
-    alias SDL_GPU_VERTEXELEMENTFORMAT_UINT2 = 6
-    alias SDL_GPU_VERTEXELEMENTFORMAT_UINT3 = 7
-    alias SDL_GPU_VERTEXELEMENTFORMAT_UINT4 = 8
+    alias GPU_VERTEXELEMENTFORMAT_UINT = Self(5)
+    alias GPU_VERTEXELEMENTFORMAT_UINT2 = Self(6)
+    alias GPU_VERTEXELEMENTFORMAT_UINT3 = Self(7)
+    alias GPU_VERTEXELEMENTFORMAT_UINT4 = Self(8)
 
     # 32-bit Floats
-    alias SDL_GPU_VERTEXELEMENTFORMAT_FLOAT = 9
-    alias SDL_GPU_VERTEXELEMENTFORMAT_FLOAT2 = 10
-    alias SDL_GPU_VERTEXELEMENTFORMAT_FLOAT3 = 11
-    alias SDL_GPU_VERTEXELEMENTFORMAT_FLOAT4 = 12
+    alias GPU_VERTEXELEMENTFORMAT_FLOAT = Self(9)
+    alias GPU_VERTEXELEMENTFORMAT_FLOAT2 = Self(10)
+    alias GPU_VERTEXELEMENTFORMAT_FLOAT3 = Self(11)
+    alias GPU_VERTEXELEMENTFORMAT_FLOAT4 = Self(12)
 
     # 8-bit Signed Integers
-    alias SDL_GPU_VERTEXELEMENTFORMAT_BYTE2 = 13
-    alias SDL_GPU_VERTEXELEMENTFORMAT_BYTE4 = 14
+    alias GPU_VERTEXELEMENTFORMAT_BYTE2 = Self(13)
+    alias GPU_VERTEXELEMENTFORMAT_BYTE4 = Self(14)
 
     # 8-bit Unsigned Integers
-    alias SDL_GPU_VERTEXELEMENTFORMAT_UBYTE2 = 15
-    alias SDL_GPU_VERTEXELEMENTFORMAT_UBYTE4 = 16
+    alias GPU_VERTEXELEMENTFORMAT_UBYTE2 = Self(15)
+    alias GPU_VERTEXELEMENTFORMAT_UBYTE4 = Self(16)
 
     # 8-bit Signed Normalized
-    alias SDL_GPU_VERTEXELEMENTFORMAT_BYTE2_NORM = 17
-    alias SDL_GPU_VERTEXELEMENTFORMAT_BYTE4_NORM = 18
+    alias GPU_VERTEXELEMENTFORMAT_BYTE2_NORM = Self(17)
+    alias GPU_VERTEXELEMENTFORMAT_BYTE4_NORM = Self(18)
 
     # 8-bit Unsigned Normalized
-    alias SDL_GPU_VERTEXELEMENTFORMAT_UBYTE2_NORM = 19
-    alias SDL_GPU_VERTEXELEMENTFORMAT_UBYTE4_NORM = 20
+    alias GPU_VERTEXELEMENTFORMAT_UBYTE2_NORM = Self(19)
+    alias GPU_VERTEXELEMENTFORMAT_UBYTE4_NORM = Self(20)
 
     # 16-bit Signed Integers
-    alias SDL_GPU_VERTEXELEMENTFORMAT_SHORT2 = 21
-    alias SDL_GPU_VERTEXELEMENTFORMAT_SHORT4 = 22
+    alias GPU_VERTEXELEMENTFORMAT_SHORT2 = Self(21)
+    alias GPU_VERTEXELEMENTFORMAT_SHORT4 = Self(22)
 
     # 16-bit Unsigned Integers
-    alias SDL_GPU_VERTEXELEMENTFORMAT_USHORT2 = 23
-    alias SDL_GPU_VERTEXELEMENTFORMAT_USHORT4 = 24
+    alias GPU_VERTEXELEMENTFORMAT_USHORT2 = Self(23)
+    alias GPU_VERTEXELEMENTFORMAT_USHORT4 = Self(24)
 
     # 16-bit Signed Normalized
-    alias SDL_GPU_VERTEXELEMENTFORMAT_SHORT2_NORM = 25
-    alias SDL_GPU_VERTEXELEMENTFORMAT_SHORT4_NORM = 26
+    alias GPU_VERTEXELEMENTFORMAT_SHORT2_NORM = Self(25)
+    alias GPU_VERTEXELEMENTFORMAT_SHORT4_NORM = Self(26)
 
     # 16-bit Unsigned Normalized
-    alias SDL_GPU_VERTEXELEMENTFORMAT_USHORT2_NORM = 27
-    alias SDL_GPU_VERTEXELEMENTFORMAT_USHORT4_NORM = 28
+    alias GPU_VERTEXELEMENTFORMAT_USHORT2_NORM = Self(27)
+    alias GPU_VERTEXELEMENTFORMAT_USHORT4_NORM = Self(28)
 
     # 16-bit Floats
-    alias SDL_GPU_VERTEXELEMENTFORMAT_HALF2 = 29
-    alias SDL_GPU_VERTEXELEMENTFORMAT_HALF4 = 30
+    alias GPU_VERTEXELEMENTFORMAT_HALF2 = Self(29)
+    alias GPU_VERTEXELEMENTFORMAT_HALF4 = Self(30)
 
 
 @register_passable("trivial")
-struct SDL_GPUVertexInputRate(Intable):
+struct GPUVertexInputRate(Intable):
     """Specifies the rate at which vertex attributes are pulled from buffers.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexInputRate.
@@ -1157,14 +1157,14 @@ struct SDL_GPUVertexInputRate(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_VERTEXINPUTRATE_VERTEX = 0
+    alias GPU_VERTEXINPUTRATE_VERTEX = Self(0)
     """Attribute addressing is a function of the vertex index."""
-    alias SDL_GPU_VERTEXINPUTRATE_INSTANCE = 1
+    alias GPU_VERTEXINPUTRATE_INSTANCE = Self(1)
     """Attribute addressing is a function of the instance index."""
 
 
 @register_passable("trivial")
-struct SDL_GPUFillMode(Intable):
+struct GPUFillMode(Intable):
     """Specifies the fill mode of the graphics pipeline.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUFillMode.
@@ -1180,14 +1180,14 @@ struct SDL_GPUFillMode(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_FILLMODE_FILL = 0
+    alias GPU_FILLMODE_FILL = Self(0)
     """Polygons will be rendered via rasterization."""
-    alias SDL_GPU_FILLMODE_LINE = 1
+    alias GPU_FILLMODE_LINE = Self(1)
     """Polygon edges will be drawn as line segments."""
 
 
 @register_passable("trivial")
-struct SDL_GPUCullMode(Intable):
+struct GPUCullMode(Intable):
     """Specifies the facing direction in which triangle faces will be culled.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUCullMode.
@@ -1203,16 +1203,16 @@ struct SDL_GPUCullMode(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_CULLMODE_NONE = 0
+    alias GPU_CULLMODE_NONE = Self(0)
     """No triangles are culled."""
-    alias SDL_GPU_CULLMODE_FRONT = 1
+    alias GPU_CULLMODE_FRONT = Self(1)
     """Front-facing triangles are culled."""
-    alias SDL_GPU_CULLMODE_BACK = 2
+    alias GPU_CULLMODE_BACK = Self(2)
     """Back-facing triangles are culled."""
 
 
 @register_passable("trivial")
-struct SDL_GPUFrontFace(Intable):
+struct GPUFrontFace(Intable):
     """Specifies the vertex winding that will cause a triangle to be determined to
     be front-facing.
 
@@ -1229,14 +1229,14 @@ struct SDL_GPUFrontFace(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_FRONTFACE_COUNTER_CLOCKWISE = 0
+    alias GPU_FRONTFACE_COUNTER_CLOCKWISE = Self(0)
     """A triangle with counter-clockwise vertex winding will be considered front-facing."""
-    alias SDL_GPU_FRONTFACE_CLOCKWISE = 1
+    alias GPU_FRONTFACE_CLOCKWISE = Self(1)
     """A triangle with clockwise vertex winding will be considered front-facing."""
 
 
 @register_passable("trivial")
-struct SDL_GPUCompareOp(Intable):
+struct GPUCompareOp(Intable):
     """Specifies a comparison operator for depth, stencil and sampler operations.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUCompareOp.
@@ -1252,27 +1252,27 @@ struct SDL_GPUCompareOp(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_COMPAREOP_INVALID = 0
-    alias SDL_GPU_COMPAREOP_NEVER = 1
+    alias GPU_COMPAREOP_INVALID = Self(0)
+    alias GPU_COMPAREOP_NEVER = Self(1)
     """The comparison always evaluates false."""
-    alias SDL_GPU_COMPAREOP_LESS = 2
+    alias GPU_COMPAREOP_LESS = Self(2)
     """The comparison evaluates reference < test."""
-    alias SDL_GPU_COMPAREOP_EQUAL = 3
+    alias GPU_COMPAREOP_EQUAL = Self(3)
     """The comparison evaluates reference == test."""
-    alias SDL_GPU_COMPAREOP_LESS_OR_EQUAL = 4
+    alias GPU_COMPAREOP_LESS_OR_EQUAL = Self(4)
     """The comparison evaluates reference <= test."""
-    alias SDL_GPU_COMPAREOP_GREATER = 5
+    alias GPU_COMPAREOP_GREATER = Self(5)
     """The comparison evaluates reference > test."""
-    alias SDL_GPU_COMPAREOP_NOT_EQUAL = 6
+    alias GPU_COMPAREOP_NOT_EQUAL = Self(6)
     """The comparison evaluates reference != test."""
-    alias SDL_GPU_COMPAREOP_GREATER_OR_EQUAL = 7
+    alias GPU_COMPAREOP_GREATER_OR_EQUAL = Self(7)
     """The comparison evalutes reference >= test."""
-    alias SDL_GPU_COMPAREOP_ALWAYS = 8
+    alias GPU_COMPAREOP_ALWAYS = Self(8)
     """The comparison always evaluates true."""
 
 
 @register_passable("trivial")
-struct SDL_GPUStencilOp(Intable):
+struct GPUStencilOp(Intable):
     """Specifies what happens to a stored stencil value if stencil tests fail or
     pass.
 
@@ -1289,27 +1289,27 @@ struct SDL_GPUStencilOp(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_STENCILOP_INVALID = 0
-    alias SDL_GPU_STENCILOP_KEEP = 1
+    alias GPU_STENCILOP_INVALID = Self(0)
+    alias GPU_STENCILOP_KEEP = Self(1)
     """Keeps the current value."""
-    alias SDL_GPU_STENCILOP_ZERO = 2
+    alias GPU_STENCILOP_ZERO = Self(2)
     """Sets the value to 0."""
-    alias SDL_GPU_STENCILOP_REPLACE = 3
+    alias GPU_STENCILOP_REPLACE = Self(3)
     """Sets the value to reference."""
-    alias SDL_GPU_STENCILOP_INCREMENT_AND_CLAMP = 4
+    alias GPU_STENCILOP_INCREMENT_AND_CLAMP = Self(4)
     """Increments the current value and clamps to the maximum value."""
-    alias SDL_GPU_STENCILOP_DECREMENT_AND_CLAMP = 5
+    alias GPU_STENCILOP_DECREMENT_AND_CLAMP = Self(5)
     """Decrements the current value and clamps to 0."""
-    alias SDL_GPU_STENCILOP_INVERT = 6
+    alias GPU_STENCILOP_INVERT = Self(6)
     """Bitwise-inverts the current value."""
-    alias SDL_GPU_STENCILOP_INCREMENT_AND_WRAP = 7
+    alias GPU_STENCILOP_INCREMENT_AND_WRAP = Self(7)
     """Increments the current value and wraps back to 0."""
-    alias SDL_GPU_STENCILOP_DECREMENT_AND_WRAP = 8
+    alias GPU_STENCILOP_DECREMENT_AND_WRAP = Self(8)
     """Decrements the current value and wraps to the maximum value."""
 
 
 @register_passable("trivial")
-struct SDL_GPUBlendOp(Intable):
+struct GPUBlendOp(Intable):
     """Specifies the operator to be used when pixels in a render target are
     blended with existing pixels in the texture.
 
@@ -1329,21 +1329,21 @@ struct SDL_GPUBlendOp(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_BLENDOP_INVALID = 0
-    alias SDL_GPU_BLENDOP_ADD = 1
+    alias GPU_BLENDOP_INVALID = Self(0)
+    alias GPU_BLENDOP_ADD = Self(1)
     """(source * source_factor) + (destination * destination_factor)."""
-    alias SDL_GPU_BLENDOP_SUBTRACT = 2
+    alias GPU_BLENDOP_SUBTRACT = Self(2)
     """(source * source_factor) - (destination * destination_factor)."""
-    alias SDL_GPU_BLENDOP_REVERSE_SUBTRACT = 3
+    alias GPU_BLENDOP_REVERSE_SUBTRACT = Self(3)
     """(destination * destination_factor) - (source * source_factor)."""
-    alias SDL_GPU_BLENDOP_MIN = 4
+    alias GPU_BLENDOP_MIN = Self(4)
     """Min(source, destination)."""
-    alias SDL_GPU_BLENDOP_MAX = 5
+    alias GPU_BLENDOP_MAX = Self(5)
     """Max(source, destination)."""
 
 
 @register_passable("trivial")
-struct SDL_GPUBlendFactor(Intable):
+struct GPUBlendFactor(Intable):
     """Specifies a blending factor to be used when pixels in a render target are
     blended with existing pixels in the texture.
 
@@ -1363,37 +1363,37 @@ struct SDL_GPUBlendFactor(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_BLENDFACTOR_INVALID = 0
-    alias SDL_GPU_BLENDFACTOR_ZERO = 1
+    alias GPU_BLENDFACTOR_INVALID = Self(0)
+    alias GPU_BLENDFACTOR_ZERO = Self(1)
     """0."""
-    alias SDL_GPU_BLENDFACTOR_ONE = 2
+    alias GPU_BLENDFACTOR_ONE = Self(2)
     """1."""
-    alias SDL_GPU_BLENDFACTOR_SRC_COLOR = 3
+    alias GPU_BLENDFACTOR_SRC_COLOR = Self(3)
     """Source color."""
-    alias SDL_GPU_BLENDFACTOR_ONE_MINUS_SRC_COLOR = 4
+    alias GPU_BLENDFACTOR_ONE_MINUS_SRC_COLOR = Self(4)
     """1 - source color."""
-    alias SDL_GPU_BLENDFACTOR_DST_COLOR = 5
+    alias GPU_BLENDFACTOR_DST_COLOR = Self(5)
     """Destination color."""
-    alias SDL_GPU_BLENDFACTOR_ONE_MINUS_DST_COLOR = 6
+    alias GPU_BLENDFACTOR_ONE_MINUS_DST_COLOR = Self(6)
     """1 - destination color."""
-    alias SDL_GPU_BLENDFACTOR_SRC_ALPHA = 7
+    alias GPU_BLENDFACTOR_SRC_ALPHA = Self(7)
     """Source alpha."""
-    alias SDL_GPU_BLENDFACTOR_ONE_MINUS_SRC_ALPHA = 8
+    alias GPU_BLENDFACTOR_ONE_MINUS_SRC_ALPHA = Self(8)
     """1 - source alpha."""
-    alias SDL_GPU_BLENDFACTOR_DST_ALPHA = 9
+    alias GPU_BLENDFACTOR_DST_ALPHA = Self(9)
     """Destination alpha."""
-    alias SDL_GPU_BLENDFACTOR_ONE_MINUS_DST_ALPHA = 10
+    alias GPU_BLENDFACTOR_ONE_MINUS_DST_ALPHA = Self(10)
     """1 - destination alpha."""
-    alias SDL_GPU_BLENDFACTOR_CONSTANT_COLOR = 11
+    alias GPU_BLENDFACTOR_CONSTANT_COLOR = Self(11)
     """Blend constant."""
-    alias SDL_GPU_BLENDFACTOR_ONE_MINUS_CONSTANT_COLOR = 12
+    alias GPU_BLENDFACTOR_ONE_MINUS_CONSTANT_COLOR = Self(12)
     """1 - blend constant."""
-    alias SDL_GPU_BLENDFACTOR_SRC_ALPHA_SATURATE = 13
+    alias GPU_BLENDFACTOR_SRC_ALPHA_SATURATE = Self(13)
     """Min(source alpha, 1 - destination alpha)."""
 
 
 @register_passable("trivial")
-struct SDL_GPUColorComponentFlags(Intable):
+struct GPUColorComponentFlags(Intable):
     """Specifies which color components are written in a graphics pipeline.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUColorComponentFlags.
@@ -1413,18 +1413,18 @@ struct SDL_GPUColorComponentFlags(Intable):
     fn __or__(lhs, rhs: Self) -> Self:
         return Self(lhs.value | rhs.value)
 
-    alias SDL_GPU_COLORCOMPONENT_R = Self(1 << 0)
+    alias GPU_COLORCOMPONENT_R = Self(1 << 0)
     """The red component."""
-    alias SDL_GPU_COLORCOMPONENT_G = Self(1 << 1)
+    alias GPU_COLORCOMPONENT_G = Self(1 << 1)
     """The green component."""
-    alias SDL_GPU_COLORCOMPONENT_B = Self(1 << 2)
+    alias GPU_COLORCOMPONENT_B = Self(1 << 2)
     """The blue component."""
-    alias SDL_GPU_COLORCOMPONENT_A = Self(1 << 3)
+    alias GPU_COLORCOMPONENT_A = Self(1 << 3)
     """The alpha component."""
 
 
 @register_passable("trivial")
-struct SDL_GPUFilter(Intable):
+struct GPUFilter(Intable):
     """Specifies a filter operation used by a sampler.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUFilter.
@@ -1440,14 +1440,14 @@ struct SDL_GPUFilter(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_FILTER_NEAREST = 0
+    alias GPU_FILTER_NEAREST = Self(0)
     """Point filtering."""
-    alias SDL_GPU_FILTER_LINEAR = 1
+    alias GPU_FILTER_LINEAR = Self(1)
     """Linear filtering."""
 
 
 @register_passable("trivial")
-struct SDL_GPUSamplerMipmapMode(Intable):
+struct GPUSamplerMipmapMode(Intable):
     """Specifies a mipmap mode used by a sampler.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUSamplerMipmapMode.
@@ -1463,14 +1463,14 @@ struct SDL_GPUSamplerMipmapMode(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_SAMPLERMIPMAPMODE_NEAREST = 0
+    alias GPU_SAMPLERMIPMAPMODE_NEAREST = Self(0)
     """Point filtering."""
-    alias SDL_GPU_SAMPLERMIPMAPMODE_LINEAR = 1
+    alias GPU_SAMPLERMIPMAPMODE_LINEAR = Self(1)
     """Linear filtering."""
 
 
 @register_passable("trivial")
-struct SDL_GPUSamplerAddressMode(Intable):
+struct GPUSamplerAddressMode(Intable):
     """Specifies behavior of texture sampling when the coordinates exceed the 0-1
     range.
 
@@ -1487,16 +1487,16 @@ struct SDL_GPUSamplerAddressMode(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_SAMPLERADDRESSMODE_REPEAT = 0
+    alias GPU_SAMPLERADDRESSMODE_REPEAT = Self(0)
     """Specifies that the coordinates will wrap around."""
-    alias SDL_GPU_SAMPLERADDRESSMODE_MIRRORED_REPEAT = 1
+    alias GPU_SAMPLERADDRESSMODE_MIRRORED_REPEAT = Self(1)
     """Specifies that the coordinates will wrap around mirrored."""
-    alias SDL_GPU_SAMPLERADDRESSMODE_CLAMP_TO_EDGE = 2
+    alias GPU_SAMPLERADDRESSMODE_CLAMP_TO_EDGE = Self(2)
     """Specifies that the coordinates will clamp to the 0-1 range."""
 
 
 @register_passable("trivial")
-struct SDL_GPUPresentMode(Intable):
+struct GPUPresentMode(Intable):
     """Specifies the timing that will be used to present swapchain textures to the
     OS.
 
@@ -1528,13 +1528,13 @@ struct SDL_GPUPresentMode(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_PRESENTMODE_VSYNC = 0
-    alias SDL_GPU_PRESENTMODE_IMMEDIATE = 1
-    alias SDL_GPU_PRESENTMODE_MAILBOX = 2
+    alias GPU_PRESENTMODE_VSYNC = Self(0)
+    alias GPU_PRESENTMODE_IMMEDIATE = Self(1)
+    alias GPU_PRESENTMODE_MAILBOX = Self(2)
 
 
 @register_passable("trivial")
-struct SDL_GPUSwapchainComposition(Intable):
+struct GPUSwapchainComposition(Intable):
     """Specifies the texture format and colorspace of the swapchain textures.
 
     SDR will always be supported. Other compositions may not be supported on
@@ -1567,17 +1567,17 @@ struct SDL_GPUSwapchainComposition(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_GPU_SWAPCHAINCOMPOSITION_SDR = 0
-    alias SDL_GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR = 1
-    alias SDL_GPU_SWAPCHAINCOMPOSITION_HDR_EXTENDED_LINEAR = 2
-    alias SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084 = 3
+    alias GPU_SWAPCHAINCOMPOSITION_SDR = Self(0)
+    alias GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR = Self(1)
+    alias GPU_SWAPCHAINCOMPOSITION_HDR_EXTENDED_LINEAR = Self(2)
+    alias GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084 = Self(3)
 
 
 @fieldwise_init
-struct SDL_GPUViewport(Copyable, Movable):
+struct GPUViewport(Copyable, Movable):
     """A structure specifying a viewport.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUViewport.
+    Docs: https://wiki.libsdl.org/SDL3/GPUViewport.
     """
 
     var x: c_float
@@ -1595,14 +1595,14 @@ struct SDL_GPUViewport(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUTextureTransferInfo(Copyable, Movable):
+struct GPUTextureTransferInfo(Copyable, Movable):
     """A structure specifying parameters related to transferring data to or from a
     texture.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureTransferInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUTextureTransferInfo.
     """
 
-    var transfer_buffer: Ptr[SDL_GPUTransferBuffer, mut=True]
+    var transfer_buffer: Ptr[GPUTransferBuffer, mut=True]
     """The transfer buffer used in the transfer operation."""
     var offset: UInt32
     """The starting byte of the image data in the transfer buffer."""
@@ -1613,30 +1613,30 @@ struct SDL_GPUTextureTransferInfo(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUTransferBufferLocation(Copyable, Movable):
+struct GPUTransferBufferLocation(Copyable, Movable):
     """A structure specifying a location in a transfer buffer.
 
     Used when transferring buffer data to or from a transfer buffer.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTransferBufferLocation.
+    Docs: https://wiki.libsdl.org/SDL3/GPUTransferBufferLocation.
     """
 
-    var transfer_buffer: Ptr[SDL_GPUTransferBuffer, mut=True]
+    var transfer_buffer: Ptr[GPUTransferBuffer, mut=True]
     """The transfer buffer used in the transfer operation."""
     var offset: UInt32
     """The starting byte of the buffer data in the transfer buffer."""
 
 
 @fieldwise_init
-struct SDL_GPUTextureLocation(Copyable, Movable):
+struct GPUTextureLocation(Copyable, Movable):
     """A structure specifying a location in a texture.
 
     Used when copying data from one texture to another.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureLocation.
+    Docs: https://wiki.libsdl.org/SDL3/GPUTextureLocation.
     """
 
-    var texture: Ptr[SDL_GPUTexture, mut=True]
+    var texture: Ptr[GPUTexture, mut=True]
     """The texture used in the copy operation."""
     var mip_level: UInt32
     """The mip level index of the location."""
@@ -1651,15 +1651,15 @@ struct SDL_GPUTextureLocation(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUTextureRegion(Copyable, Movable):
+struct GPUTextureRegion(Copyable, Movable):
     """A structure specifying a region of a texture.
 
     Used when transferring data to or from a texture.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureRegion.
+    Docs: https://wiki.libsdl.org/SDL3/GPUTextureRegion.
     """
 
-    var texture: Ptr[SDL_GPUTexture, mut=True]
+    var texture: Ptr[GPUTexture, mut=True]
     """The texture used in the copy operation."""
     var mip_level: UInt32
     """The mip level index to transfer."""
@@ -1680,13 +1680,13 @@ struct SDL_GPUTextureRegion(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUBlitRegion(Copyable, Movable):
+struct GPUBlitRegion(Copyable, Movable):
     """A structure specifying a region of a texture used in the blit operation.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBlitRegion.
+    Docs: https://wiki.libsdl.org/SDL3/GPUBlitRegion.
     """
 
-    var texture: Ptr[SDL_GPUTexture, mut=True]
+    var texture: Ptr[GPUTexture, mut=True]
     """The texture."""
     var mip_level: UInt32
     """The mip level index of the region."""
@@ -1703,30 +1703,30 @@ struct SDL_GPUBlitRegion(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUBufferLocation(Copyable, Movable):
+struct GPUBufferLocation(Copyable, Movable):
     """A structure specifying a location in a buffer.
 
     Used when copying data between buffers.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBufferLocation.
+    Docs: https://wiki.libsdl.org/SDL3/GPUBufferLocation.
     """
 
-    var buffer: Ptr[SDL_GPUBuffer, mut=True]
+    var buffer: Ptr[GPUBuffer, mut=True]
     """The buffer."""
     var offset: UInt32
     """The starting byte within the buffer."""
 
 
 @fieldwise_init
-struct SDL_GPUBufferRegion(Copyable, Movable):
+struct GPUBufferRegion(Copyable, Movable):
     """A structure specifying a region of a buffer.
 
     Used when transferring data to or from buffers.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBufferRegion.
+    Docs: https://wiki.libsdl.org/SDL3/GPUBufferRegion.
     """
 
-    var buffer: Ptr[SDL_GPUBuffer, mut=True]
+    var buffer: Ptr[GPUBuffer, mut=True]
     """The buffer."""
     var offset: UInt32
     """The starting byte within the buffer."""
@@ -1735,7 +1735,7 @@ struct SDL_GPUBufferRegion(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUIndirectDrawCommand(Copyable, Movable):
+struct GPUIndirectDrawCommand(Copyable, Movable):
     """A structure specifying the parameters of an indirect draw command.
 
     Note that the `first_vertex` and `first_instance` parameters are NOT
@@ -1745,7 +1745,7 @@ struct SDL_GPUIndirectDrawCommand(Copyable, Movable):
     only way to keep behavior consistent and portable is to always pass 0 for
     the correlating parameter in the draw calls.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUIndirectDrawCommand.
+    Docs: https://wiki.libsdl.org/SDL3/GPUIndirectDrawCommand.
     """
 
     var num_vertices: UInt32
@@ -1759,7 +1759,7 @@ struct SDL_GPUIndirectDrawCommand(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUIndexedIndirectDrawCommand(Copyable, Movable):
+struct GPUIndexedIndirectDrawCommand(Copyable, Movable):
     """A structure specifying the parameters of an indexed indirect draw command.
 
     Note that the `first_vertex` and `first_instance` parameters are NOT
@@ -1769,7 +1769,7 @@ struct SDL_GPUIndexedIndirectDrawCommand(Copyable, Movable):
     only way to keep behavior consistent and portable is to always pass 0 for
     the correlating parameter in the draw calls.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUIndexedIndirectDrawCommand.
+    Docs: https://wiki.libsdl.org/SDL3/GPUIndexedIndirectDrawCommand.
     """
 
     var num_indices: UInt32
@@ -1785,10 +1785,10 @@ struct SDL_GPUIndexedIndirectDrawCommand(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUIndirectDispatchCommand(Copyable, Movable):
+struct GPUIndirectDispatchCommand(Copyable, Movable):
     """A structure specifying the parameters of an indexed dispatch command.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUIndirectDispatchCommand.
+    Docs: https://wiki.libsdl.org/SDL3/GPUIndirectDispatchCommand.
     """
 
     var groupcount_x: UInt32
@@ -1800,32 +1800,32 @@ struct SDL_GPUIndirectDispatchCommand(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUSamplerCreateInfo(Copyable, Movable):
+struct GPUSamplerCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a sampler.
 
     Note that mip_lod_bias is a no-op for the Metal driver. For Metal, LOD bias
     must be applied via shader instead.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUSamplerCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUSamplerCreateInfo.
     """
 
-    var min_filter: SDL_GPUFilter
+    var min_filter: GPUFilter
     """The minification filter to apply to lookups."""
-    var mag_filter: SDL_GPUFilter
+    var mag_filter: GPUFilter
     """The magnification filter to apply to lookups."""
-    var mipmap_mode: SDL_GPUSamplerMipmapMode
+    var mipmap_mode: GPUSamplerMipmapMode
     """The mipmap filter to apply to lookups."""
-    var address_mode_u: SDL_GPUSamplerAddressMode
+    var address_mode_u: GPUSamplerAddressMode
     """The addressing mode for U coordinates outside [0, 1)."""
-    var address_mode_v: SDL_GPUSamplerAddressMode
+    var address_mode_v: GPUSamplerAddressMode
     """The addressing mode for V coordinates outside [0, 1)."""
-    var address_mode_w: SDL_GPUSamplerAddressMode
+    var address_mode_w: GPUSamplerAddressMode
     """The addressing mode for W coordinates outside [0, 1)."""
     var mip_lod_bias: c_float
     """The bias to be added to mipmap LOD calculation."""
     var max_anisotropy: c_float
     """The anisotropy value clamp used by the sampler. If enable_anisotropy is false, this is ignored."""
-    var compare_op: SDL_GPUCompareOp
+    var compare_op: GPUCompareOp
     """The comparison operator to apply to fetched data before filtering."""
     var min_lod: c_float
     """Clamps the minimum of the computed LOD value."""
@@ -1838,12 +1838,12 @@ struct SDL_GPUSamplerCreateInfo(Copyable, Movable):
     var padding1: UInt8
     var padding2: UInt8
 
-    var props: SDL_PropertiesID
+    var props: PropertiesID
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
 @fieldwise_init
-struct SDL_GPUVertexBufferDescription(Copyable, Movable):
+struct GPUVertexBufferDescription(Copyable, Movable):
     """A structure specifying the parameters of vertex buffers used in a graphics
     pipeline.
 
@@ -1856,94 +1856,94 @@ struct SDL_GPUVertexBufferDescription(Copyable, Movable):
     SDL_GPUVertexAttribute. For example, if an attribute has a buffer_slot of
     0, then that attribute belongs to the vertex buffer bound at slot 0.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexBufferDescription.
+    Docs: https://wiki.libsdl.org/SDL3/GPUVertexBufferDescription.
     """
 
     var slot: UInt32
     """The binding slot of the vertex buffer."""
     var pitch: UInt32
     """The byte pitch between consecutive elements of the vertex buffer."""
-    var input_rate: SDL_GPUVertexInputRate
+    var input_rate: GPUVertexInputRate
     """Whether attribute addressing is a function of the vertex index or instance index."""
     var instance_step_rate: UInt32
     """Reserved for future use. Must be set to 0."""
 
 
 @fieldwise_init
-struct SDL_GPUVertexAttribute(Copyable, Movable):
+struct GPUVertexAttribute(Copyable, Movable):
     """A structure specifying a vertex attribute.
 
     All vertex attribute locations provided to an SDL_GPUVertexInputState must
     be unique.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexAttribute.
+    Docs: https://wiki.libsdl.org/SDL3/GPUVertexAttribute.
     """
 
     var location: UInt32
     """The shader input location index."""
     var buffer_slot: UInt32
     """The binding slot of the associated vertex buffer."""
-    var format: SDL_GPUVertexElementFormat
+    var format: GPUVertexElementFormat
     """The size and type of the attribute data."""
     var offset: UInt32
     """The byte offset of this attribute relative to the start of the vertex element."""
 
 
 @fieldwise_init
-struct SDL_GPUVertexInputState(Copyable, Movable):
+struct GPUVertexInputState(Copyable, Movable):
     """A structure specifying the parameters of a graphics pipeline vertex input
     state.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexInputState.
+    Docs: https://wiki.libsdl.org/SDL3/GPUVertexInputState.
     """
 
-    var vertex_buffer_descriptions: Ptr[SDL_GPUVertexBufferDescription, mut=False]
+    var vertex_buffer_descriptions: Ptr[GPUVertexBufferDescription, mut=False]
     """A pointer to an array of vertex buffer descriptions."""
     var num_vertex_buffers: UInt32
     """The number of vertex buffer descriptions in the above array."""
-    var vertex_attributes: Ptr[SDL_GPUVertexAttribute, mut=False]
+    var vertex_attributes: Ptr[GPUVertexAttribute, mut=False]
     """A pointer to an array of vertex attribute descriptions."""
     var num_vertex_attributes: UInt32
     """The number of vertex attribute descriptions in the above array."""
 
 
 @fieldwise_init
-struct SDL_GPUStencilOpState(Copyable, Movable):
+struct GPUStencilOpState(Copyable, Movable):
     """A structure specifying the stencil operation state of a graphics pipeline.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUStencilOpState.
+    Docs: https://wiki.libsdl.org/SDL3/GPUStencilOpState.
     """
 
-    var fail_op: SDL_GPUStencilOp
+    var fail_op: GPUStencilOp
     """The action performed on samples that fail the stencil test."""
-    var pass_op: SDL_GPUStencilOp
+    var pass_op: GPUStencilOp
     """The action performed on samples that pass the depth and stencil tests."""
-    var depth_fail_op: SDL_GPUStencilOp
+    var depth_fail_op: GPUStencilOp
     """The action performed on samples that pass the stencil test and fail the depth test."""
-    var compare_op: SDL_GPUCompareOp
+    var compare_op: GPUCompareOp
     """The comparison operator used in the stencil test."""
 
 
 @fieldwise_init
-struct SDL_GPUColorTargetBlendState(Copyable, Movable):
+struct GPUColorTargetBlendState(Copyable, Movable):
     """A structure specifying the blend state of a color target.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUColorTargetBlendState.
+    Docs: https://wiki.libsdl.org/SDL3/GPUColorTargetBlendState.
     """
 
-    var src_color_blendfactor: SDL_GPUBlendFactor
+    var src_color_blendfactor: GPUBlendFactor
     """The value to be multiplied by the source RGB value."""
-    var dst_color_blendfactor: SDL_GPUBlendFactor
+    var dst_color_blendfactor: GPUBlendFactor
     """The value to be multiplied by the destination RGB value."""
-    var color_blend_op: SDL_GPUBlendOp
+    var color_blend_op: GPUBlendOp
     """The blend operation for the RGB components."""
-    var src_alpha_blendfactor: SDL_GPUBlendFactor
+    var src_alpha_blendfactor: GPUBlendFactor
     """The value to be multiplied by the source alpha."""
-    var dst_alpha_blendfactor: SDL_GPUBlendFactor
+    var dst_alpha_blendfactor: GPUBlendFactor
     """The value to be multiplied by the destination alpha."""
-    var alpha_blend_op: SDL_GPUBlendOp
+    var alpha_blend_op: GPUBlendOp
     """The blend operation for the alpha component."""
-    var color_write_mask: SDL_GPUColorComponentFlags
+    var color_write_mask: GPUColorComponentFlags
     """A bitmask specifying which of the RGBA components are enabled for writing. Writes to all channels if enable_color_write_mask is false."""
     var enable_blend: Bool
     """Whether blending is enabled for the color target."""
@@ -1954,10 +1954,10 @@ struct SDL_GPUColorTargetBlendState(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUShaderCreateInfo(Copyable, Movable):
+struct GPUShaderCreateInfo(Copyable, Movable):
     """A structure specifying code and metadata for creating a shader object.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUShaderCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUShaderCreateInfo.
     """
 
     var code_size: c_size_t
@@ -1966,9 +1966,9 @@ struct SDL_GPUShaderCreateInfo(Copyable, Movable):
     """A pointer to shader code."""
     var entrypoint: Ptr[c_char, mut=False]
     """A pointer to a null-terminated UTF-8 string specifying the entry point function name for the shader."""
-    var format: SDL_GPUShaderFormat
+    var format: GPUShaderFormat
     """The format of the shader code."""
-    var stage: SDL_GPUShaderStage
+    var stage: GPUShaderStage
     """The stage the shader program corresponds to."""
     var num_samplers: UInt32
     """The number of samplers defined in the shader."""
@@ -1979,26 +1979,26 @@ struct SDL_GPUShaderCreateInfo(Copyable, Movable):
     var num_uniform_buffers: UInt32
     """The number of uniform buffers defined in the shader."""
 
-    var props: SDL_PropertiesID
+    var props: PropertiesID
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
 @fieldwise_init
-struct SDL_GPUTextureCreateInfo(Copyable, Movable):
+struct GPUTextureCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a texture.
 
     Usage flags can be bitwise OR'd together for combinations of usages. Note
     that certain usage combinations are invalid, for example SAMPLER and
     GRAPHICS_STORAGE.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUTextureCreateInfo.
     """
 
-    var type: SDL_GPUTextureType
+    var type: GPUTextureType
     """The base dimensionality of the texture."""
-    var format: SDL_GPUTextureFormat
+    var format: GPUTextureFormat
     """The pixel format of the texture."""
-    var usage: SDL_GPUTextureUsageFlags
+    var usage: GPUTextureUsageFlags
     """How the texture is intended to be used by the client."""
     var width: UInt32
     """The width of the texture."""
@@ -2008,50 +2008,50 @@ struct SDL_GPUTextureCreateInfo(Copyable, Movable):
     """The layer count or depth of the texture. This value is treated as a layer count on 2D array textures, and as a depth value on 3D textures."""
     var num_levels: UInt32
     """The number of mip levels in the texture."""
-    var sample_count: SDL_GPUSampleCount
+    var sample_count: GPUSampleCount
     """The number of samples per texel. Only applies if the texture is used as a render target."""
 
-    var props: SDL_PropertiesID
+    var props: PropertiesID
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
 @fieldwise_init
-struct SDL_GPUBufferCreateInfo(Copyable, Movable):
+struct GPUBufferCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a buffer.
 
     Usage flags can be bitwise OR'd together for combinations of usages. Note
     that certain combinations are invalid, for example VERTEX and INDEX.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBufferCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUBufferCreateInfo.
     """
 
-    var usage: SDL_GPUBufferUsageFlags
+    var usage: GPUBufferUsageFlags
     """How the buffer is intended to be used by the client."""
     var size: UInt32
     """The size in bytes of the buffer."""
 
-    var props: SDL_PropertiesID
+    var props: PropertiesID
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
 @fieldwise_init
-struct SDL_GPUTransferBufferCreateInfo(Copyable, Movable):
+struct GPUTransferBufferCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a transfer buffer.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTransferBufferCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUTransferBufferCreateInfo.
     """
 
-    var usage: SDL_GPUTransferBufferUsage
+    var usage: GPUTransferBufferUsage
     """How the transfer buffer is intended to be used by the client."""
     var size: UInt32
     """The size in bytes of the transfer buffer."""
 
-    var props: SDL_PropertiesID
+    var props: PropertiesID
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
 @fieldwise_init
-struct SDL_GPURasterizerState(Copyable, Movable):
+struct GPURasterizerState(Copyable, Movable):
     """A structure specifying the parameters of the graphics pipeline rasterizer
     state.
 
@@ -2063,14 +2063,14 @@ struct SDL_GPURasterizerState(Copyable, Movable):
     enabling depth clip and then manually clamping depth in your fragment
     shaders on Metal and Vulkan.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPURasterizerState.
+    Docs: https://wiki.libsdl.org/SDL3/GPURasterizerState.
     """
 
-    var fill_mode: SDL_GPUFillMode
+    var fill_mode: GPUFillMode
     """Whether polygons will be filled in or drawn as lines."""
-    var cull_mode: SDL_GPUCullMode
+    var cull_mode: GPUCullMode
     """The facing direction in which triangles will be culled."""
-    var front_face: SDL_GPUFrontFace
+    var front_face: GPUFrontFace
     """The vertex winding that will cause a triangle to be determined as front-facing."""
     var depth_bias_constant_factor: c_float
     """A scalar factor controlling the depth value added to each fragment."""
@@ -2087,14 +2087,14 @@ struct SDL_GPURasterizerState(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUMultisampleState(Copyable, Movable):
+struct GPUMultisampleState(Copyable, Movable):
     """A structure specifying the parameters of the graphics pipeline multisample
     state.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUMultisampleState.
+    Docs: https://wiki.libsdl.org/SDL3/GPUMultisampleState.
     """
 
-    var sample_count: SDL_GPUSampleCount
+    var sample_count: GPUSampleCount
     """The number of samples to be used in rasterization."""
     var sample_mask: UInt32
     """Reserved for future use. Must be set to 0."""
@@ -2106,18 +2106,18 @@ struct SDL_GPUMultisampleState(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUDepthStencilState(Copyable, Movable):
+struct GPUDepthStencilState(Copyable, Movable):
     """A structure specifying the parameters of the graphics pipeline depth
     stencil state.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUDepthStencilState.
+    Docs: https://wiki.libsdl.org/SDL3/GPUDepthStencilState.
     """
 
-    var compare_op: SDL_GPUCompareOp
+    var compare_op: GPUCompareOp
     """The comparison operator used for depth testing."""
-    var back_stencil_state: SDL_GPUStencilOpState
+    var back_stencil_state: GPUStencilOpState
     """The stencil op state for back-facing triangles."""
-    var front_stencil_state: SDL_GPUStencilOpState
+    var front_stencil_state: GPUStencilOpState
     """The stencil op state for front-facing triangles."""
     var compare_mask: UInt8
     """Selects the bits of the stencil values participating in the stencil test."""
@@ -2135,32 +2135,32 @@ struct SDL_GPUDepthStencilState(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUColorTargetDescription(Copyable, Movable):
+struct GPUColorTargetDescription(Copyable, Movable):
     """A structure specifying the parameters of color targets used in a graphics
     pipeline.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUColorTargetDescription.
+    Docs: https://wiki.libsdl.org/SDL3/GPUColorTargetDescription.
     """
 
-    var format: SDL_GPUTextureFormat
+    var format: GPUTextureFormat
     """The pixel format of the texture to be used as a color target."""
-    var blend_state: SDL_GPUColorTargetBlendState
+    var blend_state: GPUColorTargetBlendState
     """The blend state to be used for the color target."""
 
 
 @fieldwise_init
-struct SDL_GPUGraphicsPipelineTargetInfo(Copyable, Movable):
+struct GPUGraphicsPipelineTargetInfo(Copyable, Movable):
     """A structure specifying the descriptions of render targets used in a
     graphics pipeline.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUGraphicsPipelineTargetInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUGraphicsPipelineTargetInfo.
     """
 
-    var color_target_descriptions: Ptr[SDL_GPUColorTargetDescription, mut=False]
+    var color_target_descriptions: Ptr[GPUColorTargetDescription, mut=False]
     """A pointer to an array of color target descriptions."""
     var num_color_targets: UInt32
     """The number of color target descriptions in the above array."""
-    var depth_stencil_format: SDL_GPUTextureFormat
+    var depth_stencil_format: GPUTextureFormat
     """The pixel format of the depth-stencil target. Ignored if has_depth_stencil_target is false."""
     var has_depth_stencil_target: Bool
     """True specifies that the pipeline uses a depth-stencil target."""
@@ -2170,38 +2170,38 @@ struct SDL_GPUGraphicsPipelineTargetInfo(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUGraphicsPipelineCreateInfo(Copyable, Movable):
+struct GPUGraphicsPipelineCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a graphics pipeline state.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUGraphicsPipelineCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUGraphicsPipelineCreateInfo.
     """
 
-    var vertex_shader: Ptr[SDL_GPUShader, mut=True]
+    var vertex_shader: Ptr[GPUShader, mut=True]
     """The vertex shader used by the graphics pipeline."""
-    var fragment_shader: Ptr[SDL_GPUShader, mut=True]
+    var fragment_shader: Ptr[GPUShader, mut=True]
     """The fragment shader used by the graphics pipeline."""
-    var vertex_input_state: SDL_GPUVertexInputState
+    var vertex_input_state: GPUVertexInputState
     """The vertex layout of the graphics pipeline."""
-    var primitive_type: SDL_GPUPrimitiveType
+    var primitive_type: GPUPrimitiveType
     """The primitive topology of the graphics pipeline."""
-    var rasterizer_state: SDL_GPURasterizerState
+    var rasterizer_state: GPURasterizerState
     """The rasterizer state of the graphics pipeline."""
-    var multisample_state: SDL_GPUMultisampleState
+    var multisample_state: GPUMultisampleState
     """The multisample state of the graphics pipeline."""
-    var depth_stencil_state: SDL_GPUDepthStencilState
+    var depth_stencil_state: GPUDepthStencilState
     """The depth-stencil state of the graphics pipeline."""
-    var target_info: SDL_GPUGraphicsPipelineTargetInfo
+    var target_info: GPUGraphicsPipelineTargetInfo
     """Formats and blend modes for the render targets of the graphics pipeline."""
 
-    var props: SDL_PropertiesID
+    var props: PropertiesID
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
 @fieldwise_init
-struct SDL_GPUComputePipelineCreateInfo(Copyable, Movable):
+struct GPUComputePipelineCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a compute pipeline state.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUComputePipelineCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUComputePipelineCreateInfo.
     """
 
     var code_size: c_size_t
@@ -2210,7 +2210,7 @@ struct SDL_GPUComputePipelineCreateInfo(Copyable, Movable):
     """A pointer to compute shader code."""
     var entrypoint: Ptr[c_char, mut=False]
     """A pointer to a null-terminated UTF-8 string specifying the entry point function name for the shader."""
-    var format: SDL_GPUShaderFormat
+    var format: GPUShaderFormat
     """The format of the compute shader code."""
     var num_samplers: UInt32
     """The number of samplers defined in the shader."""
@@ -2231,12 +2231,12 @@ struct SDL_GPUComputePipelineCreateInfo(Copyable, Movable):
     var threadcount_z: UInt32
     """The number of threads in the Z dimension. This should match the value in the shader."""
 
-    var props: SDL_PropertiesID
+    var props: PropertiesID
     """A properties ID for extensions. Should be 0 if no extensions are needed."""
 
 
 @fieldwise_init
-struct SDL_GPUColorTargetInfo(Copyable, Movable):
+struct GPUColorTargetInfo(Copyable, Movable):
     """A structure specifying the parameters of a color target used by a render
     pass.
 
@@ -2267,22 +2267,22 @@ struct SDL_GPUColorTargetInfo(Copyable, Movable):
       stores the multisample texture's contents. Not recommended as it requires
       significant memory bandwidth.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUColorTargetInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUColorTargetInfo.
     """
 
-    var texture: Ptr[SDL_GPUTexture, mut=True]
+    var texture: Ptr[GPUTexture, mut=True]
     """The texture that will be used as a color target by a render pass."""
     var mip_level: UInt32
     """The mip level to use as a color target."""
     var layer_or_depth_plane: UInt32
     """The layer index or depth plane to use as a color target. This value is treated as a layer index on 2D array and cube textures, and as a depth plane on 3D textures."""
-    var clear_color: SDL_FColor
+    var clear_color: FColor
     """The color to clear the color target to at the start of the render pass. Ignored if SDL_GPU_LOADOP_CLEAR is not used."""
-    var load_op: SDL_GPULoadOp
+    var load_op: GPULoadOp
     """What is done with the contents of the color target at the beginning of the render pass."""
-    var store_op: SDL_GPUStoreOp
+    var store_op: GPUStoreOp
     """What is done with the results of the render pass."""
-    var resolve_texture: Ptr[SDL_GPUTexture, mut=True]
+    var resolve_texture: Ptr[GPUTexture, mut=True]
     """The texture that will receive the results of a multisample resolve operation. Ignored if a RESOLVE* store_op is not used."""
     var resolve_mip_level: UInt32
     """The mip level of the resolve texture to use for the resolve operation. Ignored if a RESOLVE* store_op is not used."""
@@ -2297,7 +2297,7 @@ struct SDL_GPUColorTargetInfo(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUDepthStencilTargetInfo(Copyable, Movable):
+struct GPUDepthStencilTargetInfo(Copyable, Movable):
     """A structure specifying the parameters of a depth-stencil target used by a
     render pass.
 
@@ -2337,20 +2337,20 @@ struct SDL_GPUDepthStencilTargetInfo(Copyable, Movable):
 
     Note that depth/stencil targets do not support multisample resolves.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUDepthStencilTargetInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUDepthStencilTargetInfo.
     """
 
-    var texture: Ptr[SDL_GPUTexture, mut=True]
+    var texture: Ptr[GPUTexture, mut=True]
     """The texture that will be used as the depth stencil target by the render pass."""
     var clear_depth: c_float
     """The value to clear the depth component to at the beginning of the render pass. Ignored if SDL_GPU_LOADOP_CLEAR is not used."""
-    var load_op: SDL_GPULoadOp
+    var load_op: GPULoadOp
     """What is done with the depth contents at the beginning of the render pass."""
-    var store_op: SDL_GPUStoreOp
+    var store_op: GPUStoreOp
     """What is done with the depth results of the render pass."""
-    var stencil_load_op: SDL_GPULoadOp
+    var stencil_load_op: GPULoadOp
     """What is done with the stencil contents at the beginning of the render pass."""
-    var stencil_store_op: SDL_GPUStoreOp
+    var stencil_store_op: GPUStoreOp
     """What is done with the stencil results of the render pass."""
     var cycle: Bool
     """True cycles the texture if the texture is bound and any load ops are not LOAD."""
@@ -2361,23 +2361,23 @@ struct SDL_GPUDepthStencilTargetInfo(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUBlitInfo(Copyable, Movable):
+struct GPUBlitInfo(Copyable, Movable):
     """A structure containing parameters for a blit command.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBlitInfo.
+    Docs: https://wiki.libsdl.org/SDL3/GPUBlitInfo.
     """
 
-    var source: SDL_GPUBlitRegion
+    var source: GPUBlitRegion
     """The source region for the blit."""
-    var destination: SDL_GPUBlitRegion
+    var destination: GPUBlitRegion
     """The destination region for the blit."""
-    var load_op: SDL_GPULoadOp
+    var load_op: GPULoadOp
     """What is done with the contents of the destination before the blit."""
-    var clear_color: SDL_FColor
+    var clear_color: FColor
     """The color to clear the destination region to before the blit. Ignored if load_op is not SDL_GPU_LOADOP_CLEAR."""
-    var flip_mode: SDL_FlipMode
+    var flip_mode: FlipMode
     """The flip mode for the source region."""
-    var filter: SDL_GPUFilter
+    var filter: GPUFilter
     """The filter mode used when blitting."""
     var cycle: Bool
     """True cycles the destination texture if it is already bound."""
@@ -2387,40 +2387,40 @@ struct SDL_GPUBlitInfo(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUBufferBinding(Copyable, Movable):
+struct GPUBufferBinding(Copyable, Movable):
     """A structure specifying parameters in a buffer binding call.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBufferBinding.
+    Docs: https://wiki.libsdl.org/SDL3/GPUBufferBinding.
     """
 
-    var buffer: Ptr[SDL_GPUBuffer, mut=True]
+    var buffer: Ptr[GPUBuffer, mut=True]
     """The buffer to bind. Must have been created with SDL_GPU_BUFFERUSAGE_VERTEX for SDL_BindGPUVertexBuffers, or SDL_GPU_BUFFERUSAGE_INDEX for SDL_BindGPUIndexBuffer."""
     var offset: UInt32
     """The starting byte of the data to bind in the buffer."""
 
 
 @fieldwise_init
-struct SDL_GPUTextureSamplerBinding(Copyable, Movable):
+struct GPUTextureSamplerBinding(Copyable, Movable):
     """A structure specifying parameters in a sampler binding call.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureSamplerBinding.
+    Docs: https://wiki.libsdl.org/SDL3/GPUTextureSamplerBinding.
     """
 
-    var texture: Ptr[SDL_GPUTexture, mut=True]
+    var texture: Ptr[GPUTexture, mut=True]
     """The texture to bind. Must have been created with SDL_GPU_TEXTUREUSAGE_SAMPLER."""
-    var sampler: Ptr[SDL_GPUSampler, mut=True]
+    var sampler: Ptr[GPUSampler, mut=True]
     """The sampler to bind."""
 
 
 @fieldwise_init
-struct SDL_GPUStorageBufferReadWriteBinding(Copyable, Movable):
+struct GPUStorageBufferReadWriteBinding(Copyable, Movable):
     """A structure specifying parameters related to binding buffers in a compute
     pass.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUStorageBufferReadWriteBinding.
+    Docs: https://wiki.libsdl.org/SDL3/GPUStorageBufferReadWriteBinding.
     """
 
-    var buffer: Ptr[SDL_GPUBuffer, mut=True]
+    var buffer: Ptr[GPUBuffer, mut=True]
     """The buffer to bind. Must have been created with SDL_GPU_BUFFERUSAGE_COMPUTE_STORAGE_WRITE."""
     var cycle: Bool
     """True cycles the buffer if it is already bound."""
@@ -2430,14 +2430,14 @@ struct SDL_GPUStorageBufferReadWriteBinding(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GPUStorageTextureReadWriteBinding(Copyable, Movable):
+struct GPUStorageTextureReadWriteBinding(Copyable, Movable):
     """A structure specifying parameters related to binding textures in a compute
     pass.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUStorageTextureReadWriteBinding.
+    Docs: https://wiki.libsdl.org/SDL3/GPUStorageTextureReadWriteBinding.
     """
 
-    var texture: Ptr[SDL_GPUTexture, mut=True]
+    var texture: Ptr[GPUTexture, mut=True]
     """The texture to bind. Must have been created with SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE or SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE."""
     var mip_level: UInt32
     """The mip level index to bind."""
@@ -2450,7 +2450,7 @@ struct SDL_GPUStorageTextureReadWriteBinding(Copyable, Movable):
     var padding3: UInt8
 
 
-fn sdl_gpu_supports_shader_formats(format_flags: SDL_GPUShaderFormat, owned name: String) -> Bool:
+fn gpu_supports_shader_formats(format_flags: GPUShaderFormat, owned name: String) -> Bool:
     """Checks for GPU runtime support.
 
     Args:
@@ -2465,10 +2465,10 @@ fn sdl_gpu_supports_shader_formats(format_flags: SDL_GPUShaderFormat, owned name
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUSupportsShaderFormats.
     """
 
-    return _get_dylib_function[lib, "SDL_GPUSupportsShaderFormats", fn (format_flags: SDL_GPUShaderFormat, name: Ptr[c_char, mut=False]) -> Bool]()(format_flags, name.unsafe_cstr_ptr())
+    return _get_dylib_function[lib, "SDL_GPUSupportsShaderFormats", fn (format_flags: GPUShaderFormat, name: Ptr[c_char, mut=False]) -> Bool]()(format_flags, name.unsafe_cstr_ptr())
 
 
-fn sdl_gpu_supports_properties(props: SDL_PropertiesID) -> Bool:
+fn gpu_supports_properties(props: PropertiesID) -> Bool:
     """Checks for GPU runtime support.
 
     Args:
@@ -2480,10 +2480,10 @@ fn sdl_gpu_supports_properties(props: SDL_PropertiesID) -> Bool:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUSupportsProperties.
     """
 
-    return _get_dylib_function[lib, "SDL_GPUSupportsProperties", fn (props: SDL_PropertiesID) -> Bool]()(props)
+    return _get_dylib_function[lib, "SDL_GPUSupportsProperties", fn (props: PropertiesID) -> Bool]()(props)
 
 
-fn sdl_create_gpu_device(format_flags: SDL_GPUShaderFormat, debug_mode: Bool, owned name: String, out ret: Ptr[SDL_GPUDevice, mut=True]) raises:
+fn create_gpu_device(format_flags: GPUShaderFormat, debug_mode: Bool, owned name: String, out ret: Ptr[GPUDevice, mut=True]) raises:
     """Creates a GPU context.
 
     Args:
@@ -2500,12 +2500,12 @@ fn sdl_create_gpu_device(format_flags: SDL_GPUShaderFormat, debug_mode: Bool, ow
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateGPUDevice.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateGPUDevice", fn (format_flags: SDL_GPUShaderFormat, debug_mode: Bool, name: Ptr[c_char, mut=False]) -> Ptr[SDL_GPUDevice, mut=True]]()(format_flags, debug_mode, name.unsafe_cstr_ptr())
+    ret = _get_dylib_function[lib, "SDL_CreateGPUDevice", fn (format_flags: GPUShaderFormat, debug_mode: Bool, name: Ptr[c_char, mut=False]) -> Ptr[GPUDevice, mut=True]]()(format_flags, debug_mode, name.unsafe_cstr_ptr())
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_create_gpu_device_with_properties(props: SDL_PropertiesID, out ret: Ptr[SDL_GPUDevice, mut=True]) raises:
+fn create_gpu_device_with_properties(props: PropertiesID, out ret: Ptr[GPUDevice, mut=True]) raises:
     """Creates a GPU context.
 
     These are the supported properties:
@@ -2547,12 +2547,12 @@ fn sdl_create_gpu_device_with_properties(props: SDL_PropertiesID, out ret: Ptr[S
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateGPUDeviceWithProperties.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateGPUDeviceWithProperties", fn (props: SDL_PropertiesID) -> Ptr[SDL_GPUDevice, mut=True]]()(props)
+    ret = _get_dylib_function[lib, "SDL_CreateGPUDeviceWithProperties", fn (props: PropertiesID) -> Ptr[GPUDevice, mut=True]]()(props)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_destroy_gpu_device(device: Ptr[SDL_GPUDevice, mut=True]) -> None:
+fn destroy_gpu_device(device: Ptr[GPUDevice, mut=True]) -> None:
     """Destroys a GPU context previously returned by SDL_CreateGPUDevice.
 
     Args:
@@ -2561,10 +2561,10 @@ fn sdl_destroy_gpu_device(device: Ptr[SDL_GPUDevice, mut=True]) -> None:
     Docs: https://wiki.libsdl.org/SDL3/SDL_DestroyGPUDevice.
     """
 
-    return _get_dylib_function[lib, "SDL_DestroyGPUDevice", fn (device: Ptr[SDL_GPUDevice, mut=True]) -> None]()(device)
+    return _get_dylib_function[lib, "SDL_DestroyGPUDevice", fn (device: Ptr[GPUDevice, mut=True]) -> None]()(device)
 
 
-fn sdl_get_num_gpu_drivers() -> c_int:
+fn get_num_gpu_drivers() -> c_int:
     """Get the number of GPU drivers compiled into SDL.
 
     Returns:
@@ -2576,7 +2576,7 @@ fn sdl_get_num_gpu_drivers() -> c_int:
     return _get_dylib_function[lib, "SDL_GetNumGPUDrivers", fn () -> c_int]()()
 
 
-fn sdl_get_gpu_driver(index: c_int) -> Ptr[c_char, mut=False]:
+fn get_gpu_driver(index: c_int) -> Ptr[c_char, mut=False]:
     """Get the name of a built in GPU driver.
 
     The GPU drivers are presented in the order in which they are normally
@@ -2598,7 +2598,7 @@ fn sdl_get_gpu_driver(index: c_int) -> Ptr[c_char, mut=False]:
     return _get_dylib_function[lib, "SDL_GetGPUDriver", fn (index: c_int) -> Ptr[c_char, mut=False]]()(index)
 
 
-fn sdl_get_gpu_device_driver(device: Ptr[SDL_GPUDevice, mut=True]) -> Ptr[c_char, mut=False]:
+fn get_gpu_device_driver(device: Ptr[GPUDevice, mut=True]) -> Ptr[c_char, mut=False]:
     """Returns the name of the backend used to create this GPU context.
 
     Args:
@@ -2610,10 +2610,10 @@ fn sdl_get_gpu_device_driver(device: Ptr[SDL_GPUDevice, mut=True]) -> Ptr[c_char
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetGPUDeviceDriver.
     """
 
-    return _get_dylib_function[lib, "SDL_GetGPUDeviceDriver", fn (device: Ptr[SDL_GPUDevice, mut=True]) -> Ptr[c_char, mut=False]]()(device)
+    return _get_dylib_function[lib, "SDL_GetGPUDeviceDriver", fn (device: Ptr[GPUDevice, mut=True]) -> Ptr[c_char, mut=False]]()(device)
 
 
-fn sdl_get_gpu_shader_formats(device: Ptr[SDL_GPUDevice, mut=True]) -> SDL_GPUShaderFormat:
+fn get_gpu_shader_formats(device: Ptr[GPUDevice, mut=True]) -> GPUShaderFormat:
     """Returns the supported shader formats for this GPU context.
 
     Args:
@@ -2626,10 +2626,10 @@ fn sdl_get_gpu_shader_formats(device: Ptr[SDL_GPUDevice, mut=True]) -> SDL_GPUSh
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetGPUShaderFormats.
     """
 
-    return _get_dylib_function[lib, "SDL_GetGPUShaderFormats", fn (device: Ptr[SDL_GPUDevice, mut=True]) -> SDL_GPUShaderFormat]()(device)
+    return _get_dylib_function[lib, "SDL_GetGPUShaderFormats", fn (device: Ptr[GPUDevice, mut=True]) -> GPUShaderFormat]()(device)
 
 
-fn sdl_create_gpu_compute_pipeline(device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUComputePipelineCreateInfo, mut=False], out ret: Ptr[SDL_GPUComputePipeline, mut=True]) raises:
+fn create_gpu_compute_pipeline(device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUComputePipelineCreateInfo, mut=False], out ret: Ptr[GPUComputePipeline, mut=True]) raises:
     """Creates a pipeline object to be used in a compute workflow.
 
     Shader resource bindings must be authored to follow a particular order
@@ -2675,12 +2675,12 @@ fn sdl_create_gpu_compute_pipeline(device: Ptr[SDL_GPUDevice, mut=True], createi
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateGPUComputePipeline.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateGPUComputePipeline", fn (device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUComputePipelineCreateInfo, mut=False]) -> Ptr[SDL_GPUComputePipeline, mut=True]]()(device, createinfo)
+    ret = _get_dylib_function[lib, "SDL_CreateGPUComputePipeline", fn (device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUComputePipelineCreateInfo, mut=False]) -> Ptr[GPUComputePipeline, mut=True]]()(device, createinfo)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_create_gpu_graphics_pipeline(device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUGraphicsPipelineCreateInfo, mut=False], out ret: Ptr[SDL_GPUGraphicsPipeline, mut=True]) raises:
+fn create_gpu_graphics_pipeline(device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUGraphicsPipelineCreateInfo, mut=False], out ret: Ptr[GPUGraphicsPipeline, mut=True]) raises:
     """Creates a pipeline object to be used in a graphics workflow.
 
     There are optional properties that can be provided through `props`. These
@@ -2701,12 +2701,12 @@ fn sdl_create_gpu_graphics_pipeline(device: Ptr[SDL_GPUDevice, mut=True], create
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateGPUGraphicsPipeline.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateGPUGraphicsPipeline", fn (device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUGraphicsPipelineCreateInfo, mut=False]) -> Ptr[SDL_GPUGraphicsPipeline, mut=True]]()(device, createinfo)
+    ret = _get_dylib_function[lib, "SDL_CreateGPUGraphicsPipeline", fn (device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUGraphicsPipelineCreateInfo, mut=False]) -> Ptr[GPUGraphicsPipeline, mut=True]]()(device, createinfo)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_create_gpu_sampler(device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUSamplerCreateInfo, mut=False], out ret: Ptr[SDL_GPUSampler, mut=True]) raises:
+fn create_gpu_sampler(device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUSamplerCreateInfo, mut=False], out ret: Ptr[GPUSampler, mut=True]) raises:
     """Creates a sampler object to be used when binding textures in a graphics
     workflow.
 
@@ -2727,12 +2727,12 @@ fn sdl_create_gpu_sampler(device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateGPUSampler.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateGPUSampler", fn (device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUSamplerCreateInfo, mut=False]) -> Ptr[SDL_GPUSampler, mut=True]]()(device, createinfo)
+    ret = _get_dylib_function[lib, "SDL_CreateGPUSampler", fn (device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUSamplerCreateInfo, mut=False]) -> Ptr[GPUSampler, mut=True]]()(device, createinfo)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_create_gpu_shader(device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUShaderCreateInfo, mut=False], out ret: Ptr[SDL_GPUShader, mut=True]) raises:
+fn create_gpu_shader(device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUShaderCreateInfo, mut=False], out ret: Ptr[GPUShader, mut=True]) raises:
     """Creates a shader to be used when creating a graphics pipeline.
 
     Shader resource bindings must be authored to follow a particular order
@@ -2806,12 +2806,12 @@ fn sdl_create_gpu_shader(device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[S
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateGPUShader.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateGPUShader", fn (device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUShaderCreateInfo, mut=False]) -> Ptr[SDL_GPUShader, mut=True]]()(device, createinfo)
+    ret = _get_dylib_function[lib, "SDL_CreateGPUShader", fn (device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUShaderCreateInfo, mut=False]) -> Ptr[GPUShader, mut=True]]()(device, createinfo)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_create_gpu_texture(device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUTextureCreateInfo, mut=False], out ret: Ptr[SDL_GPUTexture, mut=True]) raises:
+fn create_gpu_texture(device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUTextureCreateInfo, mut=False], out ret: Ptr[GPUTexture, mut=True]) raises:
     """Creates a texture object to be used in graphics or compute workflows.
 
     The contents of this texture are undefined until data is written to the
@@ -2859,12 +2859,12 @@ fn sdl_create_gpu_texture(device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateGPUTexture.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateGPUTexture", fn (device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUTextureCreateInfo, mut=False]) -> Ptr[SDL_GPUTexture, mut=True]]()(device, createinfo)
+    ret = _get_dylib_function[lib, "SDL_CreateGPUTexture", fn (device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUTextureCreateInfo, mut=False]) -> Ptr[GPUTexture, mut=True]]()(device, createinfo)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_create_gpu_buffer(device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUBufferCreateInfo, mut=False], out ret: Ptr[SDL_GPUBuffer, mut=True]) raises:
+fn create_gpu_buffer(device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUBufferCreateInfo, mut=False], out ret: Ptr[GPUBuffer, mut=True]) raises:
     """Creates a buffer object to be used in graphics or compute workflows.
 
     The contents of this buffer are undefined until data is written to the
@@ -2899,12 +2899,12 @@ fn sdl_create_gpu_buffer(device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[S
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateGPUBuffer.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateGPUBuffer", fn (device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUBufferCreateInfo, mut=False]) -> Ptr[SDL_GPUBuffer, mut=True]]()(device, createinfo)
+    ret = _get_dylib_function[lib, "SDL_CreateGPUBuffer", fn (device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUBufferCreateInfo, mut=False]) -> Ptr[GPUBuffer, mut=True]]()(device, createinfo)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_create_gpu_transfer_buffer(device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUTransferBufferCreateInfo, mut=False], out ret: Ptr[SDL_GPUTransferBuffer, mut=True]) raises:
+fn create_gpu_transfer_buffer(device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUTransferBufferCreateInfo, mut=False], out ret: Ptr[GPUTransferBuffer, mut=True]) raises:
     """Creates a transfer buffer to be used when uploading to or downloading from
     graphics resources.
 
@@ -2929,12 +2929,12 @@ fn sdl_create_gpu_transfer_buffer(device: Ptr[SDL_GPUDevice, mut=True], createin
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateGPUTransferBuffer.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateGPUTransferBuffer", fn (device: Ptr[SDL_GPUDevice, mut=True], createinfo: Ptr[SDL_GPUTransferBufferCreateInfo, mut=False]) -> Ptr[SDL_GPUTransferBuffer, mut=True]]()(device, createinfo)
+    ret = _get_dylib_function[lib, "SDL_CreateGPUTransferBuffer", fn (device: Ptr[GPUDevice, mut=True], createinfo: Ptr[GPUTransferBufferCreateInfo, mut=False]) -> Ptr[GPUTransferBuffer, mut=True]]()(device, createinfo)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_gpu_buffer_name(device: Ptr[SDL_GPUDevice, mut=True], buffer: Ptr[SDL_GPUBuffer, mut=True], owned text: String) -> None:
+fn set_gpu_buffer_name(device: Ptr[GPUDevice, mut=True], buffer: Ptr[GPUBuffer, mut=True], owned text: String) -> None:
     """Sets an arbitrary string constant to label a buffer.
 
     You should use SDL_PROP_GPU_BUFFER_CREATE_NAME_STRING with
@@ -2952,10 +2952,10 @@ fn sdl_set_gpu_buffer_name(device: Ptr[SDL_GPUDevice, mut=True], buffer: Ptr[SDL
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetGPUBufferName.
     """
 
-    return _get_dylib_function[lib, "SDL_SetGPUBufferName", fn (device: Ptr[SDL_GPUDevice, mut=True], buffer: Ptr[SDL_GPUBuffer, mut=True], text: Ptr[c_char, mut=False]) -> None]()(device, buffer, text.unsafe_cstr_ptr())
+    return _get_dylib_function[lib, "SDL_SetGPUBufferName", fn (device: Ptr[GPUDevice, mut=True], buffer: Ptr[GPUBuffer, mut=True], text: Ptr[c_char, mut=False]) -> None]()(device, buffer, text.unsafe_cstr_ptr())
 
 
-fn sdl_set_gpu_texture_name(device: Ptr[SDL_GPUDevice, mut=True], texture: Ptr[SDL_GPUTexture, mut=True], owned text: String) -> None:
+fn set_gpu_texture_name(device: Ptr[GPUDevice, mut=True], texture: Ptr[GPUTexture, mut=True], owned text: String) -> None:
     """Sets an arbitrary string constant to label a texture.
 
     You should use SDL_PROP_GPU_TEXTURE_CREATE_NAME_STRING with
@@ -2974,10 +2974,10 @@ fn sdl_set_gpu_texture_name(device: Ptr[SDL_GPUDevice, mut=True], texture: Ptr[S
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetGPUTextureName.
     """
 
-    return _get_dylib_function[lib, "SDL_SetGPUTextureName", fn (device: Ptr[SDL_GPUDevice, mut=True], texture: Ptr[SDL_GPUTexture, mut=True], text: Ptr[c_char, mut=False]) -> None]()(device, texture, text.unsafe_cstr_ptr())
+    return _get_dylib_function[lib, "SDL_SetGPUTextureName", fn (device: Ptr[GPUDevice, mut=True], texture: Ptr[GPUTexture, mut=True], text: Ptr[c_char, mut=False]) -> None]()(device, texture, text.unsafe_cstr_ptr())
 
 
-fn sdl_insert_gpu_debug_label(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], owned text: String) -> None:
+fn insert_gpu_debug_label(command_buffer: Ptr[GPUCommandBuffer, mut=True], owned text: String) -> None:
     """Inserts an arbitrary string label into the command buffer callstream.
 
     Useful for debugging.
@@ -2989,10 +2989,10 @@ fn sdl_insert_gpu_debug_label(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True
     Docs: https://wiki.libsdl.org/SDL3/SDL_InsertGPUDebugLabel.
     """
 
-    return _get_dylib_function[lib, "SDL_InsertGPUDebugLabel", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], text: Ptr[c_char, mut=False]) -> None]()(command_buffer, text.unsafe_cstr_ptr())
+    return _get_dylib_function[lib, "SDL_InsertGPUDebugLabel", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], text: Ptr[c_char, mut=False]) -> None]()(command_buffer, text.unsafe_cstr_ptr())
 
 
-fn sdl_push_gpu_debug_group(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], owned name: String) -> None:
+fn push_gpu_debug_group(command_buffer: Ptr[GPUCommandBuffer, mut=True], owned name: String) -> None:
     """Begins a debug group with an arbitary name.
 
     Used for denoting groups of calls when viewing the command buffer
@@ -3013,10 +3013,10 @@ fn sdl_push_gpu_debug_group(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True],
     Docs: https://wiki.libsdl.org/SDL3/SDL_PushGPUDebugGroup.
     """
 
-    return _get_dylib_function[lib, "SDL_PushGPUDebugGroup", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], name: Ptr[c_char, mut=False]) -> None]()(command_buffer, name.unsafe_cstr_ptr())
+    return _get_dylib_function[lib, "SDL_PushGPUDebugGroup", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], name: Ptr[c_char, mut=False]) -> None]()(command_buffer, name.unsafe_cstr_ptr())
 
 
-fn sdl_pop_gpu_debug_group(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]) -> None:
+fn pop_gpu_debug_group(command_buffer: Ptr[GPUCommandBuffer, mut=True]) -> None:
     """Ends the most-recently pushed debug group.
 
     Args:
@@ -3025,10 +3025,10 @@ fn sdl_pop_gpu_debug_group(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]) 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PopGPUDebugGroup.
     """
 
-    return _get_dylib_function[lib, "SDL_PopGPUDebugGroup", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]) -> None]()(command_buffer)
+    return _get_dylib_function[lib, "SDL_PopGPUDebugGroup", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True]) -> None]()(command_buffer)
 
 
-fn sdl_release_gpu_texture(device: Ptr[SDL_GPUDevice, mut=True], texture: Ptr[SDL_GPUTexture, mut=True]) -> None:
+fn release_gpu_texture(device: Ptr[GPUDevice, mut=True], texture: Ptr[GPUTexture, mut=True]) -> None:
     """Frees the given texture as soon as it is safe to do so.
 
     You must not reference the texture after calling this function.
@@ -3040,10 +3040,10 @@ fn sdl_release_gpu_texture(device: Ptr[SDL_GPUDevice, mut=True], texture: Ptr[SD
     Docs: https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUTexture.
     """
 
-    return _get_dylib_function[lib, "SDL_ReleaseGPUTexture", fn (device: Ptr[SDL_GPUDevice, mut=True], texture: Ptr[SDL_GPUTexture, mut=True]) -> None]()(device, texture)
+    return _get_dylib_function[lib, "SDL_ReleaseGPUTexture", fn (device: Ptr[GPUDevice, mut=True], texture: Ptr[GPUTexture, mut=True]) -> None]()(device, texture)
 
 
-fn sdl_release_gpu_sampler(device: Ptr[SDL_GPUDevice, mut=True], sampler: Ptr[SDL_GPUSampler, mut=True]) -> None:
+fn release_gpu_sampler(device: Ptr[GPUDevice, mut=True], sampler: Ptr[GPUSampler, mut=True]) -> None:
     """Frees the given sampler as soon as it is safe to do so.
 
     You must not reference the sampler after calling this function.
@@ -3055,10 +3055,10 @@ fn sdl_release_gpu_sampler(device: Ptr[SDL_GPUDevice, mut=True], sampler: Ptr[SD
     Docs: https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUSampler.
     """
 
-    return _get_dylib_function[lib, "SDL_ReleaseGPUSampler", fn (device: Ptr[SDL_GPUDevice, mut=True], sampler: Ptr[SDL_GPUSampler, mut=True]) -> None]()(device, sampler)
+    return _get_dylib_function[lib, "SDL_ReleaseGPUSampler", fn (device: Ptr[GPUDevice, mut=True], sampler: Ptr[GPUSampler, mut=True]) -> None]()(device, sampler)
 
 
-fn sdl_release_gpu_buffer(device: Ptr[SDL_GPUDevice, mut=True], buffer: Ptr[SDL_GPUBuffer, mut=True]) -> None:
+fn release_gpu_buffer(device: Ptr[GPUDevice, mut=True], buffer: Ptr[GPUBuffer, mut=True]) -> None:
     """Frees the given buffer as soon as it is safe to do so.
 
     You must not reference the buffer after calling this function.
@@ -3070,10 +3070,10 @@ fn sdl_release_gpu_buffer(device: Ptr[SDL_GPUDevice, mut=True], buffer: Ptr[SDL_
     Docs: https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUBuffer.
     """
 
-    return _get_dylib_function[lib, "SDL_ReleaseGPUBuffer", fn (device: Ptr[SDL_GPUDevice, mut=True], buffer: Ptr[SDL_GPUBuffer, mut=True]) -> None]()(device, buffer)
+    return _get_dylib_function[lib, "SDL_ReleaseGPUBuffer", fn (device: Ptr[GPUDevice, mut=True], buffer: Ptr[GPUBuffer, mut=True]) -> None]()(device, buffer)
 
 
-fn sdl_release_gpu_transfer_buffer(device: Ptr[SDL_GPUDevice, mut=True], transfer_buffer: Ptr[SDL_GPUTransferBuffer, mut=True]) -> None:
+fn release_gpu_transfer_buffer(device: Ptr[GPUDevice, mut=True], transfer_buffer: Ptr[GPUTransferBuffer, mut=True]) -> None:
     """Frees the given transfer buffer as soon as it is safe to do so.
 
     You must not reference the transfer buffer after calling this function.
@@ -3085,10 +3085,10 @@ fn sdl_release_gpu_transfer_buffer(device: Ptr[SDL_GPUDevice, mut=True], transfe
     Docs: https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUTransferBuffer.
     """
 
-    return _get_dylib_function[lib, "SDL_ReleaseGPUTransferBuffer", fn (device: Ptr[SDL_GPUDevice, mut=True], transfer_buffer: Ptr[SDL_GPUTransferBuffer, mut=True]) -> None]()(device, transfer_buffer)
+    return _get_dylib_function[lib, "SDL_ReleaseGPUTransferBuffer", fn (device: Ptr[GPUDevice, mut=True], transfer_buffer: Ptr[GPUTransferBuffer, mut=True]) -> None]()(device, transfer_buffer)
 
 
-fn sdl_release_gpu_compute_pipeline(device: Ptr[SDL_GPUDevice, mut=True], compute_pipeline: Ptr[SDL_GPUComputePipeline, mut=True]) -> None:
+fn release_gpu_compute_pipeline(device: Ptr[GPUDevice, mut=True], compute_pipeline: Ptr[GPUComputePipeline, mut=True]) -> None:
     """Frees the given compute pipeline as soon as it is safe to do so.
 
     You must not reference the compute pipeline after calling this function.
@@ -3100,10 +3100,10 @@ fn sdl_release_gpu_compute_pipeline(device: Ptr[SDL_GPUDevice, mut=True], comput
     Docs: https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUComputePipeline.
     """
 
-    return _get_dylib_function[lib, "SDL_ReleaseGPUComputePipeline", fn (device: Ptr[SDL_GPUDevice, mut=True], compute_pipeline: Ptr[SDL_GPUComputePipeline, mut=True]) -> None]()(device, compute_pipeline)
+    return _get_dylib_function[lib, "SDL_ReleaseGPUComputePipeline", fn (device: Ptr[GPUDevice, mut=True], compute_pipeline: Ptr[GPUComputePipeline, mut=True]) -> None]()(device, compute_pipeline)
 
 
-fn sdl_release_gpu_shader(device: Ptr[SDL_GPUDevice, mut=True], shader: Ptr[SDL_GPUShader, mut=True]) -> None:
+fn release_gpu_shader(device: Ptr[GPUDevice, mut=True], shader: Ptr[GPUShader, mut=True]) -> None:
     """Frees the given shader as soon as it is safe to do so.
 
     You must not reference the shader after calling this function.
@@ -3115,10 +3115,10 @@ fn sdl_release_gpu_shader(device: Ptr[SDL_GPUDevice, mut=True], shader: Ptr[SDL_
     Docs: https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUShader.
     """
 
-    return _get_dylib_function[lib, "SDL_ReleaseGPUShader", fn (device: Ptr[SDL_GPUDevice, mut=True], shader: Ptr[SDL_GPUShader, mut=True]) -> None]()(device, shader)
+    return _get_dylib_function[lib, "SDL_ReleaseGPUShader", fn (device: Ptr[GPUDevice, mut=True], shader: Ptr[GPUShader, mut=True]) -> None]()(device, shader)
 
 
-fn sdl_release_gpu_graphics_pipeline(device: Ptr[SDL_GPUDevice, mut=True], graphics_pipeline: Ptr[SDL_GPUGraphicsPipeline, mut=True]) -> None:
+fn release_gpu_graphics_pipeline(device: Ptr[GPUDevice, mut=True], graphics_pipeline: Ptr[GPUGraphicsPipeline, mut=True]) -> None:
     """Frees the given graphics pipeline as soon as it is safe to do so.
 
     You must not reference the graphics pipeline after calling this function.
@@ -3130,10 +3130,10 @@ fn sdl_release_gpu_graphics_pipeline(device: Ptr[SDL_GPUDevice, mut=True], graph
     Docs: https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUGraphicsPipeline.
     """
 
-    return _get_dylib_function[lib, "SDL_ReleaseGPUGraphicsPipeline", fn (device: Ptr[SDL_GPUDevice, mut=True], graphics_pipeline: Ptr[SDL_GPUGraphicsPipeline, mut=True]) -> None]()(device, graphics_pipeline)
+    return _get_dylib_function[lib, "SDL_ReleaseGPUGraphicsPipeline", fn (device: Ptr[GPUDevice, mut=True], graphics_pipeline: Ptr[GPUGraphicsPipeline, mut=True]) -> None]()(device, graphics_pipeline)
 
 
-fn sdl_acquire_gpu_command_buffer(device: Ptr[SDL_GPUDevice, mut=True], out ret: Ptr[SDL_GPUCommandBuffer, mut=True]) raises:
+fn acquire_gpu_command_buffer(device: Ptr[GPUDevice, mut=True], out ret: Ptr[GPUCommandBuffer, mut=True]) raises:
     """Acquire a command buffer.
 
     This command buffer is managed by the implementation and should not be
@@ -3158,12 +3158,12 @@ fn sdl_acquire_gpu_command_buffer(device: Ptr[SDL_GPUDevice, mut=True], out ret:
     Docs: https://wiki.libsdl.org/SDL3/SDL_AcquireGPUCommandBuffer.
     """
 
-    ret = _get_dylib_function[lib, "SDL_AcquireGPUCommandBuffer", fn (device: Ptr[SDL_GPUDevice, mut=True]) -> Ptr[SDL_GPUCommandBuffer, mut=True]]()(device)
+    ret = _get_dylib_function[lib, "SDL_AcquireGPUCommandBuffer", fn (device: Ptr[GPUDevice, mut=True]) -> Ptr[GPUCommandBuffer, mut=True]]()(device)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_push_gpu_vertex_uniform_data(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None:
+fn push_gpu_vertex_uniform_data(command_buffer: Ptr[GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None:
     """Pushes data to a vertex uniform slot on the command buffer.
 
     Subsequent draw calls will use this uniform data.
@@ -3181,10 +3181,10 @@ fn sdl_push_gpu_vertex_uniform_data(command_buffer: Ptr[SDL_GPUCommandBuffer, mu
     Docs: https://wiki.libsdl.org/SDL3/SDL_PushGPUVertexUniformData.
     """
 
-    return _get_dylib_function[lib, "SDL_PushGPUVertexUniformData", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None]()(command_buffer, slot_index, data, length)
+    return _get_dylib_function[lib, "SDL_PushGPUVertexUniformData", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None]()(command_buffer, slot_index, data, length)
 
 
-fn sdl_push_gpu_fragment_uniform_data(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None:
+fn push_gpu_fragment_uniform_data(command_buffer: Ptr[GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None:
     """Pushes data to a fragment uniform slot on the command buffer.
 
     Subsequent draw calls will use this uniform data.
@@ -3202,10 +3202,10 @@ fn sdl_push_gpu_fragment_uniform_data(command_buffer: Ptr[SDL_GPUCommandBuffer, 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PushGPUFragmentUniformData.
     """
 
-    return _get_dylib_function[lib, "SDL_PushGPUFragmentUniformData", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None]()(command_buffer, slot_index, data, length)
+    return _get_dylib_function[lib, "SDL_PushGPUFragmentUniformData", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None]()(command_buffer, slot_index, data, length)
 
 
-fn sdl_push_gpu_compute_uniform_data(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None:
+fn push_gpu_compute_uniform_data(command_buffer: Ptr[GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None:
     """Pushes data to a uniform slot on the command buffer.
 
     Subsequent draw calls will use this uniform data.
@@ -3223,10 +3223,10 @@ fn sdl_push_gpu_compute_uniform_data(command_buffer: Ptr[SDL_GPUCommandBuffer, m
     Docs: https://wiki.libsdl.org/SDL3/SDL_PushGPUComputeUniformData.
     """
 
-    return _get_dylib_function[lib, "SDL_PushGPUComputeUniformData", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None]()(command_buffer, slot_index, data, length)
+    return _get_dylib_function[lib, "SDL_PushGPUComputeUniformData", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], slot_index: UInt32, data: Ptr[NoneType, mut=False], length: UInt32) -> None]()(command_buffer, slot_index, data, length)
 
 
-fn sdl_begin_gpu_render_pass(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], color_target_infos: Ptr[SDL_GPUColorTargetInfo, mut=False], num_color_targets: UInt32, depth_stencil_target_info: Ptr[SDL_GPUDepthStencilTargetInfo, mut=False]) -> Ptr[SDL_GPURenderPass, mut=True]:
+fn begin_gpu_render_pass(command_buffer: Ptr[GPUCommandBuffer, mut=True], color_target_infos: Ptr[GPUColorTargetInfo, mut=False], num_color_targets: UInt32, depth_stencil_target_info: Ptr[GPUDepthStencilTargetInfo, mut=False]) -> Ptr[GPURenderPass, mut=True]:
     """Begins a render pass on a command buffer.
 
     A render pass consists of a set of texture subresources (or depth slices in
@@ -3253,10 +3253,10 @@ fn sdl_begin_gpu_render_pass(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]
     Docs: https://wiki.libsdl.org/SDL3/SDL_BeginGPURenderPass.
     """
 
-    return _get_dylib_function[lib, "SDL_BeginGPURenderPass", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], color_target_infos: Ptr[SDL_GPUColorTargetInfo, mut=False], num_color_targets: UInt32, depth_stencil_target_info: Ptr[SDL_GPUDepthStencilTargetInfo, mut=False]) -> Ptr[SDL_GPURenderPass, mut=True]]()(command_buffer, color_target_infos, num_color_targets, depth_stencil_target_info)
+    return _get_dylib_function[lib, "SDL_BeginGPURenderPass", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], color_target_infos: Ptr[GPUColorTargetInfo, mut=False], num_color_targets: UInt32, depth_stencil_target_info: Ptr[GPUDepthStencilTargetInfo, mut=False]) -> Ptr[GPURenderPass, mut=True]]()(command_buffer, color_target_infos, num_color_targets, depth_stencil_target_info)
 
 
-fn sdl_bind_gpu_graphics_pipeline(render_pass: Ptr[SDL_GPURenderPass, mut=True], graphics_pipeline: Ptr[SDL_GPUGraphicsPipeline, mut=True]) -> None:
+fn bind_gpu_graphics_pipeline(render_pass: Ptr[GPURenderPass, mut=True], graphics_pipeline: Ptr[GPUGraphicsPipeline, mut=True]) -> None:
     """Binds a graphics pipeline on a render pass to be used in rendering.
 
     A graphics pipeline must be bound before making any draw calls.
@@ -3268,10 +3268,10 @@ fn sdl_bind_gpu_graphics_pipeline(render_pass: Ptr[SDL_GPURenderPass, mut=True],
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUGraphicsPipeline.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUGraphicsPipeline", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], graphics_pipeline: Ptr[SDL_GPUGraphicsPipeline, mut=True]) -> None]()(render_pass, graphics_pipeline)
+    return _get_dylib_function[lib, "SDL_BindGPUGraphicsPipeline", fn (render_pass: Ptr[GPURenderPass, mut=True], graphics_pipeline: Ptr[GPUGraphicsPipeline, mut=True]) -> None]()(render_pass, graphics_pipeline)
 
 
-fn sdl_set_gpu_viewport(render_pass: Ptr[SDL_GPURenderPass, mut=True], viewport: Ptr[SDL_GPUViewport, mut=False]) -> None:
+fn set_gpu_viewport(render_pass: Ptr[GPURenderPass, mut=True], viewport: Ptr[GPUViewport, mut=False]) -> None:
     """Sets the current viewport state on a command buffer.
 
     Args:
@@ -3281,10 +3281,10 @@ fn sdl_set_gpu_viewport(render_pass: Ptr[SDL_GPURenderPass, mut=True], viewport:
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetGPUViewport.
     """
 
-    return _get_dylib_function[lib, "SDL_SetGPUViewport", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], viewport: Ptr[SDL_GPUViewport, mut=False]) -> None]()(render_pass, viewport)
+    return _get_dylib_function[lib, "SDL_SetGPUViewport", fn (render_pass: Ptr[GPURenderPass, mut=True], viewport: Ptr[GPUViewport, mut=False]) -> None]()(render_pass, viewport)
 
 
-fn sdl_set_gpu_scissor(render_pass: Ptr[SDL_GPURenderPass, mut=True], scissor: Ptr[SDL_Rect, mut=False]) -> None:
+fn set_gpu_scissor(render_pass: Ptr[GPURenderPass, mut=True], scissor: Ptr[Rect, mut=False]) -> None:
     """Sets the current scissor state on a command buffer.
 
     Args:
@@ -3294,10 +3294,10 @@ fn sdl_set_gpu_scissor(render_pass: Ptr[SDL_GPURenderPass, mut=True], scissor: P
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetGPUScissor.
     """
 
-    return _get_dylib_function[lib, "SDL_SetGPUScissor", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], scissor: Ptr[SDL_Rect, mut=False]) -> None]()(render_pass, scissor)
+    return _get_dylib_function[lib, "SDL_SetGPUScissor", fn (render_pass: Ptr[GPURenderPass, mut=True], scissor: Ptr[Rect, mut=False]) -> None]()(render_pass, scissor)
 
 
-fn sdl_set_gpu_blend_constants(render_pass: Ptr[SDL_GPURenderPass, mut=True], blend_constants: SDL_FColor) -> None:
+fn set_gpu_blend_constants(render_pass: Ptr[GPURenderPass, mut=True], blend_constants: FColor) -> None:
     """Sets the current blend constants on a command buffer.
 
     Args:
@@ -3307,10 +3307,10 @@ fn sdl_set_gpu_blend_constants(render_pass: Ptr[SDL_GPURenderPass, mut=True], bl
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetGPUBlendConstants.
     """
 
-    return _get_dylib_function[lib, "SDL_SetGPUBlendConstants", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], blend_constants: SDL_FColor) -> None]()(render_pass, blend_constants)
+    return _get_dylib_function[lib, "SDL_SetGPUBlendConstants", fn (render_pass: Ptr[GPURenderPass, mut=True], blend_constants: FColor) -> None]()(render_pass, blend_constants)
 
 
-fn sdl_set_gpu_stencil_reference(render_pass: Ptr[SDL_GPURenderPass, mut=True], reference: UInt8) -> None:
+fn set_gpu_stencil_reference(render_pass: Ptr[GPURenderPass, mut=True], reference: UInt8) -> None:
     """Sets the current stencil reference value on a command buffer.
 
     Args:
@@ -3320,10 +3320,10 @@ fn sdl_set_gpu_stencil_reference(render_pass: Ptr[SDL_GPURenderPass, mut=True], 
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetGPUStencilReference.
     """
 
-    return _get_dylib_function[lib, "SDL_SetGPUStencilReference", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], reference: UInt8) -> None]()(render_pass, reference)
+    return _get_dylib_function[lib, "SDL_SetGPUStencilReference", fn (render_pass: Ptr[GPURenderPass, mut=True], reference: UInt8) -> None]()(render_pass, reference)
 
 
-fn sdl_bind_gpu_vertex_buffers(render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, bindings: Ptr[SDL_GPUBufferBinding, mut=False], num_bindings: UInt32) -> None:
+fn bind_gpu_vertex_buffers(render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, bindings: Ptr[GPUBufferBinding, mut=False], num_bindings: UInt32) -> None:
     """Binds vertex buffers on a command buffer for use with subsequent draw
     calls.
 
@@ -3337,10 +3337,10 @@ fn sdl_bind_gpu_vertex_buffers(render_pass: Ptr[SDL_GPURenderPass, mut=True], fi
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexBuffers.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUVertexBuffers", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, bindings: Ptr[SDL_GPUBufferBinding, mut=False], num_bindings: UInt32) -> None]()(render_pass, first_slot, bindings, num_bindings)
+    return _get_dylib_function[lib, "SDL_BindGPUVertexBuffers", fn (render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, bindings: Ptr[GPUBufferBinding, mut=False], num_bindings: UInt32) -> None]()(render_pass, first_slot, bindings, num_bindings)
 
 
-fn sdl_bind_gpu_index_buffer(render_pass: Ptr[SDL_GPURenderPass, mut=True], binding: Ptr[SDL_GPUBufferBinding, mut=False], index_element_size: SDL_GPUIndexElementSize) -> None:
+fn bind_gpu_index_buffer(render_pass: Ptr[GPURenderPass, mut=True], binding: Ptr[GPUBufferBinding, mut=False], index_element_size: GPUIndexElementSize) -> None:
     """Binds an index buffer on a command buffer for use with subsequent draw
     calls.
 
@@ -3353,10 +3353,10 @@ fn sdl_bind_gpu_index_buffer(render_pass: Ptr[SDL_GPURenderPass, mut=True], bind
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUIndexBuffer.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUIndexBuffer", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], binding: Ptr[SDL_GPUBufferBinding, mut=False], index_element_size: SDL_GPUIndexElementSize) -> None]()(render_pass, binding, index_element_size)
+    return _get_dylib_function[lib, "SDL_BindGPUIndexBuffer", fn (render_pass: Ptr[GPURenderPass, mut=True], binding: Ptr[GPUBufferBinding, mut=False], index_element_size: GPUIndexElementSize) -> None]()(render_pass, binding, index_element_size)
 
 
-fn sdl_bind_gpu_vertex_samplers(render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[SDL_GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None:
+fn bind_gpu_vertex_samplers(render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None:
     """Binds texture-sampler pairs for use on the vertex shader.
 
     The textures must have been created with SDL_GPU_TEXTUREUSAGE_SAMPLER.
@@ -3375,10 +3375,10 @@ fn sdl_bind_gpu_vertex_samplers(render_pass: Ptr[SDL_GPURenderPass, mut=True], f
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexSamplers.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUVertexSamplers", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[SDL_GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None]()(render_pass, first_slot, texture_sampler_bindings, num_bindings)
+    return _get_dylib_function[lib, "SDL_BindGPUVertexSamplers", fn (render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None]()(render_pass, first_slot, texture_sampler_bindings, num_bindings)
 
 
-fn sdl_bind_gpu_vertex_storage_textures(render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, storage_textures: Ptr[SDL_GPUTexture, mut=True], num_bindings: UInt32) -> None:
+fn bind_gpu_vertex_storage_textures(render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, storage_textures: Ptr[GPUTexture, mut=True], num_bindings: UInt32) -> None:
     """Binds storage textures for use on the vertex shader.
 
     These textures must have been created with
@@ -3396,10 +3396,10 @@ fn sdl_bind_gpu_vertex_storage_textures(render_pass: Ptr[SDL_GPURenderPass, mut=
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexStorageTextures.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUVertexStorageTextures", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, storage_textures: Ptr[SDL_GPUTexture, mut=True], num_bindings: UInt32) -> None]()(render_pass, first_slot, storage_textures, num_bindings)
+    return _get_dylib_function[lib, "SDL_BindGPUVertexStorageTextures", fn (render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, storage_textures: Ptr[GPUTexture, mut=True], num_bindings: UInt32) -> None]()(render_pass, first_slot, storage_textures, num_bindings)
 
 
-fn sdl_bind_gpu_vertex_storage_buffers(render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, storage_buffers: Ptr[SDL_GPUBuffer, mut=True], num_bindings: UInt32) -> None:
+fn bind_gpu_vertex_storage_buffers(render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, storage_buffers: Ptr[GPUBuffer, mut=True], num_bindings: UInt32) -> None:
     """Binds storage buffers for use on the vertex shader.
 
     These buffers must have been created with
@@ -3417,10 +3417,10 @@ fn sdl_bind_gpu_vertex_storage_buffers(render_pass: Ptr[SDL_GPURenderPass, mut=T
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUVertexStorageBuffers.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUVertexStorageBuffers", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, storage_buffers: Ptr[SDL_GPUBuffer, mut=True], num_bindings: UInt32) -> None]()(render_pass, first_slot, storage_buffers, num_bindings)
+    return _get_dylib_function[lib, "SDL_BindGPUVertexStorageBuffers", fn (render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, storage_buffers: Ptr[GPUBuffer, mut=True], num_bindings: UInt32) -> None]()(render_pass, first_slot, storage_buffers, num_bindings)
 
 
-fn sdl_bind_gpu_fragment_samplers(render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[SDL_GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None:
+fn bind_gpu_fragment_samplers(render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None:
     """Binds texture-sampler pairs for use on the fragment shader.
 
     The textures must have been created with SDL_GPU_TEXTUREUSAGE_SAMPLER.
@@ -3439,10 +3439,10 @@ fn sdl_bind_gpu_fragment_samplers(render_pass: Ptr[SDL_GPURenderPass, mut=True],
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUFragmentSamplers.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUFragmentSamplers", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[SDL_GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None]()(render_pass, first_slot, texture_sampler_bindings, num_bindings)
+    return _get_dylib_function[lib, "SDL_BindGPUFragmentSamplers", fn (render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None]()(render_pass, first_slot, texture_sampler_bindings, num_bindings)
 
 
-fn sdl_bind_gpu_fragment_storage_textures(render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, storage_textures: Ptr[SDL_GPUTexture, mut=True], num_bindings: UInt32) -> None:
+fn bind_gpu_fragment_storage_textures(render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, storage_textures: Ptr[GPUTexture, mut=True], num_bindings: UInt32) -> None:
     """Binds storage textures for use on the fragment shader.
 
     These textures must have been created with
@@ -3460,10 +3460,10 @@ fn sdl_bind_gpu_fragment_storage_textures(render_pass: Ptr[SDL_GPURenderPass, mu
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUFragmentStorageTextures.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUFragmentStorageTextures", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, storage_textures: Ptr[SDL_GPUTexture, mut=True], num_bindings: UInt32) -> None]()(render_pass, first_slot, storage_textures, num_bindings)
+    return _get_dylib_function[lib, "SDL_BindGPUFragmentStorageTextures", fn (render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, storage_textures: Ptr[GPUTexture, mut=True], num_bindings: UInt32) -> None]()(render_pass, first_slot, storage_textures, num_bindings)
 
 
-fn sdl_bind_gpu_fragment_storage_buffers(render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, storage_buffers: Ptr[SDL_GPUBuffer, mut=True], num_bindings: UInt32) -> None:
+fn bind_gpu_fragment_storage_buffers(render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, storage_buffers: Ptr[GPUBuffer, mut=True], num_bindings: UInt32) -> None:
     """Binds storage buffers for use on the fragment shader.
 
     These buffers must have been created with
@@ -3481,10 +3481,10 @@ fn sdl_bind_gpu_fragment_storage_buffers(render_pass: Ptr[SDL_GPURenderPass, mut
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUFragmentStorageBuffers.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUFragmentStorageBuffers", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], first_slot: UInt32, storage_buffers: Ptr[SDL_GPUBuffer, mut=True], num_bindings: UInt32) -> None]()(render_pass, first_slot, storage_buffers, num_bindings)
+    return _get_dylib_function[lib, "SDL_BindGPUFragmentStorageBuffers", fn (render_pass: Ptr[GPURenderPass, mut=True], first_slot: UInt32, storage_buffers: Ptr[GPUBuffer, mut=True], num_bindings: UInt32) -> None]()(render_pass, first_slot, storage_buffers, num_bindings)
 
 
-fn sdl_draw_gpu_indexed_primitives(render_pass: Ptr[SDL_GPURenderPass, mut=True], num_indices: UInt32, num_instances: UInt32, first_index: UInt32, vertex_offset: Int32, first_instance: UInt32) -> None:
+fn draw_gpu_indexed_primitives(render_pass: Ptr[GPURenderPass, mut=True], num_indices: UInt32, num_instances: UInt32, first_index: UInt32, vertex_offset: Int32, first_instance: UInt32) -> None:
     """Draws data using bound graphics state with an index buffer and instancing
     enabled.
 
@@ -3509,10 +3509,10 @@ fn sdl_draw_gpu_indexed_primitives(render_pass: Ptr[SDL_GPURenderPass, mut=True]
     Docs: https://wiki.libsdl.org/SDL3/SDL_DrawGPUIndexedPrimitives.
     """
 
-    return _get_dylib_function[lib, "SDL_DrawGPUIndexedPrimitives", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], num_indices: UInt32, num_instances: UInt32, first_index: UInt32, vertex_offset: Int32, first_instance: UInt32) -> None]()(render_pass, num_indices, num_instances, first_index, vertex_offset, first_instance)
+    return _get_dylib_function[lib, "SDL_DrawGPUIndexedPrimitives", fn (render_pass: Ptr[GPURenderPass, mut=True], num_indices: UInt32, num_instances: UInt32, first_index: UInt32, vertex_offset: Int32, first_instance: UInt32) -> None]()(render_pass, num_indices, num_instances, first_index, vertex_offset, first_instance)
 
 
-fn sdl_draw_gpu_primitives(render_pass: Ptr[SDL_GPURenderPass, mut=True], num_vertices: UInt32, num_instances: UInt32, first_vertex: UInt32, first_instance: UInt32) -> None:
+fn draw_gpu_primitives(render_pass: Ptr[GPURenderPass, mut=True], num_vertices: UInt32, num_instances: UInt32, first_vertex: UInt32, first_instance: UInt32) -> None:
     """Draws data using bound graphics state.
 
     You must not call this function before binding a graphics pipeline.
@@ -3534,10 +3534,10 @@ fn sdl_draw_gpu_primitives(render_pass: Ptr[SDL_GPURenderPass, mut=True], num_ve
     Docs: https://wiki.libsdl.org/SDL3/SDL_DrawGPUPrimitives.
     """
 
-    return _get_dylib_function[lib, "SDL_DrawGPUPrimitives", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], num_vertices: UInt32, num_instances: UInt32, first_vertex: UInt32, first_instance: UInt32) -> None]()(render_pass, num_vertices, num_instances, first_vertex, first_instance)
+    return _get_dylib_function[lib, "SDL_DrawGPUPrimitives", fn (render_pass: Ptr[GPURenderPass, mut=True], num_vertices: UInt32, num_instances: UInt32, first_vertex: UInt32, first_instance: UInt32) -> None]()(render_pass, num_vertices, num_instances, first_vertex, first_instance)
 
 
-fn sdl_draw_gpu_primitives_indirect(render_pass: Ptr[SDL_GPURenderPass, mut=True], buffer: Ptr[SDL_GPUBuffer, mut=True], offset: UInt32, draw_count: UInt32) -> None:
+fn draw_gpu_primitives_indirect(render_pass: Ptr[GPURenderPass, mut=True], buffer: Ptr[GPUBuffer, mut=True], offset: UInt32, draw_count: UInt32) -> None:
     """Draws data using bound graphics state and with draw parameters set from a
     buffer.
 
@@ -3555,10 +3555,10 @@ fn sdl_draw_gpu_primitives_indirect(render_pass: Ptr[SDL_GPURenderPass, mut=True
     Docs: https://wiki.libsdl.org/SDL3/SDL_DrawGPUPrimitivesIndirect.
     """
 
-    return _get_dylib_function[lib, "SDL_DrawGPUPrimitivesIndirect", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], buffer: Ptr[SDL_GPUBuffer, mut=True], offset: UInt32, draw_count: UInt32) -> None]()(render_pass, buffer, offset, draw_count)
+    return _get_dylib_function[lib, "SDL_DrawGPUPrimitivesIndirect", fn (render_pass: Ptr[GPURenderPass, mut=True], buffer: Ptr[GPUBuffer, mut=True], offset: UInt32, draw_count: UInt32) -> None]()(render_pass, buffer, offset, draw_count)
 
 
-fn sdl_draw_gpu_indexed_primitives_indirect(render_pass: Ptr[SDL_GPURenderPass, mut=True], buffer: Ptr[SDL_GPUBuffer, mut=True], offset: UInt32, draw_count: UInt32) -> None:
+fn draw_gpu_indexed_primitives_indirect(render_pass: Ptr[GPURenderPass, mut=True], buffer: Ptr[GPUBuffer, mut=True], offset: UInt32, draw_count: UInt32) -> None:
     """Draws data using bound graphics state with an index buffer enabled and with
     draw parameters set from a buffer.
 
@@ -3576,10 +3576,10 @@ fn sdl_draw_gpu_indexed_primitives_indirect(render_pass: Ptr[SDL_GPURenderPass, 
     Docs: https://wiki.libsdl.org/SDL3/SDL_DrawGPUIndexedPrimitivesIndirect.
     """
 
-    return _get_dylib_function[lib, "SDL_DrawGPUIndexedPrimitivesIndirect", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True], buffer: Ptr[SDL_GPUBuffer, mut=True], offset: UInt32, draw_count: UInt32) -> None]()(render_pass, buffer, offset, draw_count)
+    return _get_dylib_function[lib, "SDL_DrawGPUIndexedPrimitivesIndirect", fn (render_pass: Ptr[GPURenderPass, mut=True], buffer: Ptr[GPUBuffer, mut=True], offset: UInt32, draw_count: UInt32) -> None]()(render_pass, buffer, offset, draw_count)
 
 
-fn sdl_end_gpu_render_pass(render_pass: Ptr[SDL_GPURenderPass, mut=True]) -> None:
+fn end_gpu_render_pass(render_pass: Ptr[GPURenderPass, mut=True]) -> None:
     """Ends the given render pass.
 
     All bound graphics state on the render pass command buffer is unset. The
@@ -3591,10 +3591,10 @@ fn sdl_end_gpu_render_pass(render_pass: Ptr[SDL_GPURenderPass, mut=True]) -> Non
     Docs: https://wiki.libsdl.org/SDL3/SDL_EndGPURenderPass.
     """
 
-    return _get_dylib_function[lib, "SDL_EndGPURenderPass", fn (render_pass: Ptr[SDL_GPURenderPass, mut=True]) -> None]()(render_pass)
+    return _get_dylib_function[lib, "SDL_EndGPURenderPass", fn (render_pass: Ptr[GPURenderPass, mut=True]) -> None]()(render_pass)
 
 
-fn sdl_begin_gpu_compute_pass(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], storage_texture_bindings: Ptr[SDL_GPUStorageTextureReadWriteBinding, mut=False], num_storage_texture_bindings: UInt32, storage_buffer_bindings: Ptr[SDL_GPUStorageBufferReadWriteBinding, mut=False], num_storage_buffer_bindings: UInt32) -> Ptr[SDL_GPUComputePass, mut=True]:
+fn begin_gpu_compute_pass(command_buffer: Ptr[GPUCommandBuffer, mut=True], storage_texture_bindings: Ptr[GPUStorageTextureReadWriteBinding, mut=False], num_storage_texture_bindings: UInt32, storage_buffer_bindings: Ptr[GPUStorageBufferReadWriteBinding, mut=False], num_storage_buffer_bindings: UInt32) -> Ptr[GPUComputePass, mut=True]:
     """Begins a compute pass on a command buffer.
 
     A compute pass is defined by a set of texture subresources and buffers that
@@ -3633,10 +3633,10 @@ fn sdl_begin_gpu_compute_pass(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True
     Docs: https://wiki.libsdl.org/SDL3/SDL_BeginGPUComputePass.
     """
 
-    return _get_dylib_function[lib, "SDL_BeginGPUComputePass", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], storage_texture_bindings: Ptr[SDL_GPUStorageTextureReadWriteBinding, mut=False], num_storage_texture_bindings: UInt32, storage_buffer_bindings: Ptr[SDL_GPUStorageBufferReadWriteBinding, mut=False], num_storage_buffer_bindings: UInt32) -> Ptr[SDL_GPUComputePass, mut=True]]()(command_buffer, storage_texture_bindings, num_storage_texture_bindings, storage_buffer_bindings, num_storage_buffer_bindings)
+    return _get_dylib_function[lib, "SDL_BeginGPUComputePass", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], storage_texture_bindings: Ptr[GPUStorageTextureReadWriteBinding, mut=False], num_storage_texture_bindings: UInt32, storage_buffer_bindings: Ptr[GPUStorageBufferReadWriteBinding, mut=False], num_storage_buffer_bindings: UInt32) -> Ptr[GPUComputePass, mut=True]]()(command_buffer, storage_texture_bindings, num_storage_texture_bindings, storage_buffer_bindings, num_storage_buffer_bindings)
 
 
-fn sdl_bind_gpu_compute_pipeline(compute_pass: Ptr[SDL_GPUComputePass, mut=True], compute_pipeline: Ptr[SDL_GPUComputePipeline, mut=True]) -> None:
+fn bind_gpu_compute_pipeline(compute_pass: Ptr[GPUComputePass, mut=True], compute_pipeline: Ptr[GPUComputePipeline, mut=True]) -> None:
     """Binds a compute pipeline on a command buffer for use in compute dispatch.
 
     Args:
@@ -3646,10 +3646,10 @@ fn sdl_bind_gpu_compute_pipeline(compute_pass: Ptr[SDL_GPUComputePass, mut=True]
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUComputePipeline.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUComputePipeline", fn (compute_pass: Ptr[SDL_GPUComputePass, mut=True], compute_pipeline: Ptr[SDL_GPUComputePipeline, mut=True]) -> None]()(compute_pass, compute_pipeline)
+    return _get_dylib_function[lib, "SDL_BindGPUComputePipeline", fn (compute_pass: Ptr[GPUComputePass, mut=True], compute_pipeline: Ptr[GPUComputePipeline, mut=True]) -> None]()(compute_pass, compute_pipeline)
 
 
-fn sdl_bind_gpu_compute_samplers(compute_pass: Ptr[SDL_GPUComputePass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[SDL_GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None:
+fn bind_gpu_compute_samplers(compute_pass: Ptr[GPUComputePass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None:
     """Binds texture-sampler pairs for use on the compute shader.
 
     The textures must have been created with SDL_GPU_TEXTUREUSAGE_SAMPLER.
@@ -3668,10 +3668,10 @@ fn sdl_bind_gpu_compute_samplers(compute_pass: Ptr[SDL_GPUComputePass, mut=True]
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUComputeSamplers.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUComputeSamplers", fn (compute_pass: Ptr[SDL_GPUComputePass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[SDL_GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None]()(compute_pass, first_slot, texture_sampler_bindings, num_bindings)
+    return _get_dylib_function[lib, "SDL_BindGPUComputeSamplers", fn (compute_pass: Ptr[GPUComputePass, mut=True], first_slot: UInt32, texture_sampler_bindings: Ptr[GPUTextureSamplerBinding, mut=False], num_bindings: UInt32) -> None]()(compute_pass, first_slot, texture_sampler_bindings, num_bindings)
 
 
-fn sdl_bind_gpu_compute_storage_textures(compute_pass: Ptr[SDL_GPUComputePass, mut=True], first_slot: UInt32, storage_textures: Ptr[SDL_GPUTexture, mut=True], num_bindings: UInt32) -> None:
+fn bind_gpu_compute_storage_textures(compute_pass: Ptr[GPUComputePass, mut=True], first_slot: UInt32, storage_textures: Ptr[GPUTexture, mut=True], num_bindings: UInt32) -> None:
     """Binds storage textures as readonly for use on the compute pipeline.
 
     These textures must have been created with
@@ -3689,10 +3689,10 @@ fn sdl_bind_gpu_compute_storage_textures(compute_pass: Ptr[SDL_GPUComputePass, m
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUComputeStorageTextures.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUComputeStorageTextures", fn (compute_pass: Ptr[SDL_GPUComputePass, mut=True], first_slot: UInt32, storage_textures: Ptr[SDL_GPUTexture, mut=True], num_bindings: UInt32) -> None]()(compute_pass, first_slot, storage_textures, num_bindings)
+    return _get_dylib_function[lib, "SDL_BindGPUComputeStorageTextures", fn (compute_pass: Ptr[GPUComputePass, mut=True], first_slot: UInt32, storage_textures: Ptr[GPUTexture, mut=True], num_bindings: UInt32) -> None]()(compute_pass, first_slot, storage_textures, num_bindings)
 
 
-fn sdl_bind_gpu_compute_storage_buffers(compute_pass: Ptr[SDL_GPUComputePass, mut=True], first_slot: UInt32, storage_buffers: Ptr[SDL_GPUBuffer, mut=True], num_bindings: UInt32) -> None:
+fn bind_gpu_compute_storage_buffers(compute_pass: Ptr[GPUComputePass, mut=True], first_slot: UInt32, storage_buffers: Ptr[GPUBuffer, mut=True], num_bindings: UInt32) -> None:
     """Binds storage buffers as readonly for use on the compute pipeline.
 
     These buffers must have been created with
@@ -3710,10 +3710,10 @@ fn sdl_bind_gpu_compute_storage_buffers(compute_pass: Ptr[SDL_GPUComputePass, mu
     Docs: https://wiki.libsdl.org/SDL3/SDL_BindGPUComputeStorageBuffers.
     """
 
-    return _get_dylib_function[lib, "SDL_BindGPUComputeStorageBuffers", fn (compute_pass: Ptr[SDL_GPUComputePass, mut=True], first_slot: UInt32, storage_buffers: Ptr[SDL_GPUBuffer, mut=True], num_bindings: UInt32) -> None]()(compute_pass, first_slot, storage_buffers, num_bindings)
+    return _get_dylib_function[lib, "SDL_BindGPUComputeStorageBuffers", fn (compute_pass: Ptr[GPUComputePass, mut=True], first_slot: UInt32, storage_buffers: Ptr[GPUBuffer, mut=True], num_bindings: UInt32) -> None]()(compute_pass, first_slot, storage_buffers, num_bindings)
 
 
-fn sdl_dispatch_gpu_compute(compute_pass: Ptr[SDL_GPUComputePass, mut=True], groupcount_x: UInt32, groupcount_y: UInt32, groupcount_z: UInt32) -> None:
+fn dispatch_gpu_compute(compute_pass: Ptr[GPUComputePass, mut=True], groupcount_x: UInt32, groupcount_y: UInt32, groupcount_z: UInt32) -> None:
     """Dispatches compute work.
 
     You must not call this function before binding a compute pipeline.
@@ -3735,10 +3735,10 @@ fn sdl_dispatch_gpu_compute(compute_pass: Ptr[SDL_GPUComputePass, mut=True], gro
     Docs: https://wiki.libsdl.org/SDL3/SDL_DispatchGPUCompute.
     """
 
-    return _get_dylib_function[lib, "SDL_DispatchGPUCompute", fn (compute_pass: Ptr[SDL_GPUComputePass, mut=True], groupcount_x: UInt32, groupcount_y: UInt32, groupcount_z: UInt32) -> None]()(compute_pass, groupcount_x, groupcount_y, groupcount_z)
+    return _get_dylib_function[lib, "SDL_DispatchGPUCompute", fn (compute_pass: Ptr[GPUComputePass, mut=True], groupcount_x: UInt32, groupcount_y: UInt32, groupcount_z: UInt32) -> None]()(compute_pass, groupcount_x, groupcount_y, groupcount_z)
 
 
-fn sdl_dispatch_gpu_compute_indirect(compute_pass: Ptr[SDL_GPUComputePass, mut=True], buffer: Ptr[SDL_GPUBuffer, mut=True], offset: UInt32) -> None:
+fn dispatch_gpu_compute_indirect(compute_pass: Ptr[GPUComputePass, mut=True], buffer: Ptr[GPUBuffer, mut=True], offset: UInt32) -> None:
     """Dispatches compute work with parameters set from a buffer.
 
     The buffer layout should match the layout of
@@ -3758,10 +3758,10 @@ fn sdl_dispatch_gpu_compute_indirect(compute_pass: Ptr[SDL_GPUComputePass, mut=T
     Docs: https://wiki.libsdl.org/SDL3/SDL_DispatchGPUComputeIndirect.
     """
 
-    return _get_dylib_function[lib, "SDL_DispatchGPUComputeIndirect", fn (compute_pass: Ptr[SDL_GPUComputePass, mut=True], buffer: Ptr[SDL_GPUBuffer, mut=True], offset: UInt32) -> None]()(compute_pass, buffer, offset)
+    return _get_dylib_function[lib, "SDL_DispatchGPUComputeIndirect", fn (compute_pass: Ptr[GPUComputePass, mut=True], buffer: Ptr[GPUBuffer, mut=True], offset: UInt32) -> None]()(compute_pass, buffer, offset)
 
 
-fn sdl_end_gpu_compute_pass(compute_pass: Ptr[SDL_GPUComputePass, mut=True]) -> None:
+fn end_gpu_compute_pass(compute_pass: Ptr[GPUComputePass, mut=True]) -> None:
     """Ends the current compute pass.
 
     All bound compute state on the command buffer is unset. The compute pass
@@ -3773,10 +3773,10 @@ fn sdl_end_gpu_compute_pass(compute_pass: Ptr[SDL_GPUComputePass, mut=True]) -> 
     Docs: https://wiki.libsdl.org/SDL3/SDL_EndGPUComputePass.
     """
 
-    return _get_dylib_function[lib, "SDL_EndGPUComputePass", fn (compute_pass: Ptr[SDL_GPUComputePass, mut=True]) -> None]()(compute_pass)
+    return _get_dylib_function[lib, "SDL_EndGPUComputePass", fn (compute_pass: Ptr[GPUComputePass, mut=True]) -> None]()(compute_pass)
 
 
-fn sdl_map_gpu_transfer_buffer(device: Ptr[SDL_GPUDevice, mut=True], transfer_buffer: Ptr[SDL_GPUTransferBuffer, mut=True], cycle: Bool) -> Ptr[NoneType, mut=True]:
+fn map_gpu_transfer_buffer(device: Ptr[GPUDevice, mut=True], transfer_buffer: Ptr[GPUTransferBuffer, mut=True], cycle: Bool) -> Ptr[NoneType, mut=True]:
     """Maps a transfer buffer into application address space.
 
     You must unmap the transfer buffer before encoding upload commands. The
@@ -3795,10 +3795,10 @@ fn sdl_map_gpu_transfer_buffer(device: Ptr[SDL_GPUDevice, mut=True], transfer_bu
     Docs: https://wiki.libsdl.org/SDL3/SDL_MapGPUTransferBuffer.
     """
 
-    return _get_dylib_function[lib, "SDL_MapGPUTransferBuffer", fn (device: Ptr[SDL_GPUDevice, mut=True], transfer_buffer: Ptr[SDL_GPUTransferBuffer, mut=True], cycle: Bool) -> Ptr[NoneType, mut=True]]()(device, transfer_buffer, cycle)
+    return _get_dylib_function[lib, "SDL_MapGPUTransferBuffer", fn (device: Ptr[GPUDevice, mut=True], transfer_buffer: Ptr[GPUTransferBuffer, mut=True], cycle: Bool) -> Ptr[NoneType, mut=True]]()(device, transfer_buffer, cycle)
 
 
-fn sdl_unmap_gpu_transfer_buffer(device: Ptr[SDL_GPUDevice, mut=True], transfer_buffer: Ptr[SDL_GPUTransferBuffer, mut=True]) -> None:
+fn unmap_gpu_transfer_buffer(device: Ptr[GPUDevice, mut=True], transfer_buffer: Ptr[GPUTransferBuffer, mut=True]) -> None:
     """Unmaps a previously mapped transfer buffer.
 
     Args:
@@ -3808,10 +3808,10 @@ fn sdl_unmap_gpu_transfer_buffer(device: Ptr[SDL_GPUDevice, mut=True], transfer_
     Docs: https://wiki.libsdl.org/SDL3/SDL_UnmapGPUTransferBuffer.
     """
 
-    return _get_dylib_function[lib, "SDL_UnmapGPUTransferBuffer", fn (device: Ptr[SDL_GPUDevice, mut=True], transfer_buffer: Ptr[SDL_GPUTransferBuffer, mut=True]) -> None]()(device, transfer_buffer)
+    return _get_dylib_function[lib, "SDL_UnmapGPUTransferBuffer", fn (device: Ptr[GPUDevice, mut=True], transfer_buffer: Ptr[GPUTransferBuffer, mut=True]) -> None]()(device, transfer_buffer)
 
 
-fn sdl_begin_gpu_copy_pass(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]) -> Ptr[SDL_GPUCopyPass, mut=True]:
+fn begin_gpu_copy_pass(command_buffer: Ptr[GPUCommandBuffer, mut=True]) -> Ptr[GPUCopyPass, mut=True]:
     """Begins a copy pass on a command buffer.
 
     All operations related to copying to or from buffers or textures take place
@@ -3827,10 +3827,10 @@ fn sdl_begin_gpu_copy_pass(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]) 
     Docs: https://wiki.libsdl.org/SDL3/SDL_BeginGPUCopyPass.
     """
 
-    return _get_dylib_function[lib, "SDL_BeginGPUCopyPass", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]) -> Ptr[SDL_GPUCopyPass, mut=True]]()(command_buffer)
+    return _get_dylib_function[lib, "SDL_BeginGPUCopyPass", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True]) -> Ptr[GPUCopyPass, mut=True]]()(command_buffer)
 
 
-fn sdl_upload_to_gpu_texture(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUTextureTransferInfo, mut=False], destination: Ptr[SDL_GPUTextureRegion, mut=False], cycle: Bool) -> None:
+fn upload_to_gpu_texture(copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUTextureTransferInfo, mut=False], destination: Ptr[GPUTextureRegion, mut=False], cycle: Bool) -> None:
     """Uploads data from a transfer buffer to a texture.
 
     The upload occurs on the GPU timeline. You may assume that the upload has
@@ -3849,10 +3849,10 @@ fn sdl_upload_to_gpu_texture(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: 
     Docs: https://wiki.libsdl.org/SDL3/SDL_UploadToGPUTexture.
     """
 
-    return _get_dylib_function[lib, "SDL_UploadToGPUTexture", fn (copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUTextureTransferInfo, mut=False], destination: Ptr[SDL_GPUTextureRegion, mut=False], cycle: Bool) -> None]()(copy_pass, source, destination, cycle)
+    return _get_dylib_function[lib, "SDL_UploadToGPUTexture", fn (copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUTextureTransferInfo, mut=False], destination: Ptr[GPUTextureRegion, mut=False], cycle: Bool) -> None]()(copy_pass, source, destination, cycle)
 
 
-fn sdl_upload_to_gpu_buffer(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUTransferBufferLocation, mut=False], destination: Ptr[SDL_GPUBufferRegion, mut=False], cycle: Bool) -> None:
+fn upload_to_gpu_buffer(copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUTransferBufferLocation, mut=False], destination: Ptr[GPUBufferRegion, mut=False], cycle: Bool) -> None:
     """Uploads data from a transfer buffer to a buffer.
 
     The upload occurs on the GPU timeline. You may assume that the upload has
@@ -3868,10 +3868,10 @@ fn sdl_upload_to_gpu_buffer(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: P
     Docs: https://wiki.libsdl.org/SDL3/SDL_UploadToGPUBuffer.
     """
 
-    return _get_dylib_function[lib, "SDL_UploadToGPUBuffer", fn (copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUTransferBufferLocation, mut=False], destination: Ptr[SDL_GPUBufferRegion, mut=False], cycle: Bool) -> None]()(copy_pass, source, destination, cycle)
+    return _get_dylib_function[lib, "SDL_UploadToGPUBuffer", fn (copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUTransferBufferLocation, mut=False], destination: Ptr[GPUBufferRegion, mut=False], cycle: Bool) -> None]()(copy_pass, source, destination, cycle)
 
 
-fn sdl_copy_gpu_texture_to_texture(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUTextureLocation, mut=False], destination: Ptr[SDL_GPUTextureLocation, mut=False], w: UInt32, h: UInt32, d: UInt32, cycle: Bool) -> None:
+fn copy_gpu_texture_to_texture(copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUTextureLocation, mut=False], destination: Ptr[GPUTextureLocation, mut=False], w: UInt32, h: UInt32, d: UInt32, cycle: Bool) -> None:
     """Performs a texture-to-texture copy.
 
     This copy occurs on the GPU timeline. You may assume the copy has finished
@@ -3890,10 +3890,10 @@ fn sdl_copy_gpu_texture_to_texture(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], so
     Docs: https://wiki.libsdl.org/SDL3/SDL_CopyGPUTextureToTexture.
     """
 
-    return _get_dylib_function[lib, "SDL_CopyGPUTextureToTexture", fn (copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUTextureLocation, mut=False], destination: Ptr[SDL_GPUTextureLocation, mut=False], w: UInt32, h: UInt32, d: UInt32, cycle: Bool) -> None]()(copy_pass, source, destination, w, h, d, cycle)
+    return _get_dylib_function[lib, "SDL_CopyGPUTextureToTexture", fn (copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUTextureLocation, mut=False], destination: Ptr[GPUTextureLocation, mut=False], w: UInt32, h: UInt32, d: UInt32, cycle: Bool) -> None]()(copy_pass, source, destination, w, h, d, cycle)
 
 
-fn sdl_copy_gpu_buffer_to_buffer(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUBufferLocation, mut=False], destination: Ptr[SDL_GPUBufferLocation, mut=False], size: UInt32, cycle: Bool) -> None:
+fn copy_gpu_buffer_to_buffer(copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUBufferLocation, mut=False], destination: Ptr[GPUBufferLocation, mut=False], size: UInt32, cycle: Bool) -> None:
     """Performs a buffer-to-buffer copy.
 
     This copy occurs on the GPU timeline. You may assume the copy has finished
@@ -3910,10 +3910,10 @@ fn sdl_copy_gpu_buffer_to_buffer(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], sour
     Docs: https://wiki.libsdl.org/SDL3/SDL_CopyGPUBufferToBuffer.
     """
 
-    return _get_dylib_function[lib, "SDL_CopyGPUBufferToBuffer", fn (copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUBufferLocation, mut=False], destination: Ptr[SDL_GPUBufferLocation, mut=False], size: UInt32, cycle: Bool) -> None]()(copy_pass, source, destination, size, cycle)
+    return _get_dylib_function[lib, "SDL_CopyGPUBufferToBuffer", fn (copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUBufferLocation, mut=False], destination: Ptr[GPUBufferLocation, mut=False], size: UInt32, cycle: Bool) -> None]()(copy_pass, source, destination, size, cycle)
 
 
-fn sdl_download_from_gpu_texture(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUTextureRegion, mut=False], destination: Ptr[SDL_GPUTextureTransferInfo, mut=False]) -> None:
+fn download_from_gpu_texture(copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUTextureRegion, mut=False], destination: Ptr[GPUTextureTransferInfo, mut=False]) -> None:
     """Copies data from a texture to a transfer buffer on the GPU timeline.
 
     This data is not guaranteed to be copied until the command buffer fence is
@@ -3928,10 +3928,10 @@ fn sdl_download_from_gpu_texture(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], sour
     Docs: https://wiki.libsdl.org/SDL3/SDL_DownloadFromGPUTexture.
     """
 
-    return _get_dylib_function[lib, "SDL_DownloadFromGPUTexture", fn (copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUTextureRegion, mut=False], destination: Ptr[SDL_GPUTextureTransferInfo, mut=False]) -> None]()(copy_pass, source, destination)
+    return _get_dylib_function[lib, "SDL_DownloadFromGPUTexture", fn (copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUTextureRegion, mut=False], destination: Ptr[GPUTextureTransferInfo, mut=False]) -> None]()(copy_pass, source, destination)
 
 
-fn sdl_download_from_gpu_buffer(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUBufferRegion, mut=False], destination: Ptr[SDL_GPUTransferBufferLocation, mut=False]) -> None:
+fn download_from_gpu_buffer(copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUBufferRegion, mut=False], destination: Ptr[GPUTransferBufferLocation, mut=False]) -> None:
     """Copies data from a buffer to a transfer buffer on the GPU timeline.
 
     This data is not guaranteed to be copied until the command buffer fence is
@@ -3945,10 +3945,10 @@ fn sdl_download_from_gpu_buffer(copy_pass: Ptr[SDL_GPUCopyPass, mut=True], sourc
     Docs: https://wiki.libsdl.org/SDL3/SDL_DownloadFromGPUBuffer.
     """
 
-    return _get_dylib_function[lib, "SDL_DownloadFromGPUBuffer", fn (copy_pass: Ptr[SDL_GPUCopyPass, mut=True], source: Ptr[SDL_GPUBufferRegion, mut=False], destination: Ptr[SDL_GPUTransferBufferLocation, mut=False]) -> None]()(copy_pass, source, destination)
+    return _get_dylib_function[lib, "SDL_DownloadFromGPUBuffer", fn (copy_pass: Ptr[GPUCopyPass, mut=True], source: Ptr[GPUBufferRegion, mut=False], destination: Ptr[GPUTransferBufferLocation, mut=False]) -> None]()(copy_pass, source, destination)
 
 
-fn sdl_end_gpu_copy_pass(copy_pass: Ptr[SDL_GPUCopyPass, mut=True]) -> None:
+fn end_gpu_copy_pass(copy_pass: Ptr[GPUCopyPass, mut=True]) -> None:
     """Ends the current copy pass.
 
     Args:
@@ -3957,10 +3957,10 @@ fn sdl_end_gpu_copy_pass(copy_pass: Ptr[SDL_GPUCopyPass, mut=True]) -> None:
     Docs: https://wiki.libsdl.org/SDL3/SDL_EndGPUCopyPass.
     """
 
-    return _get_dylib_function[lib, "SDL_EndGPUCopyPass", fn (copy_pass: Ptr[SDL_GPUCopyPass, mut=True]) -> None]()(copy_pass)
+    return _get_dylib_function[lib, "SDL_EndGPUCopyPass", fn (copy_pass: Ptr[GPUCopyPass, mut=True]) -> None]()(copy_pass)
 
 
-fn sdl_generate_mipmaps_for_gpu_texture(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], texture: Ptr[SDL_GPUTexture, mut=True]) -> None:
+fn generate_mipmaps_for_gpu_texture(command_buffer: Ptr[GPUCommandBuffer, mut=True], texture: Ptr[GPUTexture, mut=True]) -> None:
     """Generates mipmaps for the given texture.
 
     This function must not be called inside of any pass.
@@ -3972,10 +3972,10 @@ fn sdl_generate_mipmaps_for_gpu_texture(command_buffer: Ptr[SDL_GPUCommandBuffer
     Docs: https://wiki.libsdl.org/SDL3/SDL_GenerateMipmapsForGPUTexture.
     """
 
-    return _get_dylib_function[lib, "SDL_GenerateMipmapsForGPUTexture", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], texture: Ptr[SDL_GPUTexture, mut=True]) -> None]()(command_buffer, texture)
+    return _get_dylib_function[lib, "SDL_GenerateMipmapsForGPUTexture", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], texture: Ptr[GPUTexture, mut=True]) -> None]()(command_buffer, texture)
 
 
-fn sdl_blit_gpu_texture(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], info: Ptr[SDL_GPUBlitInfo, mut=False]) -> None:
+fn blit_gpu_texture(command_buffer: Ptr[GPUCommandBuffer, mut=True], info: Ptr[GPUBlitInfo, mut=False]) -> None:
     """Blits from a source texture region to a destination texture region.
 
     This function must not be called inside of any pass.
@@ -3987,10 +3987,10 @@ fn sdl_blit_gpu_texture(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], inf
     Docs: https://wiki.libsdl.org/SDL3/SDL_BlitGPUTexture.
     """
 
-    return _get_dylib_function[lib, "SDL_BlitGPUTexture", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], info: Ptr[SDL_GPUBlitInfo, mut=False]) -> None]()(command_buffer, info)
+    return _get_dylib_function[lib, "SDL_BlitGPUTexture", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], info: Ptr[GPUBlitInfo, mut=False]) -> None]()(command_buffer, info)
 
 
-fn sdl_window_supports_gpu_swapchain_composition(device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True], swapchain_composition: SDL_GPUSwapchainComposition) -> Bool:
+fn window_supports_gpu_swapchain_composition(device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True], swapchain_composition: GPUSwapchainComposition) -> Bool:
     """Determines whether a swapchain composition is supported by the window.
 
     The window must be claimed before calling this function.
@@ -4006,10 +4006,10 @@ fn sdl_window_supports_gpu_swapchain_composition(device: Ptr[SDL_GPUDevice, mut=
     Docs: https://wiki.libsdl.org/SDL3/SDL_WindowSupportsGPUSwapchainComposition.
     """
 
-    return _get_dylib_function[lib, "SDL_WindowSupportsGPUSwapchainComposition", fn (device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True], swapchain_composition: SDL_GPUSwapchainComposition) -> Bool]()(device, window, swapchain_composition)
+    return _get_dylib_function[lib, "SDL_WindowSupportsGPUSwapchainComposition", fn (device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True], swapchain_composition: GPUSwapchainComposition) -> Bool]()(device, window, swapchain_composition)
 
 
-fn sdl_window_supports_gpu_present_mode(device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True], present_mode: SDL_GPUPresentMode) -> Bool:
+fn window_supports_gpu_present_mode(device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True], present_mode: GPUPresentMode) -> Bool:
     """Determines whether a presentation mode is supported by the window.
 
     The window must be claimed before calling this function.
@@ -4025,10 +4025,10 @@ fn sdl_window_supports_gpu_present_mode(device: Ptr[SDL_GPUDevice, mut=True], wi
     Docs: https://wiki.libsdl.org/SDL3/SDL_WindowSupportsGPUPresentMode.
     """
 
-    return _get_dylib_function[lib, "SDL_WindowSupportsGPUPresentMode", fn (device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True], present_mode: SDL_GPUPresentMode) -> Bool]()(device, window, present_mode)
+    return _get_dylib_function[lib, "SDL_WindowSupportsGPUPresentMode", fn (device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True], present_mode: GPUPresentMode) -> Bool]()(device, window, present_mode)
 
 
-fn sdl_claim_window_for_gpu_device(device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True]) raises:
+fn claim_window_for_gpu_device(device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True]) raises:
     """Claims a window, creating a swapchain structure for it.
 
     This must be called before SDL_AcquireGPUSwapchainTexture is called using
@@ -4055,12 +4055,12 @@ fn sdl_claim_window_for_gpu_device(device: Ptr[SDL_GPUDevice, mut=True], window:
     Docs: https://wiki.libsdl.org/SDL3/SDL_ClaimWindowForGPUDevice.
     """
 
-    ret = _get_dylib_function[lib, "SDL_ClaimWindowForGPUDevice", fn (device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True]) -> Bool]()(device, window)
+    ret = _get_dylib_function[lib, "SDL_ClaimWindowForGPUDevice", fn (device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True]) -> Bool]()(device, window)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_release_window_from_gpu_device(device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True]) -> None:
+fn release_window_from_gpu_device(device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True]) -> None:
     """Unclaims a window, destroying its swapchain structure.
 
     Args:
@@ -4070,10 +4070,10 @@ fn sdl_release_window_from_gpu_device(device: Ptr[SDL_GPUDevice, mut=True], wind
     Docs: https://wiki.libsdl.org/SDL3/SDL_ReleaseWindowFromGPUDevice.
     """
 
-    return _get_dylib_function[lib, "SDL_ReleaseWindowFromGPUDevice", fn (device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True]) -> None]()(device, window)
+    return _get_dylib_function[lib, "SDL_ReleaseWindowFromGPUDevice", fn (device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True]) -> None]()(device, window)
 
 
-fn sdl_set_gpu_swapchain_parameters(device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True], swapchain_composition: SDL_GPUSwapchainComposition, present_mode: SDL_GPUPresentMode) -> Bool:
+fn set_gpu_swapchain_parameters(device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True], swapchain_composition: GPUSwapchainComposition, present_mode: GPUPresentMode) -> Bool:
     """Changes the swapchain parameters for the given claimed window.
 
     This function will fail if the requested present mode or swapchain
@@ -4097,10 +4097,10 @@ fn sdl_set_gpu_swapchain_parameters(device: Ptr[SDL_GPUDevice, mut=True], window
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetGPUSwapchainParameters.
     """
 
-    return _get_dylib_function[lib, "SDL_SetGPUSwapchainParameters", fn (device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True], swapchain_composition: SDL_GPUSwapchainComposition, present_mode: SDL_GPUPresentMode) -> Bool]()(device, window, swapchain_composition, present_mode)
+    return _get_dylib_function[lib, "SDL_SetGPUSwapchainParameters", fn (device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True], swapchain_composition: GPUSwapchainComposition, present_mode: GPUPresentMode) -> Bool]()(device, window, swapchain_composition, present_mode)
 
 
-fn sdl_set_gpu_allowed_frames_in_flight(device: Ptr[SDL_GPUDevice, mut=True], allowed_frames_in_flight: UInt32) -> Bool:
+fn set_gpu_allowed_frames_in_flight(device: Ptr[GPUDevice, mut=True], allowed_frames_in_flight: UInt32) -> Bool:
     """Configures the maximum allowed number of frames in flight.
 
     The default value when the device is created is 2. This means that after
@@ -4129,10 +4129,10 @@ fn sdl_set_gpu_allowed_frames_in_flight(device: Ptr[SDL_GPUDevice, mut=True], al
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetGPUAllowedFramesInFlight.
     """
 
-    return _get_dylib_function[lib, "SDL_SetGPUAllowedFramesInFlight", fn (device: Ptr[SDL_GPUDevice, mut=True], allowed_frames_in_flight: UInt32) -> Bool]()(device, allowed_frames_in_flight)
+    return _get_dylib_function[lib, "SDL_SetGPUAllowedFramesInFlight", fn (device: Ptr[GPUDevice, mut=True], allowed_frames_in_flight: UInt32) -> Bool]()(device, allowed_frames_in_flight)
 
 
-fn sdl_get_gpu_swapchain_texture_format(device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True]) -> SDL_GPUTextureFormat:
+fn get_gpu_swapchain_texture_format(device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True]) -> GPUTextureFormat:
     """Obtains the texture format of the swapchain for the given window.
 
     Note that this format can change if the swapchain parameters change.
@@ -4147,10 +4147,10 @@ fn sdl_get_gpu_swapchain_texture_format(device: Ptr[SDL_GPUDevice, mut=True], wi
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetGPUSwapchainTextureFormat.
     """
 
-    return _get_dylib_function[lib, "SDL_GetGPUSwapchainTextureFormat", fn (device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True]) -> SDL_GPUTextureFormat]()(device, window)
+    return _get_dylib_function[lib, "SDL_GetGPUSwapchainTextureFormat", fn (device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True]) -> GPUTextureFormat]()(device, window)
 
 
-fn sdl_acquire_gpu_swapchain_texture(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], window: Ptr[SDL_Window, mut=True], swapchain_texture: Ptr[Ptr[SDL_GPUTexture, mut=True], mut=True], swapchain_texture_width: Ptr[UInt32, mut=True], swapchain_texture_height: Ptr[UInt32, mut=True]) raises:
+fn acquire_gpu_swapchain_texture(command_buffer: Ptr[GPUCommandBuffer, mut=True], window: Ptr[Window, mut=True], swapchain_texture: Ptr[Ptr[GPUTexture, mut=True], mut=True], swapchain_texture_width: Ptr[UInt32, mut=True], swapchain_texture_height: Ptr[UInt32, mut=True]) raises:
     """Acquire a texture to use in presentation.
 
     When a swapchain texture is acquired on a command buffer, it will
@@ -4192,12 +4192,12 @@ fn sdl_acquire_gpu_swapchain_texture(command_buffer: Ptr[SDL_GPUCommandBuffer, m
     Docs: https://wiki.libsdl.org/SDL3/SDL_AcquireGPUSwapchainTexture.
     """
 
-    ret = _get_dylib_function[lib, "SDL_AcquireGPUSwapchainTexture", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], window: Ptr[SDL_Window, mut=True], swapchain_texture: Ptr[Ptr[SDL_GPUTexture, mut=True], mut=True], swapchain_texture_width: Ptr[UInt32, mut=True], swapchain_texture_height: Ptr[UInt32, mut=True]) -> Bool]()(command_buffer, window, swapchain_texture, swapchain_texture_width, swapchain_texture_height)
+    ret = _get_dylib_function[lib, "SDL_AcquireGPUSwapchainTexture", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], window: Ptr[Window, mut=True], swapchain_texture: Ptr[Ptr[GPUTexture, mut=True], mut=True], swapchain_texture_width: Ptr[UInt32, mut=True], swapchain_texture_height: Ptr[UInt32, mut=True]) -> Bool]()(command_buffer, window, swapchain_texture, swapchain_texture_width, swapchain_texture_height)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_wait_for_gpu_swapchain(device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True]) raises:
+fn wait_for_gpu_swapchain(device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True]) raises:
     """Blocks the thread until a swapchain texture is available to be acquired.
 
     Args:
@@ -4215,12 +4215,12 @@ fn sdl_wait_for_gpu_swapchain(device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[
     Docs: https://wiki.libsdl.org/SDL3/SDL_WaitForGPUSwapchain.
     """
 
-    ret = _get_dylib_function[lib, "SDL_WaitForGPUSwapchain", fn (device: Ptr[SDL_GPUDevice, mut=True], window: Ptr[SDL_Window, mut=True]) -> Bool]()(device, window)
+    ret = _get_dylib_function[lib, "SDL_WaitForGPUSwapchain", fn (device: Ptr[GPUDevice, mut=True], window: Ptr[Window, mut=True]) -> Bool]()(device, window)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_wait_and_acquire_gpu_swapchain_texture(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], window: Ptr[SDL_Window, mut=True], swapchain_texture: Ptr[Ptr[SDL_GPUTexture, mut=True], mut=True], swapchain_texture_width: Ptr[UInt32, mut=True], swapchain_texture_height: Ptr[UInt32, mut=True]) raises:
+fn wait_and_acquire_gpu_swapchain_texture(command_buffer: Ptr[GPUCommandBuffer, mut=True], window: Ptr[Window, mut=True], swapchain_texture: Ptr[Ptr[GPUTexture, mut=True], mut=True], swapchain_texture_width: Ptr[UInt32, mut=True], swapchain_texture_height: Ptr[UInt32, mut=True]) raises:
     """Blocks the thread until a swapchain texture is available to be acquired,
     and then acquires it.
 
@@ -4263,12 +4263,12 @@ fn sdl_wait_and_acquire_gpu_swapchain_texture(command_buffer: Ptr[SDL_GPUCommand
     Docs: https://wiki.libsdl.org/SDL3/SDL_WaitAndAcquireGPUSwapchainTexture.
     """
 
-    ret = _get_dylib_function[lib, "SDL_WaitAndAcquireGPUSwapchainTexture", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], window: Ptr[SDL_Window, mut=True], swapchain_texture: Ptr[Ptr[SDL_GPUTexture, mut=True], mut=True], swapchain_texture_width: Ptr[UInt32, mut=True], swapchain_texture_height: Ptr[UInt32, mut=True]) -> Bool]()(command_buffer, window, swapchain_texture, swapchain_texture_width, swapchain_texture_height)
+    ret = _get_dylib_function[lib, "SDL_WaitAndAcquireGPUSwapchainTexture", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], window: Ptr[Window, mut=True], swapchain_texture: Ptr[Ptr[GPUTexture, mut=True], mut=True], swapchain_texture_width: Ptr[UInt32, mut=True], swapchain_texture_height: Ptr[UInt32, mut=True]) -> Bool]()(command_buffer, window, swapchain_texture, swapchain_texture_width, swapchain_texture_height)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_submit_gpu_command_buffer(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]) raises:
+fn submit_gpu_command_buffer(command_buffer: Ptr[GPUCommandBuffer, mut=True]) raises:
     """Submits a command buffer so its commands can be processed on the GPU.
 
     It is invalid to use the command buffer after this is called.
@@ -4288,12 +4288,12 @@ fn sdl_submit_gpu_command_buffer(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=T
     Docs: https://wiki.libsdl.org/SDL3/SDL_SubmitGPUCommandBuffer.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SubmitGPUCommandBuffer", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]) -> Bool]()(command_buffer)
+    ret = _get_dylib_function[lib, "SDL_SubmitGPUCommandBuffer", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True]) -> Bool]()(command_buffer)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_submit_gpu_command_buffer_and_acquire_fence(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True], out ret: Ptr[SDL_GPUFence, mut=True]) raises:
+fn submit_gpu_command_buffer_and_acquire_fence(command_buffer: Ptr[GPUCommandBuffer, mut=True], out ret: Ptr[GPUFence, mut=True]) raises:
     """Submits a command buffer so its commands can be processed on the GPU, and
     acquires a fence associated with the command buffer.
 
@@ -4315,12 +4315,12 @@ fn sdl_submit_gpu_command_buffer_and_acquire_fence(command_buffer: Ptr[SDL_GPUCo
     Docs: https://wiki.libsdl.org/SDL3/SDL_SubmitGPUCommandBufferAndAcquireFence.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SubmitGPUCommandBufferAndAcquireFence", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]) -> Ptr[SDL_GPUFence, mut=True]]()(command_buffer)
+    ret = _get_dylib_function[lib, "SDL_SubmitGPUCommandBufferAndAcquireFence", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True]) -> Ptr[GPUFence, mut=True]]()(command_buffer)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_cancel_gpu_command_buffer(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]) raises:
+fn cancel_gpu_command_buffer(command_buffer: Ptr[GPUCommandBuffer, mut=True]) raises:
     """Cancels a command buffer.
 
     None of the enqueued commands are executed.
@@ -4342,12 +4342,12 @@ fn sdl_cancel_gpu_command_buffer(command_buffer: Ptr[SDL_GPUCommandBuffer, mut=T
     Docs: https://wiki.libsdl.org/SDL3/SDL_CancelGPUCommandBuffer.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CancelGPUCommandBuffer", fn (command_buffer: Ptr[SDL_GPUCommandBuffer, mut=True]) -> Bool]()(command_buffer)
+    ret = _get_dylib_function[lib, "SDL_CancelGPUCommandBuffer", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True]) -> Bool]()(command_buffer)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_wait_for_gpu_idle(device: Ptr[SDL_GPUDevice, mut=True]) raises:
+fn wait_for_gpu_idle(device: Ptr[GPUDevice, mut=True]) raises:
     """Blocks the thread until the GPU is completely idle.
 
     Args:
@@ -4360,12 +4360,12 @@ fn sdl_wait_for_gpu_idle(device: Ptr[SDL_GPUDevice, mut=True]) raises:
     Docs: https://wiki.libsdl.org/SDL3/SDL_WaitForGPUIdle.
     """
 
-    ret = _get_dylib_function[lib, "SDL_WaitForGPUIdle", fn (device: Ptr[SDL_GPUDevice, mut=True]) -> Bool]()(device)
+    ret = _get_dylib_function[lib, "SDL_WaitForGPUIdle", fn (device: Ptr[GPUDevice, mut=True]) -> Bool]()(device)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_wait_for_gpu_fences(device: Ptr[SDL_GPUDevice, mut=True], wait_all: Bool, fences: Ptr[SDL_GPUFence, mut=True], num_fences: UInt32) raises:
+fn wait_for_gpu_fences(device: Ptr[GPUDevice, mut=True], wait_all: Bool, fences: Ptr[GPUFence, mut=True], num_fences: UInt32) raises:
     """Blocks the thread until the given fences are signaled.
 
     Args:
@@ -4382,12 +4382,12 @@ fn sdl_wait_for_gpu_fences(device: Ptr[SDL_GPUDevice, mut=True], wait_all: Bool,
     Docs: https://wiki.libsdl.org/SDL3/SDL_WaitForGPUFences.
     """
 
-    ret = _get_dylib_function[lib, "SDL_WaitForGPUFences", fn (device: Ptr[SDL_GPUDevice, mut=True], wait_all: Bool, fences: Ptr[SDL_GPUFence, mut=True], num_fences: UInt32) -> Bool]()(device, wait_all, fences, num_fences)
+    ret = _get_dylib_function[lib, "SDL_WaitForGPUFences", fn (device: Ptr[GPUDevice, mut=True], wait_all: Bool, fences: Ptr[GPUFence, mut=True], num_fences: UInt32) -> Bool]()(device, wait_all, fences, num_fences)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_query_gpu_fence(device: Ptr[SDL_GPUDevice, mut=True], fence: Ptr[SDL_GPUFence, mut=True]) -> Bool:
+fn query_gpu_fence(device: Ptr[GPUDevice, mut=True], fence: Ptr[GPUFence, mut=True]) -> Bool:
     """Checks the status of a fence.
 
     Args:
@@ -4400,10 +4400,10 @@ fn sdl_query_gpu_fence(device: Ptr[SDL_GPUDevice, mut=True], fence: Ptr[SDL_GPUF
     Docs: https://wiki.libsdl.org/SDL3/SDL_QueryGPUFence.
     """
 
-    return _get_dylib_function[lib, "SDL_QueryGPUFence", fn (device: Ptr[SDL_GPUDevice, mut=True], fence: Ptr[SDL_GPUFence, mut=True]) -> Bool]()(device, fence)
+    return _get_dylib_function[lib, "SDL_QueryGPUFence", fn (device: Ptr[GPUDevice, mut=True], fence: Ptr[GPUFence, mut=True]) -> Bool]()(device, fence)
 
 
-fn sdl_release_gpu_fence(device: Ptr[SDL_GPUDevice, mut=True], fence: Ptr[SDL_GPUFence, mut=True]) -> None:
+fn release_gpu_fence(device: Ptr[GPUDevice, mut=True], fence: Ptr[GPUFence, mut=True]) -> None:
     """Releases a fence obtained from SDL_SubmitGPUCommandBufferAndAcquireFence.
 
     You must not reference the fence after calling this function.
@@ -4415,10 +4415,10 @@ fn sdl_release_gpu_fence(device: Ptr[SDL_GPUDevice, mut=True], fence: Ptr[SDL_GP
     Docs: https://wiki.libsdl.org/SDL3/SDL_ReleaseGPUFence.
     """
 
-    return _get_dylib_function[lib, "SDL_ReleaseGPUFence", fn (device: Ptr[SDL_GPUDevice, mut=True], fence: Ptr[SDL_GPUFence, mut=True]) -> None]()(device, fence)
+    return _get_dylib_function[lib, "SDL_ReleaseGPUFence", fn (device: Ptr[GPUDevice, mut=True], fence: Ptr[GPUFence, mut=True]) -> None]()(device, fence)
 
 
-fn sdl_gpu_texture_format_texel_block_size(format: SDL_GPUTextureFormat) -> UInt32:
+fn gpu_texture_format_texel_block_size(format: GPUTextureFormat) -> UInt32:
     """Obtains the texel block size for a texture format.
 
     Args:
@@ -4430,10 +4430,10 @@ fn sdl_gpu_texture_format_texel_block_size(format: SDL_GPUTextureFormat) -> UInt
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureFormatTexelBlockSize.
     """
 
-    return _get_dylib_function[lib, "SDL_GPUTextureFormatTexelBlockSize", fn (format: SDL_GPUTextureFormat) -> UInt32]()(format)
+    return _get_dylib_function[lib, "SDL_GPUTextureFormatTexelBlockSize", fn (format: GPUTextureFormat) -> UInt32]()(format)
 
 
-fn sdl_gpu_texture_supports_format(device: Ptr[SDL_GPUDevice, mut=True], format: SDL_GPUTextureFormat, type: SDL_GPUTextureType, usage: SDL_GPUTextureUsageFlags) -> Bool:
+fn gpu_texture_supports_format(device: Ptr[GPUDevice, mut=True], format: GPUTextureFormat, type: GPUTextureType, usage: GPUTextureUsageFlags) -> Bool:
     """Determines whether a texture format is supported for a given type and
     usage.
 
@@ -4449,10 +4449,10 @@ fn sdl_gpu_texture_supports_format(device: Ptr[SDL_GPUDevice, mut=True], format:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureSupportsFormat.
     """
 
-    return _get_dylib_function[lib, "SDL_GPUTextureSupportsFormat", fn (device: Ptr[SDL_GPUDevice, mut=True], format: SDL_GPUTextureFormat, type: SDL_GPUTextureType, usage: SDL_GPUTextureUsageFlags) -> Bool]()(device, format, type, usage)
+    return _get_dylib_function[lib, "SDL_GPUTextureSupportsFormat", fn (device: Ptr[GPUDevice, mut=True], format: GPUTextureFormat, type: GPUTextureType, usage: GPUTextureUsageFlags) -> Bool]()(device, format, type, usage)
 
 
-fn sdl_gpu_texture_supports_sample_count(device: Ptr[SDL_GPUDevice, mut=True], format: SDL_GPUTextureFormat, sample_count: SDL_GPUSampleCount) -> Bool:
+fn gpu_texture_supports_sample_count(device: Ptr[GPUDevice, mut=True], format: GPUTextureFormat, sample_count: GPUSampleCount) -> Bool:
     """Determines if a sample count for a texture format is supported.
 
     Args:
@@ -4466,10 +4466,10 @@ fn sdl_gpu_texture_supports_sample_count(device: Ptr[SDL_GPUDevice, mut=True], f
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureSupportsSampleCount.
     """
 
-    return _get_dylib_function[lib, "SDL_GPUTextureSupportsSampleCount", fn (device: Ptr[SDL_GPUDevice, mut=True], format: SDL_GPUTextureFormat, sample_count: SDL_GPUSampleCount) -> Bool]()(device, format, sample_count)
+    return _get_dylib_function[lib, "SDL_GPUTextureSupportsSampleCount", fn (device: Ptr[GPUDevice, mut=True], format: GPUTextureFormat, sample_count: GPUSampleCount) -> Bool]()(device, format, sample_count)
 
 
-fn sdl_calculate_gpu_texture_format_size(format: SDL_GPUTextureFormat, width: UInt32, height: UInt32, depth_or_layer_count: UInt32) -> UInt32:
+fn calculate_gpu_texture_format_size(format: GPUTextureFormat, width: UInt32, height: UInt32, depth_or_layer_count: UInt32) -> UInt32:
     """Calculate the size in bytes of a texture format with dimensions.
 
     Args:
@@ -4484,10 +4484,10 @@ fn sdl_calculate_gpu_texture_format_size(format: SDL_GPUTextureFormat, width: UI
     Docs: https://wiki.libsdl.org/SDL3/SDL_CalculateGPUTextureFormatSize.
     """
 
-    return _get_dylib_function[lib, "SDL_CalculateGPUTextureFormatSize", fn (format: SDL_GPUTextureFormat, width: UInt32, height: UInt32, depth_or_layer_count: UInt32) -> UInt32]()(format, width, height, depth_or_layer_count)
+    return _get_dylib_function[lib, "SDL_CalculateGPUTextureFormatSize", fn (format: GPUTextureFormat, width: UInt32, height: UInt32, depth_or_layer_count: UInt32) -> UInt32]()(format, width, height, depth_or_layer_count)
 
 
-fn sdl_gdk_suspend_gpu(device: Ptr[SDL_GPUDevice, mut=True]) -> None:
+fn gdk_suspend_gpu(device: Ptr[GPUDevice, mut=True]) -> None:
     """Call this to suspend GPU operation on Xbox when you receive the
     SDL_EVENT_DID_ENTER_BACKGROUND event.
 
@@ -4500,10 +4500,10 @@ fn sdl_gdk_suspend_gpu(device: Ptr[SDL_GPUDevice, mut=True]) -> None:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GDKSuspendGPU.
     """
 
-    return _get_dylib_function[lib, "SDL_GDKSuspendGPU", fn (device: Ptr[SDL_GPUDevice, mut=True]) -> None]()(device)
+    return _get_dylib_function[lib, "SDL_GDKSuspendGPU", fn (device: Ptr[GPUDevice, mut=True]) -> None]()(device)
 
 
-fn sdl_gdk_resume_gpu(device: Ptr[SDL_GPUDevice, mut=True]) -> None:
+fn gdk_resume_gpu(device: Ptr[GPUDevice, mut=True]) -> None:
     """Call this to resume GPU operation on Xbox when you receive the
     SDL_EVENT_WILL_ENTER_FOREGROUND event.
 
@@ -4516,4 +4516,4 @@ fn sdl_gdk_resume_gpu(device: Ptr[SDL_GPUDevice, mut=True]) -> None:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GDKResumeGPU.
     """
 
-    return _get_dylib_function[lib, "SDL_GDKResumeGPU", fn (device: Ptr[SDL_GPUDevice, mut=True]) -> None]()(device)
+    return _get_dylib_function[lib, "SDL_GDKResumeGPU", fn (device: Ptr[GPUDevice, mut=True]) -> None]()(device)

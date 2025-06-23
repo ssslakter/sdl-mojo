@@ -52,7 +52,7 @@ parts of the system.
 
 
 @register_passable("trivial")
-struct SDL_EventType(Intable):
+struct EventType(Intable):
     """The types of events that can be delivered.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_EventType.
@@ -68,300 +68,300 @@ struct SDL_EventType(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_EVENT_FIRST = 0
+    alias EVENT_FIRST = Self(0)
     """Unused (do not remove)."""
 
     # Application events
-    alias SDL_EVENT_QUIT = 0x100
+    alias EVENT_QUIT = Self(0x100)
     """User-requested quit."""
 
     # These application events have special meaning on iOS and Android, see README-ios.md and README-android.md for details
-    alias SDL_EVENT_TERMINATING = 0x101
+    alias EVENT_TERMINATING = Self(0x101)
     """The application is being terminated by the OS. This event must be handled in a callback set with SDL_AddEventWatch().
                                          Called on iOS in applicationWillTerminate()
                                          Called on Android in onDestroy()."""
-    alias SDL_EVENT_LOW_MEMORY = 0x102
+    alias EVENT_LOW_MEMORY = Self(0x102)
     """The application is low on memory, free memory if possible. This event must be handled in a callback set with SDL_AddEventWatch().
                                          Called on iOS in applicationDidReceiveMemoryWarning()
                                          Called on Android in onTrimMemory()."""
-    alias SDL_EVENT_WILL_ENTER_BACKGROUND = 0x103
+    alias EVENT_WILL_ENTER_BACKGROUND = Self(0x103)
     """The application is about to enter the background. This event must be handled in a callback set with SDL_AddEventWatch().
                                          Called on iOS in applicationWillResignActive()
                                          Called on Android in onPause()."""
-    alias SDL_EVENT_DID_ENTER_BACKGROUND = 0x104
+    alias EVENT_DID_ENTER_BACKGROUND = Self(0x104)
     """The application did enter the background and may not get CPU for some time. This event must be handled in a callback set with SDL_AddEventWatch().
                                          Called on iOS in applicationDidEnterBackground()
                                          Called on Android in onPause()."""
-    alias SDL_EVENT_WILL_ENTER_FOREGROUND = 0x105
+    alias EVENT_WILL_ENTER_FOREGROUND = Self(0x105)
     """The application is about to enter the foreground. This event must be handled in a callback set with SDL_AddEventWatch().
                                          Called on iOS in applicationWillEnterForeground()
                                          Called on Android in onResume()."""
-    alias SDL_EVENT_DID_ENTER_FOREGROUND = 0x106
+    alias EVENT_DID_ENTER_FOREGROUND = Self(0x106)
     """The application is now interactive. This event must be handled in a callback set with SDL_AddEventWatch().
                                          Called on iOS in applicationDidBecomeActive()
                                          Called on Android in onResume()."""
 
-    alias SDL_EVENT_LOCALE_CHANGED = 0x107
+    alias EVENT_LOCALE_CHANGED = Self(0x107)
     """The user's locale preferences have changed."""
 
-    alias SDL_EVENT_SYSTEM_THEME_CHANGED = 0x108
+    alias EVENT_SYSTEM_THEME_CHANGED = Self(0x108)
     """The system theme changed."""
 
     # Display events
     # 0x150 was SDL_DISPLAYEVENT, reserve the number for sdl2-compat
-    alias SDL_EVENT_DISPLAY_ORIENTATION = 0x151
+    alias EVENT_DISPLAY_ORIENTATION = Self(0x151)
     """Display orientation has changed to data1."""
-    alias SDL_EVENT_DISPLAY_ADDED = 0x152
+    alias EVENT_DISPLAY_ADDED = Self(0x152)
     """Display has been added to the system."""
-    alias SDL_EVENT_DISPLAY_REMOVED = 0x153
+    alias EVENT_DISPLAY_REMOVED = Self(0x153)
     """Display has been removed from the system."""
-    alias SDL_EVENT_DISPLAY_MOVED = 0x154
+    alias EVENT_DISPLAY_MOVED = Self(0x154)
     """Display has changed position."""
-    alias SDL_EVENT_DISPLAY_DESKTOP_MODE_CHANGED = 0x155
+    alias EVENT_DISPLAY_DESKTOP_MODE_CHANGED = Self(0x155)
     """Display has changed desktop mode."""
-    alias SDL_EVENT_DISPLAY_CURRENT_MODE_CHANGED = 0x156
+    alias EVENT_DISPLAY_CURRENT_MODE_CHANGED = Self(0x156)
     """Display has changed current mode."""
-    alias SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED = 0x157
+    alias EVENT_DISPLAY_CONTENT_SCALE_CHANGED = Self(0x157)
     """Display has changed content scale."""
-    alias SDL_EVENT_DISPLAY_FIRST = Self.SDL_EVENT_DISPLAY_ORIENTATION
-    alias SDL_EVENT_DISPLAY_LAST = Self.SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED
+    alias EVENT_DISPLAY_FIRST = Self.EVENT_DISPLAY_ORIENTATION
+    alias EVENT_DISPLAY_LAST = Self.EVENT_DISPLAY_CONTENT_SCALE_CHANGED
 
     # Window events
     # 0x200 was SDL_WINDOWEVENT, reserve the number for sdl2-compat
     # 0x201 was SDL_SYSWMEVENT, reserve the number for sdl2-compat
-    alias SDL_EVENT_WINDOW_SHOWN = 0x202
+    alias EVENT_WINDOW_SHOWN = Self(0x202)
     """Window has been shown."""
-    alias SDL_EVENT_WINDOW_HIDDEN = 0x203
+    alias EVENT_WINDOW_HIDDEN = Self(0x203)
     """Window has been hidden."""
-    alias SDL_EVENT_WINDOW_EXPOSED = 0x204
+    alias EVENT_WINDOW_EXPOSED = Self(0x204)
     """Window has been exposed and should be redrawn, and can be redrawn directly from event watchers for this event."""
-    alias SDL_EVENT_WINDOW_MOVED = 0x205
+    alias EVENT_WINDOW_MOVED = Self(0x205)
     """Window has been moved to data1, data2."""
-    alias SDL_EVENT_WINDOW_RESIZED = 0x206
+    alias EVENT_WINDOW_RESIZED = Self(0x206)
     """Window has been resized to data1xdata2."""
-    alias SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED = 0x207
+    alias EVENT_WINDOW_PIXEL_SIZE_CHANGED = Self(0x207)
     """The pixel size of the window has changed to data1xdata2."""
-    alias SDL_EVENT_WINDOW_METAL_VIEW_RESIZED = 0x208
+    alias EVENT_WINDOW_METAL_VIEW_RESIZED = Self(0x208)
     """The pixel size of a Metal view associated with the window has changed."""
-    alias SDL_EVENT_WINDOW_MINIMIZED = 0x209
+    alias EVENT_WINDOW_MINIMIZED = Self(0x209)
     """Window has been minimized."""
-    alias SDL_EVENT_WINDOW_MAXIMIZED = 0x20A
+    alias EVENT_WINDOW_MAXIMIZED = Self(0x20A)
     """Window has been maximized."""
-    alias SDL_EVENT_WINDOW_RESTORED = 0x20B
+    alias EVENT_WINDOW_RESTORED = Self(0x20B)
     """Window has been restored to normal size and position."""
-    alias SDL_EVENT_WINDOW_MOUSE_ENTER = 0x20C
+    alias EVENT_WINDOW_MOUSE_ENTER = Self(0x20C)
     """Window has gained mouse focus."""
-    alias SDL_EVENT_WINDOW_MOUSE_LEAVE = 0x20D
+    alias EVENT_WINDOW_MOUSE_LEAVE = Self(0x20D)
     """Window has lost mouse focus."""
-    alias SDL_EVENT_WINDOW_FOCUS_GAINED = 0x20E
+    alias EVENT_WINDOW_FOCUS_GAINED = Self(0x20E)
     """Window has gained keyboard focus."""
-    alias SDL_EVENT_WINDOW_FOCUS_LOST = 0x20F
+    alias EVENT_WINDOW_FOCUS_LOST = Self(0x20F)
     """Window has lost keyboard focus."""
-    alias SDL_EVENT_WINDOW_CLOSE_REQUESTED = 0x210
+    alias EVENT_WINDOW_CLOSE_REQUESTED = Self(0x210)
     """The window manager requests that the window be closed."""
-    alias SDL_EVENT_WINDOW_HIT_TEST = 0x211
+    alias EVENT_WINDOW_HIT_TEST = Self(0x211)
     """Window had a hit test that wasn't SDL_HITTEST_NORMAL."""
-    alias SDL_EVENT_WINDOW_ICCPROF_CHANGED = 0x212
+    alias EVENT_WINDOW_ICCPROF_CHANGED = Self(0x212)
     """The ICC profile of the window's display has changed."""
-    alias SDL_EVENT_WINDOW_DISPLAY_CHANGED = 0x213
+    alias EVENT_WINDOW_DISPLAY_CHANGED = Self(0x213)
     """Window has been moved to display data1."""
-    alias SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED = 0x214
+    alias EVENT_WINDOW_DISPLAY_SCALE_CHANGED = Self(0x214)
     """Window display scale has been changed."""
-    alias SDL_EVENT_WINDOW_SAFE_AREA_CHANGED = 0x215
+    alias EVENT_WINDOW_SAFE_AREA_CHANGED = Self(0x215)
     """The window safe area has been changed."""
-    alias SDL_EVENT_WINDOW_OCCLUDED = 0x216
+    alias EVENT_WINDOW_OCCLUDED = Self(0x216)
     """The window has been occluded."""
-    alias SDL_EVENT_WINDOW_ENTER_FULLSCREEN = 0x217
+    alias EVENT_WINDOW_ENTER_FULLSCREEN = Self(0x217)
     """The window has entered fullscreen mode."""
-    alias SDL_EVENT_WINDOW_LEAVE_FULLSCREEN = 0x218
+    alias EVENT_WINDOW_LEAVE_FULLSCREEN = Self(0x218)
     """The window has left fullscreen mode."""
-    alias SDL_EVENT_WINDOW_DESTROYED = 0x219
+    alias EVENT_WINDOW_DESTROYED = Self(0x219)
     """The window with the associated ID is being or has been destroyed. If this message is being handled
                                                  in an event watcher, the window handle is still valid and can still be used to retrieve any properties
                                                  associated with the window. Otherwise, the handle has already been destroyed and all resources
                                                  associated with it are invalid."""
-    alias SDL_EVENT_WINDOW_HDR_STATE_CHANGED = 0x21A
+    alias EVENT_WINDOW_HDR_STATE_CHANGED = Self(0x21A)
     """Window HDR properties have changed."""
-    alias SDL_EVENT_WINDOW_FIRST = Self.SDL_EVENT_WINDOW_SHOWN
-    alias SDL_EVENT_WINDOW_LAST = Self.SDL_EVENT_WINDOW_HDR_STATE_CHANGED
+    alias EVENT_WINDOW_FIRST = Self.EVENT_WINDOW_SHOWN
+    alias EVENT_WINDOW_LAST = Self.EVENT_WINDOW_HDR_STATE_CHANGED
 
     # Keyboard events
-    alias SDL_EVENT_KEY_DOWN = 0x300
+    alias EVENT_KEY_DOWN = Self(0x300)
     """Key pressed."""
-    alias SDL_EVENT_KEY_UP = 0x301
+    alias EVENT_KEY_UP = Self(0x301)
     """Key released."""
-    alias SDL_EVENT_TEXT_EDITING = 0x302
+    alias EVENT_TEXT_EDITING = Self(0x302)
     """Keyboard text editing (composition)."""
-    alias SDL_EVENT_TEXT_INPUT = 0x303
+    alias EVENT_TEXT_INPUT = Self(0x303)
     """Keyboard text input."""
-    alias SDL_EVENT_KEYMAP_CHANGED = 0x304
+    alias EVENT_KEYMAP_CHANGED = Self(0x304)
     """Keymap changed due to a system event such as an
                                                 input language or keyboard layout change."""
-    alias SDL_EVENT_KEYBOARD_ADDED = 0x305
+    alias EVENT_KEYBOARD_ADDED = Self(0x305)
     """A new keyboard has been inserted into the system."""
-    alias SDL_EVENT_KEYBOARD_REMOVED = 0x306
+    alias EVENT_KEYBOARD_REMOVED = Self(0x306)
     """A keyboard has been removed."""
-    alias SDL_EVENT_TEXT_EDITING_CANDIDATES = 0x307
+    alias EVENT_TEXT_EDITING_CANDIDATES = Self(0x307)
     """Keyboard text editing candidates."""
 
     # Mouse events
-    alias SDL_EVENT_MOUSE_MOTION = 0x400
+    alias EVENT_MOUSE_MOTION = Self(0x400)
     """Mouse moved."""
-    alias SDL_EVENT_MOUSE_BUTTON_DOWN = 0x401
+    alias EVENT_MOUSE_BUTTON_DOWN = Self(0x401)
     """Mouse button pressed."""
-    alias SDL_EVENT_MOUSE_BUTTON_UP = 0x402
+    alias EVENT_MOUSE_BUTTON_UP = Self(0x402)
     """Mouse button released."""
-    alias SDL_EVENT_MOUSE_WHEEL = 0x403
+    alias EVENT_MOUSE_WHEEL = Self(0x403)
     """Mouse wheel motion."""
-    alias SDL_EVENT_MOUSE_ADDED = 0x404
+    alias EVENT_MOUSE_ADDED = Self(0x404)
     """A new mouse has been inserted into the system."""
-    alias SDL_EVENT_MOUSE_REMOVED = 0x405
+    alias EVENT_MOUSE_REMOVED = Self(0x405)
     """A mouse has been removed."""
 
     # Joystick events
-    alias SDL_EVENT_JOYSTICK_AXIS_MOTION = 0x600
+    alias EVENT_JOYSTICK_AXIS_MOTION = Self(0x600)
     """Joystick axis motion."""
-    alias SDL_EVENT_JOYSTICK_BALL_MOTION = 0x601
+    alias EVENT_JOYSTICK_BALL_MOTION = Self(0x601)
     """Joystick trackball motion."""
-    alias SDL_EVENT_JOYSTICK_HAT_MOTION = 0x602
+    alias EVENT_JOYSTICK_HAT_MOTION = Self(0x602)
     """Joystick hat position change."""
-    alias SDL_EVENT_JOYSTICK_BUTTON_DOWN = 0x603
+    alias EVENT_JOYSTICK_BUTTON_DOWN = Self(0x603)
     """Joystick button pressed."""
-    alias SDL_EVENT_JOYSTICK_BUTTON_UP = 0x604
+    alias EVENT_JOYSTICK_BUTTON_UP = Self(0x604)
     """Joystick button released."""
-    alias SDL_EVENT_JOYSTICK_ADDED = 0x605
+    alias EVENT_JOYSTICK_ADDED = Self(0x605)
     """A new joystick has been inserted into the system."""
-    alias SDL_EVENT_JOYSTICK_REMOVED = 0x606
+    alias EVENT_JOYSTICK_REMOVED = Self(0x606)
     """An opened joystick has been removed."""
-    alias SDL_EVENT_JOYSTICK_BATTERY_UPDATED = 0x607
+    alias EVENT_JOYSTICK_BATTERY_UPDATED = Self(0x607)
     """Joystick battery level change."""
-    alias SDL_EVENT_JOYSTICK_UPDATE_COMPLETE = 0x608
+    alias EVENT_JOYSTICK_UPDATE_COMPLETE = Self(0x608)
     """Joystick update is complete."""
 
     # Gamepad events
-    alias SDL_EVENT_GAMEPAD_AXIS_MOTION = 0x650
+    alias EVENT_GAMEPAD_AXIS_MOTION = Self(0x650)
     """Gamepad axis motion."""
-    alias SDL_EVENT_GAMEPAD_BUTTON_DOWN = 0x651
+    alias EVENT_GAMEPAD_BUTTON_DOWN = Self(0x651)
     """Gamepad button pressed."""
-    alias SDL_EVENT_GAMEPAD_BUTTON_UP = 0x652
+    alias EVENT_GAMEPAD_BUTTON_UP = Self(0x652)
     """Gamepad button released."""
-    alias SDL_EVENT_GAMEPAD_ADDED = 0x653
+    alias EVENT_GAMEPAD_ADDED = Self(0x653)
     """A new gamepad has been inserted into the system."""
-    alias SDL_EVENT_GAMEPAD_REMOVED = 0x654
+    alias EVENT_GAMEPAD_REMOVED = Self(0x654)
     """A gamepad has been removed."""
-    alias SDL_EVENT_GAMEPAD_REMAPPED = 0x655
+    alias EVENT_GAMEPAD_REMAPPED = Self(0x655)
     """The gamepad mapping was updated."""
-    alias SDL_EVENT_GAMEPAD_TOUCHPAD_DOWN = 0x656
+    alias EVENT_GAMEPAD_TOUCHPAD_DOWN = Self(0x656)
     """Gamepad touchpad was touched."""
-    alias SDL_EVENT_GAMEPAD_TOUCHPAD_MOTION = 0x657
+    alias EVENT_GAMEPAD_TOUCHPAD_MOTION = Self(0x657)
     """Gamepad touchpad finger was moved."""
-    alias SDL_EVENT_GAMEPAD_TOUCHPAD_UP = 0x658
+    alias EVENT_GAMEPAD_TOUCHPAD_UP = Self(0x658)
     """Gamepad touchpad finger was lifted."""
-    alias SDL_EVENT_GAMEPAD_SENSOR_UPDATE = 0x659
+    alias EVENT_GAMEPAD_SENSOR_UPDATE = Self(0x659)
     """Gamepad sensor was updated."""
-    alias SDL_EVENT_GAMEPAD_UPDATE_COMPLETE = 0x65A
+    alias EVENT_GAMEPAD_UPDATE_COMPLETE = Self(0x65A)
     """Gamepad update is complete."""
-    alias SDL_EVENT_GAMEPAD_STEAM_HANDLE_UPDATED = 0x65B
+    alias EVENT_GAMEPAD_STEAM_HANDLE_UPDATED = Self(0x65B)
     """Gamepad Steam handle has changed."""
 
     # Touch events
-    alias SDL_EVENT_FINGER_DOWN = 0x700
-    alias SDL_EVENT_FINGER_UP = 0x701
-    alias SDL_EVENT_FINGER_MOTION = 0x702
-    alias SDL_EVENT_FINGER_CANCELED = 0x703
+    alias EVENT_FINGER_DOWN = Self(0x700)
+    alias EVENT_FINGER_UP = Self(0x701)
+    alias EVENT_FINGER_MOTION = Self(0x702)
+    alias EVENT_FINGER_CANCELED = Self(0x703)
 
     # 0x800, 0x801, and 0x802 were the Gesture events from SDL2. Do not reuse these values! sdl2-compat needs them!
 
     # Clipboard events
-    alias SDL_EVENT_CLIPBOARD_UPDATE = 0x900
+    alias EVENT_CLIPBOARD_UPDATE = Self(0x900)
     """The clipboard or primary selection changed."""
 
     # Drag and drop events
-    alias SDL_EVENT_DROP_FILE = 0x1000
+    alias EVENT_DROP_FILE = Self(0x1000)
     """The system requests a file open."""
-    alias SDL_EVENT_DROP_TEXT = 0x1001
+    alias EVENT_DROP_TEXT = Self(0x1001)
     """Text/plain drag-and-drop event."""
-    alias SDL_EVENT_DROP_BEGIN = 0x1002
+    alias EVENT_DROP_BEGIN = Self(0x1002)
     """A new set of drops is beginning (NULL filename)."""
-    alias SDL_EVENT_DROP_COMPLETE = 0x1003
+    alias EVENT_DROP_COMPLETE = Self(0x1003)
     """Current set of drops is now complete (NULL filename)."""
-    alias SDL_EVENT_DROP_POSITION = 0x1004
+    alias EVENT_DROP_POSITION = Self(0x1004)
     """Position while moving over the window."""
 
     # Audio hotplug events
-    alias SDL_EVENT_AUDIO_DEVICE_ADDED = 0x1100
+    alias EVENT_AUDIO_DEVICE_ADDED = Self(0x1100)
     """A new audio device is available."""
-    alias SDL_EVENT_AUDIO_DEVICE_REMOVED = 0x1101
+    alias EVENT_AUDIO_DEVICE_REMOVED = Self(0x1101)
     """An audio device has been removed."""
-    alias SDL_EVENT_AUDIO_DEVICE_FORMAT_CHANGED = 0x1102
+    alias EVENT_AUDIO_DEVICE_FORMAT_CHANGED = Self(0x1102)
     """An audio device's format has been changed by the system."""
 
     # Sensor events
-    alias SDL_EVENT_SENSOR_UPDATE = 0x1200
+    alias EVENT_SENSOR_UPDATE = Self(0x1200)
     """A sensor was updated."""
 
     # Pressure-sensitive pen events
-    alias SDL_EVENT_PEN_PROXIMITY_IN = 0x1300
+    alias EVENT_PEN_PROXIMITY_IN = Self(0x1300)
     """Pressure-sensitive pen has become available."""
-    alias SDL_EVENT_PEN_PROXIMITY_OUT = 0x1301
+    alias EVENT_PEN_PROXIMITY_OUT = Self(0x1301)
     """Pressure-sensitive pen has become unavailable."""
-    alias SDL_EVENT_PEN_DOWN = 0x1302
+    alias EVENT_PEN_DOWN = Self(0x1302)
     """Pressure-sensitive pen touched drawing surface."""
-    alias SDL_EVENT_PEN_UP = 0x1303
+    alias EVENT_PEN_UP = Self(0x1303)
     """Pressure-sensitive pen stopped touching drawing surface."""
-    alias SDL_EVENT_PEN_BUTTON_DOWN = 0x1304
+    alias EVENT_PEN_BUTTON_DOWN = Self(0x1304)
     """Pressure-sensitive pen button pressed."""
-    alias SDL_EVENT_PEN_BUTTON_UP = 0x1305
+    alias EVENT_PEN_BUTTON_UP = Self(0x1305)
     """Pressure-sensitive pen button released."""
-    alias SDL_EVENT_PEN_MOTION = 0x1306
+    alias EVENT_PEN_MOTION = Self(0x1306)
     """Pressure-sensitive pen is moving on the tablet."""
-    alias SDL_EVENT_PEN_AXIS = 0x1307
+    alias EVENT_PEN_AXIS = Self(0x1307)
     """Pressure-sensitive pen angle/pressure/etc changed."""
 
     # Camera hotplug events
-    alias SDL_EVENT_CAMERA_DEVICE_ADDED = 0x1400
+    alias EVENT_CAMERA_DEVICE_ADDED = Self(0x1400)
     """A new camera device is available."""
-    alias SDL_EVENT_CAMERA_DEVICE_REMOVED = 0x1401
+    alias EVENT_CAMERA_DEVICE_REMOVED = Self(0x1401)
     """A camera device has been removed."""
-    alias SDL_EVENT_CAMERA_DEVICE_APPROVED = 0x1402
+    alias EVENT_CAMERA_DEVICE_APPROVED = Self(0x1402)
     """A camera device has been approved for use by the user."""
-    alias SDL_EVENT_CAMERA_DEVICE_DENIED = 0x1403
+    alias EVENT_CAMERA_DEVICE_DENIED = Self(0x1403)
     """A camera device has been denied for use by the user."""
 
     # Render events
-    alias SDL_EVENT_RENDER_TARGETS_RESET = 0x2000
+    alias EVENT_RENDER_TARGETS_RESET = Self(0x2000)
     """The render targets have been reset and their contents need to be updated."""
-    alias SDL_EVENT_RENDER_DEVICE_RESET = 0x2001
+    alias EVENT_RENDER_DEVICE_RESET = Self(0x2001)
     """The device has been reset and all textures need to be recreated."""
-    alias SDL_EVENT_RENDER_DEVICE_LOST = 0x2002
+    alias EVENT_RENDER_DEVICE_LOST = Self(0x2002)
     """The device has been lost and can't be recovered."""
 
     # Reserved events for private platforms
-    alias SDL_EVENT_PRIVATE0 = 0x4000
-    alias SDL_EVENT_PRIVATE1 = 0x4001
-    alias SDL_EVENT_PRIVATE2 = 0x4002
-    alias SDL_EVENT_PRIVATE3 = 0x4003
+    alias EVENT_PRIVATE0 = Self(0x4000)
+    alias EVENT_PRIVATE1 = Self(0x4001)
+    alias EVENT_PRIVATE2 = Self(0x4002)
+    alias EVENT_PRIVATE3 = Self(0x4003)
 
     # Internal events
-    alias SDL_EVENT_POLL_SENTINEL = 0x7F00
+    alias EVENT_POLL_SENTINEL = Self(0x7F00)
     """Signals the end of an event poll cycle."""
 
     # Events SDL_EVENT_USER through SDL_EVENT_LAST are for your use,
     #      *  and should be allocated with SDL_RegisterEvents()
-    alias SDL_EVENT_USER = 0x8000
+    alias EVENT_USER = Self(0x8000)
 
     # *  This last event is only for bounding internal arrays
-    alias SDL_EVENT_LAST = 0xFFFF
+    alias EVENT_LAST = Self(0xFFFF)
 
     # This just makes sure the enum is the size of Uint32
-    alias SDL_EVENT_ENUM_PADDING = 0x7FFFFFFF
+    alias EVENT_ENUM_PADDING = Self(0x7FFFFFFF)
 
 
 @fieldwise_init
-struct SDL_CommonEvent(Copyable, Movable):
+struct CommonEvent(Copyable, Movable):
     """Fields shared by every event.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_CommonEvent.
+    Docs: https://wiki.libsdl.org/SDL3/CommonEvent.
     """
 
     var type: UInt32
@@ -372,18 +372,18 @@ struct SDL_CommonEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_DisplayEvent(Copyable, Movable):
+struct DisplayEvent(Copyable, Movable):
     """Display state change event data (event.display.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_DisplayEvent.
+    Docs: https://wiki.libsdl.org/SDL3/DisplayEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_DISPLAYEVENT_*."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var display_id: SDL_DisplayID
+    var display_id: DisplayID
     """The associated display."""
     var data1: Int32
     """Event dependent data."""
@@ -392,18 +392,18 @@ struct SDL_DisplayEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_WindowEvent(Copyable, Movable):
+struct WindowEvent(Copyable, Movable):
     """Window state change event data (event.window.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_WindowEvent.
+    Docs: https://wiki.libsdl.org/SDL3/WindowEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_WINDOW_*."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The associated window."""
     var data1: Int32
     """Event dependent data."""
@@ -412,23 +412,23 @@ struct SDL_WindowEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_KeyboardDeviceEvent(Copyable, Movable):
+struct KeyboardDeviceEvent(Copyable, Movable):
     """Keyboard device event structure (event.kdevice.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_KeyboardDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/KeyboardDeviceEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_KEYBOARD_ADDED or SDL_EVENT_KEYBOARD_REMOVED."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_KeyboardID
+    var which: KeyboardID
     """The keyboard instance id."""
 
 
 @fieldwise_init
-struct SDL_KeyboardEvent(Copyable, Movable):
+struct KeyboardEvent(Copyable, Movable):
     """Keyboard button event structure (event.key.*).
 
     The `key` is the base SDL_Keycode generated by pressing the `scancode`
@@ -437,23 +437,23 @@ struct SDL_KeyboardEvent(Copyable, Movable):
     event scancode and modifiers directly from the keyboard layout, bypassing
     SDL_HINT_KEYCODE_OPTIONS, by calling SDL_GetKeyFromScancode().
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_KeyboardEvent.
+    Docs: https://wiki.libsdl.org/SDL3/KeyboardEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_KEY_DOWN or SDL_EVENT_KEY_UP."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with keyboard focus, if any."""
-    var which: SDL_KeyboardID
+    var which: KeyboardID
     """The keyboard instance id, or 0 if unknown or virtual."""
-    var scancode: SDL_Scancode
+    var scancode: Scancode
     """SDL physical key code."""
-    var key: SDL_Keycode
+    var key: Keycode
     """SDL virtual key code."""
-    var mod: SDL_Keymod
+    var mod: Keymod
     """Current key modifiers."""
     var raw: UInt16
     """The platform dependent scancode for this event."""
@@ -464,22 +464,22 @@ struct SDL_KeyboardEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_TextEditingEvent(Copyable, Movable):
+struct TextEditingEvent(Copyable, Movable):
     """Keyboard text editing event structure (event.edit.*).
 
     The start cursor is the position, in UTF-8 characters, where new typing
     will be inserted into the editing text. The length is the number of UTF-8
     characters that will be replaced by new typing.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_TextEditingEvent.
+    Docs: https://wiki.libsdl.org/SDL3/TextEditingEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_TEXT_EDITING."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with keyboard focus, if any."""
     var text: Ptr[c_char, mut=False]
     """The editing text."""
@@ -490,18 +490,18 @@ struct SDL_TextEditingEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_TextEditingCandidatesEvent(Copyable, Movable):
+struct TextEditingCandidatesEvent(Copyable, Movable):
     """Keyboard IME candidates event structure (event.edit_candidates.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_TextEditingCandidatesEvent.
+    Docs: https://wiki.libsdl.org/SDL3/TextEditingCandidatesEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_TEXT_EDITING_CANDIDATES."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with keyboard focus, if any."""
     var candidates: Ptr[c_char, mut=False]
     """The list of candidates, or NULL if there are no candidates available."""
@@ -517,59 +517,59 @@ struct SDL_TextEditingCandidatesEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_TextInputEvent(Copyable, Movable):
+struct TextInputEvent(Copyable, Movable):
     """Keyboard text input event structure (event.text.*).
 
     This event will never be delivered unless text input is enabled by calling
     SDL_StartTextInput(). Text input is disabled by default!
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_TextInputEvent.
+    Docs: https://wiki.libsdl.org/SDL3/TextInputEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_TEXT_INPUT."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with keyboard focus, if any."""
     var text: Ptr[c_char, mut=False]
     """The input text, UTF-8 encoded."""
 
 
 @fieldwise_init
-struct SDL_MouseDeviceEvent(Copyable, Movable):
+struct MouseDeviceEvent(Copyable, Movable):
     """Mouse device event structure (event.mdevice.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_MouseDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/MouseDeviceEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_MOUSE_ADDED or SDL_EVENT_MOUSE_REMOVED."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_MouseID
+    var which: MouseID
     """The mouse instance id."""
 
 
 @fieldwise_init
-struct SDL_MouseMotionEvent(Copyable, Movable):
+struct MouseMotionEvent(Copyable, Movable):
     """Mouse motion event structure (event.motion.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_MouseMotionEvent.
+    Docs: https://wiki.libsdl.org/SDL3/MouseMotionEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_MOUSE_MOTION."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with mouse focus, if any."""
-    var which: SDL_MouseID
+    var which: MouseID
     """The mouse instance id in relative mode, SDL_TOUCH_MOUSEID for touch events, or 0."""
-    var state: SDL_MouseButtonFlags
+    var state: MouseButtonFlags
     """The current button state."""
     var x: c_float
     """X coordinate, relative to window."""
@@ -582,20 +582,20 @@ struct SDL_MouseMotionEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_MouseButtonEvent(Copyable, Movable):
+struct MouseButtonEvent(Copyable, Movable):
     """Mouse button event structure (event.button.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_MouseButtonEvent.
+    Docs: https://wiki.libsdl.org/SDL3/MouseButtonEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_MOUSE_BUTTON_DOWN or SDL_EVENT_MOUSE_BUTTON_UP."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with mouse focus, if any."""
-    var which: SDL_MouseID
+    var which: MouseID
     """The mouse instance id in relative mode, SDL_TOUCH_MOUSEID for touch events, or 0."""
     var button: UInt8
     """The mouse button index."""
@@ -611,26 +611,26 @@ struct SDL_MouseButtonEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_MouseWheelEvent(Copyable, Movable):
+struct MouseWheelEvent(Copyable, Movable):
     """Mouse wheel event structure (event.wheel.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_MouseWheelEvent.
+    Docs: https://wiki.libsdl.org/SDL3/MouseWheelEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_MOUSE_WHEEL."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with mouse focus, if any."""
-    var which: SDL_MouseID
+    var which: MouseID
     """The mouse instance id in relative mode or 0."""
     var x: c_float
     """The amount scrolled horizontally, positive to the right and negative to the left."""
     var y: c_float
     """The amount scrolled vertically, positive away from the user and negative toward the user."""
-    var direction: SDL_MouseWheelDirection
+    var direction: MouseWheelDirection
     """Set to one of the SDL_MOUSEWHEEL_* defines. When FLIPPED the values in X and Y will be opposite. Multiply by -1 to change them back."""
     var mouse_x: c_float
     """X coordinate, relative to window."""
@@ -643,18 +643,18 @@ struct SDL_MouseWheelEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_JoyAxisEvent(Copyable, Movable):
+struct JoyAxisEvent(Copyable, Movable):
     """Joystick axis motion event structure (event.jaxis.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyAxisEvent.
+    Docs: https://wiki.libsdl.org/SDL3/JoyAxisEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_JOYSTICK_AXIS_MOTION."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_JoystickID
+    var which: JoystickID
     """The joystick instance id."""
     var axis: UInt8
     """The joystick axis index."""
@@ -667,18 +667,18 @@ struct SDL_JoyAxisEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_JoyBallEvent(Copyable, Movable):
+struct JoyBallEvent(Copyable, Movable):
     """Joystick trackball motion event structure (event.jball.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyBallEvent.
+    Docs: https://wiki.libsdl.org/SDL3/JoyBallEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_JOYSTICK_BALL_MOTION."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_JoystickID
+    var which: JoystickID
     """The joystick instance id."""
     var ball: UInt8
     """The joystick trackball index."""
@@ -692,18 +692,18 @@ struct SDL_JoyBallEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_JoyHatEvent(Copyable, Movable):
+struct JoyHatEvent(Copyable, Movable):
     """Joystick hat position change event structure (event.jhat.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyHatEvent.
+    Docs: https://wiki.libsdl.org/SDL3/JoyHatEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_JOYSTICK_HAT_MOTION."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_JoystickID
+    var which: JoystickID
     """The joystick instance id."""
     var hat: UInt8
     """The joystick hat index."""
@@ -719,18 +719,18 @@ struct SDL_JoyHatEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_JoyButtonEvent(Copyable, Movable):
+struct JoyButtonEvent(Copyable, Movable):
     """Joystick button event structure (event.jbutton.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyButtonEvent.
+    Docs: https://wiki.libsdl.org/SDL3/JoyButtonEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_JOYSTICK_BUTTON_DOWN or SDL_EVENT_JOYSTICK_BUTTON_UP."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_JoystickID
+    var which: JoystickID
     """The joystick instance id."""
     var button: UInt8
     """The joystick button index."""
@@ -741,57 +741,57 @@ struct SDL_JoyButtonEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_JoyDeviceEvent(Copyable, Movable):
+struct JoyDeviceEvent(Copyable, Movable):
     """Joystick device event structure (event.jdevice.*).
 
     SDL will send JOYSTICK_ADDED events for devices that are already plugged in
     during SDL_Init.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/JoyDeviceEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_JOYSTICK_ADDED or SDL_EVENT_JOYSTICK_REMOVED or SDL_EVENT_JOYSTICK_UPDATE_COMPLETE."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_JoystickID
+    var which: JoystickID
     """The joystick instance id."""
 
 
 @fieldwise_init
-struct SDL_JoyBatteryEvent(Copyable, Movable):
+struct JoyBatteryEvent(Copyable, Movable):
     """Joystick battery level change event structure (event.jbattery.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyBatteryEvent.
+    Docs: https://wiki.libsdl.org/SDL3/JoyBatteryEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_JOYSTICK_BATTERY_UPDATED."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_JoystickID
+    var which: JoystickID
     """The joystick instance id."""
-    var state: SDL_PowerState
+    var state: PowerState
     """The joystick battery state."""
     var percent: c_int
     """The joystick battery percent charge remaining."""
 
 
 @fieldwise_init
-struct SDL_GamepadAxisEvent(Copyable, Movable):
+struct GamepadAxisEvent(Copyable, Movable):
     """Gamepad axis motion event structure (event.gaxis.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadAxisEvent.
+    Docs: https://wiki.libsdl.org/SDL3/GamepadAxisEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_GAMEPAD_AXIS_MOTION."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_JoystickID
+    var which: JoystickID
     """The joystick instance id."""
     var axis: UInt8
     """The gamepad axis (SDL_GamepadAxis)."""
@@ -804,18 +804,18 @@ struct SDL_GamepadAxisEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GamepadButtonEvent(Copyable, Movable):
+struct GamepadButtonEvent(Copyable, Movable):
     """Gamepad button event structure (event.gbutton.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadButtonEvent.
+    Docs: https://wiki.libsdl.org/SDL3/GamepadButtonEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_GAMEPAD_BUTTON_DOWN or SDL_EVENT_GAMEPAD_BUTTON_UP."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_JoystickID
+    var which: JoystickID
     """The joystick instance id."""
     var button: UInt8
     """The gamepad button (SDL_GamepadButton)."""
@@ -826,7 +826,7 @@ struct SDL_GamepadButtonEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GamepadDeviceEvent(Copyable, Movable):
+struct GamepadDeviceEvent(Copyable, Movable):
     """Gamepad device event structure (event.gdevice.*).
 
     Joysticks that are supported gamepads receive both an SDL_JoyDeviceEvent
@@ -836,31 +836,31 @@ struct SDL_GamepadDeviceEvent(Copyable, Movable):
     in during SDL_Init() and are recognized as gamepads. It will also send
     events for joysticks that get gamepad mappings at runtime.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/GamepadDeviceEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_GAMEPAD_ADDED, SDL_EVENT_GAMEPAD_REMOVED, or SDL_EVENT_GAMEPAD_REMAPPED, SDL_EVENT_GAMEPAD_UPDATE_COMPLETE or SDL_EVENT_GAMEPAD_STEAM_HANDLE_UPDATED."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_JoystickID
+    var which: JoystickID
     """The joystick instance id."""
 
 
 @fieldwise_init
-struct SDL_GamepadTouchpadEvent(Copyable, Movable):
+struct GamepadTouchpadEvent(Copyable, Movable):
     """Gamepad touchpad event structure (event.gtouchpad.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadTouchpadEvent.
+    Docs: https://wiki.libsdl.org/SDL3/GamepadTouchpadEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_GAMEPAD_TOUCHPAD_DOWN or SDL_EVENT_GAMEPAD_TOUCHPAD_MOTION or SDL_EVENT_GAMEPAD_TOUCHPAD_UP."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_JoystickID
+    var which: JoystickID
     """The joystick instance id."""
     var touchpad: Int32
     """The index of the touchpad."""
@@ -875,18 +875,18 @@ struct SDL_GamepadTouchpadEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_GamepadSensorEvent(Copyable, Movable):
+struct GamepadSensorEvent(Copyable, Movable):
     """Gamepad sensor event structure (event.gsensor.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadSensorEvent.
+    Docs: https://wiki.libsdl.org/SDL3/GamepadSensorEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_GAMEPAD_SENSOR_UPDATE."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_JoystickID
+    var which: JoystickID
     """The joystick instance id."""
     var sensor: Int32
     """The type of the sensor, one of the values of SDL_SensorType."""
@@ -897,18 +897,18 @@ struct SDL_GamepadSensorEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_AudioDeviceEvent(Copyable, Movable):
+struct AudioDeviceEvent(Copyable, Movable):
     """Audio device event structure (event.adevice.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_AudioDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/AudioDeviceEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_AUDIO_DEVICE_ADDED, or SDL_EVENT_AUDIO_DEVICE_REMOVED, or SDL_EVENT_AUDIO_DEVICE_FORMAT_CHANGED."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_AudioDeviceID
+    var which: AudioDeviceID
     """SDL_AudioDeviceID for the device being added or removed or changing."""
     var recording: Bool
     """False if a playback device, true if a recording device."""
@@ -918,39 +918,39 @@ struct SDL_AudioDeviceEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_CameraDeviceEvent(Copyable, Movable):
+struct CameraDeviceEvent(Copyable, Movable):
     """Camera device event structure (event.cdevice.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_CameraDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/CameraDeviceEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_CAMERA_DEVICE_ADDED, SDL_EVENT_CAMERA_DEVICE_REMOVED, SDL_EVENT_CAMERA_DEVICE_APPROVED, SDL_EVENT_CAMERA_DEVICE_DENIED."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_CameraID
+    var which: CameraID
     """SDL_CameraID for the device being added or removed or changing."""
 
 
 @fieldwise_init
-struct SDL_RenderEvent(Copyable, Movable):
+struct RenderEvent(Copyable, Movable):
     """Renderer event structure (event.render.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_RenderEvent.
+    Docs: https://wiki.libsdl.org/SDL3/RenderEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_RENDER_TARGETS_RESET, SDL_EVENT_RENDER_DEVICE_RESET, SDL_EVENT_RENDER_DEVICE_LOST."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window containing the renderer in question."""
 
 
 @fieldwise_init
-struct SDL_TouchFingerEvent(Copyable, Movable):
+struct TouchFingerEvent(Copyable, Movable):
     """Touch finger event structure (event.tfinger.*).
 
     Coordinates in this event are normalized. `x` and `y` are normalized to a
@@ -967,17 +967,17 @@ struct SDL_TouchFingerEvent(Copyable, Movable):
     report a touch outside of the window, which will also be outside of the
     range.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_TouchFingerEvent.
+    Docs: https://wiki.libsdl.org/SDL3/TouchFingerEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_FINGER_DOWN, SDL_EVENT_FINGER_UP, SDL_EVENT_FINGER_MOTION, or SDL_EVENT_FINGER_CANCELED."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var touch_id: SDL_TouchID
+    var touch_id: TouchID
     """The touch device id."""
-    var finger_id: SDL_FingerID
+    var finger_id: FingerID
     var x: c_float
     """Normalized in the range 0...1."""
     var y: c_float
@@ -988,12 +988,12 @@ struct SDL_TouchFingerEvent(Copyable, Movable):
     """Normalized in the range -1...1."""
     var pressure: c_float
     """Normalized in the range 0...1."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window underneath the finger, if any."""
 
 
 @fieldwise_init
-struct SDL_PenProximityEvent(Copyable, Movable):
+struct PenProximityEvent(Copyable, Movable):
     """Pressure-sensitive pen proximity event structure (event.pmotion.*).
 
     When a pen becomes visible to the system (it is close enough to a tablet,
@@ -1006,22 +1006,22 @@ struct SDL_PenProximityEvent(Copyable, Movable):
     is there." The pen touching and lifting off from the tablet while not
     leaving the area are handled by SDL_EVENT_PEN_DOWN and SDL_EVENT_PEN_UP.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_PenProximityEvent.
+    Docs: https://wiki.libsdl.org/SDL3/PenProximityEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_PEN_PROXIMITY_IN or SDL_EVENT_PEN_PROXIMITY_OUT."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with pen focus, if any."""
-    var which: SDL_PenID
+    var which: PenID
     """The pen instance id."""
 
 
 @fieldwise_init
-struct SDL_PenMotionEvent(Copyable, Movable):
+struct PenMotionEvent(Copyable, Movable):
     """Pressure-sensitive pen motion event structure (event.pmotion.*).
 
     Depending on the hardware, you may get motion events when the pen is not
@@ -1030,19 +1030,19 @@ struct SDL_PenMotionEvent(Copyable, Movable):
     `pen_state & SDL_PEN_INPUT_DOWN` to decide if a pen is "drawing" when
     dealing with pen motion.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_PenMotionEvent.
+    Docs: https://wiki.libsdl.org/SDL3/PenMotionEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_PEN_MOTION."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with pen focus, if any."""
-    var which: SDL_PenID
+    var which: PenID
     """The pen instance id."""
-    var pen_state: SDL_PenInputFlags
+    var pen_state: PenInputFlags
     """Complete pen input state at time of event."""
     var x: c_float
     """X coordinate, relative to window."""
@@ -1051,25 +1051,25 @@ struct SDL_PenMotionEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_PenTouchEvent(Copyable, Movable):
+struct PenTouchEvent(Copyable, Movable):
     """Pressure-sensitive pen touched event structure (event.ptouch.*).
 
     These events come when a pen touches a surface (a tablet, etc), or lifts
     off from one.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_PenTouchEvent.
+    Docs: https://wiki.libsdl.org/SDL3/PenTouchEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_PEN_DOWN or SDL_EVENT_PEN_UP."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with pen focus, if any."""
-    var which: SDL_PenID
+    var which: PenID
     """The pen instance id."""
-    var pen_state: SDL_PenInputFlags
+    var pen_state: PenInputFlags
     """Complete pen input state at time of event."""
     var x: c_float
     """X coordinate, relative to window."""
@@ -1082,25 +1082,25 @@ struct SDL_PenTouchEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_PenButtonEvent(Copyable, Movable):
+struct PenButtonEvent(Copyable, Movable):
     """Pressure-sensitive pen button event structure (event.pbutton.*).
 
     This is for buttons on the pen itself that the user might click. The pen
     itself pressing down to draw triggers a SDL_EVENT_PEN_DOWN event instead.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_PenButtonEvent.
+    Docs: https://wiki.libsdl.org/SDL3/PenButtonEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_PEN_BUTTON_DOWN or SDL_EVENT_PEN_BUTTON_UP."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with mouse focus, if any."""
-    var which: SDL_PenID
+    var which: PenID
     """The pen instance id."""
-    var pen_state: SDL_PenInputFlags
+    var pen_state: PenInputFlags
     """Complete pen input state at time of event."""
     var x: c_float
     """X coordinate, relative to window."""
@@ -1113,50 +1113,50 @@ struct SDL_PenButtonEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_PenAxisEvent(Copyable, Movable):
+struct PenAxisEvent(Copyable, Movable):
     """Pressure-sensitive pen pressure / angle event structure (event.paxis.*).
 
     You might get some of these events even if the pen isn't touching the
     tablet.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_PenAxisEvent.
+    Docs: https://wiki.libsdl.org/SDL3/PenAxisEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_PEN_AXIS."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window with pen focus, if any."""
-    var which: SDL_PenID
+    var which: PenID
     """The pen instance id."""
-    var pen_state: SDL_PenInputFlags
+    var pen_state: PenInputFlags
     """Complete pen input state at time of event."""
     var x: c_float
     """X coordinate, relative to window."""
     var y: c_float
     """Y coordinate, relative to window."""
-    var axis: SDL_PenAxis
+    var axis: PenAxis
     """Axis that has changed."""
     var value: c_float
     """New value of axis."""
 
 
 @fieldwise_init
-struct SDL_DropEvent(Copyable, Movable):
+struct DropEvent(Copyable, Movable):
     """An event used to drop text or request a file open by the system
     (event.drop.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_DropEvent.
+    Docs: https://wiki.libsdl.org/SDL3/DropEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_DROP_BEGIN or SDL_EVENT_DROP_FILE or SDL_EVENT_DROP_TEXT or SDL_EVENT_DROP_COMPLETE or SDL_EVENT_DROP_POSITION."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The window that was dropped on, if any."""
     var x: c_float
     """X coordinate, relative to window (not on begin)."""
@@ -1169,14 +1169,14 @@ struct SDL_DropEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_ClipboardEvent(Copyable, Movable):
+struct ClipboardEvent(Copyable, Movable):
     """An event triggered when the clipboard contents have changed
     (event.clipboard.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_ClipboardEvent.
+    Docs: https://wiki.libsdl.org/SDL3/ClipboardEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_CLIPBOARD_UPDATE."""
     var reserved: UInt32
     var timestamp: UInt64
@@ -1190,18 +1190,18 @@ struct SDL_ClipboardEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_SensorEvent(Copyable, Movable):
+struct SensorEvent(Copyable, Movable):
     """Sensor event structure (event.sensor.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_SensorEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SensorEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_SENSOR_UPDATE."""
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var which: SDL_SensorID
+    var which: SensorID
     """The instance ID of the sensor."""
     var data: ArrayHelper[c_float, 6, mut=True].result
     """Up to 6 values from the sensor - additional values can be queried using SDL_GetSensorData()."""
@@ -1210,13 +1210,13 @@ struct SDL_SensorEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_QuitEvent(Copyable, Movable):
+struct QuitEvent(Copyable, Movable):
     """The "quit requested" event.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_QuitEvent.
+    Docs: https://wiki.libsdl.org/SDL3/QuitEvent.
     """
 
-    var type: SDL_EventType
+    var type: EventType
     """SDL_EVENT_QUIT."""
     var reserved: UInt32
     var timestamp: UInt64
@@ -1224,7 +1224,7 @@ struct SDL_QuitEvent(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_UserEvent(Copyable, Movable):
+struct UserEvent(Copyable, Movable):
     """A user-defined event type (event.user.*).
 
     This event is unique; it is never created by SDL, but only by the
@@ -1233,7 +1233,7 @@ struct SDL_UserEvent(Copyable, Movable):
     the programmer; the only requirement is that '''type''' is a value obtained
     from SDL_RegisterEvents().
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_UserEvent.
+    Docs: https://wiki.libsdl.org/SDL3/UserEvent.
     """
 
     var type: UInt32
@@ -1241,7 +1241,7 @@ struct SDL_UserEvent(Copyable, Movable):
     var reserved: UInt32
     var timestamp: UInt64
     """In nanoseconds, populated using SDL_GetTicksNS()."""
-    var window_id: SDL_WindowID
+    var window_id: WindowID
     """The associated window if any."""
     var code: Int32
     """User defined event code."""
@@ -1251,88 +1251,8 @@ struct SDL_UserEvent(Copyable, Movable):
     """User defined data pointer."""
 
 
-struct SDL_Event:
-    alias _mlir_type = __mlir_type[
-        `!pop.union<`,
-        UInt32,
-        `, `,
-        SDL_CommonEvent,
-        `, `,
-        SDL_DisplayEvent,
-        `, `,
-        SDL_WindowEvent,
-        `, `,
-        SDL_KeyboardDeviceEvent,
-        `, `,
-        SDL_KeyboardEvent,
-        `, `,
-        SDL_TextEditingEvent,
-        `, `,
-        SDL_TextEditingCandidatesEvent,
-        `, `,
-        SDL_TextInputEvent,
-        `, `,
-        SDL_MouseDeviceEvent,
-        `, `,
-        SDL_MouseMotionEvent,
-        `, `,
-        SDL_MouseButtonEvent,
-        `, `,
-        SDL_MouseWheelEvent,
-        `, `,
-        SDL_JoyDeviceEvent,
-        `, `,
-        SDL_JoyAxisEvent,
-        `, `,
-        SDL_JoyBallEvent,
-        `, `,
-        SDL_JoyHatEvent,
-        `, `,
-        SDL_JoyButtonEvent,
-        `, `,
-        SDL_JoyBatteryEvent,
-        `, `,
-        SDL_GamepadDeviceEvent,
-        `, `,
-        SDL_GamepadAxisEvent,
-        `, `,
-        SDL_GamepadButtonEvent,
-        `, `,
-        SDL_GamepadTouchpadEvent,
-        `, `,
-        SDL_GamepadSensorEvent,
-        `, `,
-        SDL_AudioDeviceEvent,
-        `, `,
-        SDL_CameraDeviceEvent,
-        `, `,
-        SDL_SensorEvent,
-        `, `,
-        SDL_QuitEvent,
-        `, `,
-        SDL_UserEvent,
-        `, `,
-        SDL_TouchFingerEvent,
-        `, `,
-        SDL_PenProximityEvent,
-        `, `,
-        SDL_PenTouchEvent,
-        `, `,
-        SDL_PenMotionEvent,
-        `, `,
-        SDL_PenButtonEvent,
-        `, `,
-        SDL_PenAxisEvent,
-        `, `,
-        SDL_RenderEvent,
-        `, `,
-        SDL_DropEvent,
-        `, `,
-        SDL_ClipboardEvent,
-        `, `,
-        InlineArray[UInt8, 128],
-        `>`,
-    ]
+struct Event:
+    alias _mlir_type = __mlir_type[`!pop.union<`, UInt32, `, `, CommonEvent, `, `, DisplayEvent, `, `, WindowEvent, `, `, KeyboardDeviceEvent, `, `, KeyboardEvent, `, `, TextEditingEvent, `, `, TextEditingCandidatesEvent, `, `, TextInputEvent, `, `, MouseDeviceEvent, `, `, MouseMotionEvent, `, `, MouseButtonEvent, `, `, MouseWheelEvent, `, `, JoyDeviceEvent, `, `, JoyAxisEvent, `, `, JoyBallEvent, `, `, JoyHatEvent, `, `, JoyButtonEvent, `, `, JoyBatteryEvent, `, `, GamepadDeviceEvent, `, `, GamepadAxisEvent, `, `, GamepadButtonEvent, `, `, GamepadTouchpadEvent, `, `, GamepadSensorEvent, `, `, AudioDeviceEvent, `, `, CameraDeviceEvent, `, `, SensorEvent, `, `, QuitEvent, `, `, UserEvent, `, `, TouchFingerEvent, `, `, PenProximityEvent, `, `, PenTouchEvent, `, `, PenMotionEvent, `, `, PenButtonEvent, `, `, PenAxisEvent, `, `, RenderEvent, `, `, DropEvent, `, `, ClipboardEvent, `, `, InlineArray[UInt8, 128], `>`]
     var _impl: Self._mlir_type
 
     @implicit
@@ -1343,7 +1263,7 @@ struct SDL_Event:
         return rebind[Ptr[T]](Ptr(to=self._impl))[]
 
 
-fn sdl_pump_events() -> None:
+fn pump_events() -> None:
     """Pump the event loop, gathering events from the input devices.
 
     This function updates the event queue and internal input device state.
@@ -1366,7 +1286,7 @@ fn sdl_pump_events() -> None:
 
 
 @register_passable("trivial")
-struct SDL_EventAction(Intable):
+struct EventAction(Intable):
     """The type of action to request from SDL_PeepEvents().
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_EventAction.
@@ -1382,15 +1302,15 @@ struct SDL_EventAction(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_ADDEVENT = 0x0
+    alias ADDEVENT = Self(0x0)
     """Add events to the back of the queue."""
-    alias SDL_PEEKEVENT = 0x1
+    alias PEEKEVENT = Self(0x1)
     """Check but don't remove events from the queue front."""
-    alias SDL_GETEVENT = 0x2
+    alias GETEVENT = Self(0x2)
     """Retrieve/remove events from the front of the queue."""
 
 
-fn sdl_peep_events(events: Ptr[SDL_Event, mut=True], numevents: c_int, action: SDL_EventAction, min_type: UInt32, max_type: UInt32) -> c_int:
+fn peep_events(events: Ptr[Event, mut=True], numevents: c_int, action: EventAction, min_type: UInt32, max_type: UInt32) -> c_int:
     """Check the event queue for messages and optionally return them.
 
     `action` may be any of the following:
@@ -1433,10 +1353,10 @@ fn sdl_peep_events(events: Ptr[SDL_Event, mut=True], numevents: c_int, action: S
     Docs: https://wiki.libsdl.org/SDL3/SDL_PeepEvents.
     """
 
-    return _get_dylib_function[lib, "SDL_PeepEvents", fn (events: Ptr[SDL_Event, mut=True], numevents: c_int, action: SDL_EventAction, min_type: UInt32, max_type: UInt32) -> c_int]()(events, numevents, action, min_type, max_type)
+    return _get_dylib_function[lib, "SDL_PeepEvents", fn (events: Ptr[Event, mut=True], numevents: c_int, action: EventAction, min_type: UInt32, max_type: UInt32) -> c_int]()(events, numevents, action, min_type, max_type)
 
 
-fn sdl_has_event(type: UInt32) -> Bool:
+fn has_event(type: UInt32) -> Bool:
     """Check for the existence of a certain event type in the event queue.
 
     If you need to check for a range of event types, use SDL_HasEvents()
@@ -1458,7 +1378,7 @@ fn sdl_has_event(type: UInt32) -> Bool:
     return _get_dylib_function[lib, "SDL_HasEvent", fn (type: UInt32) -> Bool]()(type)
 
 
-fn sdl_has_events(min_type: UInt32, max_type: UInt32) -> Bool:
+fn has_events(min_type: UInt32, max_type: UInt32) -> Bool:
     """Check for the existence of certain event types in the event queue.
 
     If you need to check for a single event type, use SDL_HasEvent() instead.
@@ -1482,7 +1402,7 @@ fn sdl_has_events(min_type: UInt32, max_type: UInt32) -> Bool:
     return _get_dylib_function[lib, "SDL_HasEvents", fn (min_type: UInt32, max_type: UInt32) -> Bool]()(min_type, max_type)
 
 
-fn sdl_flush_event(type: UInt32) -> None:
+fn flush_event(type: UInt32) -> None:
     """Clear events of a specific type from the event queue.
 
     This will unconditionally remove any events from the queue that match
@@ -1512,7 +1432,7 @@ fn sdl_flush_event(type: UInt32) -> None:
     return _get_dylib_function[lib, "SDL_FlushEvent", fn (type: UInt32) -> None]()(type)
 
 
-fn sdl_flush_events(min_type: UInt32, max_type: UInt32) -> None:
+fn flush_events(min_type: UInt32, max_type: UInt32) -> None:
     """Clear events of a range of types from the event queue.
 
     This will unconditionally remove any events from the queue that are in the
@@ -1541,7 +1461,7 @@ fn sdl_flush_events(min_type: UInt32, max_type: UInt32) -> None:
     return _get_dylib_function[lib, "SDL_FlushEvents", fn (min_type: UInt32, max_type: UInt32) -> None]()(min_type, max_type)
 
 
-fn sdl_poll_event(event: Ptr[SDL_Event, mut=True]) -> Bool:
+fn poll_event(event: Ptr[Event, mut=True]) -> Bool:
     """Poll for currently pending events.
 
     If `event` is not NULL, the next event is removed from the queue and stored
@@ -1586,10 +1506,10 @@ fn sdl_poll_event(event: Ptr[SDL_Event, mut=True]) -> Bool:
     Docs: https://wiki.libsdl.org/SDL3/SDL_PollEvent.
     """
 
-    return _get_dylib_function[lib, "SDL_PollEvent", fn (event: Ptr[SDL_Event, mut=True]) -> Bool]()(event)
+    return _get_dylib_function[lib, "SDL_PollEvent", fn (event: Ptr[Event, mut=True]) -> Bool]()(event)
 
 
-fn sdl_wait_event(event: Ptr[SDL_Event, mut=True]) raises:
+fn wait_event(event: Ptr[Event, mut=True]) raises:
     """Wait indefinitely for the next available event.
 
     If `event` is not NULL, the next event is removed from the queue and stored
@@ -1612,12 +1532,12 @@ fn sdl_wait_event(event: Ptr[SDL_Event, mut=True]) raises:
     Docs: https://wiki.libsdl.org/SDL3/SDL_WaitEvent.
     """
 
-    ret = _get_dylib_function[lib, "SDL_WaitEvent", fn (event: Ptr[SDL_Event, mut=True]) -> Bool]()(event)
+    ret = _get_dylib_function[lib, "SDL_WaitEvent", fn (event: Ptr[Event, mut=True]) -> Bool]()(event)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_wait_event_timeout(event: Ptr[SDL_Event, mut=True], timeout_ms: Int32) -> Bool:
+fn wait_event_timeout(event: Ptr[Event, mut=True], timeout_ms: Int32) -> Bool:
     """Wait until the specified timeout (in milliseconds) for the next available
     event.
 
@@ -1646,10 +1566,10 @@ fn sdl_wait_event_timeout(event: Ptr[SDL_Event, mut=True], timeout_ms: Int32) ->
     Docs: https://wiki.libsdl.org/SDL3/SDL_WaitEventTimeout.
     """
 
-    return _get_dylib_function[lib, "SDL_WaitEventTimeout", fn (event: Ptr[SDL_Event, mut=True], timeout_ms: Int32) -> Bool]()(event, timeout_ms)
+    return _get_dylib_function[lib, "SDL_WaitEventTimeout", fn (event: Ptr[Event, mut=True], timeout_ms: Int32) -> Bool]()(event, timeout_ms)
 
 
-fn sdl_push_event(event: Ptr[SDL_Event, mut=True]) raises:
+fn push_event(event: Ptr[Event, mut=True]) raises:
     """Add an event to the event queue.
 
     The event queue can actually be used as a two way communication channel.
@@ -1682,12 +1602,12 @@ fn sdl_push_event(event: Ptr[SDL_Event, mut=True]) raises:
     Docs: https://wiki.libsdl.org/SDL3/SDL_PushEvent.
     """
 
-    ret = _get_dylib_function[lib, "SDL_PushEvent", fn (event: Ptr[SDL_Event, mut=True]) -> Bool]()(event)
+    ret = _get_dylib_function[lib, "SDL_PushEvent", fn (event: Ptr[Event, mut=True]) -> Bool]()(event)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-alias SDL_EventFilter = fn (userdata: Ptr[NoneType, mut=True], event: Ptr[SDL_Event, mut=True]) -> Bool
+alias EventFilter = fn (userdata: Ptr[NoneType, mut=True], event: Ptr[Event, mut=True]) -> Bool
 """A function pointer used for callbacks that watch the event queue.
     
     Args:
@@ -1709,7 +1629,7 @@ Docs: https://wiki.libsdl.org/SDL3/SDL_EventFilter.
 """
 
 
-fn sdl_set_event_filter(filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=True]) -> None:
+fn set_event_filter(filter: EventFilter, userdata: Ptr[NoneType, mut=True]) -> None:
     """Set up a filter to process all events before they are added to the internal
     event queue.
 
@@ -1745,10 +1665,10 @@ fn sdl_set_event_filter(filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=Tru
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetEventFilter.
     """
 
-    return _get_dylib_function[lib, "SDL_SetEventFilter", fn (filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=True]) -> None]()(filter, userdata)
+    return _get_dylib_function[lib, "SDL_SetEventFilter", fn (filter: EventFilter, userdata: Ptr[NoneType, mut=True]) -> None]()(filter, userdata)
 
 
-fn sdl_get_event_filter(filter: Ptr[SDL_EventFilter, mut=True], userdata: Ptr[Ptr[NoneType, mut=True], mut=True]) raises:
+fn get_event_filter(filter: Ptr[EventFilter, mut=True], userdata: Ptr[Ptr[NoneType, mut=True], mut=True]) raises:
     """Query the current event filter.
 
     This function can be used to "chain" filters, by saving the existing filter
@@ -1768,12 +1688,12 @@ fn sdl_get_event_filter(filter: Ptr[SDL_EventFilter, mut=True], userdata: Ptr[Pt
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetEventFilter.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetEventFilter", fn (filter: Ptr[SDL_EventFilter, mut=True], userdata: Ptr[Ptr[NoneType, mut=True], mut=True]) -> Bool]()(filter, userdata)
+    ret = _get_dylib_function[lib, "SDL_GetEventFilter", fn (filter: Ptr[EventFilter, mut=True], userdata: Ptr[Ptr[NoneType, mut=True], mut=True]) -> Bool]()(filter, userdata)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_add_event_watch(filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=True]) raises:
+fn add_event_watch(filter: EventFilter, userdata: Ptr[NoneType, mut=True]) raises:
     """Add a callback to be triggered when an event is added to the event queue.
 
     `filter` will be called when an event happens, and its return value is
@@ -1805,12 +1725,12 @@ fn sdl_add_event_watch(filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=True
     Docs: https://wiki.libsdl.org/SDL3/SDL_AddEventWatch.
     """
 
-    ret = _get_dylib_function[lib, "SDL_AddEventWatch", fn (filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=True]) -> Bool]()(filter, userdata)
+    ret = _get_dylib_function[lib, "SDL_AddEventWatch", fn (filter: EventFilter, userdata: Ptr[NoneType, mut=True]) -> Bool]()(filter, userdata)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_remove_event_watch(filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=True]) -> None:
+fn remove_event_watch(filter: EventFilter, userdata: Ptr[NoneType, mut=True]) -> None:
     """Remove an event watch callback added with SDL_AddEventWatch().
 
     This function takes the same input as SDL_AddEventWatch() to identify and
@@ -1826,10 +1746,10 @@ fn sdl_remove_event_watch(filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=T
     Docs: https://wiki.libsdl.org/SDL3/SDL_RemoveEventWatch.
     """
 
-    return _get_dylib_function[lib, "SDL_RemoveEventWatch", fn (filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=True]) -> None]()(filter, userdata)
+    return _get_dylib_function[lib, "SDL_RemoveEventWatch", fn (filter: EventFilter, userdata: Ptr[NoneType, mut=True]) -> None]()(filter, userdata)
 
 
-fn sdl_filter_events(filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=True]) -> None:
+fn filter_events(filter: EventFilter, userdata: Ptr[NoneType, mut=True]) -> None:
     """Run a specific filter function on the current event queue, removing any
     events for which the filter returns false.
 
@@ -1847,10 +1767,10 @@ fn sdl_filter_events(filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=True])
     Docs: https://wiki.libsdl.org/SDL3/SDL_FilterEvents.
     """
 
-    return _get_dylib_function[lib, "SDL_FilterEvents", fn (filter: SDL_EventFilter, userdata: Ptr[NoneType, mut=True]) -> None]()(filter, userdata)
+    return _get_dylib_function[lib, "SDL_FilterEvents", fn (filter: EventFilter, userdata: Ptr[NoneType, mut=True]) -> None]()(filter, userdata)
 
 
-fn sdl_set_event_enabled(type: UInt32, enabled: Bool) -> None:
+fn set_event_enabled(type: UInt32, enabled: Bool) -> None:
     """Set the state of processing events by type.
 
     Args:
@@ -1866,7 +1786,7 @@ fn sdl_set_event_enabled(type: UInt32, enabled: Bool) -> None:
     return _get_dylib_function[lib, "SDL_SetEventEnabled", fn (type: UInt32, enabled: Bool) -> None]()(type, enabled)
 
 
-fn sdl_event_enabled(type: UInt32) -> Bool:
+fn event_enabled(type: UInt32) -> Bool:
     """Query the state of processing events by type.
 
     Args:
@@ -1884,7 +1804,7 @@ fn sdl_event_enabled(type: UInt32) -> Bool:
     return _get_dylib_function[lib, "SDL_EventEnabled", fn (type: UInt32) -> Bool]()(type)
 
 
-fn sdl_register_events(numevents: c_int) -> UInt32:
+fn register_events(numevents: c_int) -> UInt32:
     """Allocate a set of user-defined events, and return the beginning event
     number for that set of events.
 
@@ -1904,7 +1824,7 @@ fn sdl_register_events(numevents: c_int) -> UInt32:
     return _get_dylib_function[lib, "SDL_RegisterEvents", fn (numevents: c_int) -> UInt32]()(numevents)
 
 
-fn sdl_get_window_from_event(event: Ptr[SDL_Event, mut=False]) -> Ptr[SDL_Window, mut=True]:
+fn get_window_from_event(event: Ptr[Event, mut=False]) -> Ptr[Window, mut=True]:
     """Get window associated with an event.
 
     Args:
@@ -1919,4 +1839,4 @@ fn sdl_get_window_from_event(event: Ptr[SDL_Event, mut=False]) -> Ptr[SDL_Window
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetWindowFromEvent.
     """
 
-    return _get_dylib_function[lib, "SDL_GetWindowFromEvent", fn (event: Ptr[SDL_Event, mut=False]) -> Ptr[SDL_Window, mut=True]]()(event)
+    return _get_dylib_function[lib, "SDL_GetWindowFromEvent", fn (event: Ptr[Event, mut=False]) -> Ptr[Window, mut=True]]()(event)

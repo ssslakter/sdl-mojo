@@ -28,7 +28,7 @@ compiled against, and a library the app is linked to.
 """
 
 
-fn sdl_get_version() -> c_int:
+fn get_version() -> c_int:
     """Get the version of SDL that is linked against your program.
 
     If you are linking to SDL dynamically, then it is possible that the current
@@ -47,7 +47,7 @@ fn sdl_get_version() -> c_int:
     return _get_dylib_function[lib, "SDL_GetVersion", fn () -> c_int]()()
 
 
-fn sdl_get_revision() -> Ptr[c_char, mut=False]:
+fn get_revision() -> Ptr[c_char, mut=False]:
     """Get the code revision of SDL that is linked against your program.
 
     This value is the revision of the code you are linked with and may be

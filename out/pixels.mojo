@@ -80,7 +80,7 @@ The matrix coefficients are used to convert between YCbCr and RGB colors.
 
 
 @register_passable("trivial")
-struct SDL_PixelType(Intable):
+struct PixelType(Intable):
     """Pixel type.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PixelType.
@@ -96,24 +96,24 @@ struct SDL_PixelType(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_PIXELTYPE_UNKNOWN = 0
-    alias SDL_PIXELTYPE_INDEX1 = 1
-    alias SDL_PIXELTYPE_INDEX4 = 2
-    alias SDL_PIXELTYPE_INDEX8 = 3
-    alias SDL_PIXELTYPE_PACKED8 = 4
-    alias SDL_PIXELTYPE_PACKED16 = 5
-    alias SDL_PIXELTYPE_PACKED32 = 6
-    alias SDL_PIXELTYPE_ARRAYU8 = 7
-    alias SDL_PIXELTYPE_ARRAYU16 = 8
-    alias SDL_PIXELTYPE_ARRAYU32 = 9
-    alias SDL_PIXELTYPE_ARRAYF16 = 10
-    alias SDL_PIXELTYPE_ARRAYF32 = 11
+    alias PIXELTYPE_UNKNOWN = Self(0)
+    alias PIXELTYPE_INDEX1 = Self(1)
+    alias PIXELTYPE_INDEX4 = Self(2)
+    alias PIXELTYPE_INDEX8 = Self(3)
+    alias PIXELTYPE_PACKED8 = Self(4)
+    alias PIXELTYPE_PACKED16 = Self(5)
+    alias PIXELTYPE_PACKED32 = Self(6)
+    alias PIXELTYPE_ARRAYU8 = Self(7)
+    alias PIXELTYPE_ARRAYU16 = Self(8)
+    alias PIXELTYPE_ARRAYU32 = Self(9)
+    alias PIXELTYPE_ARRAYF16 = Self(10)
+    alias PIXELTYPE_ARRAYF32 = Self(11)
     # appended at the end for compatibility with sdl2-compat:
-    alias SDL_PIXELTYPE_INDEX2 = 12
+    alias PIXELTYPE_INDEX2 = Self(12)
 
 
 @register_passable("trivial")
-struct SDL_BitmapOrder(Intable):
+struct BitmapOrder(Intable):
     """Bitmap pixel order, high bit -> low bit.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_BitmapOrder.
@@ -129,13 +129,13 @@ struct SDL_BitmapOrder(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_BITMAPORDER_NONE = 0
-    alias SDL_BITMAPORDER_4321 = 1
-    alias SDL_BITMAPORDER_1234 = 2
+    alias BITMAPORDER_NONE = Self(0)
+    alias BITMAPORDER_4321 = Self(1)
+    alias BITMAPORDER_1234 = Self(2)
 
 
 @register_passable("trivial")
-struct SDL_PackedOrder(Intable):
+struct PackedOrder(Intable):
     """Packed component order, high bit -> low bit.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PackedOrder.
@@ -151,19 +151,19 @@ struct SDL_PackedOrder(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_PACKEDORDER_NONE = 0
-    alias SDL_PACKEDORDER_XRGB = 1
-    alias SDL_PACKEDORDER_RGBX = 2
-    alias SDL_PACKEDORDER_ARGB = 3
-    alias SDL_PACKEDORDER_RGBA = 4
-    alias SDL_PACKEDORDER_XBGR = 5
-    alias SDL_PACKEDORDER_BGRX = 6
-    alias SDL_PACKEDORDER_ABGR = 7
-    alias SDL_PACKEDORDER_BGRA = 8
+    alias PACKEDORDER_NONE = Self(0)
+    alias PACKEDORDER_XRGB = Self(1)
+    alias PACKEDORDER_RGBX = Self(2)
+    alias PACKEDORDER_ARGB = Self(3)
+    alias PACKEDORDER_RGBA = Self(4)
+    alias PACKEDORDER_XBGR = Self(5)
+    alias PACKEDORDER_BGRX = Self(6)
+    alias PACKEDORDER_ABGR = Self(7)
+    alias PACKEDORDER_BGRA = Self(8)
 
 
 @register_passable("trivial")
-struct SDL_ArrayOrder(Intable):
+struct ArrayOrder(Intable):
     """Array component order, low byte -> high byte.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_ArrayOrder.
@@ -179,17 +179,17 @@ struct SDL_ArrayOrder(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_ARRAYORDER_NONE = 0
-    alias SDL_ARRAYORDER_RGB = 1
-    alias SDL_ARRAYORDER_RGBA = 2
-    alias SDL_ARRAYORDER_ARGB = 3
-    alias SDL_ARRAYORDER_BGR = 4
-    alias SDL_ARRAYORDER_BGRA = 5
-    alias SDL_ARRAYORDER_ABGR = 6
+    alias ARRAYORDER_NONE = Self(0)
+    alias ARRAYORDER_RGB = Self(1)
+    alias ARRAYORDER_RGBA = Self(2)
+    alias ARRAYORDER_ARGB = Self(3)
+    alias ARRAYORDER_BGR = Self(4)
+    alias ARRAYORDER_BGRA = Self(5)
+    alias ARRAYORDER_ABGR = Self(6)
 
 
 @register_passable("trivial")
-struct SDL_PackedLayout(Intable):
+struct PackedLayout(Intable):
     """Packed component layout.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PackedLayout.
@@ -205,19 +205,19 @@ struct SDL_PackedLayout(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_PACKEDLAYOUT_NONE = 0
-    alias SDL_PACKEDLAYOUT_332 = 1
-    alias SDL_PACKEDLAYOUT_4444 = 2
-    alias SDL_PACKEDLAYOUT_1555 = 3
-    alias SDL_PACKEDLAYOUT_5551 = 4
-    alias SDL_PACKEDLAYOUT_565 = 5
-    alias SDL_PACKEDLAYOUT_8888 = 6
-    alias SDL_PACKEDLAYOUT_2101010 = 7
-    alias SDL_PACKEDLAYOUT_1010102 = 8
+    alias PACKEDLAYOUT_NONE = Self(0)
+    alias PACKEDLAYOUT_332 = Self(1)
+    alias PACKEDLAYOUT_4444 = Self(2)
+    alias PACKEDLAYOUT_1555 = Self(3)
+    alias PACKEDLAYOUT_5551 = Self(4)
+    alias PACKEDLAYOUT_565 = Self(5)
+    alias PACKEDLAYOUT_8888 = Self(6)
+    alias PACKEDLAYOUT_2101010 = Self(7)
+    alias PACKEDLAYOUT_1010102 = Self(8)
 
 
 @register_passable("trivial")
-struct SDL_PixelFormat(Intable):
+struct PixelFormat(Intable):
     """Pixel format.
 
     SDL's pixel formats have the following naming convention:
@@ -265,161 +265,161 @@ struct SDL_PixelFormat(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_PIXELFORMAT_UNKNOWN = 0
-    alias SDL_PIXELFORMAT_INDEX1LSB = 0x11100100
+    alias PIXELFORMAT_UNKNOWN = Self(0)
+    alias PIXELFORMAT_INDEX1LSB = Self(0x11100100)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX1, SDL_BITMAPORDER_4321, 0, 1, 0),
-    alias SDL_PIXELFORMAT_INDEX1MSB = 0x11200100
+    alias PIXELFORMAT_INDEX1MSB = Self(0x11200100)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX1, SDL_BITMAPORDER_1234, 0, 1, 0),
-    alias SDL_PIXELFORMAT_INDEX2LSB = 0x1C100200
+    alias PIXELFORMAT_INDEX2LSB = Self(0x1C100200)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX2, SDL_BITMAPORDER_4321, 0, 2, 0),
-    alias SDL_PIXELFORMAT_INDEX2MSB = 0x1C200200
+    alias PIXELFORMAT_INDEX2MSB = Self(0x1C200200)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX2, SDL_BITMAPORDER_1234, 0, 2, 0),
-    alias SDL_PIXELFORMAT_INDEX4LSB = 0x12100400
+    alias PIXELFORMAT_INDEX4LSB = Self(0x12100400)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX4, SDL_BITMAPORDER_4321, 0, 4, 0),
-    alias SDL_PIXELFORMAT_INDEX4MSB = 0x12200400
+    alias PIXELFORMAT_INDEX4MSB = Self(0x12200400)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX4, SDL_BITMAPORDER_1234, 0, 4, 0),
-    alias SDL_PIXELFORMAT_INDEX8 = 0x13000801
+    alias PIXELFORMAT_INDEX8 = Self(0x13000801)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX8, 0, 0, 8, 1),
-    alias SDL_PIXELFORMAT_RGB332 = 0x14110801
+    alias PIXELFORMAT_RGB332 = Self(0x14110801)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED8, SDL_PACKEDORDER_XRGB, SDL_PACKEDLAYOUT_332, 8, 1),
-    alias SDL_PIXELFORMAT_XRGB4444 = 0x15120C02
+    alias PIXELFORMAT_XRGB4444 = Self(0x15120C02)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XRGB, SDL_PACKEDLAYOUT_4444, 12, 2),
-    alias SDL_PIXELFORMAT_XBGR4444 = 0x15520C02
+    alias PIXELFORMAT_XBGR4444 = Self(0x15520C02)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XBGR, SDL_PACKEDLAYOUT_4444, 12, 2),
-    alias SDL_PIXELFORMAT_XRGB1555 = 0x15130F02
+    alias PIXELFORMAT_XRGB1555 = Self(0x15130F02)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XRGB, SDL_PACKEDLAYOUT_1555, 15, 2),
-    alias SDL_PIXELFORMAT_XBGR1555 = 0x15530F02
+    alias PIXELFORMAT_XBGR1555 = Self(0x15530F02)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XBGR, SDL_PACKEDLAYOUT_1555, 15, 2),
-    alias SDL_PIXELFORMAT_ARGB4444 = 0x15321002
+    alias PIXELFORMAT_ARGB4444 = Self(0x15321002)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ARGB, SDL_PACKEDLAYOUT_4444, 16, 2),
-    alias SDL_PIXELFORMAT_RGBA4444 = 0x15421002
+    alias PIXELFORMAT_RGBA4444 = Self(0x15421002)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_RGBA, SDL_PACKEDLAYOUT_4444, 16, 2),
-    alias SDL_PIXELFORMAT_ABGR4444 = 0x15721002
+    alias PIXELFORMAT_ABGR4444 = Self(0x15721002)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ABGR, SDL_PACKEDLAYOUT_4444, 16, 2),
-    alias SDL_PIXELFORMAT_BGRA4444 = 0x15821002
+    alias PIXELFORMAT_BGRA4444 = Self(0x15821002)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_BGRA, SDL_PACKEDLAYOUT_4444, 16, 2),
-    alias SDL_PIXELFORMAT_ARGB1555 = 0x15331002
+    alias PIXELFORMAT_ARGB1555 = Self(0x15331002)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ARGB, SDL_PACKEDLAYOUT_1555, 16, 2),
-    alias SDL_PIXELFORMAT_RGBA5551 = 0x15441002
+    alias PIXELFORMAT_RGBA5551 = Self(0x15441002)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_RGBA, SDL_PACKEDLAYOUT_5551, 16, 2),
-    alias SDL_PIXELFORMAT_ABGR1555 = 0x15731002
+    alias PIXELFORMAT_ABGR1555 = Self(0x15731002)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ABGR, SDL_PACKEDLAYOUT_1555, 16, 2),
-    alias SDL_PIXELFORMAT_BGRA5551 = 0x15841002
+    alias PIXELFORMAT_BGRA5551 = Self(0x15841002)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_BGRA, SDL_PACKEDLAYOUT_5551, 16, 2),
-    alias SDL_PIXELFORMAT_RGB565 = 0x15151002
+    alias PIXELFORMAT_RGB565 = Self(0x15151002)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XRGB, SDL_PACKEDLAYOUT_565, 16, 2),
-    alias SDL_PIXELFORMAT_BGR565 = 0x15551002
+    alias PIXELFORMAT_BGR565 = Self(0x15551002)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XBGR, SDL_PACKEDLAYOUT_565, 16, 2),
-    alias SDL_PIXELFORMAT_RGB24 = 0x17101803
+    alias PIXELFORMAT_RGB24 = Self(0x17101803)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYU8, SDL_ARRAYORDER_RGB, 0, 24, 3),
-    alias SDL_PIXELFORMAT_BGR24 = 0x17401803
+    alias PIXELFORMAT_BGR24 = Self(0x17401803)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYU8, SDL_ARRAYORDER_BGR, 0, 24, 3),
-    alias SDL_PIXELFORMAT_XRGB8888 = 0x16161804
+    alias PIXELFORMAT_XRGB8888 = Self(0x16161804)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_XRGB, SDL_PACKEDLAYOUT_8888, 24, 4),
-    alias SDL_PIXELFORMAT_RGBX8888 = 0x16261804
+    alias PIXELFORMAT_RGBX8888 = Self(0x16261804)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_RGBX, SDL_PACKEDLAYOUT_8888, 24, 4),
-    alias SDL_PIXELFORMAT_XBGR8888 = 0x16561804
+    alias PIXELFORMAT_XBGR8888 = Self(0x16561804)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_XBGR, SDL_PACKEDLAYOUT_8888, 24, 4),
-    alias SDL_PIXELFORMAT_BGRX8888 = 0x16661804
+    alias PIXELFORMAT_BGRX8888 = Self(0x16661804)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_BGRX, SDL_PACKEDLAYOUT_8888, 24, 4),
-    alias SDL_PIXELFORMAT_ARGB8888 = 0x16362004
+    alias PIXELFORMAT_ARGB8888 = Self(0x16362004)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_ARGB, SDL_PACKEDLAYOUT_8888, 32, 4),
-    alias SDL_PIXELFORMAT_RGBA8888 = 0x16462004
+    alias PIXELFORMAT_RGBA8888 = Self(0x16462004)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_RGBA, SDL_PACKEDLAYOUT_8888, 32, 4),
-    alias SDL_PIXELFORMAT_ABGR8888 = 0x16762004
+    alias PIXELFORMAT_ABGR8888 = Self(0x16762004)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_ABGR, SDL_PACKEDLAYOUT_8888, 32, 4),
-    alias SDL_PIXELFORMAT_BGRA8888 = 0x16862004
+    alias PIXELFORMAT_BGRA8888 = Self(0x16862004)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_BGRA, SDL_PACKEDLAYOUT_8888, 32, 4),
-    alias SDL_PIXELFORMAT_XRGB2101010 = 0x16172004
+    alias PIXELFORMAT_XRGB2101010 = Self(0x16172004)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_XRGB, SDL_PACKEDLAYOUT_2101010, 32, 4),
-    alias SDL_PIXELFORMAT_XBGR2101010 = 0x16572004
+    alias PIXELFORMAT_XBGR2101010 = Self(0x16572004)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_XBGR, SDL_PACKEDLAYOUT_2101010, 32, 4),
-    alias SDL_PIXELFORMAT_ARGB2101010 = 0x16372004
+    alias PIXELFORMAT_ARGB2101010 = Self(0x16372004)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_ARGB, SDL_PACKEDLAYOUT_2101010, 32, 4),
-    alias SDL_PIXELFORMAT_ABGR2101010 = 0x16772004
+    alias PIXELFORMAT_ABGR2101010 = Self(0x16772004)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_ABGR, SDL_PACKEDLAYOUT_2101010, 32, 4),
-    alias SDL_PIXELFORMAT_RGB48 = 0x18103006
+    alias PIXELFORMAT_RGB48 = Self(0x18103006)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYU16, SDL_ARRAYORDER_RGB, 0, 48, 6),
-    alias SDL_PIXELFORMAT_BGR48 = 0x18403006
+    alias PIXELFORMAT_BGR48 = Self(0x18403006)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYU16, SDL_ARRAYORDER_BGR, 0, 48, 6),
-    alias SDL_PIXELFORMAT_RGBA64 = 0x18204008
+    alias PIXELFORMAT_RGBA64 = Self(0x18204008)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYU16, SDL_ARRAYORDER_RGBA, 0, 64, 8),
-    alias SDL_PIXELFORMAT_ARGB64 = 0x18304008
+    alias PIXELFORMAT_ARGB64 = Self(0x18304008)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYU16, SDL_ARRAYORDER_ARGB, 0, 64, 8),
-    alias SDL_PIXELFORMAT_BGRA64 = 0x18504008
+    alias PIXELFORMAT_BGRA64 = Self(0x18504008)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYU16, SDL_ARRAYORDER_BGRA, 0, 64, 8),
-    alias SDL_PIXELFORMAT_ABGR64 = 0x18604008
+    alias PIXELFORMAT_ABGR64 = Self(0x18604008)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYU16, SDL_ARRAYORDER_ABGR, 0, 64, 8),
-    alias SDL_PIXELFORMAT_RGB48_FLOAT = 0x1A103006
+    alias PIXELFORMAT_RGB48_FLOAT = Self(0x1A103006)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF16, SDL_ARRAYORDER_RGB, 0, 48, 6),
-    alias SDL_PIXELFORMAT_BGR48_FLOAT = 0x1A403006
+    alias PIXELFORMAT_BGR48_FLOAT = Self(0x1A403006)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF16, SDL_ARRAYORDER_BGR, 0, 48, 6),
-    alias SDL_PIXELFORMAT_RGBA64_FLOAT = 0x1A204008
+    alias PIXELFORMAT_RGBA64_FLOAT = Self(0x1A204008)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF16, SDL_ARRAYORDER_RGBA, 0, 64, 8),
-    alias SDL_PIXELFORMAT_ARGB64_FLOAT = 0x1A304008
+    alias PIXELFORMAT_ARGB64_FLOAT = Self(0x1A304008)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF16, SDL_ARRAYORDER_ARGB, 0, 64, 8),
-    alias SDL_PIXELFORMAT_BGRA64_FLOAT = 0x1A504008
+    alias PIXELFORMAT_BGRA64_FLOAT = Self(0x1A504008)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF16, SDL_ARRAYORDER_BGRA, 0, 64, 8),
-    alias SDL_PIXELFORMAT_ABGR64_FLOAT = 0x1A604008
+    alias PIXELFORMAT_ABGR64_FLOAT = Self(0x1A604008)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF16, SDL_ARRAYORDER_ABGR, 0, 64, 8),
-    alias SDL_PIXELFORMAT_RGB96_FLOAT = 0x1B10600C
+    alias PIXELFORMAT_RGB96_FLOAT = Self(0x1B10600C)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF32, SDL_ARRAYORDER_RGB, 0, 96, 12),
-    alias SDL_PIXELFORMAT_BGR96_FLOAT = 0x1B40600C
+    alias PIXELFORMAT_BGR96_FLOAT = Self(0x1B40600C)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF32, SDL_ARRAYORDER_BGR, 0, 96, 12),
-    alias SDL_PIXELFORMAT_RGBA128_FLOAT = 0x1B208010
+    alias PIXELFORMAT_RGBA128_FLOAT = Self(0x1B208010)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF32, SDL_ARRAYORDER_RGBA, 0, 128, 16),
-    alias SDL_PIXELFORMAT_ARGB128_FLOAT = 0x1B308010
+    alias PIXELFORMAT_ARGB128_FLOAT = Self(0x1B308010)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF32, SDL_ARRAYORDER_ARGB, 0, 128, 16),
-    alias SDL_PIXELFORMAT_BGRA128_FLOAT = 0x1B508010
+    alias PIXELFORMAT_BGRA128_FLOAT = Self(0x1B508010)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF32, SDL_ARRAYORDER_BGRA, 0, 128, 16),
-    alias SDL_PIXELFORMAT_ABGR128_FLOAT = 0x1B608010
+    alias PIXELFORMAT_ABGR128_FLOAT = Self(0x1B608010)
     # SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYF32, SDL_ARRAYORDER_ABGR, 0, 128, 16),
 
-    alias SDL_PIXELFORMAT_YV12 = 0x32315659
+    alias PIXELFORMAT_YV12 = Self(0x32315659)
     """Planar mode: Y + V + U  (3 planes)."""
     # SDL_DEFINE_PIXELFOURCC('Y', 'V', '1', '2'),
-    alias SDL_PIXELFORMAT_IYUV = 0x56555949
+    alias PIXELFORMAT_IYUV = Self(0x56555949)
     """Planar mode: Y + U + V  (3 planes)."""
     # SDL_DEFINE_PIXELFOURCC('I', 'Y', 'U', 'V'),
-    alias SDL_PIXELFORMAT_YUY2 = 0x32595559
+    alias PIXELFORMAT_YUY2 = Self(0x32595559)
     """Packed mode: Y0+U0+Y1+V0 (1 plane)."""
     # SDL_DEFINE_PIXELFOURCC('Y', 'U', 'Y', '2'),
-    alias SDL_PIXELFORMAT_UYVY = 0x59565955
+    alias PIXELFORMAT_UYVY = Self(0x59565955)
     """Packed mode: U0+Y0+V0+Y1 (1 plane)."""
     # SDL_DEFINE_PIXELFOURCC('U', 'Y', 'V', 'Y'),
-    alias SDL_PIXELFORMAT_YVYU = 0x55595659
+    alias PIXELFORMAT_YVYU = Self(0x55595659)
     """Packed mode: Y0+V0+Y1+U0 (1 plane)."""
     # SDL_DEFINE_PIXELFOURCC('Y', 'V', 'Y', 'U'),
-    alias SDL_PIXELFORMAT_NV12 = 0x3231564E
+    alias PIXELFORMAT_NV12 = Self(0x3231564E)
     """Planar mode: Y + U/V interleaved  (2 planes)."""
     # SDL_DEFINE_PIXELFOURCC('N', 'V', '1', '2'),
-    alias SDL_PIXELFORMAT_NV21 = 0x3132564E
+    alias PIXELFORMAT_NV21 = Self(0x3132564E)
     """Planar mode: Y + V/U interleaved  (2 planes)."""
     # SDL_DEFINE_PIXELFOURCC('N', 'V', '2', '1'),
-    alias SDL_PIXELFORMAT_P010 = 0x30313050
+    alias PIXELFORMAT_P010 = Self(0x30313050)
     """Planar mode: Y + U/V interleaved  (2 planes)."""
     # SDL_DEFINE_PIXELFOURCC('P', '0', '1', '0'),
-    alias SDL_PIXELFORMAT_EXTERNAL_OES = 0x2053454F
+    alias PIXELFORMAT_EXTERNAL_OES = Self(0x2053454F)
     """Android video texture format."""
     # SDL_DEFINE_PIXELFOURCC('O', 'E', 'S', ' ')
 
-    alias SDL_PIXELFORMAT_MJPG = 0x47504A4D
+    alias PIXELFORMAT_MJPG = Self(0x47504A4D)
     """Motion JPEG."""
     # SDL_DEFINE_PIXELFOURCC('M', 'J', 'P', 'G')
 
     # Aliases for RGBA byte arrays of color data, for the current platform
-    alias SDL_PIXELFORMAT_RGBA32 = Self.SDL_PIXELFORMAT_RGBA8888 if is_big_endian() else Self.SDL_PIXELFORMAT_ABGR8888
-    alias SDL_PIXELFORMAT_ARGB32 = Self.SDL_PIXELFORMAT_ARGB8888 if is_big_endian() else Self.SDL_PIXELFORMAT_BGRA8888
-    alias SDL_PIXELFORMAT_BGRA32 = Self.SDL_PIXELFORMAT_BGRA8888 if is_big_endian() else Self.SDL_PIXELFORMAT_ARGB8888
-    alias SDL_PIXELFORMAT_ABGR32 = Self.SDL_PIXELFORMAT_ABGR8888 if is_big_endian() else Self.SDL_PIXELFORMAT_RGBA8888
-    alias SDL_PIXELFORMAT_RGBX32 = Self.SDL_PIXELFORMAT_RGBX8888 if is_big_endian() else Self.SDL_PIXELFORMAT_XBGR8888
-    alias SDL_PIXELFORMAT_XRGB32 = Self.SDL_PIXELFORMAT_XRGB8888 if is_big_endian() else Self.SDL_PIXELFORMAT_BGRX8888
-    alias SDL_PIXELFORMAT_BGRX32 = Self.SDL_PIXELFORMAT_BGRX8888 if is_big_endian() else Self.SDL_PIXELFORMAT_XRGB8888
-    alias SDL_PIXELFORMAT_XBGR32 = Self.SDL_PIXELFORMAT_XBGR8888 if is_big_endian() else Self.SDL_PIXELFORMAT_RGBX8888
+    alias PIXELFORMAT_RGBA32 = Self.PIXELFORMAT_RGBA8888 if is_big_endian() else Self.PIXELFORMAT_ABGR8888
+    alias PIXELFORMAT_ARGB32 = Self.PIXELFORMAT_ARGB8888 if is_big_endian() else Self.PIXELFORMAT_BGRA8888
+    alias PIXELFORMAT_BGRA32 = Self.PIXELFORMAT_BGRA8888 if is_big_endian() else Self.PIXELFORMAT_ARGB8888
+    alias PIXELFORMAT_ABGR32 = Self.PIXELFORMAT_ABGR8888 if is_big_endian() else Self.PIXELFORMAT_RGBA8888
+    alias PIXELFORMAT_RGBX32 = Self.PIXELFORMAT_RGBX8888 if is_big_endian() else Self.PIXELFORMAT_XBGR8888
+    alias PIXELFORMAT_XRGB32 = Self.PIXELFORMAT_XRGB8888 if is_big_endian() else Self.PIXELFORMAT_BGRX8888
+    alias PIXELFORMAT_BGRX32 = Self.PIXELFORMAT_BGRX8888 if is_big_endian() else Self.PIXELFORMAT_XRGB8888
+    alias PIXELFORMAT_XBGR32 = Self.PIXELFORMAT_XBGR8888 if is_big_endian() else Self.PIXELFORMAT_RGBX8888
 
 
 @register_passable("trivial")
-struct SDL_ColorType(Intable):
+struct ColorType(Intable):
     """Colorspace color type.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_ColorType.
@@ -435,13 +435,13 @@ struct SDL_ColorType(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_COLOR_TYPE_UNKNOWN = 0
-    alias SDL_COLOR_TYPE_RGB = 1
-    alias SDL_COLOR_TYPE_YCBCR = 2
+    alias COLOR_TYPE_UNKNOWN = Self(0)
+    alias COLOR_TYPE_RGB = Self(1)
+    alias COLOR_TYPE_YCBCR = Self(2)
 
 
 @register_passable("trivial")
-struct SDL_ColorRange(Intable):
+struct ColorRange(Intable):
     """Colorspace color range, as described by
     https://www.itu.int/rec/R-REC-BT.2100-2-201807-I/en.
 
@@ -458,15 +458,15 @@ struct SDL_ColorRange(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_COLOR_RANGE_UNKNOWN = 0
-    alias SDL_COLOR_RANGE_LIMITED = 1
+    alias COLOR_RANGE_UNKNOWN = Self(0)
+    alias COLOR_RANGE_LIMITED = Self(1)
     """Narrow range, e.g. 16-235 for 8-bit RGB and luma, and 16-240 for 8-bit chroma."""
-    alias SDL_COLOR_RANGE_FULL = 2
+    alias COLOR_RANGE_FULL = Self(2)
     """Full range, e.g. 0-255 for 8-bit RGB and luma, and 1-255 for 8-bit chroma."""
 
 
 @register_passable("trivial")
-struct SDL_ColorPrimaries(Intable):
+struct ColorPrimaries(Intable):
     """Colorspace color primaries, as described by
     https://www.itu.int/rec/T-REC-H.273-201612-S/en.
 
@@ -483,35 +483,35 @@ struct SDL_ColorPrimaries(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_COLOR_PRIMARIES_UNKNOWN = 0
-    alias SDL_COLOR_PRIMARIES_BT709 = 1
+    alias COLOR_PRIMARIES_UNKNOWN = Self(0)
+    alias COLOR_PRIMARIES_BT709 = Self(1)
     """ITU-R BT.709-6."""
-    alias SDL_COLOR_PRIMARIES_UNSPECIFIED = 2
-    alias SDL_COLOR_PRIMARIES_BT470M = 4
+    alias COLOR_PRIMARIES_UNSPECIFIED = Self(2)
+    alias COLOR_PRIMARIES_BT470M = Self(4)
     """ITU-R BT.470-6 System M."""
-    alias SDL_COLOR_PRIMARIES_BT470BG = 5
+    alias COLOR_PRIMARIES_BT470BG = Self(5)
     """ITU-R BT.470-6 System B, G / ITU-R BT.601-7 625."""
-    alias SDL_COLOR_PRIMARIES_BT601 = 6
+    alias COLOR_PRIMARIES_BT601 = Self(6)
     """ITU-R BT.601-7 525, SMPTE 170M."""
-    alias SDL_COLOR_PRIMARIES_SMPTE240 = 7
+    alias COLOR_PRIMARIES_SMPTE240 = Self(7)
     """SMPTE 240M, functionally the same as SDL_COLOR_PRIMARIES_BT601."""
-    alias SDL_COLOR_PRIMARIES_GENERIC_FILM = 8
+    alias COLOR_PRIMARIES_GENERIC_FILM = Self(8)
     """Generic film (color filters using Illuminant C)."""
-    alias SDL_COLOR_PRIMARIES_BT2020 = 9
+    alias COLOR_PRIMARIES_BT2020 = Self(9)
     """ITU-R BT.2020-2 / ITU-R BT.2100-0."""
-    alias SDL_COLOR_PRIMARIES_XYZ = 10
+    alias COLOR_PRIMARIES_XYZ = Self(10)
     """SMPTE ST 428-1."""
-    alias SDL_COLOR_PRIMARIES_SMPTE431 = 11
+    alias COLOR_PRIMARIES_SMPTE431 = Self(11)
     """SMPTE RP 431-2."""
-    alias SDL_COLOR_PRIMARIES_SMPTE432 = 12
+    alias COLOR_PRIMARIES_SMPTE432 = Self(12)
     """SMPTE EG 432-1 / DCI P3."""
-    alias SDL_COLOR_PRIMARIES_EBU3213 = 22
+    alias COLOR_PRIMARIES_EBU3213 = Self(22)
     """EBU Tech. 3213-E."""
-    alias SDL_COLOR_PRIMARIES_CUSTOM = 31
+    alias COLOR_PRIMARIES_CUSTOM = Self(31)
 
 
 @register_passable("trivial")
-struct SDL_TransferCharacteristics(Intable):
+struct TransferCharacteristics(Intable):
     """Colorspace transfer characteristics.
 
     These are as described by https://www.itu.int/rec/T-REC-H.273-201612-S/en
@@ -529,42 +529,42 @@ struct SDL_TransferCharacteristics(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_TRANSFER_CHARACTERISTICS_UNKNOWN = 0
-    alias SDL_TRANSFER_CHARACTERISTICS_BT709 = 1
+    alias TRANSFER_CHARACTERISTICS_UNKNOWN = Self(0)
+    alias TRANSFER_CHARACTERISTICS_BT709 = Self(1)
     """Rec. ITU-R BT.709-6 / ITU-R BT1361."""
-    alias SDL_TRANSFER_CHARACTERISTICS_UNSPECIFIED = 2
-    alias SDL_TRANSFER_CHARACTERISTICS_GAMMA22 = 4
+    alias TRANSFER_CHARACTERISTICS_UNSPECIFIED = Self(2)
+    alias TRANSFER_CHARACTERISTICS_GAMMA22 = Self(4)
     """ITU-R BT.470-6 System M / ITU-R BT1700 625 PAL & SECAM."""
-    alias SDL_TRANSFER_CHARACTERISTICS_GAMMA28 = 5
+    alias TRANSFER_CHARACTERISTICS_GAMMA28 = Self(5)
     """ITU-R BT.470-6 System B, G."""
-    alias SDL_TRANSFER_CHARACTERISTICS_BT601 = 6
+    alias TRANSFER_CHARACTERISTICS_BT601 = Self(6)
     """SMPTE ST 170M / ITU-R BT.601-7 525 or 625."""
-    alias SDL_TRANSFER_CHARACTERISTICS_SMPTE240 = 7
+    alias TRANSFER_CHARACTERISTICS_SMPTE240 = Self(7)
     """SMPTE ST 240M."""
-    alias SDL_TRANSFER_CHARACTERISTICS_LINEAR = 8
-    alias SDL_TRANSFER_CHARACTERISTICS_LOG100 = 9
-    alias SDL_TRANSFER_CHARACTERISTICS_LOG100_SQRT10 = 10
-    alias SDL_TRANSFER_CHARACTERISTICS_IEC61966 = 11
+    alias TRANSFER_CHARACTERISTICS_LINEAR = Self(8)
+    alias TRANSFER_CHARACTERISTICS_LOG100 = Self(9)
+    alias TRANSFER_CHARACTERISTICS_LOG100_SQRT10 = Self(10)
+    alias TRANSFER_CHARACTERISTICS_IEC61966 = Self(11)
     """IEC 61966-2-4."""
-    alias SDL_TRANSFER_CHARACTERISTICS_BT1361 = 12
+    alias TRANSFER_CHARACTERISTICS_BT1361 = Self(12)
     """ITU-R BT1361 Extended Colour Gamut."""
-    alias SDL_TRANSFER_CHARACTERISTICS_SRGB = 13
+    alias TRANSFER_CHARACTERISTICS_SRGB = Self(13)
     """IEC 61966-2-1 (sRGB or sYCC)."""
-    alias SDL_TRANSFER_CHARACTERISTICS_BT2020_10BIT = 14
+    alias TRANSFER_CHARACTERISTICS_BT2020_10BIT = Self(14)
     """ITU-R BT2020 for 10-bit system."""
-    alias SDL_TRANSFER_CHARACTERISTICS_BT2020_12BIT = 15
+    alias TRANSFER_CHARACTERISTICS_BT2020_12BIT = Self(15)
     """ITU-R BT2020 for 12-bit system."""
-    alias SDL_TRANSFER_CHARACTERISTICS_PQ = 16
+    alias TRANSFER_CHARACTERISTICS_PQ = Self(16)
     """SMPTE ST 2084 for 10-, 12-, 14- and 16-bit systems."""
-    alias SDL_TRANSFER_CHARACTERISTICS_SMPTE428 = 17
+    alias TRANSFER_CHARACTERISTICS_SMPTE428 = Self(17)
     """SMPTE ST 428-1."""
-    alias SDL_TRANSFER_CHARACTERISTICS_HLG = 18
+    alias TRANSFER_CHARACTERISTICS_HLG = Self(18)
     """ARIB STD-B67, known as "hybrid log-gamma" (HLG)."""
-    alias SDL_TRANSFER_CHARACTERISTICS_CUSTOM = 31
+    alias TRANSFER_CHARACTERISTICS_CUSTOM = Self(31)
 
 
 @register_passable("trivial")
-struct SDL_MatrixCoefficients(Intable):
+struct MatrixCoefficients(Intable):
     """Colorspace matrix coefficients.
 
     These are as described by https://www.itu.int/rec/T-REC-H.273-201612-S/en
@@ -582,34 +582,34 @@ struct SDL_MatrixCoefficients(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_MATRIX_COEFFICIENTS_IDENTITY = 0
-    alias SDL_MATRIX_COEFFICIENTS_BT709 = 1
+    alias MATRIX_COEFFICIENTS_IDENTITY = Self(0)
+    alias MATRIX_COEFFICIENTS_BT709 = Self(1)
     """ITU-R BT.709-6."""
-    alias SDL_MATRIX_COEFFICIENTS_UNSPECIFIED = 2
-    alias SDL_MATRIX_COEFFICIENTS_FCC = 4
+    alias MATRIX_COEFFICIENTS_UNSPECIFIED = Self(2)
+    alias MATRIX_COEFFICIENTS_FCC = Self(4)
     """US FCC Title 47."""
-    alias SDL_MATRIX_COEFFICIENTS_BT470BG = 5
+    alias MATRIX_COEFFICIENTS_BT470BG = Self(5)
     """ITU-R BT.470-6 System B, G / ITU-R BT.601-7 625, functionally the same as SDL_MATRIX_COEFFICIENTS_BT601."""
-    alias SDL_MATRIX_COEFFICIENTS_BT601 = 6
+    alias MATRIX_COEFFICIENTS_BT601 = Self(6)
     """ITU-R BT.601-7 525."""
-    alias SDL_MATRIX_COEFFICIENTS_SMPTE240 = 7
+    alias MATRIX_COEFFICIENTS_SMPTE240 = Self(7)
     """SMPTE 240M."""
-    alias SDL_MATRIX_COEFFICIENTS_YCGCO = 8
-    alias SDL_MATRIX_COEFFICIENTS_BT2020_NCL = 9
+    alias MATRIX_COEFFICIENTS_YCGCO = Self(8)
+    alias MATRIX_COEFFICIENTS_BT2020_NCL = Self(9)
     """ITU-R BT.2020-2 non-constant luminance."""
-    alias SDL_MATRIX_COEFFICIENTS_BT2020_CL = 10
+    alias MATRIX_COEFFICIENTS_BT2020_CL = Self(10)
     """ITU-R BT.2020-2 constant luminance."""
-    alias SDL_MATRIX_COEFFICIENTS_SMPTE2085 = 11
+    alias MATRIX_COEFFICIENTS_SMPTE2085 = Self(11)
     """SMPTE ST 2085."""
-    alias SDL_MATRIX_COEFFICIENTS_CHROMA_DERIVED_NCL = 12
-    alias SDL_MATRIX_COEFFICIENTS_CHROMA_DERIVED_CL = 13
-    alias SDL_MATRIX_COEFFICIENTS_ICTCP = 14
+    alias MATRIX_COEFFICIENTS_CHROMA_DERIVED_NCL = Self(12)
+    alias MATRIX_COEFFICIENTS_CHROMA_DERIVED_CL = Self(13)
+    alias MATRIX_COEFFICIENTS_ICTCP = Self(14)
     """ITU-R BT.2100-0 ICTCP."""
-    alias SDL_MATRIX_COEFFICIENTS_CUSTOM = 31
+    alias MATRIX_COEFFICIENTS_CUSTOM = Self(31)
 
 
 @register_passable("trivial")
-struct SDL_ChromaLocation(Intable):
+struct ChromaLocation(Intable):
     """Colorspace chroma sample location.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_ChromaLocation.
@@ -625,18 +625,18 @@ struct SDL_ChromaLocation(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_CHROMA_LOCATION_NONE = 0
+    alias CHROMA_LOCATION_NONE = Self(0)
     """RGB, no chroma sampling."""
-    alias SDL_CHROMA_LOCATION_LEFT = 1
+    alias CHROMA_LOCATION_LEFT = Self(1)
     """In MPEG-2, MPEG-4, and AVC, Cb and Cr are taken on midpoint of the left-edge of the 2x2 square. In other words, they have the same horizontal location as the top-left pixel, but is shifted one-half pixel down vertically."""
-    alias SDL_CHROMA_LOCATION_CENTER = 2
+    alias CHROMA_LOCATION_CENTER = Self(2)
     """In JPEG/JFIF, H.261, and MPEG-1, Cb and Cr are taken at the center of the 2x2 square. In other words, they are offset one-half pixel to the right and one-half pixel down compared to the top-left pixel."""
-    alias SDL_CHROMA_LOCATION_TOPLEFT = 3
+    alias CHROMA_LOCATION_TOPLEFT = Self(3)
     """In HEVC for BT.2020 and BT.2100 content (in particular on Blu-rays), Cb and Cr are sampled at the same location as the group's top-left Y pixel ("co-sited", "co-located")."""
 
 
 @register_passable("trivial")
-struct SDL_Colorspace(Intable):
+struct Colorspace(Intable):
     """Colorspace definitions.
 
     Since similar colorspaces may vary in their details (matrix, transfer
@@ -656,10 +656,10 @@ struct SDL_Colorspace(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_COLORSPACE_UNKNOWN = 0
+    alias COLORSPACE_UNKNOWN = Self(0)
 
     # sRGB is a gamma corrected colorspace, and the default colorspace for SDL rendering and 8-bit RGB surfaces
-    alias SDL_COLORSPACE_SRGB = 0x120005A0
+    alias COLORSPACE_SRGB = Self(0x120005A0)
     """Equivalent to DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P709."""
     # SDL_DEFINE_COLORSPACE(SDL_COLOR_TYPE_RGB,
     #                                  SDL_COLOR_RANGE_FULL,
@@ -669,7 +669,7 @@ struct SDL_Colorspace(Intable):
     #                                  SDL_CHROMA_LOCATION_NONE),
 
     # This is a linear colorspace and the default colorspace for floating point surfaces. On Windows this is the scRGB colorspace, and on Apple platforms this is kCGColorSpaceExtendedLinearSRGB for EDR content
-    alias SDL_COLORSPACE_SRGB_LINEAR = 0x12000500
+    alias COLORSPACE_SRGB_LINEAR = Self(0x12000500)
     """Equivalent to DXGI_COLOR_SPACE_RGB_FULL_G10_NONE_P709."""
     # SDL_DEFINE_COLORSPACE(SDL_COLOR_TYPE_RGB,
     #                                  SDL_COLOR_RANGE_FULL,
@@ -679,7 +679,7 @@ struct SDL_Colorspace(Intable):
     #                                  SDL_CHROMA_LOCATION_NONE),
 
     # HDR10 is a non-linear HDR colorspace and the default colorspace for 10-bit surfaces
-    alias SDL_COLORSPACE_HDR10 = 0x12002600
+    alias COLORSPACE_HDR10 = Self(0x12002600)
     """Equivalent to DXGI_COLOR_SPACE_RGB_FULL_G2084_NONE_P2020."""
     # SDL_DEFINE_COLORSPACE(SDL_COLOR_TYPE_RGB,
     #                                  SDL_COLOR_RANGE_FULL,
@@ -688,7 +688,7 @@ struct SDL_Colorspace(Intable):
     #                                  SDL_MATRIX_COEFFICIENTS_IDENTITY,
     #                                  SDL_CHROMA_LOCATION_NONE),
 
-    alias SDL_COLORSPACE_JPEG = 0x220004C6
+    alias COLORSPACE_JPEG = Self(0x220004C6)
     """Equivalent to DXGI_COLOR_SPACE_YCBCR_FULL_G22_NONE_P709_X601."""
     # SDL_DEFINE_COLORSPACE(SDL_COLOR_TYPE_YCBCR,
     #                                  SDL_COLOR_RANGE_FULL,
@@ -697,7 +697,7 @@ struct SDL_Colorspace(Intable):
     #                                  SDL_MATRIX_COEFFICIENTS_BT601,
     #                                  SDL_CHROMA_LOCATION_NONE),
 
-    alias SDL_COLORSPACE_BT601_LIMITED = 0x211018C6
+    alias COLORSPACE_BT601_LIMITED = Self(0x211018C6)
     """Equivalent to DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_LEFT_P601."""
     # SDL_DEFINE_COLORSPACE(SDL_COLOR_TYPE_YCBCR,
     #                                  SDL_COLOR_RANGE_LIMITED,
@@ -706,7 +706,7 @@ struct SDL_Colorspace(Intable):
     #                                  SDL_MATRIX_COEFFICIENTS_BT601,
     #                                  SDL_CHROMA_LOCATION_LEFT),
 
-    alias SDL_COLORSPACE_BT601_FULL = 0x221018C6
+    alias COLORSPACE_BT601_FULL = Self(0x221018C6)
     """Equivalent to DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_LEFT_P601."""
     # SDL_DEFINE_COLORSPACE(SDL_COLOR_TYPE_YCBCR,
     #                                  SDL_COLOR_RANGE_FULL,
@@ -715,7 +715,7 @@ struct SDL_Colorspace(Intable):
     #                                  SDL_MATRIX_COEFFICIENTS_BT601,
     #                                  SDL_CHROMA_LOCATION_LEFT),
 
-    alias SDL_COLORSPACE_BT709_LIMITED = 0x21100421
+    alias COLORSPACE_BT709_LIMITED = Self(0x21100421)
     """Equivalent to DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_LEFT_P709."""
     # SDL_DEFINE_COLORSPACE(SDL_COLOR_TYPE_YCBCR,
     #                                  SDL_COLOR_RANGE_LIMITED,
@@ -724,7 +724,7 @@ struct SDL_Colorspace(Intable):
     #                                  SDL_MATRIX_COEFFICIENTS_BT709,
     #                                  SDL_CHROMA_LOCATION_LEFT),
 
-    alias SDL_COLORSPACE_BT709_FULL = 0x22100421
+    alias COLORSPACE_BT709_FULL = Self(0x22100421)
     """Equivalent to DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_LEFT_P709."""
     # SDL_DEFINE_COLORSPACE(SDL_COLOR_TYPE_YCBCR,
     #                                  SDL_COLOR_RANGE_FULL,
@@ -733,7 +733,7 @@ struct SDL_Colorspace(Intable):
     #                                  SDL_MATRIX_COEFFICIENTS_BT709,
     #                                  SDL_CHROMA_LOCATION_LEFT),
 
-    alias SDL_COLORSPACE_BT2020_LIMITED = 0x21102609
+    alias COLORSPACE_BT2020_LIMITED = Self(0x21102609)
     """Equivalent to DXGI_COLOR_SPACE_YCBCR_STUDIO_G22_LEFT_P2020."""
     # SDL_DEFINE_COLORSPACE(SDL_COLOR_TYPE_YCBCR,
     #                                  SDL_COLOR_RANGE_LIMITED,
@@ -742,7 +742,7 @@ struct SDL_Colorspace(Intable):
     #                                  SDL_MATRIX_COEFFICIENTS_BT2020_NCL,
     #                                  SDL_CHROMA_LOCATION_LEFT),
 
-    alias SDL_COLORSPACE_BT2020_FULL = 0x22102609
+    alias COLORSPACE_BT2020_FULL = Self(0x22102609)
     """Equivalent to DXGI_COLOR_SPACE_YCBCR_FULL_G22_LEFT_P2020."""
     # SDL_DEFINE_COLORSPACE(SDL_COLOR_TYPE_YCBCR,
     #                                  SDL_COLOR_RANGE_FULL,
@@ -751,14 +751,14 @@ struct SDL_Colorspace(Intable):
     #                                  SDL_MATRIX_COEFFICIENTS_BT2020_NCL,
     #                                  SDL_CHROMA_LOCATION_LEFT),
 
-    alias SDL_COLORSPACE_RGB_DEFAULT = Self.SDL_COLORSPACE_SRGB
+    alias COLORSPACE_RGB_DEFAULT = Self.COLORSPACE_SRGB
     """The default colorspace for RGB surfaces if no colorspace is specified."""
-    alias SDL_COLORSPACE_YUV_DEFAULT = Self.SDL_COLORSPACE_JPEG
+    alias COLORSPACE_YUV_DEFAULT = Self.COLORSPACE_JPEG
     """The default colorspace for YUV surfaces if no colorspace is specified."""
 
 
 @fieldwise_init
-struct SDL_Color(Copyable, Movable):
+struct Color(Copyable, Movable):
     """A structure that represents a color as RGBA components.
 
     The bits of this structure can be directly reinterpreted as an
@@ -766,7 +766,7 @@ struct SDL_Color(Copyable, Movable):
     (SDL_PIXELFORMAT_ABGR8888 on little-endian systems and
     SDL_PIXELFORMAT_RGBA8888 on big-endian systems).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_Color.
+    Docs: https://wiki.libsdl.org/SDL3/Color.
     """
 
     var r: UInt8
@@ -776,11 +776,11 @@ struct SDL_Color(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_FColor(Copyable, Movable):
+struct FColor(Copyable, Movable):
     """The bits of this structure can be directly reinterpreted as a float-packed
     color which uses the SDL_PIXELFORMAT_RGBA128_FLOAT format.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_FColor.
+    Docs: https://wiki.libsdl.org/SDL3/FColor.
     """
 
     var r: c_float
@@ -790,15 +790,15 @@ struct SDL_FColor(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_Palette(Copyable, Movable):
+struct Palette(Copyable, Movable):
     """A set of indexed colors representing a palette.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_Palette.
+    Docs: https://wiki.libsdl.org/SDL3/Palette.
     """
 
     var ncolors: c_int
     """Number of elements in `colors`."""
-    var colors: Ptr[SDL_Color, mut=True]
+    var colors: Ptr[Color, mut=True]
     """An array of colors, `ncolors` long."""
     var version: UInt32
     """Internal use only, do not touch."""
@@ -807,13 +807,13 @@ struct SDL_Palette(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_PixelFormatDetails(Copyable, Movable):
+struct PixelFormatDetails(Copyable, Movable):
     """Details about the format of a pixel.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_PixelFormatDetails.
+    Docs: https://wiki.libsdl.org/SDL3/PixelFormatDetails.
     """
 
-    var format: SDL_PixelFormat
+    var format: PixelFormat
     var bits_per_pixel: UInt8
     var bytes_per_pixel: UInt8
     var padding: ArrayHelper[UInt8, 2, mut=True].result
@@ -831,7 +831,7 @@ struct SDL_PixelFormatDetails(Copyable, Movable):
     var ashift: UInt8
 
 
-fn sdl_get_pixel_format_name(format: SDL_PixelFormat) -> Ptr[c_char, mut=False]:
+fn get_pixel_format_name(format: PixelFormat) -> Ptr[c_char, mut=False]:
     """Get the human readable name of a pixel format.
 
     Args:
@@ -847,10 +847,10 @@ fn sdl_get_pixel_format_name(format: SDL_PixelFormat) -> Ptr[c_char, mut=False]:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetPixelFormatName.
     """
 
-    return _get_dylib_function[lib, "SDL_GetPixelFormatName", fn (format: SDL_PixelFormat) -> Ptr[c_char, mut=False]]()(format)
+    return _get_dylib_function[lib, "SDL_GetPixelFormatName", fn (format: PixelFormat) -> Ptr[c_char, mut=False]]()(format)
 
 
-fn sdl_get_masks_for_pixel_format(format: SDL_PixelFormat, bpp: Ptr[c_int, mut=True], rmask: Ptr[UInt32, mut=True], gmask: Ptr[UInt32, mut=True], bmask: Ptr[UInt32, mut=True], amask: Ptr[UInt32, mut=True]) raises:
+fn get_masks_for_pixel_format(format: PixelFormat, bpp: Ptr[c_int, mut=True], rmask: Ptr[UInt32, mut=True], gmask: Ptr[UInt32, mut=True], bmask: Ptr[UInt32, mut=True], amask: Ptr[UInt32, mut=True]) raises:
     """Convert one of the enumerated pixel formats to a bpp value and RGBA masks.
 
     Args:
@@ -871,12 +871,12 @@ fn sdl_get_masks_for_pixel_format(format: SDL_PixelFormat, bpp: Ptr[c_int, mut=T
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetMasksForPixelFormat.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetMasksForPixelFormat", fn (format: SDL_PixelFormat, bpp: Ptr[c_int, mut=True], rmask: Ptr[UInt32, mut=True], gmask: Ptr[UInt32, mut=True], bmask: Ptr[UInt32, mut=True], amask: Ptr[UInt32, mut=True]) -> Bool]()(format, bpp, rmask, gmask, bmask, amask)
+    ret = _get_dylib_function[lib, "SDL_GetMasksForPixelFormat", fn (format: PixelFormat, bpp: Ptr[c_int, mut=True], rmask: Ptr[UInt32, mut=True], gmask: Ptr[UInt32, mut=True], bmask: Ptr[UInt32, mut=True], amask: Ptr[UInt32, mut=True]) -> Bool]()(format, bpp, rmask, gmask, bmask, amask)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_pixel_format_for_masks(bpp: c_int, rmask: UInt32, gmask: UInt32, bmask: UInt32, amask: UInt32) -> SDL_PixelFormat:
+fn get_pixel_format_for_masks(bpp: c_int, rmask: UInt32, gmask: UInt32, bmask: UInt32, amask: UInt32) -> PixelFormat:
     """Convert a bpp value and RGBA masks to an enumerated pixel format.
 
     This will return `SDL_PIXELFORMAT_UNKNOWN` if the conversion wasn't
@@ -899,10 +899,10 @@ fn sdl_get_pixel_format_for_masks(bpp: c_int, rmask: UInt32, gmask: UInt32, bmas
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetPixelFormatForMasks.
     """
 
-    return _get_dylib_function[lib, "SDL_GetPixelFormatForMasks", fn (bpp: c_int, rmask: UInt32, gmask: UInt32, bmask: UInt32, amask: UInt32) -> SDL_PixelFormat]()(bpp, rmask, gmask, bmask, amask)
+    return _get_dylib_function[lib, "SDL_GetPixelFormatForMasks", fn (bpp: c_int, rmask: UInt32, gmask: UInt32, bmask: UInt32, amask: UInt32) -> PixelFormat]()(bpp, rmask, gmask, bmask, amask)
 
 
-fn sdl_get_pixel_format_details(format: SDL_PixelFormat) -> Ptr[SDL_PixelFormatDetails, mut=False]:
+fn get_pixel_format_details(format: PixelFormat) -> Ptr[PixelFormatDetails, mut=False]:
     """Create an SDL_PixelFormatDetails structure corresponding to a pixel format.
 
     Returned structure may come from a shared global cache (i.e. not newly
@@ -922,10 +922,10 @@ fn sdl_get_pixel_format_details(format: SDL_PixelFormat) -> Ptr[SDL_PixelFormatD
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetPixelFormatDetails.
     """
 
-    return _get_dylib_function[lib, "SDL_GetPixelFormatDetails", fn (format: SDL_PixelFormat) -> Ptr[SDL_PixelFormatDetails, mut=False]]()(format)
+    return _get_dylib_function[lib, "SDL_GetPixelFormatDetails", fn (format: PixelFormat) -> Ptr[PixelFormatDetails, mut=False]]()(format)
 
 
-fn sdl_create_palette(ncolors: c_int) -> Ptr[SDL_Palette, mut=True]:
+fn create_palette(ncolors: c_int) -> Ptr[Palette, mut=True]:
     """Create a palette structure with the specified number of color entries.
 
     The palette entries are initialized to white.
@@ -944,10 +944,10 @@ fn sdl_create_palette(ncolors: c_int) -> Ptr[SDL_Palette, mut=True]:
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreatePalette.
     """
 
-    return _get_dylib_function[lib, "SDL_CreatePalette", fn (ncolors: c_int) -> Ptr[SDL_Palette, mut=True]]()(ncolors)
+    return _get_dylib_function[lib, "SDL_CreatePalette", fn (ncolors: c_int) -> Ptr[Palette, mut=True]]()(ncolors)
 
 
-fn sdl_set_palette_colors(palette: Ptr[SDL_Palette, mut=True], colors: Ptr[SDL_Color, mut=False], firstcolor: c_int, ncolors: c_int) raises:
+fn set_palette_colors(palette: Ptr[Palette, mut=True], colors: Ptr[Color, mut=False], firstcolor: c_int, ncolors: c_int) raises:
     """Set a range of colors in a palette.
 
     Args:
@@ -967,12 +967,12 @@ fn sdl_set_palette_colors(palette: Ptr[SDL_Palette, mut=True], colors: Ptr[SDL_C
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetPaletteColors.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetPaletteColors", fn (palette: Ptr[SDL_Palette, mut=True], colors: Ptr[SDL_Color, mut=False], firstcolor: c_int, ncolors: c_int) -> Bool]()(palette, colors, firstcolor, ncolors)
+    ret = _get_dylib_function[lib, "SDL_SetPaletteColors", fn (palette: Ptr[Palette, mut=True], colors: Ptr[Color, mut=False], firstcolor: c_int, ncolors: c_int) -> Bool]()(palette, colors, firstcolor, ncolors)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_destroy_palette(palette: Ptr[SDL_Palette, mut=True]) -> None:
+fn destroy_palette(palette: Ptr[Palette, mut=True]) -> None:
     """Free a palette created with SDL_CreatePalette().
 
     Args:
@@ -985,10 +985,10 @@ fn sdl_destroy_palette(palette: Ptr[SDL_Palette, mut=True]) -> None:
     Docs: https://wiki.libsdl.org/SDL3/SDL_DestroyPalette.
     """
 
-    return _get_dylib_function[lib, "SDL_DestroyPalette", fn (palette: Ptr[SDL_Palette, mut=True]) -> None]()(palette)
+    return _get_dylib_function[lib, "SDL_DestroyPalette", fn (palette: Ptr[Palette, mut=True]) -> None]()(palette)
 
 
-fn sdl_map_rgb(format: Ptr[SDL_PixelFormatDetails, mut=False], palette: Ptr[SDL_Palette, mut=False], r: UInt8, g: UInt8, b: UInt8) -> UInt32:
+fn map_rgb(format: Ptr[PixelFormatDetails, mut=False], palette: Ptr[Palette, mut=False], r: UInt8, g: UInt8, b: UInt8) -> UInt32:
     """Map an RGB triple to an opaque pixel value for a given pixel format.
 
     This function maps the RGB color value to the specified pixel format and
@@ -1024,10 +1024,10 @@ fn sdl_map_rgb(format: Ptr[SDL_PixelFormatDetails, mut=False], palette: Ptr[SDL_
     Docs: https://wiki.libsdl.org/SDL3/SDL_MapRGB.
     """
 
-    return _get_dylib_function[lib, "SDL_MapRGB", fn (format: Ptr[SDL_PixelFormatDetails, mut=False], palette: Ptr[SDL_Palette, mut=False], r: UInt8, g: UInt8, b: UInt8) -> UInt32]()(format, palette, r, g, b)
+    return _get_dylib_function[lib, "SDL_MapRGB", fn (format: Ptr[PixelFormatDetails, mut=False], palette: Ptr[Palette, mut=False], r: UInt8, g: UInt8, b: UInt8) -> UInt32]()(format, palette, r, g, b)
 
 
-fn sdl_map_rgba(format: Ptr[SDL_PixelFormatDetails, mut=False], palette: Ptr[SDL_Palette, mut=False], r: UInt8, g: UInt8, b: UInt8, a: UInt8) -> UInt32:
+fn map_rgba(format: Ptr[PixelFormatDetails, mut=False], palette: Ptr[Palette, mut=False], r: UInt8, g: UInt8, b: UInt8, a: UInt8) -> UInt32:
     """Map an RGBA quadruple to a pixel value for a given pixel format.
 
     This function maps the RGBA color value to the specified pixel format and
@@ -1064,10 +1064,10 @@ fn sdl_map_rgba(format: Ptr[SDL_PixelFormatDetails, mut=False], palette: Ptr[SDL
     Docs: https://wiki.libsdl.org/SDL3/SDL_MapRGBA.
     """
 
-    return _get_dylib_function[lib, "SDL_MapRGBA", fn (format: Ptr[SDL_PixelFormatDetails, mut=False], palette: Ptr[SDL_Palette, mut=False], r: UInt8, g: UInt8, b: UInt8, a: UInt8) -> UInt32]()(format, palette, r, g, b, a)
+    return _get_dylib_function[lib, "SDL_MapRGBA", fn (format: Ptr[PixelFormatDetails, mut=False], palette: Ptr[Palette, mut=False], r: UInt8, g: UInt8, b: UInt8, a: UInt8) -> UInt32]()(format, palette, r, g, b, a)
 
 
-fn sdl_get_rgb(pixel: UInt32, format: Ptr[SDL_PixelFormatDetails, mut=False], palette: Ptr[SDL_Palette, mut=False], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True]) -> None:
+fn get_rgb(pixel: UInt32, format: Ptr[PixelFormatDetails, mut=False], palette: Ptr[Palette, mut=False], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True]) -> None:
     """Get RGB values from a pixel in the specified format.
 
     This function uses the entire 8-bit [0..255] range when converting color
@@ -1091,10 +1091,10 @@ fn sdl_get_rgb(pixel: UInt32, format: Ptr[SDL_PixelFormatDetails, mut=False], pa
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRGB.
     """
 
-    return _get_dylib_function[lib, "SDL_GetRGB", fn (pixel: UInt32, format: Ptr[SDL_PixelFormatDetails, mut=False], palette: Ptr[SDL_Palette, mut=False], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True]) -> None]()(pixel, format, palette, r, g, b)
+    return _get_dylib_function[lib, "SDL_GetRGB", fn (pixel: UInt32, format: Ptr[PixelFormatDetails, mut=False], palette: Ptr[Palette, mut=False], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True]) -> None]()(pixel, format, palette, r, g, b)
 
 
-fn sdl_get_rgba(pixel: UInt32, format: Ptr[SDL_PixelFormatDetails, mut=False], palette: Ptr[SDL_Palette, mut=False], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True], a: Ptr[UInt8, mut=True]) -> None:
+fn get_rgba(pixel: UInt32, format: Ptr[PixelFormatDetails, mut=False], palette: Ptr[Palette, mut=False], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True], a: Ptr[UInt8, mut=True]) -> None:
     """Get RGBA values from a pixel in the specified format.
 
     This function uses the entire 8-bit [0..255] range when converting color
@@ -1122,4 +1122,4 @@ fn sdl_get_rgba(pixel: UInt32, format: Ptr[SDL_PixelFormatDetails, mut=False], p
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRGBA.
     """
 
-    return _get_dylib_function[lib, "SDL_GetRGBA", fn (pixel: UInt32, format: Ptr[SDL_PixelFormatDetails, mut=False], palette: Ptr[SDL_Palette, mut=False], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True], a: Ptr[UInt8, mut=True]) -> None]()(pixel, format, palette, r, g, b, a)
+    return _get_dylib_function[lib, "SDL_GetRGBA", fn (pixel: UInt32, format: Ptr[PixelFormatDetails, mut=False], palette: Ptr[Palette, mut=False], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True], a: Ptr[UInt8, mut=True]) -> None]()(pixel, format, palette, r, g, b, a)

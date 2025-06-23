@@ -33,7 +33,7 @@ https://wiki.libsdl.org/SDL3/BestKeyboardPractices
 
 
 @register_passable("trivial")
-struct SDL_KeyboardID(Intable):
+struct KeyboardID(Intable):
     """This is a unique ID for a keyboard for the time it is connected to the
     system, and is never reused for the lifetime of the application.
 
@@ -59,7 +59,7 @@ struct SDL_KeyboardID(Intable):
         return Self(lhs.value | rhs.value)
 
 
-fn sdl_has_keyboard() -> Bool:
+fn has_keyboard() -> Bool:
     """Return whether a keyboard is currently connected.
 
     Returns:
@@ -74,7 +74,7 @@ fn sdl_has_keyboard() -> Bool:
     return _get_dylib_function[lib, "SDL_HasKeyboard", fn () -> Bool]()()
 
 
-fn sdl_get_keyboards(count: Ptr[c_int, mut=True], out ret: Ptr[SDL_KeyboardID, mut=True]) raises:
+fn get_keyboards(count: Ptr[c_int, mut=True], out ret: Ptr[KeyboardID, mut=True]) raises:
     """Get a list of currently connected keyboards.
 
     Note that this will include any device or virtual driver that includes
@@ -97,12 +97,12 @@ fn sdl_get_keyboards(count: Ptr[c_int, mut=True], out ret: Ptr[SDL_KeyboardID, m
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetKeyboards.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetKeyboards", fn (count: Ptr[c_int, mut=True]) -> Ptr[SDL_KeyboardID, mut=True]]()(count)
+    ret = _get_dylib_function[lib, "SDL_GetKeyboards", fn (count: Ptr[c_int, mut=True]) -> Ptr[KeyboardID, mut=True]]()(count)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_keyboard_name_for_id(instance_id: SDL_KeyboardID, out ret: Ptr[c_char, mut=False]) raises:
+fn get_keyboard_name_for_id(instance_id: KeyboardID, out ret: Ptr[c_char, mut=False]) raises:
     """Get the name of a keyboard.
 
     This function returns "" if the keyboard doesn't have a name.
@@ -120,12 +120,12 @@ fn sdl_get_keyboard_name_for_id(instance_id: SDL_KeyboardID, out ret: Ptr[c_char
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetKeyboardNameForID.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetKeyboardNameForID", fn (instance_id: SDL_KeyboardID) -> Ptr[c_char, mut=False]]()(instance_id)
+    ret = _get_dylib_function[lib, "SDL_GetKeyboardNameForID", fn (instance_id: KeyboardID) -> Ptr[c_char, mut=False]]()(instance_id)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_keyboard_focus() -> Ptr[SDL_Window, mut=True]:
+fn get_keyboard_focus() -> Ptr[Window, mut=True]:
     """Query the window which currently has keyboard focus.
 
     Returns:
@@ -137,10 +137,10 @@ fn sdl_get_keyboard_focus() -> Ptr[SDL_Window, mut=True]:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetKeyboardFocus.
     """
 
-    return _get_dylib_function[lib, "SDL_GetKeyboardFocus", fn () -> Ptr[SDL_Window, mut=True]]()()
+    return _get_dylib_function[lib, "SDL_GetKeyboardFocus", fn () -> Ptr[Window, mut=True]]()()
 
 
-fn sdl_get_keyboard_state(numkeys: Ptr[c_int, mut=True]) -> Ptr[Bool, mut=False]:
+fn get_keyboard_state(numkeys: Ptr[c_int, mut=True]) -> Ptr[Bool, mut=False]:
     """Get a snapshot of the current state of the keyboard.
 
     The pointer returned is a pointer to an internal SDL array. It will be
@@ -176,7 +176,7 @@ fn sdl_get_keyboard_state(numkeys: Ptr[c_int, mut=True]) -> Ptr[Bool, mut=False]
     return _get_dylib_function[lib, "SDL_GetKeyboardState", fn (numkeys: Ptr[c_int, mut=True]) -> Ptr[Bool, mut=False]]()(numkeys)
 
 
-fn sdl_reset_keyboard() -> None:
+fn reset_keyboard() -> None:
     """Clear the state of the keyboard.
 
     This function will generate key up events for all pressed keys.
@@ -190,7 +190,7 @@ fn sdl_reset_keyboard() -> None:
     return _get_dylib_function[lib, "SDL_ResetKeyboard", fn () -> None]()()
 
 
-fn sdl_get_mod_state() -> SDL_Keymod:
+fn get_mod_state() -> Keymod:
     """Get the current key modifier state for the keyboard.
 
     Returns:
@@ -203,10 +203,10 @@ fn sdl_get_mod_state() -> SDL_Keymod:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetModState.
     """
 
-    return _get_dylib_function[lib, "SDL_GetModState", fn () -> SDL_Keymod]()()
+    return _get_dylib_function[lib, "SDL_GetModState", fn () -> Keymod]()()
 
 
-fn sdl_set_mod_state(modstate: SDL_Keymod) -> None:
+fn set_mod_state(modstate: Keymod) -> None:
     """Set the current key modifier state for the keyboard.
 
     The inverse of SDL_GetModState(), SDL_SetModState() allows you to impose
@@ -226,10 +226,10 @@ fn sdl_set_mod_state(modstate: SDL_Keymod) -> None:
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetModState.
     """
 
-    return _get_dylib_function[lib, "SDL_SetModState", fn (modstate: SDL_Keymod) -> None]()(modstate)
+    return _get_dylib_function[lib, "SDL_SetModState", fn (modstate: Keymod) -> None]()(modstate)
 
 
-fn sdl_get_key_from_scancode(scancode: SDL_Scancode, modstate: SDL_Keymod, key_event: Bool) -> SDL_Keycode:
+fn get_key_from_scancode(scancode: Scancode, modstate: Keymod, key_event: Bool) -> Keycode:
     """Get the key code corresponding to the given scancode according to the
     current keyboard layout.
 
@@ -253,10 +253,10 @@ fn sdl_get_key_from_scancode(scancode: SDL_Scancode, modstate: SDL_Keymod, key_e
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetKeyFromScancode.
     """
 
-    return _get_dylib_function[lib, "SDL_GetKeyFromScancode", fn (scancode: SDL_Scancode, modstate: SDL_Keymod, key_event: Bool) -> SDL_Keycode]()(scancode, modstate, key_event)
+    return _get_dylib_function[lib, "SDL_GetKeyFromScancode", fn (scancode: Scancode, modstate: Keymod, key_event: Bool) -> Keycode]()(scancode, modstate, key_event)
 
 
-fn sdl_get_scancode_from_key(key: SDL_Keycode, modstate: Ptr[SDL_Keymod, mut=True]) -> SDL_Scancode:
+fn get_scancode_from_key(key: Keycode, modstate: Ptr[Keymod, mut=True]) -> Scancode:
     """Get the scancode corresponding to the given key code according to the
     current keyboard layout.
 
@@ -277,10 +277,10 @@ fn sdl_get_scancode_from_key(key: SDL_Keycode, modstate: Ptr[SDL_Keymod, mut=Tru
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetScancodeFromKey.
     """
 
-    return _get_dylib_function[lib, "SDL_GetScancodeFromKey", fn (key: SDL_Keycode, modstate: Ptr[SDL_Keymod, mut=True]) -> SDL_Scancode]()(key, modstate)
+    return _get_dylib_function[lib, "SDL_GetScancodeFromKey", fn (key: Keycode, modstate: Ptr[Keymod, mut=True]) -> Scancode]()(key, modstate)
 
 
-fn sdl_set_scancode_name(scancode: SDL_Scancode, owned name: String) raises:
+fn set_scancode_name(scancode: Scancode, owned name: String) raises:
     """Set a human-readable name for a scancode.
 
     Args:
@@ -299,12 +299,12 @@ fn sdl_set_scancode_name(scancode: SDL_Scancode, owned name: String) raises:
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetScancodeName.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetScancodeName", fn (scancode: SDL_Scancode, name: Ptr[c_char, mut=False]) -> Bool]()(scancode, name.unsafe_cstr_ptr())
+    ret = _get_dylib_function[lib, "SDL_SetScancodeName", fn (scancode: Scancode, name: Ptr[c_char, mut=False]) -> Bool]()(scancode, name.unsafe_cstr_ptr())
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_scancode_name(scancode: SDL_Scancode) -> Ptr[c_char, mut=False]:
+fn get_scancode_name(scancode: Scancode) -> Ptr[c_char, mut=False]:
     """Get a human-readable name for a scancode.
 
     **Warning**: The returned name is by design not stable across platforms,
@@ -329,10 +329,10 @@ fn sdl_get_scancode_name(scancode: SDL_Scancode) -> Ptr[c_char, mut=False]:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetScancodeName.
     """
 
-    return _get_dylib_function[lib, "SDL_GetScancodeName", fn (scancode: SDL_Scancode) -> Ptr[c_char, mut=False]]()(scancode)
+    return _get_dylib_function[lib, "SDL_GetScancodeName", fn (scancode: Scancode) -> Ptr[c_char, mut=False]]()(scancode)
 
 
-fn sdl_get_scancode_from_name(owned name: String) -> SDL_Scancode:
+fn get_scancode_from_name(owned name: String) -> Scancode:
     """Get a scancode from a human-readable name.
 
     Args:
@@ -348,10 +348,10 @@ fn sdl_get_scancode_from_name(owned name: String) -> SDL_Scancode:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetScancodeFromName.
     """
 
-    return _get_dylib_function[lib, "SDL_GetScancodeFromName", fn (name: Ptr[c_char, mut=False]) -> SDL_Scancode]()(name.unsafe_cstr_ptr())
+    return _get_dylib_function[lib, "SDL_GetScancodeFromName", fn (name: Ptr[c_char, mut=False]) -> Scancode]()(name.unsafe_cstr_ptr())
 
 
-fn sdl_get_key_name(key: SDL_Keycode) -> Ptr[c_char, mut=False]:
+fn get_key_name(key: Keycode) -> Ptr[c_char, mut=False]:
     """Get a human-readable name for a key.
 
     If the key doesn't have a name, this function returns an empty string ("").
@@ -370,10 +370,10 @@ fn sdl_get_key_name(key: SDL_Keycode) -> Ptr[c_char, mut=False]:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetKeyName.
     """
 
-    return _get_dylib_function[lib, "SDL_GetKeyName", fn (key: SDL_Keycode) -> Ptr[c_char, mut=False]]()(key)
+    return _get_dylib_function[lib, "SDL_GetKeyName", fn (key: Keycode) -> Ptr[c_char, mut=False]]()(key)
 
 
-fn sdl_get_key_from_name(owned name: String) -> SDL_Keycode:
+fn get_key_from_name(owned name: String) -> Keycode:
     """Get a key code from a human-readable name.
 
     Args:
@@ -389,10 +389,10 @@ fn sdl_get_key_from_name(owned name: String) -> SDL_Keycode:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetKeyFromName.
     """
 
-    return _get_dylib_function[lib, "SDL_GetKeyFromName", fn (name: Ptr[c_char, mut=False]) -> SDL_Keycode]()(name.unsafe_cstr_ptr())
+    return _get_dylib_function[lib, "SDL_GetKeyFromName", fn (name: Ptr[c_char, mut=False]) -> Keycode]()(name.unsafe_cstr_ptr())
 
 
-fn sdl_start_text_input(window: Ptr[SDL_Window, mut=True]) raises:
+fn start_text_input(window: Ptr[Window, mut=True]) raises:
     """Start accepting Unicode text input events in a window.
 
     This function will enable text input (SDL_EVENT_TEXT_INPUT and
@@ -418,13 +418,13 @@ fn sdl_start_text_input(window: Ptr[SDL_Window, mut=True]) raises:
     Docs: https://wiki.libsdl.org/SDL3/SDL_StartTextInput.
     """
 
-    ret = _get_dylib_function[lib, "SDL_StartTextInput", fn (window: Ptr[SDL_Window, mut=True]) -> Bool]()(window)
+    ret = _get_dylib_function[lib, "SDL_StartTextInput", fn (window: Ptr[Window, mut=True]) -> Bool]()(window)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
 @register_passable("trivial")
-struct SDL_TextInputType(Intable):
+struct TextInputType(Intable):
     """Text input type.
 
     These are the valid values for SDL_PROP_TEXTINPUT_TYPE_NUMBER. Not every
@@ -444,28 +444,28 @@ struct SDL_TextInputType(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_TEXTINPUT_TYPE_TEXT = 0
+    alias TEXTINPUT_TYPE_TEXT = Self(0)
     """The input is text."""
-    alias SDL_TEXTINPUT_TYPE_TEXT_NAME = 1
+    alias TEXTINPUT_TYPE_TEXT_NAME = Self(1)
     """The input is a person's name."""
-    alias SDL_TEXTINPUT_TYPE_TEXT_EMAIL = 2
+    alias TEXTINPUT_TYPE_TEXT_EMAIL = Self(2)
     """The input is an e-mail address."""
-    alias SDL_TEXTINPUT_TYPE_TEXT_USERNAME = 3
+    alias TEXTINPUT_TYPE_TEXT_USERNAME = Self(3)
     """The input is a username."""
-    alias SDL_TEXTINPUT_TYPE_TEXT_PASSWORD_HIDDEN = 4
+    alias TEXTINPUT_TYPE_TEXT_PASSWORD_HIDDEN = Self(4)
     """The input is a secure password that is hidden."""
-    alias SDL_TEXTINPUT_TYPE_TEXT_PASSWORD_VISIBLE = 5
+    alias TEXTINPUT_TYPE_TEXT_PASSWORD_VISIBLE = Self(5)
     """The input is a secure password that is visible."""
-    alias SDL_TEXTINPUT_TYPE_NUMBER = 6
+    alias TEXTINPUT_TYPE_NUMBER = Self(6)
     """The input is a number."""
-    alias SDL_TEXTINPUT_TYPE_NUMBER_PASSWORD_HIDDEN = 7
+    alias TEXTINPUT_TYPE_NUMBER_PASSWORD_HIDDEN = Self(7)
     """The input is a secure PIN that is hidden."""
-    alias SDL_TEXTINPUT_TYPE_NUMBER_PASSWORD_VISIBLE = 8
+    alias TEXTINPUT_TYPE_NUMBER_PASSWORD_VISIBLE = Self(8)
     """The input is a secure PIN that is visible."""
 
 
 @register_passable("trivial")
-struct SDL_Capitalization(Intable):
+struct Capitalization(Intable):
     """Auto capitalization type.
 
     These are the valid values for SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER.
@@ -485,17 +485,17 @@ struct SDL_Capitalization(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_CAPITALIZE_NONE = 0
+    alias CAPITALIZE_NONE = Self(0)
     """No auto-capitalization will be done."""
-    alias SDL_CAPITALIZE_SENTENCES = 1
+    alias CAPITALIZE_SENTENCES = Self(1)
     """The first letter of sentences will be capitalized."""
-    alias SDL_CAPITALIZE_WORDS = 2
+    alias CAPITALIZE_WORDS = Self(2)
     """The first letter of words will be capitalized."""
-    alias SDL_CAPITALIZE_LETTERS = 3
+    alias CAPITALIZE_LETTERS = Self(3)
     """All letters will be capitalized."""
 
 
-fn sdl_start_text_input_with_properties(window: Ptr[SDL_Window, mut=True], props: SDL_PropertiesID) raises:
+fn start_text_input_with_properties(window: Ptr[Window, mut=True], props: PropertiesID) raises:
     """Start accepting Unicode text input events in a window, with properties
     describing the input.
 
@@ -545,12 +545,12 @@ fn sdl_start_text_input_with_properties(window: Ptr[SDL_Window, mut=True], props
     Docs: https://wiki.libsdl.org/SDL3/SDL_StartTextInputWithProperties.
     """
 
-    ret = _get_dylib_function[lib, "SDL_StartTextInputWithProperties", fn (window: Ptr[SDL_Window, mut=True], props: SDL_PropertiesID) -> Bool]()(window, props)
+    ret = _get_dylib_function[lib, "SDL_StartTextInputWithProperties", fn (window: Ptr[Window, mut=True], props: PropertiesID) -> Bool]()(window, props)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_text_input_active(window: Ptr[SDL_Window, mut=True]) -> Bool:
+fn text_input_active(window: Ptr[Window, mut=True]) -> Bool:
     """Check whether or not Unicode text input events are enabled for a window.
 
     Args:
@@ -565,10 +565,10 @@ fn sdl_text_input_active(window: Ptr[SDL_Window, mut=True]) -> Bool:
     Docs: https://wiki.libsdl.org/SDL3/SDL_TextInputActive.
     """
 
-    return _get_dylib_function[lib, "SDL_TextInputActive", fn (window: Ptr[SDL_Window, mut=True]) -> Bool]()(window)
+    return _get_dylib_function[lib, "SDL_TextInputActive", fn (window: Ptr[Window, mut=True]) -> Bool]()(window)
 
 
-fn sdl_stop_text_input(window: Ptr[SDL_Window, mut=True]) raises:
+fn stop_text_input(window: Ptr[Window, mut=True]) raises:
     """Stop receiving any text input events in a window.
 
     If SDL_StartTextInput() showed the screen keyboard, this function will hide
@@ -587,12 +587,12 @@ fn sdl_stop_text_input(window: Ptr[SDL_Window, mut=True]) raises:
     Docs: https://wiki.libsdl.org/SDL3/SDL_StopTextInput.
     """
 
-    ret = _get_dylib_function[lib, "SDL_StopTextInput", fn (window: Ptr[SDL_Window, mut=True]) -> Bool]()(window)
+    ret = _get_dylib_function[lib, "SDL_StopTextInput", fn (window: Ptr[Window, mut=True]) -> Bool]()(window)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_clear_composition(window: Ptr[SDL_Window, mut=True]) raises:
+fn clear_composition(window: Ptr[Window, mut=True]) raises:
     """Dismiss the composition window/IME without disabling the subsystem.
 
     Args:
@@ -608,12 +608,12 @@ fn sdl_clear_composition(window: Ptr[SDL_Window, mut=True]) raises:
     Docs: https://wiki.libsdl.org/SDL3/SDL_ClearComposition.
     """
 
-    ret = _get_dylib_function[lib, "SDL_ClearComposition", fn (window: Ptr[SDL_Window, mut=True]) -> Bool]()(window)
+    ret = _get_dylib_function[lib, "SDL_ClearComposition", fn (window: Ptr[Window, mut=True]) -> Bool]()(window)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_text_input_area(window: Ptr[SDL_Window, mut=True], rect: Ptr[SDL_Rect, mut=False], cursor: c_int) raises:
+fn set_text_input_area(window: Ptr[Window, mut=True], rect: Ptr[Rect, mut=False], cursor: c_int) raises:
     """Set the area used to type Unicode text input.
 
     Native input methods may place a window with word suggestions near the
@@ -636,12 +636,12 @@ fn sdl_set_text_input_area(window: Ptr[SDL_Window, mut=True], rect: Ptr[SDL_Rect
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetTextInputArea.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetTextInputArea", fn (window: Ptr[SDL_Window, mut=True], rect: Ptr[SDL_Rect, mut=False], cursor: c_int) -> Bool]()(window, rect, cursor)
+    ret = _get_dylib_function[lib, "SDL_SetTextInputArea", fn (window: Ptr[Window, mut=True], rect: Ptr[Rect, mut=False], cursor: c_int) -> Bool]()(window, rect, cursor)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_text_input_area(window: Ptr[SDL_Window, mut=True], rect: Ptr[SDL_Rect, mut=True], cursor: Ptr[c_int, mut=True]) raises:
+fn get_text_input_area(window: Ptr[Window, mut=True], rect: Ptr[Rect, mut=True], cursor: Ptr[c_int, mut=True]) raises:
     """Get the area used to type Unicode text input.
 
     This returns the values previously set by SDL_SetTextInputArea().
@@ -663,12 +663,12 @@ fn sdl_get_text_input_area(window: Ptr[SDL_Window, mut=True], rect: Ptr[SDL_Rect
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetTextInputArea.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetTextInputArea", fn (window: Ptr[SDL_Window, mut=True], rect: Ptr[SDL_Rect, mut=True], cursor: Ptr[c_int, mut=True]) -> Bool]()(window, rect, cursor)
+    ret = _get_dylib_function[lib, "SDL_GetTextInputArea", fn (window: Ptr[Window, mut=True], rect: Ptr[Rect, mut=True], cursor: Ptr[c_int, mut=True]) -> Bool]()(window, rect, cursor)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_has_screen_keyboard_support() -> Bool:
+fn has_screen_keyboard_support() -> Bool:
     """Check whether the platform has screen keyboard support.
 
     Returns:
@@ -684,7 +684,7 @@ fn sdl_has_screen_keyboard_support() -> Bool:
     return _get_dylib_function[lib, "SDL_HasScreenKeyboardSupport", fn () -> Bool]()()
 
 
-fn sdl_screen_keyboard_shown(window: Ptr[SDL_Window, mut=True]) -> Bool:
+fn screen_keyboard_shown(window: Ptr[Window, mut=True]) -> Bool:
     """Check whether the screen keyboard is shown for given window.
 
     Args:
@@ -699,4 +699,4 @@ fn sdl_screen_keyboard_shown(window: Ptr[SDL_Window, mut=True]) -> Bool:
     Docs: https://wiki.libsdl.org/SDL3/SDL_ScreenKeyboardShown.
     """
 
-    return _get_dylib_function[lib, "SDL_ScreenKeyboardShown", fn (window: Ptr[SDL_Window, mut=True]) -> Bool]()(window)
+    return _get_dylib_function[lib, "SDL_ScreenKeyboardShown", fn (window: Ptr[Window, mut=True]) -> Bool]()(window)

@@ -30,7 +30,7 @@ dictating what sort of math to do on what color components.
 
 
 @register_passable("trivial")
-struct SDL_BlendMode(Intable):
+struct BlendMode(Intable):
     """A set of blend modes used in drawing operations.
 
     These predefined blend modes are supported everywhere.
@@ -54,25 +54,25 @@ struct SDL_BlendMode(Intable):
     fn __or__(lhs, rhs: Self) -> Self:
         return Self(lhs.value | rhs.value)
 
-    alias SDL_BLENDMODE_NONE = Self(0x00000000)
+    alias BLENDMODE_NONE = Self(0x00000000)
     """No blending: dstRGBA = srcRGBA."""
-    alias SDL_BLENDMODE_BLEND = Self(0x00000001)
+    alias BLENDMODE_BLEND = Self(0x00000001)
     """Alpha blending: dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA)), dstA = srcA + (dstA * (1-srcA))."""
-    alias SDL_BLENDMODE_BLEND_PREMULTIPLIED = Self(0x00000010)
+    alias BLENDMODE_BLEND_PREMULTIPLIED = Self(0x00000010)
     """Pre-multiplied alpha blending: dstRGBA = srcRGBA + (dstRGBA * (1-srcA))."""
-    alias SDL_BLENDMODE_ADD = Self(0x00000002)
+    alias BLENDMODE_ADD = Self(0x00000002)
     """Additive blending: dstRGB = (srcRGB * srcA) + dstRGB, dstA = dstA."""
-    alias SDL_BLENDMODE_ADD_PREMULTIPLIED = Self(0x00000020)
+    alias BLENDMODE_ADD_PREMULTIPLIED = Self(0x00000020)
     """Pre-multiplied additive blending: dstRGB = srcRGB + dstRGB, dstA = dstA."""
-    alias SDL_BLENDMODE_MOD = Self(0x00000004)
+    alias BLENDMODE_MOD = Self(0x00000004)
     """Color modulate: dstRGB = srcRGB * dstRGB, dstA = dstA."""
-    alias SDL_BLENDMODE_MUL = Self(0x00000008)
+    alias BLENDMODE_MUL = Self(0x00000008)
     """Color multiply: dstRGB = (srcRGB * dstRGB) + (dstRGB * (1-srcA)), dstA = dstA."""
-    alias SDL_BLENDMODE_INVALID = Self(0x7FFFFFFF)
+    alias BLENDMODE_INVALID = Self(0x7FFFFFFF)
 
 
 @register_passable("trivial")
-struct SDL_BlendOperation(Intable):
+struct BlendOperation(Intable):
     """The blend operation used when combining source and destination pixel
     components.
 
@@ -89,20 +89,20 @@ struct SDL_BlendOperation(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_BLENDOPERATION_ADD = 0x1
+    alias BLENDOPERATION_ADD = Self(0x1)
     """Dst + src: supported by all renderers."""
-    alias SDL_BLENDOPERATION_SUBTRACT = 0x2
+    alias BLENDOPERATION_SUBTRACT = Self(0x2)
     """Src - dst : supported by D3D, OpenGL, OpenGLES, and Vulkan."""
-    alias SDL_BLENDOPERATION_REV_SUBTRACT = 0x3
+    alias BLENDOPERATION_REV_SUBTRACT = Self(0x3)
     """Dst - src : supported by D3D, OpenGL, OpenGLES, and Vulkan."""
-    alias SDL_BLENDOPERATION_MINIMUM = 0x4
+    alias BLENDOPERATION_MINIMUM = Self(0x4)
     """Min(dst, src) : supported by D3D, OpenGL, OpenGLES, and Vulkan."""
-    alias SDL_BLENDOPERATION_MAXIMUM = 0x5
+    alias BLENDOPERATION_MAXIMUM = Self(0x5)
     """Max(dst, src) : supported by D3D, OpenGL, OpenGLES, and Vulkan."""
 
 
 @register_passable("trivial")
-struct SDL_BlendFactor(Intable):
+struct BlendFactor(Intable):
     """The normalized factor used to multiply pixel components.
 
     The blend factors are multiplied with the pixels from a drawing operation
@@ -123,29 +123,29 @@ struct SDL_BlendFactor(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_BLENDFACTOR_ZERO = 0x1
+    alias BLENDFACTOR_ZERO = Self(0x1)
     """0, 0, 0, 0."""
-    alias SDL_BLENDFACTOR_ONE = 0x2
+    alias BLENDFACTOR_ONE = Self(0x2)
     """1, 1, 1, 1."""
-    alias SDL_BLENDFACTOR_SRC_COLOR = 0x3
+    alias BLENDFACTOR_SRC_COLOR = Self(0x3)
     """SrcR, srcG, srcB, srcA."""
-    alias SDL_BLENDFACTOR_ONE_MINUS_SRC_COLOR = 0x4
+    alias BLENDFACTOR_ONE_MINUS_SRC_COLOR = Self(0x4)
     """1-srcR, 1-srcG, 1-srcB, 1-srcA."""
-    alias SDL_BLENDFACTOR_SRC_ALPHA = 0x5
+    alias BLENDFACTOR_SRC_ALPHA = Self(0x5)
     """SrcA, srcA, srcA, srcA."""
-    alias SDL_BLENDFACTOR_ONE_MINUS_SRC_ALPHA = 0x6
+    alias BLENDFACTOR_ONE_MINUS_SRC_ALPHA = Self(0x6)
     """1-srcA, 1-srcA, 1-srcA, 1-srcA."""
-    alias SDL_BLENDFACTOR_DST_COLOR = 0x7
+    alias BLENDFACTOR_DST_COLOR = Self(0x7)
     """DstR, dstG, dstB, dstA."""
-    alias SDL_BLENDFACTOR_ONE_MINUS_DST_COLOR = 0x8
+    alias BLENDFACTOR_ONE_MINUS_DST_COLOR = Self(0x8)
     """1-dstR, 1-dstG, 1-dstB, 1-dstA."""
-    alias SDL_BLENDFACTOR_DST_ALPHA = 0x9
+    alias BLENDFACTOR_DST_ALPHA = Self(0x9)
     """DstA, dstA, dstA, dstA."""
-    alias SDL_BLENDFACTOR_ONE_MINUS_DST_ALPHA = 0xA
+    alias BLENDFACTOR_ONE_MINUS_DST_ALPHA = Self(0xA)
     """1-dstA, 1-dstA, 1-dstA, 1-dstA."""
 
 
-fn sdl_compose_custom_blend_mode(src_color_factor: SDL_BlendFactor, dst_color_factor: SDL_BlendFactor, color_operation: SDL_BlendOperation, src_alpha_factor: SDL_BlendFactor, dst_alpha_factor: SDL_BlendFactor, alpha_operation: SDL_BlendOperation) -> SDL_BlendMode:
+fn compose_custom_blend_mode(src_color_factor: BlendFactor, dst_color_factor: BlendFactor, color_operation: BlendOperation, src_alpha_factor: BlendFactor, dst_alpha_factor: BlendFactor, alpha_operation: BlendOperation) -> BlendMode:
     """Compose a custom blend mode for renderers.
 
     The functions SDL_SetRenderDrawBlendMode and SDL_SetTextureBlendMode accept
@@ -232,4 +232,4 @@ fn sdl_compose_custom_blend_mode(src_color_factor: SDL_BlendFactor, dst_color_fa
     Docs: https://wiki.libsdl.org/SDL3/SDL_ComposeCustomBlendMode.
     """
 
-    return _get_dylib_function[lib, "SDL_ComposeCustomBlendMode", fn (src_color_factor: SDL_BlendFactor, dst_color_factor: SDL_BlendFactor, color_operation: SDL_BlendOperation, src_alpha_factor: SDL_BlendFactor, dst_alpha_factor: SDL_BlendFactor, alpha_operation: SDL_BlendOperation) -> SDL_BlendMode]()(src_color_factor, dst_color_factor, color_operation, src_alpha_factor, dst_alpha_factor, alpha_operation)
+    return _get_dylib_function[lib, "SDL_ComposeCustomBlendMode", fn (src_color_factor: BlendFactor, dst_color_factor: BlendFactor, color_operation: BlendOperation, src_alpha_factor: BlendFactor, dst_alpha_factor: BlendFactor, alpha_operation: BlendOperation) -> BlendMode]()(src_color_factor, dst_color_factor, color_operation, src_alpha_factor, dst_alpha_factor, alpha_operation)

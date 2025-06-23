@@ -31,7 +31,7 @@ SDL provides functions to convert a GUID to/from a string.
 
 
 @fieldwise_init
-struct SDL_GUID(Copyable, Movable):
+struct GUID(Copyable, Movable):
     """An SDL_GUID is a 128-bit identifier for an input device that identifies
     that device across runs of SDL programs on the same platform.
 
@@ -46,13 +46,13 @@ struct SDL_GUID(Copyable, Movable):
     GUIDs may be platform-dependent (i.e., the same device may report different
     GUIDs on different operating systems).
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_GUID.
+    Docs: https://wiki.libsdl.org/SDL3/GUID.
     """
 
     var data: ArrayHelper[UInt8, 16, mut=True].result
 
 
-fn sdl_guid_to_string(guid: SDL_GUID, psz_guid: Ptr[c_char, mut=True], cb_guid: c_int) -> None:
+fn guid_to_string(guid: GUID, psz_guid: Ptr[c_char, mut=True], cb_guid: c_int) -> None:
     """Get an ASCII string representation for a given SDL_GUID.
 
     Args:
@@ -66,10 +66,10 @@ fn sdl_guid_to_string(guid: SDL_GUID, psz_guid: Ptr[c_char, mut=True], cb_guid: 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GUIDToString.
     """
 
-    return _get_dylib_function[lib, "SDL_GUIDToString", fn (guid: SDL_GUID, psz_guid: Ptr[c_char, mut=True], cb_guid: c_int) -> None]()(guid, psz_guid, cb_guid)
+    return _get_dylib_function[lib, "SDL_GUIDToString", fn (guid: GUID, psz_guid: Ptr[c_char, mut=True], cb_guid: c_int) -> None]()(guid, psz_guid, cb_guid)
 
 
-fn sdl_string_to_guid(owned pch_guid: String) -> SDL_GUID:
+fn string_to_guid(owned pch_guid: String) -> GUID:
     """Convert a GUID string into a SDL_GUID structure.
 
     Performs no error checking. If this function is given a string containing
@@ -88,4 +88,4 @@ fn sdl_string_to_guid(owned pch_guid: String) -> SDL_GUID:
     Docs: https://wiki.libsdl.org/SDL3/SDL_StringToGUID.
     """
 
-    return _get_dylib_function[lib, "SDL_StringToGUID", fn (pch_guid: Ptr[c_char, mut=False]) -> SDL_GUID]()(pch_guid.unsafe_cstr_ptr())
+    return _get_dylib_function[lib, "SDL_StringToGUID", fn (pch_guid: Ptr[c_char, mut=False]) -> GUID]()(pch_guid.unsafe_cstr_ptr())

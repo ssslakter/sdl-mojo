@@ -37,7 +37,7 @@ they can save their game.
 
 
 @register_passable("trivial")
-struct SDL_PowerState(Intable):
+struct PowerState(Intable):
     """The basic state for the system's power supply.
 
     These are results returned by SDL_GetPowerInfo().
@@ -55,21 +55,21 @@ struct SDL_PowerState(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_POWERSTATE_ERROR = -1
+    alias POWERSTATE_ERROR = Self(-1)
     """Error determining power status."""
-    alias SDL_POWERSTATE_UNKNOWN = 0
+    alias POWERSTATE_UNKNOWN = Self(0)
     """Cannot determine power status."""
-    alias SDL_POWERSTATE_ON_BATTERY = 1
+    alias POWERSTATE_ON_BATTERY = Self(1)
     """Not plugged in, running on the battery."""
-    alias SDL_POWERSTATE_NO_BATTERY = 2
+    alias POWERSTATE_NO_BATTERY = Self(2)
     """Plugged in, no battery available."""
-    alias SDL_POWERSTATE_CHARGING = 3
+    alias POWERSTATE_CHARGING = Self(3)
     """Plugged in, charging battery."""
-    alias SDL_POWERSTATE_CHARGED = 4
+    alias POWERSTATE_CHARGED = Self(4)
     """Plugged in, battery charged."""
 
 
-fn sdl_get_power_info(seconds: Ptr[c_int, mut=True], percent: Ptr[c_int, mut=True]) -> SDL_PowerState:
+fn get_power_info(seconds: Ptr[c_int, mut=True], percent: Ptr[c_int, mut=True]) -> PowerState:
     """Get the current power supply details.
 
     You should never take a battery status as absolute truth. Batteries
@@ -105,4 +105,4 @@ fn sdl_get_power_info(seconds: Ptr[c_int, mut=True], percent: Ptr[c_int, mut=Tru
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetPowerInfo.
     """
 
-    return _get_dylib_function[lib, "SDL_GetPowerInfo", fn (seconds: Ptr[c_int, mut=True], percent: Ptr[c_int, mut=True]) -> SDL_PowerState]()(seconds, percent)
+    return _get_dylib_function[lib, "SDL_GetPowerInfo", fn (seconds: Ptr[c_int, mut=True], percent: Ptr[c_int, mut=True]) -> PowerState]()(seconds, percent)

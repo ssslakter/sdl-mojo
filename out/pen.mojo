@@ -39,7 +39,7 @@ such as pressure, tilt, rotation, etc.
 
 
 @register_passable("trivial")
-struct SDL_PenID(Intable):
+struct PenID(Intable):
     """SDL pen instance IDs.
 
     Zero is used to signify an invalid/null device.
@@ -67,7 +67,7 @@ struct SDL_PenID(Intable):
 
 
 @register_passable("trivial")
-struct SDL_PenInputFlags(Intable):
+struct PenInputFlags(Intable):
     """Pen input flags, as reported by various pen events' `pen_state` field.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PenInputFlags.
@@ -87,24 +87,24 @@ struct SDL_PenInputFlags(Intable):
     fn __or__(lhs, rhs: Self) -> Self:
         return Self(lhs.value | rhs.value)
 
-    alias SDL_PEN_INPUT_DOWN = Self(1 << 0)
+    alias PEN_INPUT_DOWN = Self(1 << 0)
     """Pen is pressed down."""
-    alias SDL_PEN_INPUT_BUTTON_1 = Self(1 << 1)
+    alias PEN_INPUT_BUTTON_1 = Self(1 << 1)
     """Button 1 is pressed."""
-    alias SDL_PEN_INPUT_BUTTON_2 = Self(1 << 2)
+    alias PEN_INPUT_BUTTON_2 = Self(1 << 2)
     """Button 2 is pressed."""
-    alias SDL_PEN_INPUT_BUTTON_3 = Self(1 << 3)
+    alias PEN_INPUT_BUTTON_3 = Self(1 << 3)
     """Button 3 is pressed."""
-    alias SDL_PEN_INPUT_BUTTON_4 = Self(1 << 4)
+    alias PEN_INPUT_BUTTON_4 = Self(1 << 4)
     """Button 4 is pressed."""
-    alias SDL_PEN_INPUT_BUTTON_5 = Self(1 << 5)
+    alias PEN_INPUT_BUTTON_5 = Self(1 << 5)
     """Button 5 is pressed."""
-    alias SDL_PEN_INPUT_ERASER_TIP = Self(1 << 30)
+    alias PEN_INPUT_ERASER_TIP = Self(1 << 30)
     """Eraser tip is used."""
 
 
 @register_passable("trivial")
-struct SDL_PenAxis(Intable):
+struct PenAxis(Intable):
     """Pen axis indices.
 
     These are the valid values for the `axis` field in SDL_PenAxisEvent. All
@@ -130,19 +130,19 @@ struct SDL_PenAxis(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_PEN_AXIS_PRESSURE = 0
+    alias PEN_AXIS_PRESSURE = Self(0)
     """Pen pressure.  Unidirectional: 0 to 1.0."""
-    alias SDL_PEN_AXIS_XTILT = 1
+    alias PEN_AXIS_XTILT = Self(1)
     """Pen horizontal tilt angle.  Bidirectional: -90.0 to 90.0 (left-to-right)."""
-    alias SDL_PEN_AXIS_YTILT = 2
+    alias PEN_AXIS_YTILT = Self(2)
     """Pen vertical tilt angle.  Bidirectional: -90.0 to 90.0 (top-to-down)."""
-    alias SDL_PEN_AXIS_DISTANCE = 3
+    alias PEN_AXIS_DISTANCE = Self(3)
     """Pen distance to drawing surface.  Unidirectional: 0.0 to 1.0."""
-    alias SDL_PEN_AXIS_ROTATION = 4
+    alias PEN_AXIS_ROTATION = Self(4)
     """Pen barrel rotation.  Bidirectional: -180 to 179.9 (clockwise, 0 is facing up, -180.0 is facing down)."""
-    alias SDL_PEN_AXIS_SLIDER = 5
+    alias PEN_AXIS_SLIDER = Self(5)
     """Pen finger wheel or slider (e.g., Airbrush Pen).  Unidirectional: 0 to 1.0."""
-    alias SDL_PEN_AXIS_TANGENTIAL_PRESSURE = 6
+    alias PEN_AXIS_TANGENTIAL_PRESSURE = Self(6)
     """Pressure from squeezing the pen ("barrel pressure")."""
-    alias SDL_PEN_AXIS_COUNT = 7
+    alias PEN_AXIS_COUNT = Self(7)
     """Total known pen axis types in this version of SDL. This number may grow in future releases!."""

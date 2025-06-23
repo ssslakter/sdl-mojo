@@ -95,6 +95,9 @@ def snake_case(string: str) -> str:
 def capitalize(string: str) -> str:
     return string.capitalize() if len(string) < 2 else (string[0].capitalize() + string[1:])
 
+def drop_prefix(string: str) -> str:
+    return string.replace('SDL_', '')
+
 
 # +------( heading )------+ #
 #
@@ -166,7 +169,7 @@ def translate_type(m: re.Match) -> str:
     if m.groupdict().get('amnt'):
         result = f'InlineArray[{result}, {m['amnt']}]'
 
-    return result
+    return drop_prefix(result)
 
 
 # +------( return )------+ #
@@ -182,13 +185,13 @@ match_variable = re.compile(r'^(?P<mut>const )?(?P<type>.+) (?P<ptrs>\**)(?P<nam
 match_function_pointer = re.compile(r'^(?P<ret>.*?) \(SDLCALL \*(?P<name>\w*)\)\((?P<args>.*?)\)')
 
 def translate_variable(m: re.Match) -> str:
-    return f'{snake_case(m['name'])}: {translate_type(m)}'
+    return f'{snake_case(drop_prefix(m['name']))}: {translate_type(m)}'
 
 def translate_function_pointer(m: re.Match) -> str:
     if m:
         ret = translate_return_type(re.match(match_return, m['ret']))
         args = re.sub(match_argument, translate_argument, m['args'])
-        return f'{snake_case(m['name'])}: fn ({args}) -> {ret}'
+        return f'{snake_case(drop_prefix(m['name']))}: fn ({args}) -> {ret}'
 
 
 # +------( docstring )------+ #
@@ -261,17 +264,19 @@ def translate_typedef(m: re.Match) -> str:
     doc = format_docblock(m['doc'])
     type = type_map.get(m['td_type']) or m['td_type']
     name = m['td_name']
+    mojo_name = drop_prefix(name)
     ptr = m['td_ptr']
     
     if ptr:
-        return f'alias {name} = Ptr[NoneType]\n{doc_template(doc, name)}'
+        return f'alias {mojo_name} = Ptr[NoneType]\n{doc_template(doc, name)}'
 
     def translate_def(m: re.Match) -> str:
-        def_name = m['name']
+        def_name = drop_prefix(m['name'])
         def_params = m['params']
         def_expr = re.sub(r'SDL_UINT64_C\((\w*)\)', r'\1', m['expr'])
         def_expr = def_expr.replace('u', '').lstrip('(').rstrip(')')
         def_expr = re.sub(r'\bSDL(\w*)\b', r'Self.SDL\1.value', def_expr)
+        def_expr = drop_prefix(def_expr)
         def_doc = format_docblock(m['doc'])
         if def_params:
             return (
@@ -289,7 +294,7 @@ f'''
     return (
 f'''
 @register_passable("trivial")
-struct {name}(Intable):
+struct {mojo_name}(Intable):
     {doc_template(doc, name, '    ')}
     var value: {type}
 
@@ -335,10 +340,12 @@ def translate_enum_type(m: re.Match) -> str:
         value = hex(running_enum_value) if running_enum_base == 16 else str(running_enum_value)
         running_enum_value += 1
     doc = format_docblock(m[3])
+    if 'Self.' not in value:
+        value = f'Self({value})'
+    res =  drop_prefix(f'    alias {name} = {value}\n')
     if doc:
-        return f'    alias {name} = {value}\n    """{doc}"""'
-    else:
-        return f'    alias {name} = {value}\n'
+        return res + f'    """{doc}"""'
+    return res
 
 
 def translate_enum_comment(m: re.Match) -> str:
@@ -367,7 +374,7 @@ def translate_enum_if(m: re.Match) -> str:
     result = ''
     for false, true in zip(true_iter, false_iter):
         result += f'    alias {false.group('name')} = Self.{false.group('val')} if {cond} else Self.{true.group('val')}\n'
-    return result
+    return drop_prefix(result)
 
 def translate_enum(m: re.Match) -> str:
     global running_enum_value
@@ -382,7 +389,7 @@ def translate_enum(m: re.Match) -> str:
     return (
 f'''
 @register_passable("trivial")
-struct {name}(Intable):
+struct {drop_prefix(name)}(Intable):
     {doc_template(doc, name, '    ')}
     var value: UInt32
 
@@ -423,7 +430,7 @@ def translate_struct(m: re.Match) -> str:
     return (
 f'''
 @fieldwise_init
-struct {name}(Copyable, Movable):
+struct {drop_prefix(name)}(Copyable, Movable):
     {doc_template(doc, name, '    ')}
     
 {body}
@@ -436,8 +443,8 @@ def translate_opaque_struct(m: re.Match) -> str:
     return (
 f'''
 @fieldwise_init
-struct {m['os_name']}(Copyable, Movable):
-    {doc_template(format_docblock(m['doc']), m['os_name'], '    ')}
+struct {drop_prefix(m['os_name'])}(Copyable, Movable):
+    {doc_template(format_docblock(m['doc']), drop_prefix(m['os_name']), '    ')}
     pass
 ''')
 
@@ -447,8 +454,8 @@ struct {m['os_name']}(Copyable, Movable):
 def translate_ptr_struct(m: re.Match) -> str:
     return (
 f'''
-alias {m['ps_name']} = Ptr[NoneType]
-{doc_template(format_docblock(m['doc']), m['ps_name'])}
+alias {drop_prefix(m['ps_name'])} = Ptr[NoneType]
+{doc_template(format_docblock(m['doc']), drop_prefix(m['ps_name']))}
 ''')
 
 
@@ -456,15 +463,15 @@ alias {m['ps_name']} = Ptr[NoneType]
 #
 def translate_typedef_struct(m: re.Match) -> str:
     doc = format_docblock(m['doc'])
-    name = m['ts_name']
+    name = drop_prefix(m['ts_name'])
 
-    if name == "SDL_GamepadBinding":
+    if name == "GamepadBinding":
         return translate_gamepadbinding(doc)
     
     body = m['ts_body']
     body = re.sub(match_multi_field, split_multifield, body)
     body = re.sub(match_field, translate_field, body)
-    if name == 'SDL_StorageInterface':
+    if name == 'StorageInterface':
         body = body.replace('var copy: fn', 'var copy_file: fn')
     return (
 f'''
@@ -488,7 +495,7 @@ def translate_union(m: re.Match) -> str:
     body = body.removesuffix(' `, `,\n')
     return (
 f'''  
-struct {name}:
+struct {drop_prefix(name)}:
     alias _mlir_type = __mlir_type[`!pop.union<`, 
 {body}
     `>`]
@@ -522,7 +529,7 @@ fn {mojo_name}({args}{', ' * bool(args) * (ret != 'None')}{f'out ret: {ret}' * (
     {doc_template(doc, sdl_name, '    ')}
     ret = {call}
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 ''')
 
@@ -541,7 +548,7 @@ def translate_function(m: re.Match):
         return ''
     doc = format_docblock(m['doc'])
     sdl_name = m.group('f_name')
-    mojo_name = snake_case(sdl_name)
+    mojo_name = snake_case(drop_prefix(sdl_name))
     sdl_ret = translate_return_type(re.match(match_return, m.group('f_ret')))
     mojo_ret = re.sub(match_string_argument, r'String', sdl_ret)
     sdl_args = re.sub(match_argument, translate_argument, m.group('f_args')).removeprefix(' ')
@@ -575,7 +582,7 @@ def translate_typedef_function(m: re.Match):
         f_type = f'Ptr[{f_type}]'
     return (
 f'''
-alias {name} = {f_type}
+alias {drop_prefix(name)} = {f_type}
 {doc_template(doc, name)}
 
 ''')
@@ -590,7 +597,7 @@ def translate_gamepadbinding(doc: str) -> str:
 f'''
 @fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingInputAxis(Copyable, Movable):
+struct GamepadBindingInputAxis(Copyable, Movable):
     var axis: c_int
     var axis_min: c_int
     var axis_max: c_int
@@ -598,15 +605,15 @@ struct SDL_GamepadBindingInputAxis(Copyable, Movable):
 
 @fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingInputHat(Copyable, Movable):
+struct GamepadBindingInputHat(Copyable, Movable):
     var hat: c_int
     var hat_mask: c_int
 
 
 @fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingInput(Copyable, Movable):
-    alias _mlir_type = __mlir_type[`!pop.union<`, SDL_GamepadBindingInputAxis, `, `, SDL_GamepadBindingInputHat, `>`]
+struct GamepadBindingInput(Copyable, Movable):
+    alias _mlir_type = __mlir_type[`!pop.union<`, GamepadBindingInputAxis, `, `, GamepadBindingInputHat, `>`]
     var _impl: Self._mlir_type
 
     @implicit
@@ -619,16 +626,16 @@ struct SDL_GamepadBindingInput(Copyable, Movable):
 
 @fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingOutputAxis(Copyable, Movable):
-    var axis: SDL_GamepadAxis
+struct GamepadBindingOutputAxis(Copyable, Movable):
+    var axis: GamepadAxis
     var axis_min: c_int
     var axis_max: c_int
 
 
 @fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBindingOutput(Copyable, Movable):
-    alias _mlir_type = __mlir_type[`!pop.union<`, SDL_GamepadButton, `, `, SDL_GamepadBindingOutputAxis, `>`]
+struct GamepadBindingOutput(Copyable, Movable):
+    alias _mlir_type = __mlir_type[`!pop.union<`, GamepadButton, `, `, GamepadBindingOutputAxis, `>`]
     var _impl: Self._mlir_type
 
     @implicit
@@ -641,16 +648,16 @@ struct SDL_GamepadBindingOutput(Copyable, Movable):
 
 @fieldwise_init
 @register_passable("trivial")
-struct SDL_GamepadBinding(Copyable, Movable):
+struct GamepadBinding(Copyable, Movable):
     """{doc}
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadBinding.
     """
-    var input_type: SDL_GamepadBindingType
-    var input: SDL_GamepadBindingInput
+    var input_type: GamepadBindingType
+    var input: GamepadBindingInput
 
-    var output_type: SDL_GamepadBindingType
-    var output: SDL_GamepadBindingOutput
+    var output_type: GamepadBindingType
+    var output: GamepadBindingOutput
 '''
 )
 

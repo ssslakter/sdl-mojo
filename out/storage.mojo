@@ -243,7 +243,7 @@ refuse to create files with those names, etc.
 
 
 @fieldwise_init
-struct SDL_StorageInterface(Copyable, Movable):
+struct StorageInterface(Copyable, Movable):
     """Function interface for SDL_Storage.
 
     Apps that want to supply a custom implementation of SDL_Storage will fill
@@ -255,7 +255,7 @@ struct SDL_StorageInterface(Copyable, Movable):
 
     This structure should be initialized using SDL_INIT_INTERFACE()
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_StorageInterface.
+    Docs: https://wiki.libsdl.org/SDL3/StorageInterface.
     """
 
     var version: UInt32
@@ -267,10 +267,10 @@ struct SDL_StorageInterface(Copyable, Movable):
     var ready: fn (userdata: Ptr[NoneType, mut=True]) -> Bool
     """Optional, returns whether the storage is currently ready for access."""
 
-    var enumerate: fn (userdata: Ptr[NoneType, mut=True], path: Ptr[c_char, mut=False], callback: SDL_EnumerateDirectoryCallback, callback_userdata: Ptr[NoneType, mut=True]) -> Bool
+    var enumerate: fn (userdata: Ptr[NoneType, mut=True], path: Ptr[c_char, mut=False], callback: EnumerateDirectoryCallback, callback_userdata: Ptr[NoneType, mut=True]) -> Bool
     """Enumerate a directory, optional for write-only storage."""
 
-    var info: fn (userdata: Ptr[NoneType, mut=True], path: Ptr[c_char, mut=False], info: Ptr[SDL_PathInfo, mut=True]) -> Bool
+    var info: fn (userdata: Ptr[NoneType, mut=True], path: Ptr[c_char, mut=False], info: Ptr[PathInfo, mut=True]) -> Bool
     """Get path information, optional for write-only storage."""
 
     var read_file: fn (userdata: Ptr[NoneType, mut=True], path: Ptr[c_char, mut=False], destination: Ptr[NoneType, mut=True], length: UInt64) -> Bool
@@ -296,20 +296,20 @@ struct SDL_StorageInterface(Copyable, Movable):
 
 
 @fieldwise_init
-struct SDL_Storage(Copyable, Movable):
+struct Storage(Copyable, Movable):
     """An abstract interface for filesystem access.
 
     This is an opaque datatype. One can create this object using standard SDL
     functions like SDL_OpenTitleStorage or SDL_OpenUserStorage, etc, or create
     an object with a custom implementation using SDL_OpenStorage.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_Storage.
+    Docs: https://wiki.libsdl.org/SDL3/Storage.
     """
 
     pass
 
 
-fn sdl_open_title_storage(owned override: String, props: SDL_PropertiesID, out ret: Ptr[SDL_Storage, mut=True]) raises:
+fn open_title_storage(owned override: String, props: PropertiesID, out ret: Ptr[Storage, mut=True]) raises:
     """Opens up a read-only container for the application's filesystem.
 
     Args:
@@ -323,12 +323,12 @@ fn sdl_open_title_storage(owned override: String, props: SDL_PropertiesID, out r
     Docs: https://wiki.libsdl.org/SDL3/SDL_OpenTitleStorage.
     """
 
-    ret = _get_dylib_function[lib, "SDL_OpenTitleStorage", fn (override: Ptr[c_char, mut=False], props: SDL_PropertiesID) -> Ptr[SDL_Storage, mut=True]]()(override.unsafe_cstr_ptr(), props)
+    ret = _get_dylib_function[lib, "SDL_OpenTitleStorage", fn (override: Ptr[c_char, mut=False], props: PropertiesID) -> Ptr[Storage, mut=True]]()(override.unsafe_cstr_ptr(), props)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_open_user_storage(owned org: String, owned app: String, props: SDL_PropertiesID, out ret: Ptr[SDL_Storage, mut=True]) raises:
+fn open_user_storage(owned org: String, owned app: String, props: PropertiesID, out ret: Ptr[Storage, mut=True]) raises:
     """Opens up a container for a user's unique read/write filesystem.
 
     While title storage can generally be kept open throughout runtime, user
@@ -348,12 +348,12 @@ fn sdl_open_user_storage(owned org: String, owned app: String, props: SDL_Proper
     Docs: https://wiki.libsdl.org/SDL3/SDL_OpenUserStorage.
     """
 
-    ret = _get_dylib_function[lib, "SDL_OpenUserStorage", fn (org: Ptr[c_char, mut=False], app: Ptr[c_char, mut=False], props: SDL_PropertiesID) -> Ptr[SDL_Storage, mut=True]]()(org.unsafe_cstr_ptr(), app.unsafe_cstr_ptr(), props)
+    ret = _get_dylib_function[lib, "SDL_OpenUserStorage", fn (org: Ptr[c_char, mut=False], app: Ptr[c_char, mut=False], props: PropertiesID) -> Ptr[Storage, mut=True]]()(org.unsafe_cstr_ptr(), app.unsafe_cstr_ptr(), props)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_open_file_storage(owned path: String, out ret: Ptr[SDL_Storage, mut=True]) raises:
+fn open_file_storage(owned path: String, out ret: Ptr[Storage, mut=True]) raises:
     """Opens up a container for local filesystem storage.
 
     This is provided for development and tools. Portable applications should
@@ -371,12 +371,12 @@ fn sdl_open_file_storage(owned path: String, out ret: Ptr[SDL_Storage, mut=True]
     Docs: https://wiki.libsdl.org/SDL3/SDL_OpenFileStorage.
     """
 
-    ret = _get_dylib_function[lib, "SDL_OpenFileStorage", fn (path: Ptr[c_char, mut=False]) -> Ptr[SDL_Storage, mut=True]]()(path.unsafe_cstr_ptr())
+    ret = _get_dylib_function[lib, "SDL_OpenFileStorage", fn (path: Ptr[c_char, mut=False]) -> Ptr[Storage, mut=True]]()(path.unsafe_cstr_ptr())
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_open_storage(iface: Ptr[SDL_StorageInterface, mut=False], userdata: Ptr[NoneType, mut=True], out ret: Ptr[SDL_Storage, mut=True]) raises:
+fn open_storage(iface: Ptr[StorageInterface, mut=False], userdata: Ptr[NoneType, mut=True], out ret: Ptr[Storage, mut=True]) raises:
     """Opens up a container using a client-provided storage interface.
 
     Applications do not need to use this function unless they are providing
@@ -399,12 +399,12 @@ fn sdl_open_storage(iface: Ptr[SDL_StorageInterface, mut=False], userdata: Ptr[N
     Docs: https://wiki.libsdl.org/SDL3/SDL_OpenStorage.
     """
 
-    ret = _get_dylib_function[lib, "SDL_OpenStorage", fn (iface: Ptr[SDL_StorageInterface, mut=False], userdata: Ptr[NoneType, mut=True]) -> Ptr[SDL_Storage, mut=True]]()(iface, userdata)
+    ret = _get_dylib_function[lib, "SDL_OpenStorage", fn (iface: Ptr[StorageInterface, mut=False], userdata: Ptr[NoneType, mut=True]) -> Ptr[Storage, mut=True]]()(iface, userdata)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_close_storage(storage: Ptr[SDL_Storage, mut=True]) -> Bool:
+fn close_storage(storage: Ptr[Storage, mut=True]) -> Bool:
     """Closes and frees a storage container.
 
     Args:
@@ -419,10 +419,10 @@ fn sdl_close_storage(storage: Ptr[SDL_Storage, mut=True]) -> Bool:
     Docs: https://wiki.libsdl.org/SDL3/SDL_CloseStorage.
     """
 
-    return _get_dylib_function[lib, "SDL_CloseStorage", fn (storage: Ptr[SDL_Storage, mut=True]) -> Bool]()(storage)
+    return _get_dylib_function[lib, "SDL_CloseStorage", fn (storage: Ptr[Storage, mut=True]) -> Bool]()(storage)
 
 
-fn sdl_storage_ready(storage: Ptr[SDL_Storage, mut=True]) -> Bool:
+fn storage_ready(storage: Ptr[Storage, mut=True]) -> Bool:
     """Checks if the storage container is ready to use.
 
     This function should be called in regular intervals until it returns true -
@@ -439,10 +439,10 @@ fn sdl_storage_ready(storage: Ptr[SDL_Storage, mut=True]) -> Bool:
     Docs: https://wiki.libsdl.org/SDL3/SDL_StorageReady.
     """
 
-    return _get_dylib_function[lib, "SDL_StorageReady", fn (storage: Ptr[SDL_Storage, mut=True]) -> Bool]()(storage)
+    return _get_dylib_function[lib, "SDL_StorageReady", fn (storage: Ptr[Storage, mut=True]) -> Bool]()(storage)
 
 
-fn sdl_get_storage_file_size(storage: Ptr[SDL_Storage, mut=True], owned path: String, length: Ptr[UInt64, mut=True]) -> Bool:
+fn get_storage_file_size(storage: Ptr[Storage, mut=True], owned path: String, length: Ptr[UInt64, mut=True]) -> Bool:
     """Query the size of a file within a storage container.
 
     Args:
@@ -457,10 +457,10 @@ fn sdl_get_storage_file_size(storage: Ptr[SDL_Storage, mut=True], owned path: St
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetStorageFileSize.
     """
 
-    return _get_dylib_function[lib, "SDL_GetStorageFileSize", fn (storage: Ptr[SDL_Storage, mut=True], path: Ptr[c_char, mut=False], length: Ptr[UInt64, mut=True]) -> Bool]()(storage, path.unsafe_cstr_ptr(), length)
+    return _get_dylib_function[lib, "SDL_GetStorageFileSize", fn (storage: Ptr[Storage, mut=True], path: Ptr[c_char, mut=False], length: Ptr[UInt64, mut=True]) -> Bool]()(storage, path.unsafe_cstr_ptr(), length)
 
 
-fn sdl_read_storage_file(storage: Ptr[SDL_Storage, mut=True], owned path: String, destination: Ptr[NoneType, mut=True], length: UInt64) -> Bool:
+fn read_storage_file(storage: Ptr[Storage, mut=True], owned path: String, destination: Ptr[NoneType, mut=True], length: UInt64) -> Bool:
     """Synchronously read a file from a storage container into a client-provided
     buffer.
 
@@ -481,10 +481,10 @@ fn sdl_read_storage_file(storage: Ptr[SDL_Storage, mut=True], owned path: String
     Docs: https://wiki.libsdl.org/SDL3/SDL_ReadStorageFile.
     """
 
-    return _get_dylib_function[lib, "SDL_ReadStorageFile", fn (storage: Ptr[SDL_Storage, mut=True], path: Ptr[c_char, mut=False], destination: Ptr[NoneType, mut=True], length: UInt64) -> Bool]()(storage, path.unsafe_cstr_ptr(), destination, length)
+    return _get_dylib_function[lib, "SDL_ReadStorageFile", fn (storage: Ptr[Storage, mut=True], path: Ptr[c_char, mut=False], destination: Ptr[NoneType, mut=True], length: UInt64) -> Bool]()(storage, path.unsafe_cstr_ptr(), destination, length)
 
 
-fn sdl_write_storage_file(storage: Ptr[SDL_Storage, mut=True], owned path: String, source: Ptr[NoneType, mut=False], length: UInt64) -> Bool:
+fn write_storage_file(storage: Ptr[Storage, mut=True], owned path: String, source: Ptr[NoneType, mut=False], length: UInt64) -> Bool:
     """Synchronously write a file from client memory into a storage container.
 
     Args:
@@ -500,10 +500,10 @@ fn sdl_write_storage_file(storage: Ptr[SDL_Storage, mut=True], owned path: Strin
     Docs: https://wiki.libsdl.org/SDL3/SDL_WriteStorageFile.
     """
 
-    return _get_dylib_function[lib, "SDL_WriteStorageFile", fn (storage: Ptr[SDL_Storage, mut=True], path: Ptr[c_char, mut=False], source: Ptr[NoneType, mut=False], length: UInt64) -> Bool]()(storage, path.unsafe_cstr_ptr(), source, length)
+    return _get_dylib_function[lib, "SDL_WriteStorageFile", fn (storage: Ptr[Storage, mut=True], path: Ptr[c_char, mut=False], source: Ptr[NoneType, mut=False], length: UInt64) -> Bool]()(storage, path.unsafe_cstr_ptr(), source, length)
 
 
-fn sdl_create_storage_directory(storage: Ptr[SDL_Storage, mut=True], owned path: String) raises:
+fn create_storage_directory(storage: Ptr[Storage, mut=True], owned path: String) raises:
     """Create a directory in a writable storage container.
 
     Args:
@@ -517,12 +517,12 @@ fn sdl_create_storage_directory(storage: Ptr[SDL_Storage, mut=True], owned path:
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateStorageDirectory.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateStorageDirectory", fn (storage: Ptr[SDL_Storage, mut=True], path: Ptr[c_char, mut=False]) -> Bool]()(storage, path.unsafe_cstr_ptr())
+    ret = _get_dylib_function[lib, "SDL_CreateStorageDirectory", fn (storage: Ptr[Storage, mut=True], path: Ptr[c_char, mut=False]) -> Bool]()(storage, path.unsafe_cstr_ptr())
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_enumerate_storage_directory(storage: Ptr[SDL_Storage, mut=True], owned path: String, callback: SDL_EnumerateDirectoryCallback, userdata: Ptr[NoneType, mut=True]) raises:
+fn enumerate_storage_directory(storage: Ptr[Storage, mut=True], owned path: String, callback: EnumerateDirectoryCallback, userdata: Ptr[NoneType, mut=True]) raises:
     """Enumerate a directory in a storage container through a callback function.
 
     This function provides every directory entry through an app-provided
@@ -551,12 +551,12 @@ fn sdl_enumerate_storage_directory(storage: Ptr[SDL_Storage, mut=True], owned pa
     Docs: https://wiki.libsdl.org/SDL3/SDL_EnumerateStorageDirectory.
     """
 
-    ret = _get_dylib_function[lib, "SDL_EnumerateStorageDirectory", fn (storage: Ptr[SDL_Storage, mut=True], path: Ptr[c_char, mut=False], callback: SDL_EnumerateDirectoryCallback, userdata: Ptr[NoneType, mut=True]) -> Bool]()(storage, path.unsafe_cstr_ptr(), callback, userdata)
+    ret = _get_dylib_function[lib, "SDL_EnumerateStorageDirectory", fn (storage: Ptr[Storage, mut=True], path: Ptr[c_char, mut=False], callback: EnumerateDirectoryCallback, userdata: Ptr[NoneType, mut=True]) -> Bool]()(storage, path.unsafe_cstr_ptr(), callback, userdata)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_remove_storage_path(storage: Ptr[SDL_Storage, mut=True], owned path: String) raises:
+fn remove_storage_path(storage: Ptr[Storage, mut=True], owned path: String) raises:
     """Remove a file or an empty directory in a writable storage container.
 
     Args:
@@ -570,12 +570,12 @@ fn sdl_remove_storage_path(storage: Ptr[SDL_Storage, mut=True], owned path: Stri
     Docs: https://wiki.libsdl.org/SDL3/SDL_RemoveStoragePath.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RemoveStoragePath", fn (storage: Ptr[SDL_Storage, mut=True], path: Ptr[c_char, mut=False]) -> Bool]()(storage, path.unsafe_cstr_ptr())
+    ret = _get_dylib_function[lib, "SDL_RemoveStoragePath", fn (storage: Ptr[Storage, mut=True], path: Ptr[c_char, mut=False]) -> Bool]()(storage, path.unsafe_cstr_ptr())
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_rename_storage_path(storage: Ptr[SDL_Storage, mut=True], owned oldpath: String, owned newpath: String) raises:
+fn rename_storage_path(storage: Ptr[Storage, mut=True], owned oldpath: String, owned newpath: String) raises:
     """Rename a file or directory in a writable storage container.
 
     Args:
@@ -590,12 +590,12 @@ fn sdl_rename_storage_path(storage: Ptr[SDL_Storage, mut=True], owned oldpath: S
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenameStoragePath.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenameStoragePath", fn (storage: Ptr[SDL_Storage, mut=True], oldpath: Ptr[c_char, mut=False], newpath: Ptr[c_char, mut=False]) -> Bool]()(storage, oldpath.unsafe_cstr_ptr(), newpath.unsafe_cstr_ptr())
+    ret = _get_dylib_function[lib, "SDL_RenameStoragePath", fn (storage: Ptr[Storage, mut=True], oldpath: Ptr[c_char, mut=False], newpath: Ptr[c_char, mut=False]) -> Bool]()(storage, oldpath.unsafe_cstr_ptr(), newpath.unsafe_cstr_ptr())
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_copy_storage_file(storage: Ptr[SDL_Storage, mut=True], owned oldpath: String, owned newpath: String) raises:
+fn copy_storage_file(storage: Ptr[Storage, mut=True], owned oldpath: String, owned newpath: String) raises:
     """Copy a file in a writable storage container.
 
     Args:
@@ -610,12 +610,12 @@ fn sdl_copy_storage_file(storage: Ptr[SDL_Storage, mut=True], owned oldpath: Str
     Docs: https://wiki.libsdl.org/SDL3/SDL_CopyStorageFile.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CopyStorageFile", fn (storage: Ptr[SDL_Storage, mut=True], oldpath: Ptr[c_char, mut=False], newpath: Ptr[c_char, mut=False]) -> Bool]()(storage, oldpath.unsafe_cstr_ptr(), newpath.unsafe_cstr_ptr())
+    ret = _get_dylib_function[lib, "SDL_CopyStorageFile", fn (storage: Ptr[Storage, mut=True], oldpath: Ptr[c_char, mut=False], newpath: Ptr[c_char, mut=False]) -> Bool]()(storage, oldpath.unsafe_cstr_ptr(), newpath.unsafe_cstr_ptr())
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_storage_path_info(storage: Ptr[SDL_Storage, mut=True], owned path: String, info: Ptr[SDL_PathInfo, mut=True]) raises:
+fn get_storage_path_info(storage: Ptr[Storage, mut=True], owned path: String, info: Ptr[PathInfo, mut=True]) raises:
     """Get information about a filesystem path in a storage container.
 
     Args:
@@ -631,12 +631,12 @@ fn sdl_get_storage_path_info(storage: Ptr[SDL_Storage, mut=True], owned path: St
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetStoragePathInfo.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetStoragePathInfo", fn (storage: Ptr[SDL_Storage, mut=True], path: Ptr[c_char, mut=False], info: Ptr[SDL_PathInfo, mut=True]) -> Bool]()(storage, path.unsafe_cstr_ptr(), info)
+    ret = _get_dylib_function[lib, "SDL_GetStoragePathInfo", fn (storage: Ptr[Storage, mut=True], path: Ptr[c_char, mut=False], info: Ptr[PathInfo, mut=True]) -> Bool]()(storage, path.unsafe_cstr_ptr(), info)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_storage_space_remaining(storage: Ptr[SDL_Storage, mut=True]) -> UInt64:
+fn get_storage_space_remaining(storage: Ptr[Storage, mut=True]) -> UInt64:
     """Queries the remaining space in a storage container.
 
     Args:
@@ -648,10 +648,10 @@ fn sdl_get_storage_space_remaining(storage: Ptr[SDL_Storage, mut=True]) -> UInt6
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetStorageSpaceRemaining.
     """
 
-    return _get_dylib_function[lib, "SDL_GetStorageSpaceRemaining", fn (storage: Ptr[SDL_Storage, mut=True]) -> UInt64]()(storage)
+    return _get_dylib_function[lib, "SDL_GetStorageSpaceRemaining", fn (storage: Ptr[Storage, mut=True]) -> UInt64]()(storage)
 
 
-fn sdl_glob_storage_directory(storage: Ptr[SDL_Storage, mut=True], owned path: String, owned pattern: String, flags: SDL_GlobFlags, count: Ptr[c_int, mut=True], out ret: Ptr[Ptr[c_char, mut=True], mut=True]) raises:
+fn glob_storage_directory(storage: Ptr[Storage, mut=True], owned path: String, owned pattern: String, flags: GlobFlags, count: Ptr[c_int, mut=True], out ret: Ptr[Ptr[c_char, mut=True], mut=True]) raises:
     """Enumerate a directory tree, filtered by pattern, and return a list.
 
     Files are filtered out if they don't match the string in `pattern`, which
@@ -694,6 +694,6 @@ fn sdl_glob_storage_directory(storage: Ptr[SDL_Storage, mut=True], owned path: S
     Docs: https://wiki.libsdl.org/SDL3/SDL_GlobStorageDirectory.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GlobStorageDirectory", fn (storage: Ptr[SDL_Storage, mut=True], path: Ptr[c_char, mut=False], pattern: Ptr[c_char, mut=False], flags: SDL_GlobFlags, count: Ptr[c_int, mut=True]) -> Ptr[Ptr[c_char, mut=True], mut=True]]()(storage, path.unsafe_cstr_ptr(), pattern.unsafe_cstr_ptr(), flags, count)
+    ret = _get_dylib_function[lib, "SDL_GlobStorageDirectory", fn (storage: Ptr[Storage, mut=True], path: Ptr[c_char, mut=False], pattern: Ptr[c_char, mut=False], flags: GlobFlags, count: Ptr[c_int, mut=True]) -> Ptr[Ptr[c_char, mut=True], mut=True]]()(storage, path.unsafe_cstr_ptr(), pattern.unsafe_cstr_ptr(), flags, count)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())

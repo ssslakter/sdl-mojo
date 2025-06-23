@@ -33,7 +33,7 @@ https://wiki.libsdl.org/SDL3/BestKeyboardPractices
 
 
 @register_passable("trivial")
-struct SDL_Keycode(Intable):
+struct Keycode(Intable):
     """The SDL virtual key representation.
 
     Values of this type are used to represent keyboard keys using the current
@@ -69,7 +69,7 @@ struct SDL_Keycode(Intable):
 
     @always_inline
     @staticmethod
-    fn SDL_SCANCODE_TO_KEYCODE(X: UInt32) -> UInt32:
+    fn SCANCODE_TO_KEYCODE(X: UInt32) -> UInt32:
         return X | Self.SDLK_SCANCODE_MASK.value
 
     alias SDLK_UNKNOWN = Self(0x00000000)
@@ -587,7 +587,7 @@ struct SDL_Keycode(Intable):
 
 
 @register_passable("trivial")
-struct SDL_Keymod(Intable):
+struct Keymod(Intable):
     """Valid key modifiers (possibly OR'd together).
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Keymod.
@@ -607,39 +607,39 @@ struct SDL_Keymod(Intable):
     fn __or__(lhs, rhs: Self) -> Self:
         return Self(lhs.value | rhs.value)
 
-    alias SDL_KMOD_NONE = Self(0x0000)
+    alias KMOD_NONE = Self(0x0000)
     """No modifier is applicable."""
-    alias SDL_KMOD_LSHIFT = Self(0x0001)
+    alias KMOD_LSHIFT = Self(0x0001)
     """The left Shift key is down."""
-    alias SDL_KMOD_RSHIFT = Self(0x0002)
+    alias KMOD_RSHIFT = Self(0x0002)
     """The right Shift key is down."""
-    alias SDL_KMOD_LEVEL5 = Self(0x0004)
+    alias KMOD_LEVEL5 = Self(0x0004)
     """The Level 5 Shift key is down."""
-    alias SDL_KMOD_LCTRL = Self(0x0040)
+    alias KMOD_LCTRL = Self(0x0040)
     """The left Ctrl (Control) key is down."""
-    alias SDL_KMOD_RCTRL = Self(0x0080)
+    alias KMOD_RCTRL = Self(0x0080)
     """The right Ctrl (Control) key is down."""
-    alias SDL_KMOD_LALT = Self(0x0100)
+    alias KMOD_LALT = Self(0x0100)
     """The left Alt key is down."""
-    alias SDL_KMOD_RALT = Self(0x0200)
+    alias KMOD_RALT = Self(0x0200)
     """The right Alt key is down."""
-    alias SDL_KMOD_LGUI = Self(0x0400)
+    alias KMOD_LGUI = Self(0x0400)
     """The left GUI key (often the Windows key) is down."""
-    alias SDL_KMOD_RGUI = Self(0x0800)
+    alias KMOD_RGUI = Self(0x0800)
     """The right GUI key (often the Windows key) is down."""
-    alias SDL_KMOD_NUM = Self(0x1000)
+    alias KMOD_NUM = Self(0x1000)
     """The Num Lock key (may be located on an extended keypad) is down."""
-    alias SDL_KMOD_CAPS = Self(0x2000)
+    alias KMOD_CAPS = Self(0x2000)
     """The Caps Lock key is down."""
-    alias SDL_KMOD_MODE = Self(0x4000)
+    alias KMOD_MODE = Self(0x4000)
     """The !AltGr key is down."""
-    alias SDL_KMOD_SCROLL = Self(0x8000)
+    alias KMOD_SCROLL = Self(0x8000)
     """The Scroll Lock key is down."""
-    alias SDL_KMOD_CTRL = Self(Self.SDL_KMOD_LCTRL.value | Self.SDL_KMOD_RCTRL.value)
+    alias KMOD_CTRL = Self(Self.KMOD_LCTRL.value | Self.KMOD_RCTRL.value)
     """Any Ctrl key is down."""
-    alias SDL_KMOD_SHIFT = Self(Self.SDL_KMOD_LSHIFT.value | Self.SDL_KMOD_RSHIFT.value)
+    alias KMOD_SHIFT = Self(Self.KMOD_LSHIFT.value | Self.KMOD_RSHIFT.value)
     """Any Shift key is down."""
-    alias SDL_KMOD_ALT = Self(Self.SDL_KMOD_LALT.value | Self.SDL_KMOD_RALT.value)
+    alias KMOD_ALT = Self(Self.KMOD_LALT.value | Self.KMOD_RALT.value)
     """Any Alt key is down."""
-    alias SDL_KMOD_GUI = Self(Self.SDL_KMOD_LGUI.value | Self.SDL_KMOD_RGUI.value)
+    alias KMOD_GUI = Self(Self.KMOD_LGUI.value | Self.KMOD_RGUI.value)
     """Any GUI key is down."""

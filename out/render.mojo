@@ -50,22 +50,22 @@ details: https://github.com/libsdl-org/SDL/issues/986
 
 
 @fieldwise_init
-struct SDL_Vertex(Copyable, Movable):
+struct Vertex(Copyable, Movable):
     """Vertex structure.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_Vertex.
+    Docs: https://wiki.libsdl.org/SDL3/Vertex.
     """
 
-    var position: SDL_FPoint
+    var position: FPoint
     """Vertex position, in SDL_Renderer coordinates."""
-    var color: SDL_FColor
+    var color: FColor
     """Vertex color."""
-    var tex_coord: SDL_FPoint
+    var tex_coord: FPoint
     """Normalized texture coordinates, if needed."""
 
 
 @register_passable("trivial")
-struct SDL_TextureAccess(Intable):
+struct TextureAccess(Intable):
     """The access pattern allowed for a texture.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_TextureAccess.
@@ -81,16 +81,16 @@ struct SDL_TextureAccess(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_TEXTUREACCESS_STATIC = 0
+    alias TEXTUREACCESS_STATIC = Self(0)
     """Changes rarely, not lockable."""
-    alias SDL_TEXTUREACCESS_STREAMING = 1
+    alias TEXTUREACCESS_STREAMING = Self(1)
     """Changes frequently, lockable."""
-    alias SDL_TEXTUREACCESS_TARGET = 2
+    alias TEXTUREACCESS_TARGET = Self(2)
     """Texture can be used as a render target."""
 
 
 @register_passable("trivial")
-struct SDL_RendererLogicalPresentation(Intable):
+struct RendererLogicalPresentation(Intable):
     """How the logical size is mapped to the output.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_RendererLogicalPresentation.
@@ -106,36 +106,36 @@ struct SDL_RendererLogicalPresentation(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
-    alias SDL_LOGICAL_PRESENTATION_DISABLED = 0
+    alias LOGICAL_PRESENTATION_DISABLED = Self(0)
     """There is no logical size in effect."""
-    alias SDL_LOGICAL_PRESENTATION_STRETCH = 1
+    alias LOGICAL_PRESENTATION_STRETCH = Self(1)
     """The rendered content is stretched to the output resolution."""
-    alias SDL_LOGICAL_PRESENTATION_LETTERBOX = 2
+    alias LOGICAL_PRESENTATION_LETTERBOX = Self(2)
     """The rendered content is fit to the largest dimension and the other dimension is letterboxed with black bars."""
-    alias SDL_LOGICAL_PRESENTATION_OVERSCAN = 3
+    alias LOGICAL_PRESENTATION_OVERSCAN = Self(3)
     """The rendered content is fit to the smallest dimension and the other dimension extends beyond the output bounds."""
-    alias SDL_LOGICAL_PRESENTATION_INTEGER_SCALE = 4
+    alias LOGICAL_PRESENTATION_INTEGER_SCALE = Self(4)
     """The rendered content is scaled up by integer multiples to fit the output resolution."""
 
 
 @fieldwise_init
-struct SDL_Renderer(Copyable, Movable):
+struct Renderer(Copyable, Movable):
     """A structure representing rendering state.
 
-    Docs: https://wiki.libsdl.org/SDL3/SDL_Renderer.
+    Docs: https://wiki.libsdl.org/SDL3/Renderer.
     """
 
     pass
 
 
 @fieldwise_init
-struct SDL_Texture(Copyable, Movable):
+struct Texture(Copyable, Movable):
     """An efficient driver-specific representation of pixel data.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_Texture.
     """
 
-    var format: SDL_PixelFormat
+    var format: PixelFormat
     """The format of the texture, read-only."""
     var w: c_int
     """The width of the texture, read-only."""
@@ -146,7 +146,7 @@ struct SDL_Texture(Copyable, Movable):
     """Application reference count, used when freeing texture."""
 
 
-fn sdl_get_num_render_drivers() -> c_int:
+fn get_num_render_drivers() -> c_int:
     """Get the number of 2D rendering drivers available for the current display.
 
     A render driver is a set of code that handles rendering and texture
@@ -167,7 +167,7 @@ fn sdl_get_num_render_drivers() -> c_int:
     return _get_dylib_function[lib, "SDL_GetNumRenderDrivers", fn () -> c_int]()()
 
 
-fn sdl_get_render_driver(index: c_int) -> Ptr[c_char, mut=False]:
+fn get_render_driver(index: c_int) -> Ptr[c_char, mut=False]:
     """Use this function to get the name of a built in 2D rendering driver.
 
     The list of rendering drivers is given in the order that they are normally
@@ -195,7 +195,7 @@ fn sdl_get_render_driver(index: c_int) -> Ptr[c_char, mut=False]:
     return _get_dylib_function[lib, "SDL_GetRenderDriver", fn (index: c_int) -> Ptr[c_char, mut=False]]()(index)
 
 
-fn sdl_create_window_and_renderer(owned title: String, width: c_int, height: c_int, window_flags: SDL_WindowFlags, window: Ptr[Ptr[SDL_Window, mut=True], mut=True], renderer: Ptr[Ptr[SDL_Renderer, mut=True], mut=True]) raises:
+fn create_window_and_renderer(owned title: String, width: c_int, height: c_int, window_flags: WindowFlags, window: Ptr[Ptr[Window, mut=True], mut=True], renderer: Ptr[Ptr[Renderer, mut=True], mut=True]) raises:
     """Create a window and default renderer.
 
     Args:
@@ -217,12 +217,12 @@ fn sdl_create_window_and_renderer(owned title: String, width: c_int, height: c_i
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateWindowAndRenderer.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateWindowAndRenderer", fn (title: Ptr[c_char, mut=False], width: c_int, height: c_int, window_flags: SDL_WindowFlags, window: Ptr[Ptr[SDL_Window, mut=True], mut=True], renderer: Ptr[Ptr[SDL_Renderer, mut=True], mut=True]) -> Bool]()(title.unsafe_cstr_ptr(), width, height, window_flags, window, renderer)
+    ret = _get_dylib_function[lib, "SDL_CreateWindowAndRenderer", fn (title: Ptr[c_char, mut=False], width: c_int, height: c_int, window_flags: WindowFlags, window: Ptr[Ptr[Window, mut=True], mut=True], renderer: Ptr[Ptr[Renderer, mut=True], mut=True]) -> Bool]()(title.unsafe_cstr_ptr(), width, height, window_flags, window, renderer)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_create_renderer(window: Ptr[SDL_Window, mut=True], owned name: String) -> Ptr[SDL_Renderer, mut=True]:
+fn create_renderer(window: Ptr[Window, mut=True], owned name: String) -> Ptr[Renderer, mut=True]:
     """Create a 2D rendering context for a window.
 
     If you want a specific renderer, you can specify its name here. A list of
@@ -253,10 +253,10 @@ fn sdl_create_renderer(window: Ptr[SDL_Window, mut=True], owned name: String) ->
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateRenderer.
     """
 
-    return _get_dylib_function[lib, "SDL_CreateRenderer", fn (window: Ptr[SDL_Window, mut=True], name: Ptr[c_char, mut=False]) -> Ptr[SDL_Renderer, mut=True]]()(window, name.unsafe_cstr_ptr())
+    return _get_dylib_function[lib, "SDL_CreateRenderer", fn (window: Ptr[Window, mut=True], name: Ptr[c_char, mut=False]) -> Ptr[Renderer, mut=True]]()(window, name.unsafe_cstr_ptr())
 
 
-fn sdl_create_renderer_with_properties(props: SDL_PropertiesID) -> Ptr[SDL_Renderer, mut=True]:
+fn create_renderer_with_properties(props: PropertiesID) -> Ptr[Renderer, mut=True]:
     """Create a 2D rendering context for a window, with the specified properties.
 
     These are the supported properties:
@@ -306,10 +306,10 @@ fn sdl_create_renderer_with_properties(props: SDL_PropertiesID) -> Ptr[SDL_Rende
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateRendererWithProperties.
     """
 
-    return _get_dylib_function[lib, "SDL_CreateRendererWithProperties", fn (props: SDL_PropertiesID) -> Ptr[SDL_Renderer, mut=True]]()(props)
+    return _get_dylib_function[lib, "SDL_CreateRendererWithProperties", fn (props: PropertiesID) -> Ptr[Renderer, mut=True]]()(props)
 
 
-fn sdl_create_software_renderer(surface: Ptr[SDL_Surface, mut=True]) -> Ptr[SDL_Renderer, mut=True]:
+fn create_software_renderer(surface: Ptr[Surface, mut=True]) -> Ptr[Renderer, mut=True]:
     """Create a 2D software rendering context for a surface.
 
     Two other API which can be used to create SDL_Renderer:
@@ -331,10 +331,10 @@ fn sdl_create_software_renderer(surface: Ptr[SDL_Surface, mut=True]) -> Ptr[SDL_
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateSoftwareRenderer.
     """
 
-    return _get_dylib_function[lib, "SDL_CreateSoftwareRenderer", fn (surface: Ptr[SDL_Surface, mut=True]) -> Ptr[SDL_Renderer, mut=True]]()(surface)
+    return _get_dylib_function[lib, "SDL_CreateSoftwareRenderer", fn (surface: Ptr[Surface, mut=True]) -> Ptr[Renderer, mut=True]]()(surface)
 
 
-fn sdl_get_renderer(window: Ptr[SDL_Window, mut=True], out ret: Ptr[SDL_Renderer, mut=True]) raises:
+fn get_renderer(window: Ptr[Window, mut=True], out ret: Ptr[Renderer, mut=True]) raises:
     """Get the renderer associated with a window.
 
     Args:
@@ -350,12 +350,12 @@ fn sdl_get_renderer(window: Ptr[SDL_Window, mut=True], out ret: Ptr[SDL_Renderer
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderer.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderer", fn (window: Ptr[SDL_Window, mut=True]) -> Ptr[SDL_Renderer, mut=True]]()(window)
+    ret = _get_dylib_function[lib, "SDL_GetRenderer", fn (window: Ptr[Window, mut=True]) -> Ptr[Renderer, mut=True]]()(window)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_window(renderer: Ptr[SDL_Renderer, mut=True], out ret: Ptr[SDL_Window, mut=True]) raises:
+fn get_render_window(renderer: Ptr[Renderer, mut=True], out ret: Ptr[Window, mut=True]) raises:
     """Get the window associated with a renderer.
 
     Args:
@@ -371,12 +371,12 @@ fn sdl_get_render_window(renderer: Ptr[SDL_Renderer, mut=True], out ret: Ptr[SDL
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderWindow.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderWindow", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> Ptr[SDL_Window, mut=True]]()(renderer)
+    ret = _get_dylib_function[lib, "SDL_GetRenderWindow", fn (renderer: Ptr[Renderer, mut=True]) -> Ptr[Window, mut=True]]()(renderer)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_renderer_name(renderer: Ptr[SDL_Renderer, mut=True], out ret: Ptr[c_char, mut=False]) raises:
+fn get_renderer_name(renderer: Ptr[Renderer, mut=True], out ret: Ptr[c_char, mut=False]) raises:
     """Get the name of a renderer.
 
     Args:
@@ -392,12 +392,12 @@ fn sdl_get_renderer_name(renderer: Ptr[SDL_Renderer, mut=True], out ret: Ptr[c_c
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRendererName.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRendererName", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> Ptr[c_char, mut=False]]()(renderer)
+    ret = _get_dylib_function[lib, "SDL_GetRendererName", fn (renderer: Ptr[Renderer, mut=True]) -> Ptr[c_char, mut=False]]()(renderer)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_renderer_properties(renderer: Ptr[SDL_Renderer, mut=True]) -> SDL_PropertiesID:
+fn get_renderer_properties(renderer: Ptr[Renderer, mut=True]) -> PropertiesID:
     """Get the properties associated with a renderer.
 
     The following read-only properties are provided by SDL:
@@ -486,10 +486,10 @@ fn sdl_get_renderer_properties(renderer: Ptr[SDL_Renderer, mut=True]) -> SDL_Pro
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRendererProperties.
     """
 
-    return _get_dylib_function[lib, "SDL_GetRendererProperties", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> SDL_PropertiesID]()(renderer)
+    return _get_dylib_function[lib, "SDL_GetRendererProperties", fn (renderer: Ptr[Renderer, mut=True]) -> PropertiesID]()(renderer)
 
 
-fn sdl_get_render_output_size(renderer: Ptr[SDL_Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True]) raises:
+fn get_render_output_size(renderer: Ptr[Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True]) raises:
     """Get the output size in pixels of a rendering context.
 
     This returns the true output size in pixels, ignoring any render targets or
@@ -513,12 +513,12 @@ fn sdl_get_render_output_size(renderer: Ptr[SDL_Renderer, mut=True], w: Ptr[c_in
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderOutputSize.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderOutputSize", fn (renderer: Ptr[SDL_Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True]) -> Bool]()(renderer, w, h)
+    ret = _get_dylib_function[lib, "SDL_GetRenderOutputSize", fn (renderer: Ptr[Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True]) -> Bool]()(renderer, w, h)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_current_render_output_size(renderer: Ptr[SDL_Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True]) raises:
+fn get_current_render_output_size(renderer: Ptr[Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True]) raises:
     """Get the current output size in pixels of a rendering context.
 
     If a rendering target is active, this will return the size of the rendering
@@ -542,12 +542,12 @@ fn sdl_get_current_render_output_size(renderer: Ptr[SDL_Renderer, mut=True], w: 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetCurrentRenderOutputSize.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetCurrentRenderOutputSize", fn (renderer: Ptr[SDL_Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True]) -> Bool]()(renderer, w, h)
+    ret = _get_dylib_function[lib, "SDL_GetCurrentRenderOutputSize", fn (renderer: Ptr[Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True]) -> Bool]()(renderer, w, h)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_create_texture(renderer: Ptr[SDL_Renderer, mut=True], format: SDL_PixelFormat, access: SDL_TextureAccess, w: c_int, h: c_int, out ret: Ptr[SDL_Texture, mut=True]) raises:
+fn create_texture(renderer: Ptr[Renderer, mut=True], format: PixelFormat, access: TextureAccess, w: c_int, h: c_int, out ret: Ptr[Texture, mut=True]) raises:
     """Create a texture for a rendering context.
 
     The contents of a texture when first created are not defined.
@@ -569,12 +569,12 @@ fn sdl_create_texture(renderer: Ptr[SDL_Renderer, mut=True], format: SDL_PixelFo
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateTexture.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateTexture", fn (renderer: Ptr[SDL_Renderer, mut=True], format: SDL_PixelFormat, access: SDL_TextureAccess, w: c_int, h: c_int) -> Ptr[SDL_Texture, mut=True]]()(renderer, format, access, w, h)
+    ret = _get_dylib_function[lib, "SDL_CreateTexture", fn (renderer: Ptr[Renderer, mut=True], format: PixelFormat, access: TextureAccess, w: c_int, h: c_int) -> Ptr[Texture, mut=True]]()(renderer, format, access, w, h)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_create_texture_from_surface(renderer: Ptr[SDL_Renderer, mut=True], surface: Ptr[SDL_Surface, mut=True], out ret: Ptr[SDL_Texture, mut=True]) raises:
+fn create_texture_from_surface(renderer: Ptr[Renderer, mut=True], surface: Ptr[Surface, mut=True], out ret: Ptr[Texture, mut=True]) raises:
     """Create a texture from an existing surface.
 
     The surface is not modified or freed by this function.
@@ -601,12 +601,12 @@ fn sdl_create_texture_from_surface(renderer: Ptr[SDL_Renderer, mut=True], surfac
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateTextureFromSurface.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateTextureFromSurface", fn (renderer: Ptr[SDL_Renderer, mut=True], surface: Ptr[SDL_Surface, mut=True]) -> Ptr[SDL_Texture, mut=True]]()(renderer, surface)
+    ret = _get_dylib_function[lib, "SDL_CreateTextureFromSurface", fn (renderer: Ptr[Renderer, mut=True], surface: Ptr[Surface, mut=True]) -> Ptr[Texture, mut=True]]()(renderer, surface)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_create_texture_with_properties(renderer: Ptr[SDL_Renderer, mut=True], props: SDL_PropertiesID, out ret: Ptr[SDL_Texture, mut=True]) raises:
+fn create_texture_with_properties(renderer: Ptr[Renderer, mut=True], props: PropertiesID, out ret: Ptr[Texture, mut=True]) raises:
     """Create a texture for a rendering context with the specified properties.
 
     These are the supported properties:
@@ -714,12 +714,12 @@ fn sdl_create_texture_with_properties(renderer: Ptr[SDL_Renderer, mut=True], pro
     Docs: https://wiki.libsdl.org/SDL3/SDL_CreateTextureWithProperties.
     """
 
-    ret = _get_dylib_function[lib, "SDL_CreateTextureWithProperties", fn (renderer: Ptr[SDL_Renderer, mut=True], props: SDL_PropertiesID) -> Ptr[SDL_Texture, mut=True]]()(renderer, props)
+    ret = _get_dylib_function[lib, "SDL_CreateTextureWithProperties", fn (renderer: Ptr[Renderer, mut=True], props: PropertiesID) -> Ptr[Texture, mut=True]]()(renderer, props)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_texture_properties(texture: Ptr[SDL_Texture, mut=True]) -> SDL_PropertiesID:
+fn get_texture_properties(texture: Ptr[Texture, mut=True]) -> PropertiesID:
     """Get the properties associated with a texture.
 
     The following read-only properties are provided by SDL:
@@ -810,10 +810,10 @@ fn sdl_get_texture_properties(texture: Ptr[SDL_Texture, mut=True]) -> SDL_Proper
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetTextureProperties.
     """
 
-    return _get_dylib_function[lib, "SDL_GetTextureProperties", fn (texture: Ptr[SDL_Texture, mut=True]) -> SDL_PropertiesID]()(texture)
+    return _get_dylib_function[lib, "SDL_GetTextureProperties", fn (texture: Ptr[Texture, mut=True]) -> PropertiesID]()(texture)
 
 
-fn sdl_get_renderer_from_texture(texture: Ptr[SDL_Texture, mut=True]) -> Ptr[SDL_Renderer, mut=True]:
+fn get_renderer_from_texture(texture: Ptr[Texture, mut=True]) -> Ptr[Renderer, mut=True]:
     """Get the renderer that created an SDL_Texture.
 
     Args:
@@ -829,10 +829,10 @@ fn sdl_get_renderer_from_texture(texture: Ptr[SDL_Texture, mut=True]) -> Ptr[SDL
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRendererFromTexture.
     """
 
-    return _get_dylib_function[lib, "SDL_GetRendererFromTexture", fn (texture: Ptr[SDL_Texture, mut=True]) -> Ptr[SDL_Renderer, mut=True]]()(texture)
+    return _get_dylib_function[lib, "SDL_GetRendererFromTexture", fn (texture: Ptr[Texture, mut=True]) -> Ptr[Renderer, mut=True]]()(texture)
 
 
-fn sdl_get_texture_size(texture: Ptr[SDL_Texture, mut=True], w: Ptr[c_float, mut=True], h: Ptr[c_float, mut=True]) raises:
+fn get_texture_size(texture: Ptr[Texture, mut=True], w: Ptr[c_float, mut=True], h: Ptr[c_float, mut=True]) raises:
     """Get the size of a texture, as floating point values.
 
     Args:
@@ -852,12 +852,12 @@ fn sdl_get_texture_size(texture: Ptr[SDL_Texture, mut=True], w: Ptr[c_float, mut
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetTextureSize.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetTextureSize", fn (texture: Ptr[SDL_Texture, mut=True], w: Ptr[c_float, mut=True], h: Ptr[c_float, mut=True]) -> Bool]()(texture, w, h)
+    ret = _get_dylib_function[lib, "SDL_GetTextureSize", fn (texture: Ptr[Texture, mut=True], w: Ptr[c_float, mut=True], h: Ptr[c_float, mut=True]) -> Bool]()(texture, w, h)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_texture_color_mod(texture: Ptr[SDL_Texture, mut=True], r: UInt8, g: UInt8, b: UInt8) raises:
+fn set_texture_color_mod(texture: Ptr[Texture, mut=True], r: UInt8, g: UInt8, b: UInt8) raises:
     """Set an additional color value multiplied into render copy operations.
 
     When this texture is rendered, during the copy operation each source color
@@ -885,12 +885,12 @@ fn sdl_set_texture_color_mod(texture: Ptr[SDL_Texture, mut=True], r: UInt8, g: U
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetTextureColorMod.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetTextureColorMod", fn (texture: Ptr[SDL_Texture, mut=True], r: UInt8, g: UInt8, b: UInt8) -> Bool]()(texture, r, g, b)
+    ret = _get_dylib_function[lib, "SDL_SetTextureColorMod", fn (texture: Ptr[Texture, mut=True], r: UInt8, g: UInt8, b: UInt8) -> Bool]()(texture, r, g, b)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_texture_color_mod_float(texture: Ptr[SDL_Texture, mut=True], r: c_float, g: c_float, b: c_float) raises:
+fn set_texture_color_mod_float(texture: Ptr[Texture, mut=True], r: c_float, g: c_float, b: c_float) raises:
     """Set an additional color value multiplied into render copy operations.
 
     When this texture is rendered, during the copy operation each source color
@@ -918,12 +918,12 @@ fn sdl_set_texture_color_mod_float(texture: Ptr[SDL_Texture, mut=True], r: c_flo
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetTextureColorModFloat.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetTextureColorModFloat", fn (texture: Ptr[SDL_Texture, mut=True], r: c_float, g: c_float, b: c_float) -> Bool]()(texture, r, g, b)
+    ret = _get_dylib_function[lib, "SDL_SetTextureColorModFloat", fn (texture: Ptr[Texture, mut=True], r: c_float, g: c_float, b: c_float) -> Bool]()(texture, r, g, b)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_texture_color_mod(texture: Ptr[SDL_Texture, mut=True], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True]) raises:
+fn get_texture_color_mod(texture: Ptr[Texture, mut=True], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True]) raises:
     """Get the additional color value multiplied into render copy operations.
 
     Args:
@@ -942,12 +942,12 @@ fn sdl_get_texture_color_mod(texture: Ptr[SDL_Texture, mut=True], r: Ptr[UInt8, 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetTextureColorMod.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetTextureColorMod", fn (texture: Ptr[SDL_Texture, mut=True], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True]) -> Bool]()(texture, r, g, b)
+    ret = _get_dylib_function[lib, "SDL_GetTextureColorMod", fn (texture: Ptr[Texture, mut=True], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True]) -> Bool]()(texture, r, g, b)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_texture_color_mod_float(texture: Ptr[SDL_Texture, mut=True], r: Ptr[c_float, mut=True], g: Ptr[c_float, mut=True], b: Ptr[c_float, mut=True]) raises:
+fn get_texture_color_mod_float(texture: Ptr[Texture, mut=True], r: Ptr[c_float, mut=True], g: Ptr[c_float, mut=True], b: Ptr[c_float, mut=True]) raises:
     """Get the additional color value multiplied into render copy operations.
 
     Args:
@@ -966,12 +966,12 @@ fn sdl_get_texture_color_mod_float(texture: Ptr[SDL_Texture, mut=True], r: Ptr[c
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetTextureColorModFloat.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetTextureColorModFloat", fn (texture: Ptr[SDL_Texture, mut=True], r: Ptr[c_float, mut=True], g: Ptr[c_float, mut=True], b: Ptr[c_float, mut=True]) -> Bool]()(texture, r, g, b)
+    ret = _get_dylib_function[lib, "SDL_GetTextureColorModFloat", fn (texture: Ptr[Texture, mut=True], r: Ptr[c_float, mut=True], g: Ptr[c_float, mut=True], b: Ptr[c_float, mut=True]) -> Bool]()(texture, r, g, b)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_texture_alpha_mod(texture: Ptr[SDL_Texture, mut=True], alpha: UInt8) raises:
+fn set_texture_alpha_mod(texture: Ptr[Texture, mut=True], alpha: UInt8) raises:
     """Set an additional alpha value multiplied into render copy operations.
 
     When this texture is rendered, during the copy operation the source alpha
@@ -996,12 +996,12 @@ fn sdl_set_texture_alpha_mod(texture: Ptr[SDL_Texture, mut=True], alpha: UInt8) 
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetTextureAlphaMod.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetTextureAlphaMod", fn (texture: Ptr[SDL_Texture, mut=True], alpha: UInt8) -> Bool]()(texture, alpha)
+    ret = _get_dylib_function[lib, "SDL_SetTextureAlphaMod", fn (texture: Ptr[Texture, mut=True], alpha: UInt8) -> Bool]()(texture, alpha)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_texture_alpha_mod_float(texture: Ptr[SDL_Texture, mut=True], alpha: c_float) raises:
+fn set_texture_alpha_mod_float(texture: Ptr[Texture, mut=True], alpha: c_float) raises:
     """Set an additional alpha value multiplied into render copy operations.
 
     When this texture is rendered, during the copy operation the source alpha
@@ -1026,12 +1026,12 @@ fn sdl_set_texture_alpha_mod_float(texture: Ptr[SDL_Texture, mut=True], alpha: c
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetTextureAlphaModFloat.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetTextureAlphaModFloat", fn (texture: Ptr[SDL_Texture, mut=True], alpha: c_float) -> Bool]()(texture, alpha)
+    ret = _get_dylib_function[lib, "SDL_SetTextureAlphaModFloat", fn (texture: Ptr[Texture, mut=True], alpha: c_float) -> Bool]()(texture, alpha)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_texture_alpha_mod(texture: Ptr[SDL_Texture, mut=True], alpha: Ptr[UInt8, mut=True]) raises:
+fn get_texture_alpha_mod(texture: Ptr[Texture, mut=True], alpha: Ptr[UInt8, mut=True]) raises:
     """Get the additional alpha value multiplied into render copy operations.
 
     Args:
@@ -1048,12 +1048,12 @@ fn sdl_get_texture_alpha_mod(texture: Ptr[SDL_Texture, mut=True], alpha: Ptr[UIn
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetTextureAlphaMod.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetTextureAlphaMod", fn (texture: Ptr[SDL_Texture, mut=True], alpha: Ptr[UInt8, mut=True]) -> Bool]()(texture, alpha)
+    ret = _get_dylib_function[lib, "SDL_GetTextureAlphaMod", fn (texture: Ptr[Texture, mut=True], alpha: Ptr[UInt8, mut=True]) -> Bool]()(texture, alpha)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_texture_alpha_mod_float(texture: Ptr[SDL_Texture, mut=True], alpha: Ptr[c_float, mut=True]) raises:
+fn get_texture_alpha_mod_float(texture: Ptr[Texture, mut=True], alpha: Ptr[c_float, mut=True]) raises:
     """Get the additional alpha value multiplied into render copy operations.
 
     Args:
@@ -1070,12 +1070,12 @@ fn sdl_get_texture_alpha_mod_float(texture: Ptr[SDL_Texture, mut=True], alpha: P
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetTextureAlphaModFloat.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetTextureAlphaModFloat", fn (texture: Ptr[SDL_Texture, mut=True], alpha: Ptr[c_float, mut=True]) -> Bool]()(texture, alpha)
+    ret = _get_dylib_function[lib, "SDL_GetTextureAlphaModFloat", fn (texture: Ptr[Texture, mut=True], alpha: Ptr[c_float, mut=True]) -> Bool]()(texture, alpha)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_texture_blend_mode(texture: Ptr[SDL_Texture, mut=True], blend_mode: SDL_BlendMode) raises:
+fn set_texture_blend_mode(texture: Ptr[Texture, mut=True], blend_mode: BlendMode) raises:
     """Set the blend mode for a texture, used by SDL_RenderTexture().
 
     If the blend mode is not supported, the closest supported mode is chosen
@@ -1095,12 +1095,12 @@ fn sdl_set_texture_blend_mode(texture: Ptr[SDL_Texture, mut=True], blend_mode: S
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetTextureBlendMode.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetTextureBlendMode", fn (texture: Ptr[SDL_Texture, mut=True], blend_mode: SDL_BlendMode) -> Bool]()(texture, blend_mode)
+    ret = _get_dylib_function[lib, "SDL_SetTextureBlendMode", fn (texture: Ptr[Texture, mut=True], blend_mode: BlendMode) -> Bool]()(texture, blend_mode)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_texture_blend_mode(texture: Ptr[SDL_Texture, mut=True], blend_mode: Ptr[SDL_BlendMode, mut=True]) raises:
+fn get_texture_blend_mode(texture: Ptr[Texture, mut=True], blend_mode: Ptr[BlendMode, mut=True]) raises:
     """Get the blend mode used for texture copy operations.
 
     Args:
@@ -1117,12 +1117,12 @@ fn sdl_get_texture_blend_mode(texture: Ptr[SDL_Texture, mut=True], blend_mode: P
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetTextureBlendMode.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetTextureBlendMode", fn (texture: Ptr[SDL_Texture, mut=True], blend_mode: Ptr[SDL_BlendMode, mut=True]) -> Bool]()(texture, blend_mode)
+    ret = _get_dylib_function[lib, "SDL_GetTextureBlendMode", fn (texture: Ptr[Texture, mut=True], blend_mode: Ptr[BlendMode, mut=True]) -> Bool]()(texture, blend_mode)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_texture_scale_mode(texture: Ptr[SDL_Texture, mut=True], scale_mode: SDL_ScaleMode) raises:
+fn set_texture_scale_mode(texture: Ptr[Texture, mut=True], scale_mode: ScaleMode) raises:
     """Set the scale mode used for texture scale operations.
 
     The default texture scale mode is SDL_SCALEMODE_LINEAR.
@@ -1143,12 +1143,12 @@ fn sdl_set_texture_scale_mode(texture: Ptr[SDL_Texture, mut=True], scale_mode: S
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetTextureScaleMode.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetTextureScaleMode", fn (texture: Ptr[SDL_Texture, mut=True], scale_mode: SDL_ScaleMode) -> Bool]()(texture, scale_mode)
+    ret = _get_dylib_function[lib, "SDL_SetTextureScaleMode", fn (texture: Ptr[Texture, mut=True], scale_mode: ScaleMode) -> Bool]()(texture, scale_mode)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_texture_scale_mode(texture: Ptr[SDL_Texture, mut=True], scale_mode: Ptr[SDL_ScaleMode, mut=True]) raises:
+fn get_texture_scale_mode(texture: Ptr[Texture, mut=True], scale_mode: Ptr[ScaleMode, mut=True]) raises:
     """Get the scale mode used for texture scale operations.
 
     Args:
@@ -1165,12 +1165,12 @@ fn sdl_get_texture_scale_mode(texture: Ptr[SDL_Texture, mut=True], scale_mode: P
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetTextureScaleMode.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetTextureScaleMode", fn (texture: Ptr[SDL_Texture, mut=True], scale_mode: Ptr[SDL_ScaleMode, mut=True]) -> Bool]()(texture, scale_mode)
+    ret = _get_dylib_function[lib, "SDL_GetTextureScaleMode", fn (texture: Ptr[Texture, mut=True], scale_mode: Ptr[ScaleMode, mut=True]) -> Bool]()(texture, scale_mode)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_update_texture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], pixels: Ptr[NoneType, mut=False], pitch: c_int) raises:
+fn update_texture(texture: Ptr[Texture, mut=True], rect: Ptr[Rect, mut=False], pixels: Ptr[NoneType, mut=False], pitch: c_int) raises:
     """Update the given texture rectangle with new pixel data.
 
     The pixel data must be in the pixel format of the texture, which can be
@@ -1202,12 +1202,12 @@ fn sdl_update_texture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, m
     Docs: https://wiki.libsdl.org/SDL3/SDL_UpdateTexture.
     """
 
-    ret = _get_dylib_function[lib, "SDL_UpdateTexture", fn (texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], pixels: Ptr[NoneType, mut=False], pitch: c_int) -> Bool]()(texture, rect, pixels, pitch)
+    ret = _get_dylib_function[lib, "SDL_UpdateTexture", fn (texture: Ptr[Texture, mut=True], rect: Ptr[Rect, mut=False], pixels: Ptr[NoneType, mut=False], pitch: c_int) -> Bool]()(texture, rect, pixels, pitch)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_update_yuv_texture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uplane: Ptr[UInt8, mut=False], upitch: c_int, vplane: Ptr[UInt8, mut=False], vpitch: c_int) raises:
+fn update_yuv_texture(texture: Ptr[Texture, mut=True], rect: Ptr[Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uplane: Ptr[UInt8, mut=False], upitch: c_int, vplane: Ptr[UInt8, mut=False], vpitch: c_int) raises:
     """Update a rectangle within a planar YV12 or IYUV texture with new pixel
     data.
 
@@ -1239,12 +1239,12 @@ fn sdl_update_yuv_texture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rec
     Docs: https://wiki.libsdl.org/SDL3/SDL_UpdateYUVTexture.
     """
 
-    ret = _get_dylib_function[lib, "SDL_UpdateYUVTexture", fn (texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uplane: Ptr[UInt8, mut=False], upitch: c_int, vplane: Ptr[UInt8, mut=False], vpitch: c_int) -> Bool]()(texture, rect, y_plane, y_pitch, uplane, upitch, vplane, vpitch)
+    ret = _get_dylib_function[lib, "SDL_UpdateYUVTexture", fn (texture: Ptr[Texture, mut=True], rect: Ptr[Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uplane: Ptr[UInt8, mut=False], upitch: c_int, vplane: Ptr[UInt8, mut=False], vpitch: c_int) -> Bool]()(texture, rect, y_plane, y_pitch, uplane, upitch, vplane, vpitch)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_update_nv_texture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uv_plane: Ptr[UInt8, mut=False], uv_pitch: c_int) raises:
+fn update_nv_texture(texture: Ptr[Texture, mut=True], rect: Ptr[Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uv_plane: Ptr[UInt8, mut=False], uv_pitch: c_int) raises:
     """Update a rectangle within a planar NV12 or NV21 texture with new pixels.
 
     You can use SDL_UpdateTexture() as long as your pixel data is a contiguous
@@ -1272,12 +1272,12 @@ fn sdl_update_nv_texture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect
     Docs: https://wiki.libsdl.org/SDL3/SDL_UpdateNVTexture.
     """
 
-    ret = _get_dylib_function[lib, "SDL_UpdateNVTexture", fn (texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uv_plane: Ptr[UInt8, mut=False], uv_pitch: c_int) -> Bool]()(texture, rect, y_plane, y_pitch, uv_plane, uv_pitch)
+    ret = _get_dylib_function[lib, "SDL_UpdateNVTexture", fn (texture: Ptr[Texture, mut=True], rect: Ptr[Rect, mut=False], y_plane: Ptr[UInt8, mut=False], y_pitch: c_int, uv_plane: Ptr[UInt8, mut=False], uv_pitch: c_int) -> Bool]()(texture, rect, y_plane, y_pitch, uv_plane, uv_pitch)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_lock_texture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], pixels: Ptr[Ptr[NoneType, mut=True], mut=True], pitch: Ptr[c_int, mut=True]) raises:
+fn lock_texture(texture: Ptr[Texture, mut=True], rect: Ptr[Rect, mut=False], pixels: Ptr[Ptr[NoneType, mut=True], mut=True], pitch: Ptr[c_int, mut=True]) raises:
     """Lock a portion of the texture for **write-only** pixel access.
 
     As an optimization, the pixels made available for editing don't necessarily
@@ -1309,12 +1309,12 @@ fn sdl_lock_texture(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut
     Docs: https://wiki.libsdl.org/SDL3/SDL_LockTexture.
     """
 
-    ret = _get_dylib_function[lib, "SDL_LockTexture", fn (texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], pixels: Ptr[Ptr[NoneType, mut=True], mut=True], pitch: Ptr[c_int, mut=True]) -> Bool]()(texture, rect, pixels, pitch)
+    ret = _get_dylib_function[lib, "SDL_LockTexture", fn (texture: Ptr[Texture, mut=True], rect: Ptr[Rect, mut=False], pixels: Ptr[Ptr[NoneType, mut=True], mut=True], pitch: Ptr[c_int, mut=True]) -> Bool]()(texture, rect, pixels, pitch)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_lock_texture_to_surface(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], surface: Ptr[Ptr[SDL_Surface, mut=True], mut=True]) raises:
+fn lock_texture_to_surface(texture: Ptr[Texture, mut=True], rect: Ptr[Rect, mut=False], surface: Ptr[Ptr[Surface, mut=True], mut=True]) raises:
     """Lock a portion of the texture for **write-only** pixel access, and expose
     it as a SDL surface.
 
@@ -1350,12 +1350,12 @@ fn sdl_lock_texture_to_surface(texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SD
     Docs: https://wiki.libsdl.org/SDL3/SDL_LockTextureToSurface.
     """
 
-    ret = _get_dylib_function[lib, "SDL_LockTextureToSurface", fn (texture: Ptr[SDL_Texture, mut=True], rect: Ptr[SDL_Rect, mut=False], surface: Ptr[Ptr[SDL_Surface, mut=True], mut=True]) -> Bool]()(texture, rect, surface)
+    ret = _get_dylib_function[lib, "SDL_LockTextureToSurface", fn (texture: Ptr[Texture, mut=True], rect: Ptr[Rect, mut=False], surface: Ptr[Ptr[Surface, mut=True], mut=True]) -> Bool]()(texture, rect, surface)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_unlock_texture(texture: Ptr[SDL_Texture, mut=True]) -> None:
+fn unlock_texture(texture: Ptr[Texture, mut=True]) -> None:
     """Unlock a texture, uploading the changes to video memory, if needed.
 
     **Warning**: Please note that SDL_LockTexture() is intended to be
@@ -1375,10 +1375,10 @@ fn sdl_unlock_texture(texture: Ptr[SDL_Texture, mut=True]) -> None:
     Docs: https://wiki.libsdl.org/SDL3/SDL_UnlockTexture.
     """
 
-    return _get_dylib_function[lib, "SDL_UnlockTexture", fn (texture: Ptr[SDL_Texture, mut=True]) -> None]()(texture)
+    return _get_dylib_function[lib, "SDL_UnlockTexture", fn (texture: Ptr[Texture, mut=True]) -> None]()(texture)
 
 
-fn sdl_set_render_target(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True]) raises:
+fn set_render_target(renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True]) raises:
     """Set a texture as the current rendering target.
 
     The default render target is the window for which the renderer was created.
@@ -1406,12 +1406,12 @@ fn sdl_set_render_target(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetRenderTarget.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetRenderTarget", fn (renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True]) -> Bool]()(renderer, texture)
+    ret = _get_dylib_function[lib, "SDL_SetRenderTarget", fn (renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True]) -> Bool]()(renderer, texture)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_target(renderer: Ptr[SDL_Renderer, mut=True]) -> Ptr[SDL_Texture, mut=True]:
+fn get_render_target(renderer: Ptr[Renderer, mut=True]) -> Ptr[Texture, mut=True]:
     """Get the current render target.
 
     The default render target is the window for which the renderer was created,
@@ -1429,10 +1429,10 @@ fn sdl_get_render_target(renderer: Ptr[SDL_Renderer, mut=True]) -> Ptr[SDL_Textu
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderTarget.
     """
 
-    return _get_dylib_function[lib, "SDL_GetRenderTarget", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> Ptr[SDL_Texture, mut=True]]()(renderer)
+    return _get_dylib_function[lib, "SDL_GetRenderTarget", fn (renderer: Ptr[Renderer, mut=True]) -> Ptr[Texture, mut=True]]()(renderer)
 
 
-fn sdl_set_render_logical_presentation(renderer: Ptr[SDL_Renderer, mut=True], w: c_int, h: c_int, mode: SDL_RendererLogicalPresentation) raises:
+fn set_render_logical_presentation(renderer: Ptr[Renderer, mut=True], w: c_int, h: c_int, mode: RendererLogicalPresentation) raises:
     """Set a device-independent resolution and presentation mode for rendering.
 
     This function sets the width and height of the logical rendering output.
@@ -1486,12 +1486,12 @@ fn sdl_set_render_logical_presentation(renderer: Ptr[SDL_Renderer, mut=True], w:
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetRenderLogicalPresentation.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetRenderLogicalPresentation", fn (renderer: Ptr[SDL_Renderer, mut=True], w: c_int, h: c_int, mode: SDL_RendererLogicalPresentation) -> Bool]()(renderer, w, h, mode)
+    ret = _get_dylib_function[lib, "SDL_SetRenderLogicalPresentation", fn (renderer: Ptr[Renderer, mut=True], w: c_int, h: c_int, mode: RendererLogicalPresentation) -> Bool]()(renderer, w, h, mode)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_logical_presentation(renderer: Ptr[SDL_Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True], mode: Ptr[SDL_RendererLogicalPresentation, mut=True]) raises:
+fn get_render_logical_presentation(renderer: Ptr[Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True], mode: Ptr[RendererLogicalPresentation, mut=True]) raises:
     """Get device independent resolution and presentation mode for rendering.
 
     This function gets the width and height of the logical rendering output, or
@@ -1516,12 +1516,12 @@ fn sdl_get_render_logical_presentation(renderer: Ptr[SDL_Renderer, mut=True], w:
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderLogicalPresentation.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderLogicalPresentation", fn (renderer: Ptr[SDL_Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True], mode: Ptr[SDL_RendererLogicalPresentation, mut=True]) -> Bool]()(renderer, w, h, mode)
+    ret = _get_dylib_function[lib, "SDL_GetRenderLogicalPresentation", fn (renderer: Ptr[Renderer, mut=True], w: Ptr[c_int, mut=True], h: Ptr[c_int, mut=True], mode: Ptr[RendererLogicalPresentation, mut=True]) -> Bool]()(renderer, w, h, mode)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_logical_presentation_rect(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_FRect, mut=True]) raises:
+fn get_render_logical_presentation_rect(renderer: Ptr[Renderer, mut=True], rect: Ptr[FRect, mut=True]) raises:
     """Get the final presentation rectangle for rendering.
 
     This function returns the calculated rectangle used for logical
@@ -1547,12 +1547,12 @@ fn sdl_get_render_logical_presentation_rect(renderer: Ptr[SDL_Renderer, mut=True
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderLogicalPresentationRect.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderLogicalPresentationRect", fn (renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_FRect, mut=True]) -> Bool]()(renderer, rect)
+    ret = _get_dylib_function[lib, "SDL_GetRenderLogicalPresentationRect", fn (renderer: Ptr[Renderer, mut=True], rect: Ptr[FRect, mut=True]) -> Bool]()(renderer, rect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_coordinates_from_window(renderer: Ptr[SDL_Renderer, mut=True], window_x: c_float, window_y: c_float, x: Ptr[c_float, mut=True], y: Ptr[c_float, mut=True]) raises:
+fn render_coordinates_from_window(renderer: Ptr[Renderer, mut=True], window_x: c_float, window_y: c_float, x: Ptr[c_float, mut=True], y: Ptr[c_float, mut=True]) raises:
     """Get a point in render coordinates when given a point in window coordinates.
 
     This takes into account several states:
@@ -1579,12 +1579,12 @@ fn sdl_render_coordinates_from_window(renderer: Ptr[SDL_Renderer, mut=True], win
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderCoordinatesFromWindow.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderCoordinatesFromWindow", fn (renderer: Ptr[SDL_Renderer, mut=True], window_x: c_float, window_y: c_float, x: Ptr[c_float, mut=True], y: Ptr[c_float, mut=True]) -> Bool]()(renderer, window_x, window_y, x, y)
+    ret = _get_dylib_function[lib, "SDL_RenderCoordinatesFromWindow", fn (renderer: Ptr[Renderer, mut=True], window_x: c_float, window_y: c_float, x: Ptr[c_float, mut=True], y: Ptr[c_float, mut=True]) -> Bool]()(renderer, window_x, window_y, x, y)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_coordinates_to_window(renderer: Ptr[SDL_Renderer, mut=True], x: c_float, y: c_float, window_x: Ptr[c_float, mut=True], window_y: Ptr[c_float, mut=True]) raises:
+fn render_coordinates_to_window(renderer: Ptr[Renderer, mut=True], x: c_float, y: c_float, window_x: Ptr[c_float, mut=True], window_y: Ptr[c_float, mut=True]) raises:
     """Get a point in window coordinates when given a point in render coordinates.
 
     This takes into account several states:
@@ -1613,12 +1613,12 @@ fn sdl_render_coordinates_to_window(renderer: Ptr[SDL_Renderer, mut=True], x: c_
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderCoordinatesToWindow.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderCoordinatesToWindow", fn (renderer: Ptr[SDL_Renderer, mut=True], x: c_float, y: c_float, window_x: Ptr[c_float, mut=True], window_y: Ptr[c_float, mut=True]) -> Bool]()(renderer, x, y, window_x, window_y)
+    ret = _get_dylib_function[lib, "SDL_RenderCoordinatesToWindow", fn (renderer: Ptr[Renderer, mut=True], x: c_float, y: c_float, window_x: Ptr[c_float, mut=True], window_y: Ptr[c_float, mut=True]) -> Bool]()(renderer, x, y, window_x, window_y)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_convert_event_to_render_coordinates(renderer: Ptr[SDL_Renderer, mut=True], event: Ptr[SDL_Event, mut=True]) raises:
+fn convert_event_to_render_coordinates(renderer: Ptr[Renderer, mut=True], event: Ptr[Event, mut=True]) raises:
     """Convert the coordinates in an event to render coordinates.
 
     This takes into account several states:
@@ -1655,12 +1655,12 @@ fn sdl_convert_event_to_render_coordinates(renderer: Ptr[SDL_Renderer, mut=True]
     Docs: https://wiki.libsdl.org/SDL3/SDL_ConvertEventToRenderCoordinates.
     """
 
-    ret = _get_dylib_function[lib, "SDL_ConvertEventToRenderCoordinates", fn (renderer: Ptr[SDL_Renderer, mut=True], event: Ptr[SDL_Event, mut=True]) -> Bool]()(renderer, event)
+    ret = _get_dylib_function[lib, "SDL_ConvertEventToRenderCoordinates", fn (renderer: Ptr[Renderer, mut=True], event: Ptr[Event, mut=True]) -> Bool]()(renderer, event)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_render_viewport(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=False]) raises:
+fn set_render_viewport(renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=False]) raises:
     """Set the drawing area for rendering on the current target.
 
     Drawing will clip to this area (separately from any clipping done with
@@ -1687,12 +1687,12 @@ fn sdl_set_render_viewport(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetRenderViewport.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetRenderViewport", fn (renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=False]) -> Bool]()(renderer, rect)
+    ret = _get_dylib_function[lib, "SDL_SetRenderViewport", fn (renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=False]) -> Bool]()(renderer, rect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_viewport(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=True]) raises:
+fn get_render_viewport(renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=True]) raises:
     """Get the drawing area for the current target.
 
     Each render target has its own viewport. This function gets the viewport
@@ -1712,12 +1712,12 @@ fn sdl_get_render_viewport(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderViewport.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderViewport", fn (renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=True]) -> Bool]()(renderer, rect)
+    ret = _get_dylib_function[lib, "SDL_GetRenderViewport", fn (renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=True]) -> Bool]()(renderer, rect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_viewport_set(renderer: Ptr[SDL_Renderer, mut=True]) -> Bool:
+fn render_viewport_set(renderer: Ptr[Renderer, mut=True]) -> Bool:
     """Return whether an explicit rectangle was set as the viewport.
 
     This is useful if you're saving and restoring the viewport and want to know
@@ -1739,10 +1739,10 @@ fn sdl_render_viewport_set(renderer: Ptr[SDL_Renderer, mut=True]) -> Bool:
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderViewportSet.
     """
 
-    return _get_dylib_function[lib, "SDL_RenderViewportSet", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> Bool]()(renderer)
+    return _get_dylib_function[lib, "SDL_RenderViewportSet", fn (renderer: Ptr[Renderer, mut=True]) -> Bool]()(renderer)
 
 
-fn sdl_get_render_safe_area(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=True]) raises:
+fn get_render_safe_area(renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=True]) raises:
     """Get the safe area for rendering within the current viewport.
 
     Some devices have portions of the screen which are partially obscured or
@@ -1767,12 +1767,12 @@ fn sdl_get_render_safe_area(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderSafeArea.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderSafeArea", fn (renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=True]) -> Bool]()(renderer, rect)
+    ret = _get_dylib_function[lib, "SDL_GetRenderSafeArea", fn (renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=True]) -> Bool]()(renderer, rect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_render_clip_rect(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=False]) raises:
+fn set_render_clip_rect(renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=False]) raises:
     """Set the clip rectangle for rendering on the specified target.
 
     Each render target has its own clip rectangle. This function sets the
@@ -1793,12 +1793,12 @@ fn sdl_set_render_clip_rect(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetRenderClipRect.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetRenderClipRect", fn (renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=False]) -> Bool]()(renderer, rect)
+    ret = _get_dylib_function[lib, "SDL_SetRenderClipRect", fn (renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=False]) -> Bool]()(renderer, rect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_clip_rect(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=True]) raises:
+fn get_render_clip_rect(renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=True]) raises:
     """Get the clip rectangle for the current target.
 
     Each render target has its own clip rectangle. This function gets the
@@ -1819,12 +1819,12 @@ fn sdl_get_render_clip_rect(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderClipRect.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderClipRect", fn (renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=True]) -> Bool]()(renderer, rect)
+    ret = _get_dylib_function[lib, "SDL_GetRenderClipRect", fn (renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=True]) -> Bool]()(renderer, rect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_clip_enabled(renderer: Ptr[SDL_Renderer, mut=True]) -> Bool:
+fn render_clip_enabled(renderer: Ptr[Renderer, mut=True]) -> Bool:
     """Get whether clipping is enabled on the given render target.
 
     Each render target has its own clip rectangle. This function checks the
@@ -1843,10 +1843,10 @@ fn sdl_render_clip_enabled(renderer: Ptr[SDL_Renderer, mut=True]) -> Bool:
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderClipEnabled.
     """
 
-    return _get_dylib_function[lib, "SDL_RenderClipEnabled", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> Bool]()(renderer)
+    return _get_dylib_function[lib, "SDL_RenderClipEnabled", fn (renderer: Ptr[Renderer, mut=True]) -> Bool]()(renderer)
 
 
-fn sdl_set_render_scale(renderer: Ptr[SDL_Renderer, mut=True], scale_x: c_float, scale_y: c_float) raises:
+fn set_render_scale(renderer: Ptr[Renderer, mut=True], scale_x: c_float, scale_y: c_float) raises:
     """Set the drawing scale for rendering on the current target.
 
     The drawing coordinates are scaled by the x/y scaling factors before they
@@ -1875,12 +1875,12 @@ fn sdl_set_render_scale(renderer: Ptr[SDL_Renderer, mut=True], scale_x: c_float,
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetRenderScale.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetRenderScale", fn (renderer: Ptr[SDL_Renderer, mut=True], scale_x: c_float, scale_y: c_float) -> Bool]()(renderer, scale_x, scale_y)
+    ret = _get_dylib_function[lib, "SDL_SetRenderScale", fn (renderer: Ptr[Renderer, mut=True], scale_x: c_float, scale_y: c_float) -> Bool]()(renderer, scale_x, scale_y)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_scale(renderer: Ptr[SDL_Renderer, mut=True], scale_x: Ptr[c_float, mut=True], scale_y: Ptr[c_float, mut=True]) raises:
+fn get_render_scale(renderer: Ptr[Renderer, mut=True], scale_x: Ptr[c_float, mut=True], scale_y: Ptr[c_float, mut=True]) raises:
     """Get the drawing scale for the current target.
 
     Each render target has its own scale. This function gets the scale for the
@@ -1901,12 +1901,12 @@ fn sdl_get_render_scale(renderer: Ptr[SDL_Renderer, mut=True], scale_x: Ptr[c_fl
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderScale.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderScale", fn (renderer: Ptr[SDL_Renderer, mut=True], scale_x: Ptr[c_float, mut=True], scale_y: Ptr[c_float, mut=True]) -> Bool]()(renderer, scale_x, scale_y)
+    ret = _get_dylib_function[lib, "SDL_GetRenderScale", fn (renderer: Ptr[Renderer, mut=True], scale_x: Ptr[c_float, mut=True], scale_y: Ptr[c_float, mut=True]) -> Bool]()(renderer, scale_x, scale_y)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_render_draw_color(renderer: Ptr[SDL_Renderer, mut=True], r: UInt8, g: UInt8, b: UInt8, a: UInt8) raises:
+fn set_render_draw_color(renderer: Ptr[Renderer, mut=True], r: UInt8, g: UInt8, b: UInt8, a: UInt8) raises:
     """Set the color used for drawing operations.
 
     Set the color for drawing or filling rectangles, lines, and points, and for
@@ -1931,12 +1931,12 @@ fn sdl_set_render_draw_color(renderer: Ptr[SDL_Renderer, mut=True], r: UInt8, g:
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetRenderDrawColor.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetRenderDrawColor", fn (renderer: Ptr[SDL_Renderer, mut=True], r: UInt8, g: UInt8, b: UInt8, a: UInt8) -> Bool]()(renderer, r, g, b, a)
+    ret = _get_dylib_function[lib, "SDL_SetRenderDrawColor", fn (renderer: Ptr[Renderer, mut=True], r: UInt8, g: UInt8, b: UInt8, a: UInt8) -> Bool]()(renderer, r, g, b, a)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_render_draw_color_float(renderer: Ptr[SDL_Renderer, mut=True], r: c_float, g: c_float, b: c_float, a: c_float) raises:
+fn set_render_draw_color_float(renderer: Ptr[Renderer, mut=True], r: c_float, g: c_float, b: c_float, a: c_float) raises:
     """Set the color used for drawing operations (Rect, Line and Clear).
 
     Set the color for drawing or filling rectangles, lines, and points, and for
@@ -1961,12 +1961,12 @@ fn sdl_set_render_draw_color_float(renderer: Ptr[SDL_Renderer, mut=True], r: c_f
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetRenderDrawColorFloat.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetRenderDrawColorFloat", fn (renderer: Ptr[SDL_Renderer, mut=True], r: c_float, g: c_float, b: c_float, a: c_float) -> Bool]()(renderer, r, g, b, a)
+    ret = _get_dylib_function[lib, "SDL_SetRenderDrawColorFloat", fn (renderer: Ptr[Renderer, mut=True], r: c_float, g: c_float, b: c_float, a: c_float) -> Bool]()(renderer, r, g, b, a)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_draw_color(renderer: Ptr[SDL_Renderer, mut=True], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True], a: Ptr[UInt8, mut=True]) raises:
+fn get_render_draw_color(renderer: Ptr[Renderer, mut=True], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True], a: Ptr[UInt8, mut=True]) raises:
     """Get the color used for drawing operations (Rect, Line and Clear).
 
     Args:
@@ -1990,12 +1990,12 @@ fn sdl_get_render_draw_color(renderer: Ptr[SDL_Renderer, mut=True], r: Ptr[UInt8
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColor.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderDrawColor", fn (renderer: Ptr[SDL_Renderer, mut=True], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True], a: Ptr[UInt8, mut=True]) -> Bool]()(renderer, r, g, b, a)
+    ret = _get_dylib_function[lib, "SDL_GetRenderDrawColor", fn (renderer: Ptr[Renderer, mut=True], r: Ptr[UInt8, mut=True], g: Ptr[UInt8, mut=True], b: Ptr[UInt8, mut=True], a: Ptr[UInt8, mut=True]) -> Bool]()(renderer, r, g, b, a)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_draw_color_float(renderer: Ptr[SDL_Renderer, mut=True], r: Ptr[c_float, mut=True], g: Ptr[c_float, mut=True], b: Ptr[c_float, mut=True], a: Ptr[c_float, mut=True]) raises:
+fn get_render_draw_color_float(renderer: Ptr[Renderer, mut=True], r: Ptr[c_float, mut=True], g: Ptr[c_float, mut=True], b: Ptr[c_float, mut=True], a: Ptr[c_float, mut=True]) raises:
     """Get the color used for drawing operations (Rect, Line and Clear).
 
     Args:
@@ -2019,12 +2019,12 @@ fn sdl_get_render_draw_color_float(renderer: Ptr[SDL_Renderer, mut=True], r: Ptr
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawColorFloat.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderDrawColorFloat", fn (renderer: Ptr[SDL_Renderer, mut=True], r: Ptr[c_float, mut=True], g: Ptr[c_float, mut=True], b: Ptr[c_float, mut=True], a: Ptr[c_float, mut=True]) -> Bool]()(renderer, r, g, b, a)
+    ret = _get_dylib_function[lib, "SDL_GetRenderDrawColorFloat", fn (renderer: Ptr[Renderer, mut=True], r: Ptr[c_float, mut=True], g: Ptr[c_float, mut=True], b: Ptr[c_float, mut=True], a: Ptr[c_float, mut=True]) -> Bool]()(renderer, r, g, b, a)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_render_color_scale(renderer: Ptr[SDL_Renderer, mut=True], scale: c_float) raises:
+fn set_render_color_scale(renderer: Ptr[Renderer, mut=True], scale: c_float) raises:
     """Set the color scale used for render operations.
 
     The color scale is an additional scale multiplied into the pixel color
@@ -2049,12 +2049,12 @@ fn sdl_set_render_color_scale(renderer: Ptr[SDL_Renderer, mut=True], scale: c_fl
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetRenderColorScale.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetRenderColorScale", fn (renderer: Ptr[SDL_Renderer, mut=True], scale: c_float) -> Bool]()(renderer, scale)
+    ret = _get_dylib_function[lib, "SDL_SetRenderColorScale", fn (renderer: Ptr[Renderer, mut=True], scale: c_float) -> Bool]()(renderer, scale)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_color_scale(renderer: Ptr[SDL_Renderer, mut=True], scale: Ptr[c_float, mut=True]) raises:
+fn get_render_color_scale(renderer: Ptr[Renderer, mut=True], scale: Ptr[c_float, mut=True]) raises:
     """Get the color scale used for render operations.
 
     Args:
@@ -2071,12 +2071,12 @@ fn sdl_get_render_color_scale(renderer: Ptr[SDL_Renderer, mut=True], scale: Ptr[
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderColorScale.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderColorScale", fn (renderer: Ptr[SDL_Renderer, mut=True], scale: Ptr[c_float, mut=True]) -> Bool]()(renderer, scale)
+    ret = _get_dylib_function[lib, "SDL_GetRenderColorScale", fn (renderer: Ptr[Renderer, mut=True], scale: Ptr[c_float, mut=True]) -> Bool]()(renderer, scale)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_render_draw_blend_mode(renderer: Ptr[SDL_Renderer, mut=True], blend_mode: SDL_BlendMode) raises:
+fn set_render_draw_blend_mode(renderer: Ptr[Renderer, mut=True], blend_mode: BlendMode) raises:
     """Set the blend mode used for drawing operations (Fill and Line).
 
     If the blend mode is not supported, the closest supported mode is chosen.
@@ -2095,12 +2095,12 @@ fn sdl_set_render_draw_blend_mode(renderer: Ptr[SDL_Renderer, mut=True], blend_m
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetRenderDrawBlendMode.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetRenderDrawBlendMode", fn (renderer: Ptr[SDL_Renderer, mut=True], blend_mode: SDL_BlendMode) -> Bool]()(renderer, blend_mode)
+    ret = _get_dylib_function[lib, "SDL_SetRenderDrawBlendMode", fn (renderer: Ptr[Renderer, mut=True], blend_mode: BlendMode) -> Bool]()(renderer, blend_mode)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_draw_blend_mode(renderer: Ptr[SDL_Renderer, mut=True], blend_mode: Ptr[SDL_BlendMode, mut=True]) raises:
+fn get_render_draw_blend_mode(renderer: Ptr[Renderer, mut=True], blend_mode: Ptr[BlendMode, mut=True]) raises:
     """Get the blend mode used for drawing operations.
 
     Args:
@@ -2117,12 +2117,12 @@ fn sdl_get_render_draw_blend_mode(renderer: Ptr[SDL_Renderer, mut=True], blend_m
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderDrawBlendMode.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderDrawBlendMode", fn (renderer: Ptr[SDL_Renderer, mut=True], blend_mode: Ptr[SDL_BlendMode, mut=True]) -> Bool]()(renderer, blend_mode)
+    ret = _get_dylib_function[lib, "SDL_GetRenderDrawBlendMode", fn (renderer: Ptr[Renderer, mut=True], blend_mode: Ptr[BlendMode, mut=True]) -> Bool]()(renderer, blend_mode)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_clear(renderer: Ptr[SDL_Renderer, mut=True]) raises:
+fn render_clear(renderer: Ptr[Renderer, mut=True]) raises:
     """Clear the current rendering target with the drawing color.
 
     This function clears the entire rendering target, ignoring the viewport and
@@ -2143,12 +2143,12 @@ fn sdl_render_clear(renderer: Ptr[SDL_Renderer, mut=True]) raises:
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderClear.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderClear", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> Bool]()(renderer)
+    ret = _get_dylib_function[lib, "SDL_RenderClear", fn (renderer: Ptr[Renderer, mut=True]) -> Bool]()(renderer)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_point(renderer: Ptr[SDL_Renderer, mut=True], x: c_float, y: c_float) raises:
+fn render_point(renderer: Ptr[Renderer, mut=True], x: c_float, y: c_float) raises:
     """Draw a point on the current rendering target at subpixel precision.
 
     Args:
@@ -2166,12 +2166,12 @@ fn sdl_render_point(renderer: Ptr[SDL_Renderer, mut=True], x: c_float, y: c_floa
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderPoint.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderPoint", fn (renderer: Ptr[SDL_Renderer, mut=True], x: c_float, y: c_float) -> Bool]()(renderer, x, y)
+    ret = _get_dylib_function[lib, "SDL_RenderPoint", fn (renderer: Ptr[Renderer, mut=True], x: c_float, y: c_float) -> Bool]()(renderer, x, y)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_points(renderer: Ptr[SDL_Renderer, mut=True], points: Ptr[SDL_FPoint, mut=False], count: c_int) raises:
+fn render_points(renderer: Ptr[Renderer, mut=True], points: Ptr[FPoint, mut=False], count: c_int) raises:
     """Draw multiple points on the current rendering target at subpixel precision.
 
     Args:
@@ -2189,12 +2189,12 @@ fn sdl_render_points(renderer: Ptr[SDL_Renderer, mut=True], points: Ptr[SDL_FPoi
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderPoints.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderPoints", fn (renderer: Ptr[SDL_Renderer, mut=True], points: Ptr[SDL_FPoint, mut=False], count: c_int) -> Bool]()(renderer, points, count)
+    ret = _get_dylib_function[lib, "SDL_RenderPoints", fn (renderer: Ptr[Renderer, mut=True], points: Ptr[FPoint, mut=False], count: c_int) -> Bool]()(renderer, points, count)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_line(renderer: Ptr[SDL_Renderer, mut=True], x1: c_float, y1: c_float, x2: c_float, y2: c_float) raises:
+fn render_line(renderer: Ptr[Renderer, mut=True], x1: c_float, y1: c_float, x2: c_float, y2: c_float) raises:
     """Draw a line on the current rendering target at subpixel precision.
 
     Args:
@@ -2214,12 +2214,12 @@ fn sdl_render_line(renderer: Ptr[SDL_Renderer, mut=True], x1: c_float, y1: c_flo
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderLine.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderLine", fn (renderer: Ptr[SDL_Renderer, mut=True], x1: c_float, y1: c_float, x2: c_float, y2: c_float) -> Bool]()(renderer, x1, y1, x2, y2)
+    ret = _get_dylib_function[lib, "SDL_RenderLine", fn (renderer: Ptr[Renderer, mut=True], x1: c_float, y1: c_float, x2: c_float, y2: c_float) -> Bool]()(renderer, x1, y1, x2, y2)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_lines(renderer: Ptr[SDL_Renderer, mut=True], points: Ptr[SDL_FPoint, mut=False], count: c_int) raises:
+fn render_lines(renderer: Ptr[Renderer, mut=True], points: Ptr[FPoint, mut=False], count: c_int) raises:
     """Draw a series of connected lines on the current rendering target at
     subpixel precision.
 
@@ -2238,12 +2238,12 @@ fn sdl_render_lines(renderer: Ptr[SDL_Renderer, mut=True], points: Ptr[SDL_FPoin
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderLines.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderLines", fn (renderer: Ptr[SDL_Renderer, mut=True], points: Ptr[SDL_FPoint, mut=False], count: c_int) -> Bool]()(renderer, points, count)
+    ret = _get_dylib_function[lib, "SDL_RenderLines", fn (renderer: Ptr[Renderer, mut=True], points: Ptr[FPoint, mut=False], count: c_int) -> Bool]()(renderer, points, count)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_rect(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_FRect, mut=False]) raises:
+fn render_rect(renderer: Ptr[Renderer, mut=True], rect: Ptr[FRect, mut=False]) raises:
     """Draw a rectangle on the current rendering target at subpixel precision.
 
     Args:
@@ -2261,12 +2261,12 @@ fn sdl_render_rect(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_FRect, m
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderRect.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderRect", fn (renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_FRect, mut=False]) -> Bool]()(renderer, rect)
+    ret = _get_dylib_function[lib, "SDL_RenderRect", fn (renderer: Ptr[Renderer, mut=True], rect: Ptr[FRect, mut=False]) -> Bool]()(renderer, rect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_rects(renderer: Ptr[SDL_Renderer, mut=True], rects: Ptr[SDL_FRect, mut=False], count: c_int) raises:
+fn render_rects(renderer: Ptr[Renderer, mut=True], rects: Ptr[FRect, mut=False], count: c_int) raises:
     """Draw some number of rectangles on the current rendering target at subpixel
     precision.
 
@@ -2285,12 +2285,12 @@ fn sdl_render_rects(renderer: Ptr[SDL_Renderer, mut=True], rects: Ptr[SDL_FRect,
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderRects.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderRects", fn (renderer: Ptr[SDL_Renderer, mut=True], rects: Ptr[SDL_FRect, mut=False], count: c_int) -> Bool]()(renderer, rects, count)
+    ret = _get_dylib_function[lib, "SDL_RenderRects", fn (renderer: Ptr[Renderer, mut=True], rects: Ptr[FRect, mut=False], count: c_int) -> Bool]()(renderer, rects, count)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_fill_rect(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_FRect, mut=False]) raises:
+fn render_fill_rect(renderer: Ptr[Renderer, mut=True], rect: Ptr[FRect, mut=False]) raises:
     """Fill a rectangle on the current rendering target with the drawing color at
     subpixel precision.
 
@@ -2309,12 +2309,12 @@ fn sdl_render_fill_rect(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_FRe
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderFillRect.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderFillRect", fn (renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_FRect, mut=False]) -> Bool]()(renderer, rect)
+    ret = _get_dylib_function[lib, "SDL_RenderFillRect", fn (renderer: Ptr[Renderer, mut=True], rect: Ptr[FRect, mut=False]) -> Bool]()(renderer, rect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_fill_rects(renderer: Ptr[SDL_Renderer, mut=True], rects: Ptr[SDL_FRect, mut=False], count: c_int) raises:
+fn render_fill_rects(renderer: Ptr[Renderer, mut=True], rects: Ptr[FRect, mut=False], count: c_int) raises:
     """Fill some number of rectangles on the current rendering target with the
     drawing color at subpixel precision.
 
@@ -2333,12 +2333,12 @@ fn sdl_render_fill_rects(renderer: Ptr[SDL_Renderer, mut=True], rects: Ptr[SDL_F
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderFillRects.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderFillRects", fn (renderer: Ptr[SDL_Renderer, mut=True], rects: Ptr[SDL_FRect, mut=False], count: c_int) -> Bool]()(renderer, rects, count)
+    ret = _get_dylib_function[lib, "SDL_RenderFillRects", fn (renderer: Ptr[Renderer, mut=True], rects: Ptr[FRect, mut=False], count: c_int) -> Bool]()(renderer, rects, count)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_texture(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], dstrect: Ptr[SDL_FRect, mut=False]) raises:
+fn render_texture(renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], srcrect: Ptr[FRect, mut=False], dstrect: Ptr[FRect, mut=False]) raises:
     """Copy a portion of the texture to the current rendering target at subpixel
     precision.
 
@@ -2360,12 +2360,12 @@ fn sdl_render_texture(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Te
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderTexture.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderTexture", fn (renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], dstrect: Ptr[SDL_FRect, mut=False]) -> Bool]()(renderer, texture, srcrect, dstrect)
+    ret = _get_dylib_function[lib, "SDL_RenderTexture", fn (renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], srcrect: Ptr[FRect, mut=False], dstrect: Ptr[FRect, mut=False]) -> Bool]()(renderer, texture, srcrect, dstrect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_texture_rotated(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], dstrect: Ptr[SDL_FRect, mut=False], angle: c_double, center: Ptr[SDL_FPoint, mut=False], flip: SDL_FlipMode) raises:
+fn render_texture_rotated(renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], srcrect: Ptr[FRect, mut=False], dstrect: Ptr[FRect, mut=False], angle: c_double, center: Ptr[FPoint, mut=False], flip: FlipMode) raises:
     """Copy a portion of the source texture to the current rendering target, with
     rotation and flipping, at subpixel precision.
 
@@ -2394,12 +2394,12 @@ fn sdl_render_texture_rotated(renderer: Ptr[SDL_Renderer, mut=True], texture: Pt
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderTextureRotated.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderTextureRotated", fn (renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], dstrect: Ptr[SDL_FRect, mut=False], angle: c_double, center: Ptr[SDL_FPoint, mut=False], flip: SDL_FlipMode) -> Bool]()(renderer, texture, srcrect, dstrect, angle, center, flip)
+    ret = _get_dylib_function[lib, "SDL_RenderTextureRotated", fn (renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], srcrect: Ptr[FRect, mut=False], dstrect: Ptr[FRect, mut=False], angle: c_double, center: Ptr[FPoint, mut=False], flip: FlipMode) -> Bool]()(renderer, texture, srcrect, dstrect, angle, center, flip)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_texture_affine(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], origin: Ptr[SDL_FPoint, mut=False], right: Ptr[SDL_FPoint, mut=False], down: Ptr[SDL_FPoint, mut=False]) raises:
+fn render_texture_affine(renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], srcrect: Ptr[FRect, mut=False], origin: Ptr[FPoint, mut=False], right: Ptr[FPoint, mut=False], down: Ptr[FPoint, mut=False]) raises:
     """Copy a portion of the source texture to the current rendering target, with
     affine transform, at subpixel precision.
 
@@ -2428,12 +2428,12 @@ fn sdl_render_texture_affine(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderTextureAffine.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderTextureAffine", fn (renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], origin: Ptr[SDL_FPoint, mut=False], right: Ptr[SDL_FPoint, mut=False], down: Ptr[SDL_FPoint, mut=False]) -> Bool]()(renderer, texture, srcrect, origin, right, down)
+    ret = _get_dylib_function[lib, "SDL_RenderTextureAffine", fn (renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], srcrect: Ptr[FRect, mut=False], origin: Ptr[FPoint, mut=False], right: Ptr[FPoint, mut=False], down: Ptr[FPoint, mut=False]) -> Bool]()(renderer, texture, srcrect, origin, right, down)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_texture_tiled(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], scale: c_float, dstrect: Ptr[SDL_FRect, mut=False]) raises:
+fn render_texture_tiled(renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], srcrect: Ptr[FRect, mut=False], scale: c_float, dstrect: Ptr[FRect, mut=False]) raises:
     """Tile a portion of the texture to the current rendering target at subpixel
     precision.
 
@@ -2461,12 +2461,12 @@ fn sdl_render_texture_tiled(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderTextureTiled.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderTextureTiled", fn (renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], scale: c_float, dstrect: Ptr[SDL_FRect, mut=False]) -> Bool]()(renderer, texture, srcrect, scale, dstrect)
+    ret = _get_dylib_function[lib, "SDL_RenderTextureTiled", fn (renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], srcrect: Ptr[FRect, mut=False], scale: c_float, dstrect: Ptr[FRect, mut=False]) -> Bool]()(renderer, texture, srcrect, scale, dstrect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_texture_9grid(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], left_width: c_float, right_width: c_float, top_height: c_float, bottom_height: c_float, scale: c_float, dstrect: Ptr[SDL_FRect, mut=False]) raises:
+fn render_texture_9grid(renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], srcrect: Ptr[FRect, mut=False], left_width: c_float, right_width: c_float, top_height: c_float, bottom_height: c_float, scale: c_float, dstrect: Ptr[FRect, mut=False]) raises:
     """Perform a scaled copy using the 9-grid algorithm to the current rendering
     target at subpixel precision.
 
@@ -2501,12 +2501,12 @@ fn sdl_render_texture_9grid(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderTexture9Grid.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderTexture9Grid", fn (renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], srcrect: Ptr[SDL_FRect, mut=False], left_width: c_float, right_width: c_float, top_height: c_float, bottom_height: c_float, scale: c_float, dstrect: Ptr[SDL_FRect, mut=False]) -> Bool]()(renderer, texture, srcrect, left_width, right_width, top_height, bottom_height, scale, dstrect)
+    ret = _get_dylib_function[lib, "SDL_RenderTexture9Grid", fn (renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], srcrect: Ptr[FRect, mut=False], left_width: c_float, right_width: c_float, top_height: c_float, bottom_height: c_float, scale: c_float, dstrect: Ptr[FRect, mut=False]) -> Bool]()(renderer, texture, srcrect, left_width, right_width, top_height, bottom_height, scale, dstrect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_geometry(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], vertices: Ptr[SDL_Vertex, mut=False], num_vertices: c_int, indices: Ptr[c_int, mut=False], num_indices: c_int) raises:
+fn render_geometry(renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], vertices: Ptr[Vertex, mut=False], num_vertices: c_int, indices: Ptr[c_int, mut=False], num_indices: c_int) raises:
     """Render a list of triangles, optionally using a texture and indices into the
     vertex array Color and alpha modulation is done per vertex
     (SDL_SetTextureColorMod and SDL_SetTextureAlphaMod are ignored).
@@ -2531,12 +2531,12 @@ fn sdl_render_geometry(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_T
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderGeometry.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderGeometry", fn (renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], vertices: Ptr[SDL_Vertex, mut=False], num_vertices: c_int, indices: Ptr[c_int, mut=False], num_indices: c_int) -> Bool]()(renderer, texture, vertices, num_vertices, indices, num_indices)
+    ret = _get_dylib_function[lib, "SDL_RenderGeometry", fn (renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], vertices: Ptr[Vertex, mut=False], num_vertices: c_int, indices: Ptr[c_int, mut=False], num_indices: c_int) -> Bool]()(renderer, texture, vertices, num_vertices, indices, num_indices)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_geometry_raw(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], xy: Ptr[c_float, mut=False], xy_stride: c_int, color: Ptr[SDL_FColor, mut=False], color_stride: c_int, uv: Ptr[c_float, mut=False], uv_stride: c_int, num_vertices: c_int, indices: Ptr[NoneType, mut=False], num_indices: c_int, size_indices: c_int) raises:
+fn render_geometry_raw(renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], xy: Ptr[c_float, mut=False], xy_stride: c_int, color: Ptr[FColor, mut=False], color_stride: c_int, uv: Ptr[c_float, mut=False], uv_stride: c_int, num_vertices: c_int, indices: Ptr[NoneType, mut=False], num_indices: c_int, size_indices: c_int) raises:
     """Render a list of triangles, optionally using a texture and indices into the
     vertex arrays Color and alpha modulation is done per vertex
     (SDL_SetTextureColorMod and SDL_SetTextureAlphaMod are ignored).
@@ -2566,12 +2566,12 @@ fn sdl_render_geometry_raw(renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[S
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderGeometryRaw.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderGeometryRaw", fn (renderer: Ptr[SDL_Renderer, mut=True], texture: Ptr[SDL_Texture, mut=True], xy: Ptr[c_float, mut=False], xy_stride: c_int, color: Ptr[SDL_FColor, mut=False], color_stride: c_int, uv: Ptr[c_float, mut=False], uv_stride: c_int, num_vertices: c_int, indices: Ptr[NoneType, mut=False], num_indices: c_int, size_indices: c_int) -> Bool]()(renderer, texture, xy, xy_stride, color, color_stride, uv, uv_stride, num_vertices, indices, num_indices, size_indices)
+    ret = _get_dylib_function[lib, "SDL_RenderGeometryRaw", fn (renderer: Ptr[Renderer, mut=True], texture: Ptr[Texture, mut=True], xy: Ptr[c_float, mut=False], xy_stride: c_int, color: Ptr[FColor, mut=False], color_stride: c_int, uv: Ptr[c_float, mut=False], uv_stride: c_int, num_vertices: c_int, indices: Ptr[NoneType, mut=False], num_indices: c_int, size_indices: c_int) -> Bool]()(renderer, texture, xy, xy_stride, color, color_stride, uv, uv_stride, num_vertices, indices, num_indices, size_indices)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_read_pixels(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=False], out ret: Ptr[SDL_Surface, mut=True]) raises:
+fn render_read_pixels(renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=False], out ret: Ptr[Surface, mut=True]) raises:
     """Read pixels from the current rendering target.
 
     The returned surface contains pixels inside the desired area clipped to the
@@ -2601,12 +2601,12 @@ fn sdl_render_read_pixels(renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_R
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderReadPixels.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderReadPixels", fn (renderer: Ptr[SDL_Renderer, mut=True], rect: Ptr[SDL_Rect, mut=False]) -> Ptr[SDL_Surface, mut=True]]()(renderer, rect)
+    ret = _get_dylib_function[lib, "SDL_RenderReadPixels", fn (renderer: Ptr[Renderer, mut=True], rect: Ptr[Rect, mut=False]) -> Ptr[Surface, mut=True]]()(renderer, rect)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_present(renderer: Ptr[SDL_Renderer, mut=True]) raises:
+fn render_present(renderer: Ptr[Renderer, mut=True]) raises:
     """Update the screen with any rendering performed since the previous call.
 
     SDL's rendering functions operate on a backbuffer; that is, calling a
@@ -2646,12 +2646,12 @@ fn sdl_render_present(renderer: Ptr[SDL_Renderer, mut=True]) raises:
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderPresent.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderPresent", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> Bool]()(renderer)
+    ret = _get_dylib_function[lib, "SDL_RenderPresent", fn (renderer: Ptr[Renderer, mut=True]) -> Bool]()(renderer)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_destroy_texture(texture: Ptr[SDL_Texture, mut=True]) -> None:
+fn destroy_texture(texture: Ptr[Texture, mut=True]) -> None:
     """Destroy the specified texture.
 
     Passing NULL or an otherwise invalid texture will set the SDL error message
@@ -2666,10 +2666,10 @@ fn sdl_destroy_texture(texture: Ptr[SDL_Texture, mut=True]) -> None:
     Docs: https://wiki.libsdl.org/SDL3/SDL_DestroyTexture.
     """
 
-    return _get_dylib_function[lib, "SDL_DestroyTexture", fn (texture: Ptr[SDL_Texture, mut=True]) -> None]()(texture)
+    return _get_dylib_function[lib, "SDL_DestroyTexture", fn (texture: Ptr[Texture, mut=True]) -> None]()(texture)
 
 
-fn sdl_destroy_renderer(renderer: Ptr[SDL_Renderer, mut=True]) -> None:
+fn destroy_renderer(renderer: Ptr[Renderer, mut=True]) -> None:
     """Destroy the rendering context for a window and free all associated
     textures.
 
@@ -2684,10 +2684,10 @@ fn sdl_destroy_renderer(renderer: Ptr[SDL_Renderer, mut=True]) -> None:
     Docs: https://wiki.libsdl.org/SDL3/SDL_DestroyRenderer.
     """
 
-    return _get_dylib_function[lib, "SDL_DestroyRenderer", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> None]()(renderer)
+    return _get_dylib_function[lib, "SDL_DestroyRenderer", fn (renderer: Ptr[Renderer, mut=True]) -> None]()(renderer)
 
 
-fn sdl_flush_renderer(renderer: Ptr[SDL_Renderer, mut=True]) raises:
+fn flush_renderer(renderer: Ptr[Renderer, mut=True]) raises:
     """Force the rendering context to flush any pending commands and state.
 
     You do not need to (and in fact, shouldn't) call this function unless you
@@ -2723,12 +2723,12 @@ fn sdl_flush_renderer(renderer: Ptr[SDL_Renderer, mut=True]) raises:
     Docs: https://wiki.libsdl.org/SDL3/SDL_FlushRenderer.
     """
 
-    ret = _get_dylib_function[lib, "SDL_FlushRenderer", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> Bool]()(renderer)
+    ret = _get_dylib_function[lib, "SDL_FlushRenderer", fn (renderer: Ptr[Renderer, mut=True]) -> Bool]()(renderer)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_metal_layer(renderer: Ptr[SDL_Renderer, mut=True]) -> Ptr[NoneType, mut=True]:
+fn get_render_metal_layer(renderer: Ptr[Renderer, mut=True]) -> Ptr[NoneType, mut=True]:
     """Get the CAMetalLayer associated with the given Metal renderer.
 
     This function returns `void *`, so SDL doesn't have to include Metal's
@@ -2747,10 +2747,10 @@ fn sdl_get_render_metal_layer(renderer: Ptr[SDL_Renderer, mut=True]) -> Ptr[None
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderMetalLayer.
     """
 
-    return _get_dylib_function[lib, "SDL_GetRenderMetalLayer", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> Ptr[NoneType, mut=True]]()(renderer)
+    return _get_dylib_function[lib, "SDL_GetRenderMetalLayer", fn (renderer: Ptr[Renderer, mut=True]) -> Ptr[NoneType, mut=True]]()(renderer)
 
 
-fn sdl_get_render_metal_command_encoder(renderer: Ptr[SDL_Renderer, mut=True]) -> Ptr[NoneType, mut=True]:
+fn get_render_metal_command_encoder(renderer: Ptr[Renderer, mut=True]) -> Ptr[NoneType, mut=True]:
     """Get the Metal command encoder for the current frame.
 
     This function returns `void *`, so SDL doesn't have to include Metal's
@@ -2774,10 +2774,10 @@ fn sdl_get_render_metal_command_encoder(renderer: Ptr[SDL_Renderer, mut=True]) -
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderMetalCommandEncoder.
     """
 
-    return _get_dylib_function[lib, "SDL_GetRenderMetalCommandEncoder", fn (renderer: Ptr[SDL_Renderer, mut=True]) -> Ptr[NoneType, mut=True]]()(renderer)
+    return _get_dylib_function[lib, "SDL_GetRenderMetalCommandEncoder", fn (renderer: Ptr[Renderer, mut=True]) -> Ptr[NoneType, mut=True]]()(renderer)
 
 
-fn sdl_add_vulkan_render_semaphores(renderer: Ptr[SDL_Renderer, mut=True], wait_stage_mask: UInt32, wait_semaphore: Int64, signal_semaphore: Int64) raises:
+fn add_vulkan_render_semaphores(renderer: Ptr[Renderer, mut=True], wait_stage_mask: UInt32, wait_semaphore: Int64, signal_semaphore: Int64) raises:
     """Add a set of synchronization semaphores for the current frame.
 
     The Vulkan renderer will wait for `wait_semaphore` before submitting
@@ -2810,12 +2810,12 @@ fn sdl_add_vulkan_render_semaphores(renderer: Ptr[SDL_Renderer, mut=True], wait_
     Docs: https://wiki.libsdl.org/SDL3/SDL_AddVulkanRenderSemaphores.
     """
 
-    ret = _get_dylib_function[lib, "SDL_AddVulkanRenderSemaphores", fn (renderer: Ptr[SDL_Renderer, mut=True], wait_stage_mask: UInt32, wait_semaphore: Int64, signal_semaphore: Int64) -> Bool]()(renderer, wait_stage_mask, wait_semaphore, signal_semaphore)
+    ret = _get_dylib_function[lib, "SDL_AddVulkanRenderSemaphores", fn (renderer: Ptr[Renderer, mut=True], wait_stage_mask: UInt32, wait_semaphore: Int64, signal_semaphore: Int64) -> Bool]()(renderer, wait_stage_mask, wait_semaphore, signal_semaphore)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_set_render_vsync(renderer: Ptr[SDL_Renderer, mut=True], vsync: c_int) raises:
+fn set_render_vsync(renderer: Ptr[Renderer, mut=True], vsync: c_int) raises:
     """Toggle VSync of the given renderer.
 
     When a renderer is created, vsync defaults to SDL_RENDERER_VSYNC_DISABLED.
@@ -2841,12 +2841,12 @@ fn sdl_set_render_vsync(renderer: Ptr[SDL_Renderer, mut=True], vsync: c_int) rai
     Docs: https://wiki.libsdl.org/SDL3/SDL_SetRenderVSync.
     """
 
-    ret = _get_dylib_function[lib, "SDL_SetRenderVSync", fn (renderer: Ptr[SDL_Renderer, mut=True], vsync: c_int) -> Bool]()(renderer, vsync)
+    ret = _get_dylib_function[lib, "SDL_SetRenderVSync", fn (renderer: Ptr[Renderer, mut=True], vsync: c_int) -> Bool]()(renderer, vsync)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_get_render_vsync(renderer: Ptr[SDL_Renderer, mut=True], vsync: Ptr[c_int, mut=True]) raises:
+fn get_render_vsync(renderer: Ptr[Renderer, mut=True], vsync: Ptr[c_int, mut=True]) raises:
     """Get VSync of the given renderer.
 
     Args:
@@ -2864,12 +2864,12 @@ fn sdl_get_render_vsync(renderer: Ptr[SDL_Renderer, mut=True], vsync: Ptr[c_int,
     Docs: https://wiki.libsdl.org/SDL3/SDL_GetRenderVSync.
     """
 
-    ret = _get_dylib_function[lib, "SDL_GetRenderVSync", fn (renderer: Ptr[SDL_Renderer, mut=True], vsync: Ptr[c_int, mut=True]) -> Bool]()(renderer, vsync)
+    ret = _get_dylib_function[lib, "SDL_GetRenderVSync", fn (renderer: Ptr[Renderer, mut=True], vsync: Ptr[c_int, mut=True]) -> Bool]()(renderer, vsync)
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn sdl_render_debug_text(renderer: Ptr[SDL_Renderer, mut=True], x: c_float, y: c_float, owned str: String) raises:
+fn render_debug_text(renderer: Ptr[Renderer, mut=True], x: c_float, y: c_float, owned str: String) raises:
     """Draw debug text to an SDL_Renderer.
 
     This function will render a string of text to an SDL_Renderer. Note that
@@ -2910,6 +2910,6 @@ fn sdl_render_debug_text(renderer: Ptr[SDL_Renderer, mut=True], x: c_float, y: c
     Docs: https://wiki.libsdl.org/SDL3/SDL_RenderDebugText.
     """
 
-    ret = _get_dylib_function[lib, "SDL_RenderDebugText", fn (renderer: Ptr[SDL_Renderer, mut=True], x: c_float, y: c_float, str: Ptr[c_char, mut=False]) -> Bool]()(renderer, x, y, str.unsafe_cstr_ptr())
+    ret = _get_dylib_function[lib, "SDL_RenderDebugText", fn (renderer: Ptr[Renderer, mut=True], x: c_float, y: c_float, str: Ptr[c_char, mut=False]) -> Bool]()(renderer, x, y, str.unsafe_cstr_ptr())
     if not ret:
-        raise String(unsafe_from_utf8_ptr=sdl_get_error())
+        raise String(unsafe_from_utf8_ptr=get_error())
