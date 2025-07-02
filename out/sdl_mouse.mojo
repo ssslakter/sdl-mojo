@@ -96,7 +96,7 @@ struct Cursor(Copyable, Movable):
 
 
 @register_passable("trivial")
-struct SystemCursor(Intable):
+struct SystemCursor(Indexer, Intable):
     """Cursor types for SDL_CreateSystemCursor().
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_SystemCursor.
@@ -111,6 +111,14 @@ struct SystemCursor(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias SYSTEM_CURSOR_DEFAULT = Self(0)
     """Default cursor. Usually an arrow."""
@@ -156,7 +164,7 @@ struct SystemCursor(Intable):
 
 
 @register_passable("trivial")
-struct MouseWheelDirection(Intable):
+struct MouseWheelDirection(Indexer, Intable):
     """Scroll direction types for the Scroll event.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_MouseWheelDirection.
@@ -171,6 +179,14 @@ struct MouseWheelDirection(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias MOUSEWHEEL_NORMAL = Self(0)
     """The scroll direction is normal."""

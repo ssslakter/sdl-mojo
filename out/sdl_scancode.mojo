@@ -33,7 +33,7 @@ https://wiki.libsdl.org/SDL3/BestKeyboardPractices
 
 
 @register_passable("trivial")
-struct Scancode(Intable):
+struct Scancode(Indexer, Intable):
     """The SDL keyboard scancode representation.
 
     An SDL scancode is the physical representation of a key on the keyboard,
@@ -57,6 +57,14 @@ struct Scancode(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias SCANCODE_UNKNOWN = Self(0)
 

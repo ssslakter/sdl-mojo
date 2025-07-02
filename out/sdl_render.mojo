@@ -65,7 +65,7 @@ struct Vertex(Copyable, Movable):
 
 
 @register_passable("trivial")
-struct TextureAccess(Intable):
+struct TextureAccess(Indexer, Intable):
     """The access pattern allowed for a texture.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_TextureAccess.
@@ -81,6 +81,14 @@ struct TextureAccess(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias TEXTUREACCESS_STATIC = Self(0)
     """Changes rarely, not lockable."""
     alias TEXTUREACCESS_STREAMING = Self(1)
@@ -90,7 +98,7 @@ struct TextureAccess(Intable):
 
 
 @register_passable("trivial")
-struct RendererLogicalPresentation(Intable):
+struct RendererLogicalPresentation(Indexer, Intable):
     """How the logical size is mapped to the output.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_RendererLogicalPresentation.
@@ -105,6 +113,14 @@ struct RendererLogicalPresentation(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias LOGICAL_PRESENTATION_DISABLED = Self(0)
     """There is no logical size in effect."""

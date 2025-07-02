@@ -128,7 +128,7 @@ to whatever is necessary, in other audio processing scenarios.
 
 
 @register_passable("trivial")
-struct AudioFormat(Intable):
+struct AudioFormat(Indexer, Intable):
     """Audio format.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_AudioFormat.
@@ -143,6 +143,14 @@ struct AudioFormat(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias AUDIO_UNKNOWN = Self(0x0000)
     """Unspecified audio format."""

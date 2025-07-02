@@ -92,7 +92,7 @@ struct JoystickID(Intable):
 
 
 @register_passable("trivial")
-struct JoystickType(Intable):
+struct JoystickType(Indexer, Intable):
     """An enum of some common joystick types.
 
     In some cases, SDL can identify a low-level joystick as being a certain
@@ -115,6 +115,14 @@ struct JoystickType(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias JOYSTICK_TYPE_UNKNOWN = Self(0)
     alias JOYSTICK_TYPE_GAMEPAD = Self(1)
     alias JOYSTICK_TYPE_WHEEL = Self(2)
@@ -129,7 +137,7 @@ struct JoystickType(Intable):
 
 
 @register_passable("trivial")
-struct JoystickConnectionState(Intable):
+struct JoystickConnectionState(Indexer, Intable):
     """Possible connection states for a joystick device.
 
     This is used by SDL_GetJoystickConnectionState to report how a device is
@@ -147,6 +155,14 @@ struct JoystickConnectionState(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias JOYSTICK_CONNECTION_INVALID = Self(-1)
     alias JOYSTICK_CONNECTION_UNKNOWN = Self(0)

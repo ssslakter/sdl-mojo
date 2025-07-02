@@ -129,7 +129,7 @@ struct CameraSpec(Copyable, Movable):
 
 
 @register_passable("trivial")
-struct CameraPosition(Intable):
+struct CameraPosition(Indexer, Intable):
     """The position of camera in relation to system device.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_CameraPosition.
@@ -144,6 +144,14 @@ struct CameraPosition(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias CAMERA_POSITION_UNKNOWN = Self(0x0)
     alias CAMERA_POSITION_FRONT_FACING = Self(0x1)

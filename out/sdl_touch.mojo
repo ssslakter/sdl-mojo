@@ -95,7 +95,7 @@ struct FingerID(Intable):
 
 
 @register_passable("trivial")
-struct TouchDeviceType(Intable):
+struct TouchDeviceType(Indexer, Intable):
     """An enum that describes the type of a touch device.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_TouchDeviceType.
@@ -110,6 +110,14 @@ struct TouchDeviceType(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias TOUCH_DEVICE_INVALID = Self(-1)
     alias TOUCH_DEVICE_DIRECT = Self(0)

@@ -64,7 +64,7 @@ struct DateTime(Copyable, Movable):
 
 
 @register_passable("trivial")
-struct DateFormat(Intable):
+struct DateFormat(Indexer, Intable):
     """The preferred date format of the current system locale.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_DateFormat.
@@ -80,6 +80,14 @@ struct DateFormat(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias DATE_FORMAT_YYYYMMDD = Self(0)
     """Year/Month/Day."""
     alias DATE_FORMAT_DDMMYYYY = Self(1)
@@ -89,7 +97,7 @@ struct DateFormat(Intable):
 
 
 @register_passable("trivial")
-struct TimeFormat(Intable):
+struct TimeFormat(Indexer, Intable):
     """The preferred time format of the current system locale.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_TimeFormat.
@@ -104,6 +112,14 @@ struct TimeFormat(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias TIME_FORMAT_24HR = Self(0)
     """24 hour time."""

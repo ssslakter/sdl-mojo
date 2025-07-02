@@ -100,7 +100,7 @@ struct WindowID(Intable):
 
 
 @register_passable("trivial")
-struct SystemTheme(Intable):
+struct SystemTheme(Indexer, Intable):
     """System theme.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_SystemTheme.
@@ -115,6 +115,14 @@ struct SystemTheme(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias SYSTEM_THEME_UNKNOWN = Self(0)
     """Unknown system theme."""
@@ -165,7 +173,7 @@ struct DisplayMode(Copyable, Movable):
 
 
 @register_passable("trivial")
-struct DisplayOrientation(Intable):
+struct DisplayOrientation(Indexer, Intable):
     """Display orientation values; the way a display is rotated.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_DisplayOrientation.
@@ -180,6 +188,14 @@ struct DisplayOrientation(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias ORIENTATION_UNKNOWN = Self(0)
     """The display orientation can't be determined."""
@@ -282,7 +298,7 @@ struct WindowFlags(Intable):
 
 
 @register_passable("trivial")
-struct FlashOperation(Intable):
+struct FlashOperation(Indexer, Intable):
     """Window flash operation.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_FlashOperation.
@@ -297,6 +313,14 @@ struct FlashOperation(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias FLASH_CANCEL = Self(0)
     """Cancel any window flash state."""
@@ -432,7 +456,7 @@ Docs: https://wiki.libsdl.org/SDL3/SDL_EGLIntArrayCallback.
 
 
 @register_passable("trivial")
-struct GLAttr(Intable):
+struct GLAttr(Indexer, Intable):
     """An enumeration of OpenGL configuration attributes.
 
     While you can set most OpenGL attributes normally, the attributes listed
@@ -459,6 +483,14 @@ struct GLAttr(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias GL_RED_SIZE = Self(0)
     """The minimum number of bits for the red channel of the color buffer; defaults to 8."""
@@ -3094,7 +3126,7 @@ fn show_window_system_menu(window: Ptr[Window, mut=True], x: c_int, y: c_int) ra
 
 
 @register_passable("trivial")
-struct HitTestResult(Intable):
+struct HitTestResult(Indexer, Intable):
     """Possible return values from the SDL_HitTest callback.
 
     Safety:
@@ -3112,6 +3144,14 @@ struct HitTestResult(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias HITTEST_NORMAL = Self(0)
     """Region is normal. No special properties."""

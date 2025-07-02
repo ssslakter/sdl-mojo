@@ -389,7 +389,7 @@ def translate_enum(m: re.Match) -> str:
     return (
 f'''
 @register_passable("trivial")
-struct {drop_prefix(name)}(Intable):
+struct {drop_prefix(name)}(Indexer, Intable):
     {doc_template(doc, name, '    ')}
     var value: UInt32
 
@@ -400,7 +400,14 @@ struct {drop_prefix(name)}(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
-
+    
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+    
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 {body}
 ''')
 

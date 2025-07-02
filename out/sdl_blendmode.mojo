@@ -72,7 +72,7 @@ struct BlendMode(Intable):
 
 
 @register_passable("trivial")
-struct BlendOperation(Intable):
+struct BlendOperation(Indexer, Intable):
     """The blend operation used when combining source and destination pixel
     components.
 
@@ -89,6 +89,14 @@ struct BlendOperation(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias BLENDOPERATION_ADD = Self(0x1)
     """Dst + src: supported by all renderers."""
     alias BLENDOPERATION_SUBTRACT = Self(0x2)
@@ -102,7 +110,7 @@ struct BlendOperation(Intable):
 
 
 @register_passable("trivial")
-struct BlendFactor(Intable):
+struct BlendFactor(Indexer, Intable):
     """The normalized factor used to multiply pixel components.
 
     The blend factors are multiplied with the pixels from a drawing operation
@@ -122,6 +130,14 @@ struct BlendFactor(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias BLENDFACTOR_ZERO = Self(0x1)
     """0, 0, 0, 0."""

@@ -144,7 +144,7 @@ fn get_pref_path(owned org: String, owned app: String) -> Ptr[c_char, mut=True]:
 
 
 @register_passable("trivial")
-struct Folder(Intable):
+struct Folder(Indexer, Intable):
     """The type of the OS-provided default folder for a specific purpose.
 
     Note that the Trash folder isn't included here, because trashing files
@@ -181,6 +181,14 @@ struct Folder(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias FOLDER_HOME = Self(0x0)
     """The folder which contains all of the current user's data, preferences, and documents. It usually contains most of the other folders. If a requested folder does not exist, the home folder can be considered a safe fallback to store a user's documents."""
@@ -239,7 +247,7 @@ fn get_user_folder(folder: Folder) -> Ptr[c_char, mut=False]:
 
 
 @register_passable("trivial")
-struct PathType(Intable):
+struct PathType(Indexer, Intable):
     """Types of filesystem entries.
 
     Note that there may be other sorts of items on a filesystem: devices,
@@ -258,6 +266,14 @@ struct PathType(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias PATHTYPE_NONE = Self(0x0)
     """Path does not exist."""
@@ -336,7 +352,7 @@ fn create_directory(owned path: String) raises:
 
 
 @register_passable("trivial")
-struct EnumerationResult(Intable):
+struct EnumerationResult(Indexer, Intable):
     """Possible results from an enumeration callback.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_EnumerationResult.
@@ -351,6 +367,14 @@ struct EnumerationResult(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias ENUM_CONTINUE = Self(0x0)
     """Value that requests that enumeration continue."""

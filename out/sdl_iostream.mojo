@@ -33,7 +33,7 @@ both are abstract interfaces to read/write data.
 
 
 @register_passable("trivial")
-struct IOStatus(Intable):
+struct IOStatus(Indexer, Intable):
     """SDL_IOStream status, set by a read or write operation.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_IOStatus.
@@ -48,6 +48,14 @@ struct IOStatus(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias IO_STATUS_READY = Self(0)
     """Everything is ready (no errors and not EOF)."""
@@ -64,7 +72,7 @@ struct IOStatus(Intable):
 
 
 @register_passable("trivial")
-struct IOWhence(Intable):
+struct IOWhence(Indexer, Intable):
     """Possible `whence` values for SDL_IOStream seeking.
 
     These map to the same "whence" concept that `fseek` or `lseek` use in the
@@ -82,6 +90,14 @@ struct IOWhence(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias IO_SEEK_SET = Self(0)
     """Seek from the beginning of data."""

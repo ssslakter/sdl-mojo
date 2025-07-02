@@ -52,7 +52,7 @@ parts of the system.
 
 
 @register_passable("trivial")
-struct EventType(Intable):
+struct EventType(Indexer, Intable):
     """The types of events that can be delivered.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_EventType.
@@ -67,6 +67,14 @@ struct EventType(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias EVENT_FIRST = Self(0)
     """Unused (do not remove)."""
@@ -1286,7 +1294,7 @@ fn pump_events() -> None:
 
 
 @register_passable("trivial")
-struct EventAction(Intable):
+struct EventAction(Indexer, Intable):
     """The type of action to request from SDL_PeepEvents().
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_EventAction.
@@ -1301,6 +1309,14 @@ struct EventAction(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias ADDEVENT = Self(0x0)
     """Add events to the back of the queue."""

@@ -37,7 +37,7 @@ work.
 
 
 @register_passable("trivial")
-struct HintPriority(Intable):
+struct HintPriority(Indexer, Intable):
     """An enumeration of hint priorities.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_HintPriority.
@@ -52,6 +52,14 @@ struct HintPriority(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias HINT_DEFAULT = Self(0)
     alias HINT_NORMAL = Self(1)

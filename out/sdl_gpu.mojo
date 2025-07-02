@@ -466,7 +466,7 @@ struct GPUFence(Copyable, Movable):
 
 
 @register_passable("trivial")
-struct GPUPrimitiveType(Intable):
+struct GPUPrimitiveType(Indexer, Intable):
     """Specifies the primitive topology of a graphics pipeline.
 
     If you are using POINTLIST you must include a point size output in the
@@ -496,6 +496,14 @@ struct GPUPrimitiveType(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_PRIMITIVETYPE_TRIANGLELIST = Self(0)
     """A series of separate triangles."""
     alias GPU_PRIMITIVETYPE_TRIANGLESTRIP = Self(1)
@@ -509,7 +517,7 @@ struct GPUPrimitiveType(Intable):
 
 
 @register_passable("trivial")
-struct GPULoadOp(Intable):
+struct GPULoadOp(Indexer, Intable):
     """Specifies how the contents of a texture attached to a render pass are
     treated at the beginning of the render pass.
 
@@ -526,6 +534,14 @@ struct GPULoadOp(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_LOADOP_LOAD = Self(0)
     """The previous contents of the texture will be preserved."""
     alias GPU_LOADOP_CLEAR = Self(1)
@@ -535,7 +551,7 @@ struct GPULoadOp(Intable):
 
 
 @register_passable("trivial")
-struct GPUStoreOp(Intable):
+struct GPUStoreOp(Indexer, Intable):
     """Specifies how the contents of a texture attached to a render pass are
     treated at the end of the render pass.
 
@@ -552,6 +568,14 @@ struct GPUStoreOp(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_STOREOP_STORE = Self(0)
     """The contents generated during the render pass will be written to memory."""
     alias GPU_STOREOP_DONT_CARE = Self(1)
@@ -563,7 +587,7 @@ struct GPUStoreOp(Intable):
 
 
 @register_passable("trivial")
-struct GPUIndexElementSize(Intable):
+struct GPUIndexElementSize(Indexer, Intable):
     """Specifies the size of elements in an index buffer.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUIndexElementSize.
@@ -579,6 +603,14 @@ struct GPUIndexElementSize(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_INDEXELEMENTSIZE_16BIT = Self(0)
     """The index elements are 16-bit."""
     alias GPU_INDEXELEMENTSIZE_32BIT = Self(1)
@@ -586,7 +618,7 @@ struct GPUIndexElementSize(Intable):
 
 
 @register_passable("trivial")
-struct GPUTextureFormat(Intable):
+struct GPUTextureFormat(Indexer, Intable):
     """Specifies the pixel format of a texture.
 
     Texture format support varies depending on driver, hardware, and usage
@@ -678,6 +710,14 @@ struct GPUTextureFormat(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias GPU_TEXTUREFORMAT_INVALID = Self(0)
 
@@ -853,7 +893,7 @@ struct GPUTextureUsageFlags(Intable):
 
 
 @register_passable("trivial")
-struct GPUTextureType(Intable):
+struct GPUTextureType(Indexer, Intable):
     """Specifies the type of a texture.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureType.
@@ -869,6 +909,14 @@ struct GPUTextureType(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_TEXTURETYPE_2D = Self(0)
     """The texture is a 2-dimensional image."""
     alias GPU_TEXTURETYPE_2D_ARRAY = Self(1)
@@ -882,7 +930,7 @@ struct GPUTextureType(Intable):
 
 
 @register_passable("trivial")
-struct GPUSampleCount(Intable):
+struct GPUSampleCount(Indexer, Intable):
     """Specifies the sample count of a texture.
 
     Used in multisampling. Note that this value only applies when the texture
@@ -901,6 +949,14 @@ struct GPUSampleCount(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_SAMPLECOUNT_1 = Self(0)
     """No multisampling."""
     alias GPU_SAMPLECOUNT_2 = Self(1)
@@ -912,7 +968,7 @@ struct GPUSampleCount(Intable):
 
 
 @register_passable("trivial")
-struct GPUCubeMapFace(Intable):
+struct GPUCubeMapFace(Indexer, Intable):
     """Specifies the face of a cube map.
 
     Can be passed in as the layer field in texture-related structs.
@@ -929,6 +985,14 @@ struct GPUCubeMapFace(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias GPU_CUBEMAPFACE_POSITIVEX = Self(0)
     alias GPU_CUBEMAPFACE_NEGATIVEX = Self(1)
@@ -984,7 +1048,7 @@ struct GPUBufferUsageFlags(Intable):
 
 
 @register_passable("trivial")
-struct GPUTransferBufferUsage(Intable):
+struct GPUTransferBufferUsage(Indexer, Intable):
     """Specifies how a transfer buffer is intended to be used by the client.
 
     Note that mapping and copying FROM an upload transfer buffer or TO a
@@ -1003,12 +1067,20 @@ struct GPUTransferBufferUsage(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_TRANSFERBUFFERUSAGE_UPLOAD = Self(0)
     alias GPU_TRANSFERBUFFERUSAGE_DOWNLOAD = Self(1)
 
 
 @register_passable("trivial")
-struct GPUShaderStage(Intable):
+struct GPUShaderStage(Indexer, Intable):
     """Specifies which stage a shader program corresponds to.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUShaderStage.
@@ -1023,6 +1095,14 @@ struct GPUShaderStage(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias GPU_SHADERSTAGE_VERTEX = Self(0)
     alias GPU_SHADERSTAGE_FRAGMENT = Self(1)
@@ -1067,7 +1147,7 @@ struct GPUShaderFormat(Intable):
 
 
 @register_passable("trivial")
-struct GPUVertexElementFormat(Intable):
+struct GPUVertexElementFormat(Indexer, Intable):
     """Specifies the format of a vertex attribute.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexElementFormat.
@@ -1082,6 +1162,14 @@ struct GPUVertexElementFormat(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias GPU_VERTEXELEMENTFORMAT_INVALID = Self(0)
 
@@ -1141,7 +1229,7 @@ struct GPUVertexElementFormat(Intable):
 
 
 @register_passable("trivial")
-struct GPUVertexInputRate(Intable):
+struct GPUVertexInputRate(Indexer, Intable):
     """Specifies the rate at which vertex attributes are pulled from buffers.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexInputRate.
@@ -1157,6 +1245,14 @@ struct GPUVertexInputRate(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_VERTEXINPUTRATE_VERTEX = Self(0)
     """Attribute addressing is a function of the vertex index."""
     alias GPU_VERTEXINPUTRATE_INSTANCE = Self(1)
@@ -1164,7 +1260,7 @@ struct GPUVertexInputRate(Intable):
 
 
 @register_passable("trivial")
-struct GPUFillMode(Intable):
+struct GPUFillMode(Indexer, Intable):
     """Specifies the fill mode of the graphics pipeline.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUFillMode.
@@ -1180,6 +1276,14 @@ struct GPUFillMode(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_FILLMODE_FILL = Self(0)
     """Polygons will be rendered via rasterization."""
     alias GPU_FILLMODE_LINE = Self(1)
@@ -1187,7 +1291,7 @@ struct GPUFillMode(Intable):
 
 
 @register_passable("trivial")
-struct GPUCullMode(Intable):
+struct GPUCullMode(Indexer, Intable):
     """Specifies the facing direction in which triangle faces will be culled.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUCullMode.
@@ -1203,6 +1307,14 @@ struct GPUCullMode(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_CULLMODE_NONE = Self(0)
     """No triangles are culled."""
     alias GPU_CULLMODE_FRONT = Self(1)
@@ -1212,7 +1324,7 @@ struct GPUCullMode(Intable):
 
 
 @register_passable("trivial")
-struct GPUFrontFace(Intable):
+struct GPUFrontFace(Indexer, Intable):
     """Specifies the vertex winding that will cause a triangle to be determined to
     be front-facing.
 
@@ -1229,6 +1341,14 @@ struct GPUFrontFace(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_FRONTFACE_COUNTER_CLOCKWISE = Self(0)
     """A triangle with counter-clockwise vertex winding will be considered front-facing."""
     alias GPU_FRONTFACE_CLOCKWISE = Self(1)
@@ -1236,7 +1356,7 @@ struct GPUFrontFace(Intable):
 
 
 @register_passable("trivial")
-struct GPUCompareOp(Intable):
+struct GPUCompareOp(Indexer, Intable):
     """Specifies a comparison operator for depth, stencil and sampler operations.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUCompareOp.
@@ -1251,6 +1371,14 @@ struct GPUCompareOp(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias GPU_COMPAREOP_INVALID = Self(0)
     alias GPU_COMPAREOP_NEVER = Self(1)
@@ -1272,7 +1400,7 @@ struct GPUCompareOp(Intable):
 
 
 @register_passable("trivial")
-struct GPUStencilOp(Intable):
+struct GPUStencilOp(Indexer, Intable):
     """Specifies what happens to a stored stencil value if stencil tests fail or
     pass.
 
@@ -1288,6 +1416,14 @@ struct GPUStencilOp(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias GPU_STENCILOP_INVALID = Self(0)
     alias GPU_STENCILOP_KEEP = Self(1)
@@ -1309,7 +1445,7 @@ struct GPUStencilOp(Intable):
 
 
 @register_passable("trivial")
-struct GPUBlendOp(Intable):
+struct GPUBlendOp(Indexer, Intable):
     """Specifies the operator to be used when pixels in a render target are
     blended with existing pixels in the texture.
 
@@ -1329,6 +1465,14 @@ struct GPUBlendOp(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_BLENDOP_INVALID = Self(0)
     alias GPU_BLENDOP_ADD = Self(1)
     """(source * source_factor) + (destination * destination_factor)."""
@@ -1343,7 +1487,7 @@ struct GPUBlendOp(Intable):
 
 
 @register_passable("trivial")
-struct GPUBlendFactor(Intable):
+struct GPUBlendFactor(Indexer, Intable):
     """Specifies a blending factor to be used when pixels in a render target are
     blended with existing pixels in the texture.
 
@@ -1362,6 +1506,14 @@ struct GPUBlendFactor(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias GPU_BLENDFACTOR_INVALID = Self(0)
     alias GPU_BLENDFACTOR_ZERO = Self(1)
@@ -1424,7 +1576,7 @@ struct GPUColorComponentFlags(Intable):
 
 
 @register_passable("trivial")
-struct GPUFilter(Intable):
+struct GPUFilter(Indexer, Intable):
     """Specifies a filter operation used by a sampler.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUFilter.
@@ -1440,6 +1592,14 @@ struct GPUFilter(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_FILTER_NEAREST = Self(0)
     """Point filtering."""
     alias GPU_FILTER_LINEAR = Self(1)
@@ -1447,7 +1607,7 @@ struct GPUFilter(Intable):
 
 
 @register_passable("trivial")
-struct GPUSamplerMipmapMode(Intable):
+struct GPUSamplerMipmapMode(Indexer, Intable):
     """Specifies a mipmap mode used by a sampler.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GPUSamplerMipmapMode.
@@ -1463,6 +1623,14 @@ struct GPUSamplerMipmapMode(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_SAMPLERMIPMAPMODE_NEAREST = Self(0)
     """Point filtering."""
     alias GPU_SAMPLERMIPMAPMODE_LINEAR = Self(1)
@@ -1470,7 +1638,7 @@ struct GPUSamplerMipmapMode(Intable):
 
 
 @register_passable("trivial")
-struct GPUSamplerAddressMode(Intable):
+struct GPUSamplerAddressMode(Indexer, Intable):
     """Specifies behavior of texture sampling when the coordinates exceed the 0-1
     range.
 
@@ -1487,6 +1655,14 @@ struct GPUSamplerAddressMode(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_SAMPLERADDRESSMODE_REPEAT = Self(0)
     """Specifies that the coordinates will wrap around."""
     alias GPU_SAMPLERADDRESSMODE_MIRRORED_REPEAT = Self(1)
@@ -1496,7 +1672,7 @@ struct GPUSamplerAddressMode(Intable):
 
 
 @register_passable("trivial")
-struct GPUPresentMode(Intable):
+struct GPUPresentMode(Indexer, Intable):
     """Specifies the timing that will be used to present swapchain textures to the
     OS.
 
@@ -1528,13 +1704,21 @@ struct GPUPresentMode(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GPU_PRESENTMODE_VSYNC = Self(0)
     alias GPU_PRESENTMODE_IMMEDIATE = Self(1)
     alias GPU_PRESENTMODE_MAILBOX = Self(2)
 
 
 @register_passable("trivial")
-struct GPUSwapchainComposition(Intable):
+struct GPUSwapchainComposition(Indexer, Intable):
     """Specifies the texture format and colorspace of the swapchain textures.
 
     SDR will always be supported. Other compositions may not be supported on
@@ -1566,6 +1750,14 @@ struct GPUSwapchainComposition(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias GPU_SWAPCHAINCOMPOSITION_SDR = Self(0)
     alias GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR = Self(1)

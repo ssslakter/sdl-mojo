@@ -84,7 +84,7 @@ struct Gamepad(Copyable, Movable):
 
 
 @register_passable("trivial")
-struct GamepadType(Intable):
+struct GamepadType(Indexer, Intable):
     """Standard gamepad types.
 
     This type does not necessarily map to first-party controllers from
@@ -106,6 +106,14 @@ struct GamepadType(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GAMEPAD_TYPE_UNKNOWN = Self(0)
     alias GAMEPAD_TYPE_STANDARD = Self(1)
     alias GAMEPAD_TYPE_XBOX360 = Self(2)
@@ -121,7 +129,7 @@ struct GamepadType(Intable):
 
 
 @register_passable("trivial")
-struct GamepadButton(Intable):
+struct GamepadButton(Indexer, Intable):
     """The list of buttons available on a gamepad.
 
     For controllers that use a diamond pattern for the face buttons, the
@@ -154,6 +162,14 @@ struct GamepadButton(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias GAMEPAD_BUTTON_INVALID = Self(-1)
     alias GAMEPAD_BUTTON_SOUTH = Self(0)
@@ -201,7 +217,7 @@ struct GamepadButton(Intable):
 
 
 @register_passable("trivial")
-struct GamepadButtonLabel(Intable):
+struct GamepadButtonLabel(Indexer, Intable):
     """The set of gamepad button labels.
 
     This isn't a complete set, just the face buttons to make it easy to show
@@ -223,6 +239,14 @@ struct GamepadButtonLabel(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GAMEPAD_BUTTON_LABEL_UNKNOWN = Self(0)
     alias GAMEPAD_BUTTON_LABEL_A = Self(1)
     alias GAMEPAD_BUTTON_LABEL_B = Self(2)
@@ -235,7 +259,7 @@ struct GamepadButtonLabel(Intable):
 
 
 @register_passable("trivial")
-struct GamepadAxis(Intable):
+struct GamepadAxis(Indexer, Intable):
     """The list of axes available on a gamepad.
 
     Thumbstick axis values range from SDL_JOYSTICK_AXIS_MIN to
@@ -260,6 +284,14 @@ struct GamepadAxis(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias GAMEPAD_AXIS_INVALID = Self(-1)
     alias GAMEPAD_AXIS_LEFTX = Self(0)
     alias GAMEPAD_AXIS_LEFTY = Self(1)
@@ -271,7 +303,7 @@ struct GamepadAxis(Intable):
 
 
 @register_passable("trivial")
-struct GamepadBindingType(Intable):
+struct GamepadBindingType(Indexer, Intable):
     """Types of gamepad control bindings.
 
     A gamepad is a collection of bindings that map arbitrary joystick buttons,
@@ -291,6 +323,14 @@ struct GamepadBindingType(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias GAMEPAD_BINDTYPE_NONE = Self(0)
     alias GAMEPAD_BINDTYPE_BUTTON = Self(1)

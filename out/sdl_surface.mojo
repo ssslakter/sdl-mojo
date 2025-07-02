@@ -73,7 +73,7 @@ struct SurfaceFlags(Intable):
 
 
 @register_passable("trivial")
-struct ScaleMode(Intable):
+struct ScaleMode(Indexer, Intable):
     """The scaling mode.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_ScaleMode.
@@ -89,6 +89,14 @@ struct ScaleMode(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias SCALEMODE_INVALID = Self(-1)
     alias SCALEMODE_NEAREST = Self(0)
     """Nearest pixel sampling."""
@@ -97,7 +105,7 @@ struct ScaleMode(Intable):
 
 
 @register_passable("trivial")
-struct FlipMode(Intable):
+struct FlipMode(Indexer, Intable):
     """The flip mode.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_FlipMode.
@@ -112,6 +120,14 @@ struct FlipMode(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias FLIP_NONE = Self(0)
     """Do not flip."""

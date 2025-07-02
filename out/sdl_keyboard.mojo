@@ -424,7 +424,7 @@ fn start_text_input(window: Ptr[Window, mut=True]) raises:
 
 
 @register_passable("trivial")
-struct TextInputType(Intable):
+struct TextInputType(Indexer, Intable):
     """Text input type.
 
     These are the valid values for SDL_PROP_TEXTINPUT_TYPE_NUMBER. Not every
@@ -443,6 +443,14 @@ struct TextInputType(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias TEXTINPUT_TYPE_TEXT = Self(0)
     """The input is text."""
@@ -465,7 +473,7 @@ struct TextInputType(Intable):
 
 
 @register_passable("trivial")
-struct Capitalization(Intable):
+struct Capitalization(Indexer, Intable):
     """Auto capitalization type.
 
     These are the valid values for SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER.
@@ -484,6 +492,14 @@ struct Capitalization(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias CAPITALIZE_NONE = Self(0)
     """No auto-capitalization will be done."""

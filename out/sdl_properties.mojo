@@ -70,7 +70,7 @@ struct PropertiesID(Intable):
 
 
 @register_passable("trivial")
-struct PropertyType(Intable):
+struct PropertyType(Indexer, Intable):
     """SDL property type.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PropertyType.
@@ -85,6 +85,14 @@ struct PropertyType(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias PROPERTY_TYPE_INVALID = Self(0)
     alias PROPERTY_TYPE_POINTER = Self(1)

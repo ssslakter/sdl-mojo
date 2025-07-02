@@ -80,7 +80,7 @@ The matrix coefficients are used to convert between YCbCr and RGB colors.
 
 
 @register_passable("trivial")
-struct PixelType(Intable):
+struct PixelType(Indexer, Intable):
     """Pixel type.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PixelType.
@@ -95,6 +95,14 @@ struct PixelType(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias PIXELTYPE_UNKNOWN = Self(0)
     alias PIXELTYPE_INDEX1 = Self(1)
@@ -113,7 +121,7 @@ struct PixelType(Intable):
 
 
 @register_passable("trivial")
-struct BitmapOrder(Intable):
+struct BitmapOrder(Indexer, Intable):
     """Bitmap pixel order, high bit -> low bit.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_BitmapOrder.
@@ -129,13 +137,21 @@ struct BitmapOrder(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias BITMAPORDER_NONE = Self(0)
     alias BITMAPORDER_4321 = Self(1)
     alias BITMAPORDER_1234 = Self(2)
 
 
 @register_passable("trivial")
-struct PackedOrder(Intable):
+struct PackedOrder(Indexer, Intable):
     """Packed component order, high bit -> low bit.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PackedOrder.
@@ -151,6 +167,14 @@ struct PackedOrder(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias PACKEDORDER_NONE = Self(0)
     alias PACKEDORDER_XRGB = Self(1)
     alias PACKEDORDER_RGBX = Self(2)
@@ -163,7 +187,7 @@ struct PackedOrder(Intable):
 
 
 @register_passable("trivial")
-struct ArrayOrder(Intable):
+struct ArrayOrder(Indexer, Intable):
     """Array component order, low byte -> high byte.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_ArrayOrder.
@@ -179,6 +203,14 @@ struct ArrayOrder(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias ARRAYORDER_NONE = Self(0)
     alias ARRAYORDER_RGB = Self(1)
     alias ARRAYORDER_RGBA = Self(2)
@@ -189,7 +221,7 @@ struct ArrayOrder(Intable):
 
 
 @register_passable("trivial")
-struct PackedLayout(Intable):
+struct PackedLayout(Indexer, Intable):
     """Packed component layout.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_PackedLayout.
@@ -205,6 +237,14 @@ struct PackedLayout(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias PACKEDLAYOUT_NONE = Self(0)
     alias PACKEDLAYOUT_332 = Self(1)
     alias PACKEDLAYOUT_4444 = Self(2)
@@ -217,7 +257,7 @@ struct PackedLayout(Intable):
 
 
 @register_passable("trivial")
-struct PixelFormat(Intable):
+struct PixelFormat(Indexer, Intable):
     """Pixel format.
 
     SDL's pixel formats have the following naming convention:
@@ -264,6 +304,14 @@ struct PixelFormat(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias PIXELFORMAT_UNKNOWN = Self(0)
     alias PIXELFORMAT_INDEX1LSB = Self(0x11100100)
@@ -419,7 +467,7 @@ struct PixelFormat(Intable):
 
 
 @register_passable("trivial")
-struct ColorType(Intable):
+struct ColorType(Indexer, Intable):
     """Colorspace color type.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_ColorType.
@@ -435,13 +483,21 @@ struct ColorType(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias COLOR_TYPE_UNKNOWN = Self(0)
     alias COLOR_TYPE_RGB = Self(1)
     alias COLOR_TYPE_YCBCR = Self(2)
 
 
 @register_passable("trivial")
-struct ColorRange(Intable):
+struct ColorRange(Indexer, Intable):
     """Colorspace color range, as described by
     https://www.itu.int/rec/R-REC-BT.2100-2-201807-I/en.
 
@@ -458,6 +514,14 @@ struct ColorRange(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias COLOR_RANGE_UNKNOWN = Self(0)
     alias COLOR_RANGE_LIMITED = Self(1)
     """Narrow range, e.g. 16-235 for 8-bit RGB and luma, and 16-240 for 8-bit chroma."""
@@ -466,7 +530,7 @@ struct ColorRange(Intable):
 
 
 @register_passable("trivial")
-struct ColorPrimaries(Intable):
+struct ColorPrimaries(Indexer, Intable):
     """Colorspace color primaries, as described by
     https://www.itu.int/rec/T-REC-H.273-201612-S/en.
 
@@ -482,6 +546,14 @@ struct ColorPrimaries(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias COLOR_PRIMARIES_UNKNOWN = Self(0)
     alias COLOR_PRIMARIES_BT709 = Self(1)
@@ -511,7 +583,7 @@ struct ColorPrimaries(Intable):
 
 
 @register_passable("trivial")
-struct TransferCharacteristics(Intable):
+struct TransferCharacteristics(Indexer, Intable):
     """Colorspace transfer characteristics.
 
     These are as described by https://www.itu.int/rec/T-REC-H.273-201612-S/en
@@ -528,6 +600,14 @@ struct TransferCharacteristics(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias TRANSFER_CHARACTERISTICS_UNKNOWN = Self(0)
     alias TRANSFER_CHARACTERISTICS_BT709 = Self(1)
@@ -564,7 +644,7 @@ struct TransferCharacteristics(Intable):
 
 
 @register_passable("trivial")
-struct MatrixCoefficients(Intable):
+struct MatrixCoefficients(Indexer, Intable):
     """Colorspace matrix coefficients.
 
     These are as described by https://www.itu.int/rec/T-REC-H.273-201612-S/en
@@ -581,6 +661,14 @@ struct MatrixCoefficients(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias MATRIX_COEFFICIENTS_IDENTITY = Self(0)
     alias MATRIX_COEFFICIENTS_BT709 = Self(1)
@@ -609,7 +697,7 @@ struct MatrixCoefficients(Intable):
 
 
 @register_passable("trivial")
-struct ChromaLocation(Intable):
+struct ChromaLocation(Indexer, Intable):
     """Colorspace chroma sample location.
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_ChromaLocation.
@@ -625,6 +713,14 @@ struct ChromaLocation(Intable):
     fn __int__(self) -> Int:
         return Int(self.value)
 
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
+
     alias CHROMA_LOCATION_NONE = Self(0)
     """RGB, no chroma sampling."""
     alias CHROMA_LOCATION_LEFT = Self(1)
@@ -636,7 +732,7 @@ struct ChromaLocation(Intable):
 
 
 @register_passable("trivial")
-struct Colorspace(Intable):
+struct Colorspace(Indexer, Intable):
     """Colorspace definitions.
 
     Since similar colorspaces may vary in their details (matrix, transfer
@@ -655,6 +751,14 @@ struct Colorspace(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias COLORSPACE_UNKNOWN = Self(0)
 

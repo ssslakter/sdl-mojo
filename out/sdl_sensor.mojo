@@ -69,7 +69,7 @@ struct SensorID(Intable):
 
 
 @register_passable("trivial")
-struct SensorType(Intable):
+struct SensorType(Indexer, Intable):
     """The different sensors defined by SDL.
 
     Additional sensors may be available, using platform dependent semantics.
@@ -131,6 +131,14 @@ struct SensorType(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias SENSOR_INVALID = Self(-1)
     """Returned for an invalid sensor."""

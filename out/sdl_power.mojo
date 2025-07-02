@@ -37,7 +37,7 @@ they can save their game.
 
 
 @register_passable("trivial")
-struct PowerState(Intable):
+struct PowerState(Indexer, Intable):
     """The basic state for the system's power supply.
 
     These are results returned by SDL_GetPowerInfo().
@@ -54,6 +54,14 @@ struct PowerState(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias POWERSTATE_ERROR = Self(-1)
     """Error determining power status."""

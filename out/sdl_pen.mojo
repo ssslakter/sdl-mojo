@@ -104,7 +104,7 @@ struct PenInputFlags(Intable):
 
 
 @register_passable("trivial")
-struct PenAxis(Intable):
+struct PenAxis(Indexer, Intable):
     """Pen axis indices.
 
     These are the valid values for the `axis` field in SDL_PenAxisEvent. All
@@ -129,6 +129,14 @@ struct PenAxis(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias PEN_AXIS_PRESSURE = Self(0)
     """Pen pressure.  Unidirectional: 0 to 1.0."""

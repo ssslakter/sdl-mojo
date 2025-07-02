@@ -89,7 +89,7 @@ struct InitFlags(Intable):
 
 
 @register_passable("trivial")
-struct AppResult(Intable):
+struct AppResult(Indexer, Intable):
     """Return values for optional main callbacks.
 
     Returning SDL_APP_SUCCESS or SDL_APP_FAILURE from SDL_AppInit,
@@ -119,6 +119,14 @@ struct AppResult(Intable):
     @always_inline
     fn __int__(self) -> Int:
         return Int(self.value)
+
+    @always_inline
+    fn __eq__(lhs, rhs: Self) -> Bool:
+        return lhs.value == rhs.value
+
+    @always_inline("nodebug")
+    fn __index__(self) -> __mlir_type.index:
+        return Int(self).value
 
     alias APP_CONTINUE = Self(0)
     """Value that requests that the app continue from the main callbacks."""
