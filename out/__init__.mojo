@@ -60,7 +60,7 @@ fn _init_sdl_handle() -> _OwnedDLHandle:
             constrained[False, "OS is not supported"]()
             return _uninit[_OwnedDLHandle]()
     except:
-        print("no sdl")
+        print("libSDL3 not found at .pixi/envs/default/lib/")
         return _uninit[_OwnedDLHandle]()
 
 
