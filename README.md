@@ -6,14 +6,14 @@ You can take a look at the [test file](./test/test.mojo), or check out the [sdl3
 
 note: `sdl-mojo` is not on the Modular community channel yet.
 
-# Magic
-Install [magic](https://docs.modular.com/magic/).
+# Generating and Building the Bindings
+If you havent already, Install [pixi](https://pixi.sh/) with:
 
-commands:
+`curl -fsSL https://pixi.sh/install.sh | sh`
 
-`magic run build` - Generate the bindings
+Then, run `pixi run build` to generate and build the bindings.
 
-`magic run test` - Run the test file
+Once it's finished, run `pixi run test` to test the bindings.
 
 # Notes
 The generator attempts to turn cases of error on null, and error on false, into raising functions. 
