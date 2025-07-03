@@ -4,39 +4,39 @@
 
 """SDL3 Bindings in Mojo"""
 
-from .audio import *
-from .blendmode import *
-from .camera import *
-from .clipboard import *
-from .error import *
-from .events import *
-from .filesystem import *
-from .gamepad import *
-from .gpu import *
-from .guid import *
-from .haptic import *
-from .hints import *
-from .init import *
-from .iostream import *
-from .joystick import *
-from .keyboard import *
-from .keycode import *
-from .mouse import *
-from .pen import *
-from .pixels import *
-from .power import *
-from .properties import *
-from .rect import *
-from .render import *
-from .scancode import *
-from .sensor import *
-from .storage import *
-from .surface import *
-from .time import *
-from .timer import *
-from .touch import *
-from .version import *
-from .video import *
+from .sdl_audio import *
+from .sdl_blendmode import *
+from .sdl_camera import *
+from .sdl_clipboard import *
+from .sdl_error import *
+from .sdl_events import *
+from .sdl_filesystem import *
+from .sdl_gamepad import *
+from .sdl_gpu import *
+from .sdl_guid import *
+from .sdl_haptic import *
+from .sdl_hints import *
+from .sdl_init import *
+from .sdl_iostream import *
+from .sdl_joystick import *
+from .sdl_keyboard import *
+from .sdl_keycode import *
+from .sdl_mouse import *
+from .sdl_pen import *
+from .sdl_pixels import *
+from .sdl_power import *
+from .sdl_properties import *
+from .sdl_rect import *
+from .sdl_render import *
+from .sdl_scancode import *
+from .sdl_sensor import *
+from .sdl_storage import *
+from .sdl_surface import *
+from .sdl_time import *
+from .sdl_timer import *
+from .sdl_touch import *
+from .sdl_version import *
+from .sdl_video import *
 
 
 alias Ptr = stdlib.memory.UnsafePointer
@@ -53,14 +53,14 @@ fn _init_sdl_handle() -> _OwnedDLHandle:
 
         @parameter
         if os_is_macos():
-            return _OwnedDLHandle(".magic/envs/default/lib/libSDL3.dylib")
+            return _OwnedDLHandle(".pixi/envs/default/lib/libSDL3.dylib")
         elif os_is_linux():
-            return _OwnedDLHandle(".magic/envs/default/lib/libSDL3.so")
+            return _OwnedDLHandle(".pixi/envs/default/lib/libSDL3.so")
         else:
             constrained[False, "OS is not supported"]()
             return _uninit[_OwnedDLHandle]()
     except:
-        print("no sdl")
+        print("libSDL3 not found at .pixi/envs/default/lib/")
         return _uninit[_OwnedDLHandle]()
 
 
