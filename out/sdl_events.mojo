@@ -369,7 +369,7 @@ struct EventType(Indexer, Intable):
 struct CommonEvent(Copyable, Movable):
     """Fields shared by every event.
 
-    Docs: https://wiki.libsdl.org/SDL3/CommonEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_CommonEvent.
     """
 
     var type: UInt32
@@ -383,7 +383,7 @@ struct CommonEvent(Copyable, Movable):
 struct DisplayEvent(Copyable, Movable):
     """Display state change event data (event.display.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/DisplayEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_DisplayEvent.
     """
 
     var type: EventType
@@ -403,7 +403,7 @@ struct DisplayEvent(Copyable, Movable):
 struct WindowEvent(Copyable, Movable):
     """Window state change event data (event.window.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/WindowEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_WindowEvent.
     """
 
     var type: EventType
@@ -423,7 +423,7 @@ struct WindowEvent(Copyable, Movable):
 struct KeyboardDeviceEvent(Copyable, Movable):
     """Keyboard device event structure (event.kdevice.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/KeyboardDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_KeyboardDeviceEvent.
     """
 
     var type: EventType
@@ -445,7 +445,7 @@ struct KeyboardEvent(Copyable, Movable):
     event scancode and modifiers directly from the keyboard layout, bypassing
     SDL_HINT_KEYCODE_OPTIONS, by calling SDL_GetKeyFromScancode().
 
-    Docs: https://wiki.libsdl.org/SDL3/KeyboardEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_KeyboardEvent.
     """
 
     var type: EventType
@@ -479,7 +479,7 @@ struct TextEditingEvent(Copyable, Movable):
     will be inserted into the editing text. The length is the number of UTF-8
     characters that will be replaced by new typing.
 
-    Docs: https://wiki.libsdl.org/SDL3/TextEditingEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_TextEditingEvent.
     """
 
     var type: EventType
@@ -501,7 +501,7 @@ struct TextEditingEvent(Copyable, Movable):
 struct TextEditingCandidatesEvent(Copyable, Movable):
     """Keyboard IME candidates event structure (event.edit_candidates.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/TextEditingCandidatesEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_TextEditingCandidatesEvent.
     """
 
     var type: EventType
@@ -531,7 +531,7 @@ struct TextInputEvent(Copyable, Movable):
     This event will never be delivered unless text input is enabled by calling
     SDL_StartTextInput(). Text input is disabled by default!
 
-    Docs: https://wiki.libsdl.org/SDL3/TextInputEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_TextInputEvent.
     """
 
     var type: EventType
@@ -549,7 +549,7 @@ struct TextInputEvent(Copyable, Movable):
 struct MouseDeviceEvent(Copyable, Movable):
     """Mouse device event structure (event.mdevice.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/MouseDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_MouseDeviceEvent.
     """
 
     var type: EventType
@@ -565,7 +565,7 @@ struct MouseDeviceEvent(Copyable, Movable):
 struct MouseMotionEvent(Copyable, Movable):
     """Mouse motion event structure (event.motion.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/MouseMotionEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_MouseMotionEvent.
     """
 
     var type: EventType
@@ -593,7 +593,7 @@ struct MouseMotionEvent(Copyable, Movable):
 struct MouseButtonEvent(Copyable, Movable):
     """Mouse button event structure (event.button.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/MouseButtonEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_MouseButtonEvent.
     """
 
     var type: EventType
@@ -622,7 +622,7 @@ struct MouseButtonEvent(Copyable, Movable):
 struct MouseWheelEvent(Copyable, Movable):
     """Mouse wheel event structure (event.wheel.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/MouseWheelEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_MouseWheelEvent.
     """
 
     var type: EventType
@@ -654,7 +654,7 @@ struct MouseWheelEvent(Copyable, Movable):
 struct JoyAxisEvent(Copyable, Movable):
     """Joystick axis motion event structure (event.jaxis.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/JoyAxisEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyAxisEvent.
     """
 
     var type: EventType
@@ -678,7 +678,7 @@ struct JoyAxisEvent(Copyable, Movable):
 struct JoyBallEvent(Copyable, Movable):
     """Joystick trackball motion event structure (event.jball.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/JoyBallEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyBallEvent.
     """
 
     var type: EventType
@@ -703,7 +703,7 @@ struct JoyBallEvent(Copyable, Movable):
 struct JoyHatEvent(Copyable, Movable):
     """Joystick hat position change event structure (event.jhat.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/JoyHatEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyHatEvent.
     """
 
     var type: EventType
@@ -730,7 +730,7 @@ struct JoyHatEvent(Copyable, Movable):
 struct JoyButtonEvent(Copyable, Movable):
     """Joystick button event structure (event.jbutton.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/JoyButtonEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyButtonEvent.
     """
 
     var type: EventType
@@ -755,7 +755,7 @@ struct JoyDeviceEvent(Copyable, Movable):
     SDL will send JOYSTICK_ADDED events for devices that are already plugged in
     during SDL_Init.
 
-    Docs: https://wiki.libsdl.org/SDL3/JoyDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyDeviceEvent.
     """
 
     var type: EventType
@@ -771,7 +771,7 @@ struct JoyDeviceEvent(Copyable, Movable):
 struct JoyBatteryEvent(Copyable, Movable):
     """Joystick battery level change event structure (event.jbattery.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/JoyBatteryEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_JoyBatteryEvent.
     """
 
     var type: EventType
@@ -791,7 +791,7 @@ struct JoyBatteryEvent(Copyable, Movable):
 struct GamepadAxisEvent(Copyable, Movable):
     """Gamepad axis motion event structure (event.gaxis.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/GamepadAxisEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadAxisEvent.
     """
 
     var type: EventType
@@ -815,7 +815,7 @@ struct GamepadAxisEvent(Copyable, Movable):
 struct GamepadButtonEvent(Copyable, Movable):
     """Gamepad button event structure (event.gbutton.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/GamepadButtonEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadButtonEvent.
     """
 
     var type: EventType
@@ -844,7 +844,7 @@ struct GamepadDeviceEvent(Copyable, Movable):
     in during SDL_Init() and are recognized as gamepads. It will also send
     events for joysticks that get gamepad mappings at runtime.
 
-    Docs: https://wiki.libsdl.org/SDL3/GamepadDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadDeviceEvent.
     """
 
     var type: EventType
@@ -860,7 +860,7 @@ struct GamepadDeviceEvent(Copyable, Movable):
 struct GamepadTouchpadEvent(Copyable, Movable):
     """Gamepad touchpad event structure (event.gtouchpad.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/GamepadTouchpadEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadTouchpadEvent.
     """
 
     var type: EventType
@@ -886,7 +886,7 @@ struct GamepadTouchpadEvent(Copyable, Movable):
 struct GamepadSensorEvent(Copyable, Movable):
     """Gamepad sensor event structure (event.gsensor.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/GamepadSensorEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadSensorEvent.
     """
 
     var type: EventType
@@ -908,7 +908,7 @@ struct GamepadSensorEvent(Copyable, Movable):
 struct AudioDeviceEvent(Copyable, Movable):
     """Audio device event structure (event.adevice.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/AudioDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_AudioDeviceEvent.
     """
 
     var type: EventType
@@ -929,7 +929,7 @@ struct AudioDeviceEvent(Copyable, Movable):
 struct CameraDeviceEvent(Copyable, Movable):
     """Camera device event structure (event.cdevice.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/CameraDeviceEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_CameraDeviceEvent.
     """
 
     var type: EventType
@@ -945,7 +945,7 @@ struct CameraDeviceEvent(Copyable, Movable):
 struct RenderEvent(Copyable, Movable):
     """Renderer event structure (event.render.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/RenderEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_RenderEvent.
     """
 
     var type: EventType
@@ -975,7 +975,7 @@ struct TouchFingerEvent(Copyable, Movable):
     report a touch outside of the window, which will also be outside of the
     range.
 
-    Docs: https://wiki.libsdl.org/SDL3/TouchFingerEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_TouchFingerEvent.
     """
 
     var type: EventType
@@ -1014,7 +1014,7 @@ struct PenProximityEvent(Copyable, Movable):
     is there." The pen touching and lifting off from the tablet while not
     leaving the area are handled by SDL_EVENT_PEN_DOWN and SDL_EVENT_PEN_UP.
 
-    Docs: https://wiki.libsdl.org/SDL3/PenProximityEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_PenProximityEvent.
     """
 
     var type: EventType
@@ -1038,7 +1038,7 @@ struct PenMotionEvent(Copyable, Movable):
     `pen_state & SDL_PEN_INPUT_DOWN` to decide if a pen is "drawing" when
     dealing with pen motion.
 
-    Docs: https://wiki.libsdl.org/SDL3/PenMotionEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_PenMotionEvent.
     """
 
     var type: EventType
@@ -1065,7 +1065,7 @@ struct PenTouchEvent(Copyable, Movable):
     These events come when a pen touches a surface (a tablet, etc), or lifts
     off from one.
 
-    Docs: https://wiki.libsdl.org/SDL3/PenTouchEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_PenTouchEvent.
     """
 
     var type: EventType
@@ -1096,7 +1096,7 @@ struct PenButtonEvent(Copyable, Movable):
     This is for buttons on the pen itself that the user might click. The pen
     itself pressing down to draw triggers a SDL_EVENT_PEN_DOWN event instead.
 
-    Docs: https://wiki.libsdl.org/SDL3/PenButtonEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_PenButtonEvent.
     """
 
     var type: EventType
@@ -1127,7 +1127,7 @@ struct PenAxisEvent(Copyable, Movable):
     You might get some of these events even if the pen isn't touching the
     tablet.
 
-    Docs: https://wiki.libsdl.org/SDL3/PenAxisEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_PenAxisEvent.
     """
 
     var type: EventType
@@ -1156,7 +1156,7 @@ struct DropEvent(Copyable, Movable):
     """An event used to drop text or request a file open by the system
     (event.drop.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/DropEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_DropEvent.
     """
 
     var type: EventType
@@ -1181,7 +1181,7 @@ struct ClipboardEvent(Copyable, Movable):
     """An event triggered when the clipboard contents have changed
     (event.clipboard.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/ClipboardEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_ClipboardEvent.
     """
 
     var type: EventType
@@ -1201,7 +1201,7 @@ struct ClipboardEvent(Copyable, Movable):
 struct SensorEvent(Copyable, Movable):
     """Sensor event structure (event.sensor.*).
 
-    Docs: https://wiki.libsdl.org/SDL3/SensorEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_SensorEvent.
     """
 
     var type: EventType
@@ -1221,7 +1221,7 @@ struct SensorEvent(Copyable, Movable):
 struct QuitEvent(Copyable, Movable):
     """The "quit requested" event.
 
-    Docs: https://wiki.libsdl.org/SDL3/QuitEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_QuitEvent.
     """
 
     var type: EventType
@@ -1241,7 +1241,7 @@ struct UserEvent(Copyable, Movable):
     the programmer; the only requirement is that '''type''' is a value obtained
     from SDL_RegisterEvents().
 
-    Docs: https://wiki.libsdl.org/SDL3/UserEvent.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_UserEvent.
     """
 
     var type: UInt32

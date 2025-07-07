@@ -118,7 +118,7 @@ struct IOStreamInterface(Copyable, Movable):
 
     This structure should be initialized using SDL_INIT_INTERFACE()
 
-    Docs: https://wiki.libsdl.org/SDL3/IOStreamInterface.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_IOStreamInterface.
     """
 
     var version: UInt32
@@ -185,7 +185,7 @@ struct IOStream(Copyable, Movable):
     SDL_OpenIO() to provide their own stream implementation behind this
     struct's abstract interface.
 
-    Docs: https://wiki.libsdl.org/SDL3/IOStream.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_IOStream.
     """
 
     pass

@@ -138,7 +138,7 @@ struct DisplayModeData(Copyable, Movable):
 
     This lives as a field in SDL_DisplayMode, as opaque data.
 
-    Docs: https://wiki.libsdl.org/SDL3/DisplayModeData.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_DisplayModeData.
     """
 
     pass
@@ -148,7 +148,7 @@ struct DisplayModeData(Copyable, Movable):
 struct DisplayMode(Copyable, Movable):
     """The structure that defines a display mode.
 
-    Docs: https://wiki.libsdl.org/SDL3/DisplayMode.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_DisplayMode.
     """
 
     var display_id: DisplayID
@@ -213,7 +213,7 @@ struct DisplayOrientation(Indexer, Intable):
 struct Window(Copyable, Movable):
     """The struct used as an opaque handle to a window.
 
-    Docs: https://wiki.libsdl.org/SDL3/Window.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Window.
     """
 
     pass
@@ -333,7 +333,7 @@ struct FlashOperation(Indexer, Intable):
 alias GLContext = Ptr[NoneType]
 """An opaque handle to an OpenGL context.
 
-Docs: https://wiki.libsdl.org/SDL3/GLContext.
+Docs: https://wiki.libsdl.org/SDL3/SDL_GLContext.
 """
 
 alias EGLDisplay = Ptr[NoneType]

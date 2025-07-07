@@ -77,7 +77,7 @@ come in at some point after you've started processing events.
 struct Gamepad(Copyable, Movable):
     """The structure used to identify an SDL gamepad.
 
-    Docs: https://wiki.libsdl.org/SDL3/Gamepad.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Gamepad.
     """
 
     pass

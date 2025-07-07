@@ -289,7 +289,7 @@ struct PathType(Indexer, Intable):
 struct PathInfo(Copyable, Movable):
     """Information about a path on the filesystem.
 
-    Docs: https://wiki.libsdl.org/SDL3/PathInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_PathInfo.
     """
 
     var type: PathType

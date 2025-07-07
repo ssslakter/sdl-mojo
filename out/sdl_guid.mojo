@@ -46,7 +46,7 @@ struct GUID(Copyable, Movable):
     GUIDs may be platform-dependent (i.e., the same device may report different
     GUIDs on different operating systems).
 
-    Docs: https://wiki.libsdl.org/SDL3/GUID.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GUID.
     """
 
     var data: ArrayHelper[UInt8, 16, mut=True].result

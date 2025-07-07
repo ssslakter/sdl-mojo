@@ -213,7 +213,7 @@ struct AudioDeviceID(Intable):
 struct AudioSpec(Copyable, Movable):
     """Format specifier for audio data.
 
-    Docs: https://wiki.libsdl.org/SDL3/AudioSpec.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_AudioSpec.
     """
 
     var format: AudioFormat
@@ -245,7 +245,7 @@ struct AudioStream(Copyable, Movable):
     more of them, bind them to an opened audio device, and feed data to them
     (or for recording, consume data from them).
 
-    Docs: https://wiki.libsdl.org/SDL3/AudioStream.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_AudioStream.
     """
 
     pass

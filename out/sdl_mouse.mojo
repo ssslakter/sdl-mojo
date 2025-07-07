@@ -89,7 +89,7 @@ struct Cursor(Copyable, Movable):
 
     This is opaque data.
 
-    Docs: https://wiki.libsdl.org/SDL3/Cursor.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Cursor.
     """
 
     pass

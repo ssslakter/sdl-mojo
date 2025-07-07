@@ -37,7 +37,7 @@ load appropriate drivers.
 struct Sensor(Copyable, Movable):
     """The opaque structure used to identify an opened SDL sensor.
 
-    Docs: https://wiki.libsdl.org/SDL3/Sensor.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Sensor.
     """
 
     pass

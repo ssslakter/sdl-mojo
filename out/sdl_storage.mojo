@@ -255,7 +255,7 @@ struct StorageInterface(Copyable, Movable):
 
     This structure should be initialized using SDL_INIT_INTERFACE()
 
-    Docs: https://wiki.libsdl.org/SDL3/StorageInterface.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_StorageInterface.
     """
 
     var version: UInt32
@@ -303,7 +303,7 @@ struct Storage(Copyable, Movable):
     functions like SDL_OpenTitleStorage or SDL_OpenUserStorage, etc, or create
     an object with a custom implementation using SDL_OpenStorage.
 
-    Docs: https://wiki.libsdl.org/SDL3/Storage.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Storage.
     """
 
     pass

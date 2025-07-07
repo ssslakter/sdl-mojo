@@ -98,7 +98,7 @@ struct CameraID(Intable):
 struct Camera(Copyable, Movable):
     """The opaque structure used to identify an opened SDL camera.
 
-    Docs: https://wiki.libsdl.org/SDL3/Camera.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Camera.
     """
 
     pass
@@ -111,7 +111,7 @@ struct CameraSpec(Copyable, Movable):
     Cameras often support multiple formats; each one will be encapsulated in
     this struct.
 
-    Docs: https://wiki.libsdl.org/SDL3/CameraSpec.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_CameraSpec.
     """
 
     var format: PixelFormat

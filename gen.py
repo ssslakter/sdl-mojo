@@ -451,7 +451,7 @@ def translate_opaque_struct(m: re.Match) -> str:
 f'''
 @fieldwise_init
 struct {drop_prefix(m['os_name'])}(Copyable, Movable):
-    {doc_template(format_docblock(m['doc']), drop_prefix(m['os_name']), '    ')}
+    {doc_template(format_docblock(m['doc']), m['os_name'], '    ')}
     pass
 ''')
 
@@ -462,7 +462,7 @@ def translate_ptr_struct(m: re.Match) -> str:
     return (
 f'''
 alias {drop_prefix(m['ps_name'])} = Ptr[NoneType]
-{doc_template(format_docblock(m['doc']), drop_prefix(m['ps_name']))}
+{doc_template(format_docblock(m['doc']), m['ps_name'])}
 ''')
 
 
@@ -470,20 +470,20 @@ alias {drop_prefix(m['ps_name'])} = Ptr[NoneType]
 #
 def translate_typedef_struct(m: re.Match) -> str:
     doc = format_docblock(m['doc'])
-    name = drop_prefix(m['ts_name'])
+    name = m['ts_name']
 
-    if name == "GamepadBinding":
+    if name == "SDL_GamepadBinding":
         return translate_gamepadbinding(doc)
     
     body = m['ts_body']
     body = re.sub(match_multi_field, split_multifield, body)
     body = re.sub(match_field, translate_field, body)
-    if name == 'StorageInterface':
+    if name == 'SDL_StorageInterface':
         body = body.replace('var copy: fn', 'var copy_file: fn')
     return (
 f'''
 @fieldwise_init
-struct {name}(Copyable, Movable):
+struct {drop_prefix(m['ts_name'])}(Copyable, Movable):
     {doc_template(doc, name, '    ')}
     
 {body}

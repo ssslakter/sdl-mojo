@@ -58,7 +58,7 @@ struct Joystick(Copyable, Movable):
 
     This is opaque data.
 
-    Docs: https://wiki.libsdl.org/SDL3/Joystick.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Joystick.
     """
 
     pass
@@ -430,7 +430,7 @@ fn get_joystick_from_player_index(player_index: c_int, out ret: Ptr[Joystick, mu
 struct VirtualJoystickTouchpadDesc(Copyable, Movable):
     """The structure that describes a virtual joystick touchpad.
 
-    Docs: https://wiki.libsdl.org/SDL3/VirtualJoystickTouchpadDesc.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_VirtualJoystickTouchpadDesc.
     """
 
     var nfingers: UInt16
@@ -442,7 +442,7 @@ struct VirtualJoystickTouchpadDesc(Copyable, Movable):
 struct VirtualJoystickSensorDesc(Copyable, Movable):
     """The structure that describes a virtual joystick sensor.
 
-    Docs: https://wiki.libsdl.org/SDL3/VirtualJoystickSensorDesc.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_VirtualJoystickSensorDesc.
     """
 
     var type: SensorType
@@ -458,7 +458,7 @@ struct VirtualJoystickDesc(Copyable, Movable):
     This structure should be initialized using SDL_INIT_INTERFACE(). All
     elements of this structure are optional.
 
-    Docs: https://wiki.libsdl.org/SDL3/VirtualJoystickDesc.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_VirtualJoystickDesc.
     """
 
     var version: UInt32

@@ -119,7 +119,7 @@ Note that the SDL haptic subsystem is not thread-safe.
 struct Haptic(Copyable, Movable):
     """The haptic structure used to identify an SDL haptic.
 
-    Docs: https://wiki.libsdl.org/SDL3/Haptic.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Haptic.
     """
 
     pass
@@ -218,7 +218,7 @@ struct HapticDirection(Copyable, Movable):
      direction.dir[0] = 9000; // Since we only have two axes we don't need more parameters.
     ```
 
-    Docs: https://wiki.libsdl.org/SDL3/HapticDirection.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_HapticDirection.
     """
 
     var type: UInt8
@@ -236,7 +236,7 @@ struct HapticConstant(Copyable, Movable):
     A constant effect applies a constant force in the specified direction to
     the joystick.
 
-    Docs: https://wiki.libsdl.org/SDL3/HapticConstant.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_HapticConstant.
     """
 
     var type: UInt16
@@ -321,7 +321,7 @@ struct HapticPeriodic(Copyable, Movable):
         \\|  \\|  \\|  \\|  \\|  \\|  \\|
     ```
 
-    Docs: https://wiki.libsdl.org/SDL3/HapticPeriodic.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_HapticPeriodic.
     """
 
     var type: UInt16
@@ -377,7 +377,7 @@ struct HapticCondition(Copyable, Movable):
     SDL_HapticDirection diagram for which side is positive and which is
     negative.
 
-    Docs: https://wiki.libsdl.org/SDL3/HapticCondition.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_HapticCondition.
     """
 
     var type: UInt16
@@ -420,7 +420,7 @@ struct HapticRamp(Copyable, Movable):
     effects get added to the ramp effect making the effect become quadratic
     instead of linear.
 
-    Docs: https://wiki.libsdl.org/SDL3/HapticRamp.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_HapticRamp.
     """
 
     var type: UInt16
@@ -463,7 +463,7 @@ struct HapticLeftRight(Copyable, Movable):
     motors, commonly found in modern game controllers. The small (right) motor
     is high frequency, and the large (left) motor is low frequency.
 
-    Docs: https://wiki.libsdl.org/SDL3/HapticLeftRight.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_HapticLeftRight.
     """
 
     var type: UInt16
@@ -491,7 +491,7 @@ struct HapticCustom(Copyable, Movable):
     If channels is one, the effect is rotated using the defined direction.
     Otherwise it uses the samples in data for the different axes.
 
-    Docs: https://wiki.libsdl.org/SDL3/HapticCustom.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_HapticCustom.
     """
 
     var type: UInt16

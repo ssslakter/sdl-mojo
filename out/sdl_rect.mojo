@@ -32,7 +32,7 @@ integer and floating point versions.
 struct Point(Copyable, Movable):
     """The structure that defines a point (using integers).
 
-    Docs: https://wiki.libsdl.org/SDL3/Point.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Point.
     """
 
     var x: c_int
@@ -43,7 +43,7 @@ struct Point(Copyable, Movable):
 struct FPoint(Copyable, Movable):
     """The structure that defines a point (using floating point values).
 
-    Docs: https://wiki.libsdl.org/SDL3/FPoint.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_FPoint.
     """
 
     var x: c_float
@@ -54,7 +54,7 @@ struct FPoint(Copyable, Movable):
 struct Rect(Copyable, Movable):
     """A rectangle, with the origin at the upper left (using integers).
 
-    Docs: https://wiki.libsdl.org/SDL3/Rect.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Rect.
     """
 
     var x: c_int
@@ -69,7 +69,7 @@ struct FRect(Copyable, Movable):
     """A rectangle, with the origin at the upper left (using floating point
     values).
 
-    Docs: https://wiki.libsdl.org/SDL3/FRect.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_FRect.
     """
 
     var x: c_float

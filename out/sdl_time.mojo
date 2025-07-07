@@ -40,7 +40,7 @@ struct DateTime(Copyable, Movable):
     """A structure holding a calendar date and time broken down into its
     components.
 
-    Docs: https://wiki.libsdl.org/SDL3/DateTime.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_DateTime.
     """
 
     var year: c_int

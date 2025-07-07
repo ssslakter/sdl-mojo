@@ -136,7 +136,7 @@ struct Finger(Copyable, Movable):
     contact with the touch device (so a "touch" can be a "multitouch," in
     reality), and this struct reports details of the specific fingers.
 
-    Docs: https://wiki.libsdl.org/SDL3/Finger.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Finger.
     """
 
     var id: FingerID

@@ -870,7 +870,7 @@ struct Color(Copyable, Movable):
     (SDL_PIXELFORMAT_ABGR8888 on little-endian systems and
     SDL_PIXELFORMAT_RGBA8888 on big-endian systems).
 
-    Docs: https://wiki.libsdl.org/SDL3/Color.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Color.
     """
 
     var r: UInt8
@@ -884,7 +884,7 @@ struct FColor(Copyable, Movable):
     """The bits of this structure can be directly reinterpreted as a float-packed
     color which uses the SDL_PIXELFORMAT_RGBA128_FLOAT format.
 
-    Docs: https://wiki.libsdl.org/SDL3/FColor.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_FColor.
     """
 
     var r: c_float
@@ -897,7 +897,7 @@ struct FColor(Copyable, Movable):
 struct Palette(Copyable, Movable):
     """A set of indexed colors representing a palette.
 
-    Docs: https://wiki.libsdl.org/SDL3/Palette.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Palette.
     """
 
     var ncolors: c_int
@@ -914,7 +914,7 @@ struct Palette(Copyable, Movable):
 struct PixelFormatDetails(Copyable, Movable):
     """Details about the format of a pixel.
 
-    Docs: https://wiki.libsdl.org/SDL3/PixelFormatDetails.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_PixelFormatDetails.
     """
 
     var format: PixelFormat

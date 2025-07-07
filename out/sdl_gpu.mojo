@@ -307,7 +307,7 @@ results.
 struct GPUDevice(Copyable, Movable):
     """An opaque handle representing the SDL_GPU context.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUDevice.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUDevice.
     """
 
     pass
@@ -320,7 +320,7 @@ struct GPUBuffer(Copyable, Movable):
     Used for vertices, indices, indirect draw commands, and general compute
     data.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUBuffer.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBuffer.
     """
 
     pass
@@ -332,7 +332,7 @@ struct GPUTransferBuffer(Copyable, Movable):
 
     Used for transferring data to and from the device.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUTransferBuffer.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTransferBuffer.
     """
 
     pass
@@ -342,7 +342,7 @@ struct GPUTransferBuffer(Copyable, Movable):
 struct GPUTexture(Copyable, Movable):
     """An opaque handle representing a texture.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUTexture.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTexture.
     """
 
     pass
@@ -352,7 +352,7 @@ struct GPUTexture(Copyable, Movable):
 struct GPUSampler(Copyable, Movable):
     """An opaque handle representing a sampler.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUSampler.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUSampler.
     """
 
     pass
@@ -362,7 +362,7 @@ struct GPUSampler(Copyable, Movable):
 struct GPUShader(Copyable, Movable):
     """An opaque handle representing a compiled shader object.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUShader.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUShader.
     """
 
     pass
@@ -374,7 +374,7 @@ struct GPUComputePipeline(Copyable, Movable):
 
     Used during compute passes.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUComputePipeline.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUComputePipeline.
     """
 
     pass
@@ -386,7 +386,7 @@ struct GPUGraphicsPipeline(Copyable, Movable):
 
     Used during render passes.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUGraphicsPipeline.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUGraphicsPipeline.
     """
 
     pass
@@ -410,7 +410,7 @@ struct GPUCommandBuffer(Copyable, Movable):
     In multi-threading scenarios, you should only access a command buffer on
     the thread you acquired it from.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUCommandBuffer.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUCommandBuffer.
     """
 
     pass
@@ -423,7 +423,7 @@ struct GPURenderPass(Copyable, Movable):
     This handle is transient and should not be held or referenced after
     SDL_EndGPURenderPass is called.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPURenderPass.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPURenderPass.
     """
 
     pass
@@ -436,7 +436,7 @@ struct GPUComputePass(Copyable, Movable):
     This handle is transient and should not be held or referenced after
     SDL_EndGPUComputePass is called.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUComputePass.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUComputePass.
     """
 
     pass
@@ -449,7 +449,7 @@ struct GPUCopyPass(Copyable, Movable):
     This handle is transient and should not be held or referenced after
     SDL_EndGPUCopyPass is called.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUCopyPass.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUCopyPass.
     """
 
     pass
@@ -459,7 +459,7 @@ struct GPUCopyPass(Copyable, Movable):
 struct GPUFence(Copyable, Movable):
     """An opaque handle representing a fence.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUFence.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUFence.
     """
 
     pass
@@ -1769,7 +1769,7 @@ struct GPUSwapchainComposition(Indexer, Intable):
 struct GPUViewport(Copyable, Movable):
     """A structure specifying a viewport.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUViewport.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUViewport.
     """
 
     var x: c_float
@@ -1791,7 +1791,7 @@ struct GPUTextureTransferInfo(Copyable, Movable):
     """A structure specifying parameters related to transferring data to or from a
     texture.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUTextureTransferInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureTransferInfo.
     """
 
     var transfer_buffer: Ptr[GPUTransferBuffer, mut=True]
@@ -1810,7 +1810,7 @@ struct GPUTransferBufferLocation(Copyable, Movable):
 
     Used when transferring buffer data to or from a transfer buffer.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUTransferBufferLocation.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTransferBufferLocation.
     """
 
     var transfer_buffer: Ptr[GPUTransferBuffer, mut=True]
@@ -1825,7 +1825,7 @@ struct GPUTextureLocation(Copyable, Movable):
 
     Used when copying data from one texture to another.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUTextureLocation.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureLocation.
     """
 
     var texture: Ptr[GPUTexture, mut=True]
@@ -1848,7 +1848,7 @@ struct GPUTextureRegion(Copyable, Movable):
 
     Used when transferring data to or from a texture.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUTextureRegion.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureRegion.
     """
 
     var texture: Ptr[GPUTexture, mut=True]
@@ -1875,7 +1875,7 @@ struct GPUTextureRegion(Copyable, Movable):
 struct GPUBlitRegion(Copyable, Movable):
     """A structure specifying a region of a texture used in the blit operation.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUBlitRegion.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBlitRegion.
     """
 
     var texture: Ptr[GPUTexture, mut=True]
@@ -1900,7 +1900,7 @@ struct GPUBufferLocation(Copyable, Movable):
 
     Used when copying data between buffers.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUBufferLocation.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBufferLocation.
     """
 
     var buffer: Ptr[GPUBuffer, mut=True]
@@ -1915,7 +1915,7 @@ struct GPUBufferRegion(Copyable, Movable):
 
     Used when transferring data to or from buffers.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUBufferRegion.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBufferRegion.
     """
 
     var buffer: Ptr[GPUBuffer, mut=True]
@@ -1937,7 +1937,7 @@ struct GPUIndirectDrawCommand(Copyable, Movable):
     only way to keep behavior consistent and portable is to always pass 0 for
     the correlating parameter in the draw calls.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUIndirectDrawCommand.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUIndirectDrawCommand.
     """
 
     var num_vertices: UInt32
@@ -1961,7 +1961,7 @@ struct GPUIndexedIndirectDrawCommand(Copyable, Movable):
     only way to keep behavior consistent and portable is to always pass 0 for
     the correlating parameter in the draw calls.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUIndexedIndirectDrawCommand.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUIndexedIndirectDrawCommand.
     """
 
     var num_indices: UInt32
@@ -1980,7 +1980,7 @@ struct GPUIndexedIndirectDrawCommand(Copyable, Movable):
 struct GPUIndirectDispatchCommand(Copyable, Movable):
     """A structure specifying the parameters of an indexed dispatch command.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUIndirectDispatchCommand.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUIndirectDispatchCommand.
     """
 
     var groupcount_x: UInt32
@@ -1998,7 +1998,7 @@ struct GPUSamplerCreateInfo(Copyable, Movable):
     Note that mip_lod_bias is a no-op for the Metal driver. For Metal, LOD bias
     must be applied via shader instead.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUSamplerCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUSamplerCreateInfo.
     """
 
     var min_filter: GPUFilter
@@ -2048,7 +2048,7 @@ struct GPUVertexBufferDescription(Copyable, Movable):
     SDL_GPUVertexAttribute. For example, if an attribute has a buffer_slot of
     0, then that attribute belongs to the vertex buffer bound at slot 0.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUVertexBufferDescription.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexBufferDescription.
     """
 
     var slot: UInt32
@@ -2068,7 +2068,7 @@ struct GPUVertexAttribute(Copyable, Movable):
     All vertex attribute locations provided to an SDL_GPUVertexInputState must
     be unique.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUVertexAttribute.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexAttribute.
     """
 
     var location: UInt32
@@ -2086,7 +2086,7 @@ struct GPUVertexInputState(Copyable, Movable):
     """A structure specifying the parameters of a graphics pipeline vertex input
     state.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUVertexInputState.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUVertexInputState.
     """
 
     var vertex_buffer_descriptions: Ptr[GPUVertexBufferDescription, mut=False]
@@ -2103,7 +2103,7 @@ struct GPUVertexInputState(Copyable, Movable):
 struct GPUStencilOpState(Copyable, Movable):
     """A structure specifying the stencil operation state of a graphics pipeline.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUStencilOpState.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUStencilOpState.
     """
 
     var fail_op: GPUStencilOp
@@ -2120,7 +2120,7 @@ struct GPUStencilOpState(Copyable, Movable):
 struct GPUColorTargetBlendState(Copyable, Movable):
     """A structure specifying the blend state of a color target.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUColorTargetBlendState.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUColorTargetBlendState.
     """
 
     var src_color_blendfactor: GPUBlendFactor
@@ -2149,7 +2149,7 @@ struct GPUColorTargetBlendState(Copyable, Movable):
 struct GPUShaderCreateInfo(Copyable, Movable):
     """A structure specifying code and metadata for creating a shader object.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUShaderCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUShaderCreateInfo.
     """
 
     var code_size: c_size_t
@@ -2183,7 +2183,7 @@ struct GPUTextureCreateInfo(Copyable, Movable):
     that certain usage combinations are invalid, for example SAMPLER and
     GRAPHICS_STORAGE.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUTextureCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureCreateInfo.
     """
 
     var type: GPUTextureType
@@ -2214,7 +2214,7 @@ struct GPUBufferCreateInfo(Copyable, Movable):
     Usage flags can be bitwise OR'd together for combinations of usages. Note
     that certain combinations are invalid, for example VERTEX and INDEX.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUBufferCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBufferCreateInfo.
     """
 
     var usage: GPUBufferUsageFlags
@@ -2230,7 +2230,7 @@ struct GPUBufferCreateInfo(Copyable, Movable):
 struct GPUTransferBufferCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a transfer buffer.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUTransferBufferCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTransferBufferCreateInfo.
     """
 
     var usage: GPUTransferBufferUsage
@@ -2255,7 +2255,7 @@ struct GPURasterizerState(Copyable, Movable):
     enabling depth clip and then manually clamping depth in your fragment
     shaders on Metal and Vulkan.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPURasterizerState.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPURasterizerState.
     """
 
     var fill_mode: GPUFillMode
@@ -2283,7 +2283,7 @@ struct GPUMultisampleState(Copyable, Movable):
     """A structure specifying the parameters of the graphics pipeline multisample
     state.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUMultisampleState.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUMultisampleState.
     """
 
     var sample_count: GPUSampleCount
@@ -2302,7 +2302,7 @@ struct GPUDepthStencilState(Copyable, Movable):
     """A structure specifying the parameters of the graphics pipeline depth
     stencil state.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUDepthStencilState.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUDepthStencilState.
     """
 
     var compare_op: GPUCompareOp
@@ -2331,7 +2331,7 @@ struct GPUColorTargetDescription(Copyable, Movable):
     """A structure specifying the parameters of color targets used in a graphics
     pipeline.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUColorTargetDescription.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUColorTargetDescription.
     """
 
     var format: GPUTextureFormat
@@ -2345,7 +2345,7 @@ struct GPUGraphicsPipelineTargetInfo(Copyable, Movable):
     """A structure specifying the descriptions of render targets used in a
     graphics pipeline.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUGraphicsPipelineTargetInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUGraphicsPipelineTargetInfo.
     """
 
     var color_target_descriptions: Ptr[GPUColorTargetDescription, mut=False]
@@ -2365,7 +2365,7 @@ struct GPUGraphicsPipelineTargetInfo(Copyable, Movable):
 struct GPUGraphicsPipelineCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a graphics pipeline state.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUGraphicsPipelineCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUGraphicsPipelineCreateInfo.
     """
 
     var vertex_shader: Ptr[GPUShader, mut=True]
@@ -2393,7 +2393,7 @@ struct GPUGraphicsPipelineCreateInfo(Copyable, Movable):
 struct GPUComputePipelineCreateInfo(Copyable, Movable):
     """A structure specifying the parameters of a compute pipeline state.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUComputePipelineCreateInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUComputePipelineCreateInfo.
     """
 
     var code_size: c_size_t
@@ -2459,7 +2459,7 @@ struct GPUColorTargetInfo(Copyable, Movable):
       stores the multisample texture's contents. Not recommended as it requires
       significant memory bandwidth.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUColorTargetInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUColorTargetInfo.
     """
 
     var texture: Ptr[GPUTexture, mut=True]
@@ -2529,7 +2529,7 @@ struct GPUDepthStencilTargetInfo(Copyable, Movable):
 
     Note that depth/stencil targets do not support multisample resolves.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUDepthStencilTargetInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUDepthStencilTargetInfo.
     """
 
     var texture: Ptr[GPUTexture, mut=True]
@@ -2556,7 +2556,7 @@ struct GPUDepthStencilTargetInfo(Copyable, Movable):
 struct GPUBlitInfo(Copyable, Movable):
     """A structure containing parameters for a blit command.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUBlitInfo.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBlitInfo.
     """
 
     var source: GPUBlitRegion
@@ -2582,7 +2582,7 @@ struct GPUBlitInfo(Copyable, Movable):
 struct GPUBufferBinding(Copyable, Movable):
     """A structure specifying parameters in a buffer binding call.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUBufferBinding.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUBufferBinding.
     """
 
     var buffer: Ptr[GPUBuffer, mut=True]
@@ -2595,7 +2595,7 @@ struct GPUBufferBinding(Copyable, Movable):
 struct GPUTextureSamplerBinding(Copyable, Movable):
     """A structure specifying parameters in a sampler binding call.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUTextureSamplerBinding.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUTextureSamplerBinding.
     """
 
     var texture: Ptr[GPUTexture, mut=True]
@@ -2609,7 +2609,7 @@ struct GPUStorageBufferReadWriteBinding(Copyable, Movable):
     """A structure specifying parameters related to binding buffers in a compute
     pass.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUStorageBufferReadWriteBinding.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUStorageBufferReadWriteBinding.
     """
 
     var buffer: Ptr[GPUBuffer, mut=True]
@@ -2626,7 +2626,7 @@ struct GPUStorageTextureReadWriteBinding(Copyable, Movable):
     """A structure specifying parameters related to binding textures in a compute
     pass.
 
-    Docs: https://wiki.libsdl.org/SDL3/GPUStorageTextureReadWriteBinding.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_GPUStorageTextureReadWriteBinding.
     """
 
     var texture: Ptr[GPUTexture, mut=True]

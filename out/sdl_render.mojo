@@ -53,7 +53,7 @@ details: https://github.com/libsdl-org/SDL/issues/986
 struct Vertex(Copyable, Movable):
     """Vertex structure.
 
-    Docs: https://wiki.libsdl.org/SDL3/Vertex.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Vertex.
     """
 
     var position: FPoint
@@ -138,7 +138,7 @@ struct RendererLogicalPresentation(Indexer, Intable):
 struct Renderer(Copyable, Movable):
     """A structure representing rendering state.
 
-    Docs: https://wiki.libsdl.org/SDL3/Renderer.
+    Docs: https://wiki.libsdl.org/SDL3/SDL_Renderer.
     """
 
     pass
