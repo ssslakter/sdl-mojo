@@ -815,7 +815,10 @@ fn bind_audio_streams(devid: AudioDeviceID, streams: Ptr[AudioStream, mut=True],
     Binding a stream to a device will set its output format for playback
     devices, and its input format for recording devices, so they match the
     device's settings. The caller is welcome to change the other end of the
-    stream's format at any time with SDL_SetAudioStreamFormat().
+    stream's format at any time with SDL_SetAudioStreamFormat(). If the other
+    end of the stream's format has never been set (the audio stream was created
+    with a NULL audio spec), this function will set it to match the device
+    end's format.
 
     Args:
         devid: An audio device to bind a stream to.

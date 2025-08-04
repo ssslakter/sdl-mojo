@@ -2054,7 +2054,7 @@ struct GPUVertexBufferDescription(Copyable, Movable):
     var slot: UInt32
     """The binding slot of the vertex buffer."""
     var pitch: UInt32
-    """The byte pitch between consecutive elements of the vertex buffer."""
+    """The size of a single element + the offset between elements."""
     var input_rate: GPUVertexInputRate
     """Whether attribute addressing is a function of the vertex index or instance index."""
     var instance_step_rate: UInt32

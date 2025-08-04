@@ -99,7 +99,7 @@ fn set_clipboard_text(owned text: String) raises:
 fn get_clipboard_text(out ret: Ptr[c_char, mut=True]) raises:
     """Get UTF-8 text from the clipboard.
 
-    This functions returns an empty string if there was not enough memory left
+    This function returns an empty string if there is not enough memory left
     for a copy of the clipboard's content.
 
     Returns:
@@ -157,7 +157,7 @@ fn set_primary_selection_text(owned text: String) raises:
 fn get_primary_selection_text() -> Ptr[c_char, mut=True]:
     """Get UTF-8 text from the primary selection.
 
-    This functions returns an empty string if there was not enough memory left
+    This function returns an empty string if there is not enough memory left
     for a copy of the primary selection's content.
 
     Returns:
@@ -199,28 +199,28 @@ alias ClipboardDataCallback = Ptr[fn (userdata: Ptr[NoneType, mut=True], mime_ty
     cleared in SDL_Quit().
     
     Args:
-        userdata: A pointer to provided user data.
+        userdata: A pointer to the provided user data.
         mime_type: The requested mime-type.
         size: A pointer filled in with the length of the returned data.
     
     Returns:
         A pointer to the data for the provided mime-type. Returning NULL
-        or setting length to 0 will cause no data to be sent to the
+        or setting the length to 0 will cause no data to be sent to the
         "receiver". It is up to the receiver to handle this. Essentially
         returning no data is more or less undefined behavior and may cause
         breakage in receiving applications. The returned data will not be
-        freed so it needs to be retained and dealt with internally.
+        freed, so it needs to be retained and dealt with internally.
 
 Docs: https://wiki.libsdl.org/SDL3/SDL_ClipboardDataCallback.
 """
 
 
 alias ClipboardCleanupCallback = fn (userdata: Ptr[NoneType, mut=True]) -> None
-"""Callback function that will be called when the clipboard is cleared, or new
+"""Callback function that will be called when the clipboard is cleared, or when new
     data is set.
     
     Args:
-        userdata: A pointer to provided user data.
+        userdata: A pointer to the provided user data.
 
 Docs: https://wiki.libsdl.org/SDL3/SDL_ClipboardCleanupCallback.
 """
@@ -235,7 +235,7 @@ fn set_clipboard_data(callback: ClipboardDataCallback, cleanup: ClipboardCleanup
     respond with the data for the requested mime-type.
 
     The size of text data does not include any terminator, and the text does
-    not need to be null terminated (e.g. you can directly copy a portion of a
+    not need to be null-terminated (e.g., you can directly copy a portion of a
     document).
 
     Args:
@@ -244,7 +244,7 @@ fn set_clipboard_data(callback: ClipboardDataCallback, cleanup: ClipboardCleanup
         cleanup: A function pointer to the function that cleans up the
                  clipboard data.
         userdata: An opaque pointer that will be forwarded to the callbacks.
-        mime_types: A list of mime-types that are being offered.
+        mime_types: A list of mime-types that are being offered. SDL copies the given list.
         num_mime_types: The number of mime-types in the mime_types list.
 
     Raises:
@@ -281,10 +281,10 @@ fn clear_clipboard_data() raises:
 
 
 fn get_clipboard_data(owned mime_type: String, size: Ptr[c_size_t, mut=True], out ret: Ptr[NoneType, mut=True]) raises:
-    """Get the data from clipboard for a given mime type.
+    """Get the data from the clipboard for a given mime type.
 
     The size of text data does not include the terminator, but the text is
-    guaranteed to be null terminated.
+    guaranteed to be null-terminated.
 
     Args:
         mime_type: The mime type to read from the clipboard.
@@ -310,10 +310,10 @@ fn has_clipboard_data(owned mime_type: String) -> Bool:
     """Query whether there is data in the clipboard for the provided mime type.
 
     Args:
-        mime_type: The mime type to check for data for.
+        mime_type: The mime type to check for data.
 
     Returns:
-        True if there exists data in clipboard for the provided mime type,
+        True if data exists in the clipboard for the provided mime type,
         false if it does not.
 
     Safety:
@@ -333,7 +333,7 @@ fn get_clipboard_mime_types(num_mime_types: Ptr[c_size_t, mut=True]) -> Ptr[Ptr[
                         be NULL.
 
     Returns:
-        A null terminated array of strings with mime types, or NULL on
+        A null-terminated array of strings with mime types, or NULL on
         failure; call SDL_GetError() for more information. This should be
         freed with SDL_free() when it is no longer needed.
 

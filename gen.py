@@ -718,7 +718,7 @@ f'''
 alias Ptr = stdlib.memory.UnsafePointer
 
 
-from sys import os_is_linux, os_is_macos, is_little_endian, is_big_endian
+from sys import CompilationTarget, is_big_endian, is_little_endian
 from sys.ffi import _Global, _OwnedDLHandle, _get_dylib_function, c_char, c_uchar, c_int, c_uint, c_short, c_ushort, c_long, c_long_long, c_size_t, c_ssize_t, c_float, c_double
 
 alias lib = _Global["SDL", _OwnedDLHandle, _init_sdl_handle]()
@@ -726,9 +726,9 @@ alias lib = _Global["SDL", _OwnedDLHandle, _init_sdl_handle]()
 fn _init_sdl_handle() -> _OwnedDLHandle:
     try:
         @parameter
-        if os_is_macos():
+        if CompilationTarget.is_macos():
             return _OwnedDLHandle(".pixi/envs/default/lib/libSDL3.dylib")
-        elif os_is_linux():
+        elif CompilationTarget.is_linux():
             return _OwnedDLHandle(".pixi/envs/default/lib/libSDL3.so")
         else:
             constrained[False, "OS is not supported"]()
