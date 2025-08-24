@@ -46,7 +46,7 @@ includes = [
     "SDL_keycode.h",
     # "SDL_loadso.h",
     # "SDL_locale.h",
-    # "SDL_log.h",
+    "SDL_log.h",
     # "SDL_messagebox.h",
     # "SDL_metal.h",
     # "SDL_misc.h",
