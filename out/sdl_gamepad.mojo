@@ -112,7 +112,7 @@ struct GamepadType(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GAMEPAD_TYPE_UNKNOWN = Self(0)
     alias GAMEPAD_TYPE_STANDARD = Self(1)
@@ -169,7 +169,7 @@ struct GamepadButton(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GAMEPAD_BUTTON_INVALID = Self(-1)
     alias GAMEPAD_BUTTON_SOUTH = Self(0)
@@ -245,7 +245,7 @@ struct GamepadButtonLabel(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GAMEPAD_BUTTON_LABEL_UNKNOWN = Self(0)
     alias GAMEPAD_BUTTON_LABEL_A = Self(1)
@@ -290,7 +290,7 @@ struct GamepadAxis(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GAMEPAD_AXIS_INVALID = Self(-1)
     alias GAMEPAD_AXIS_LEFTX = Self(0)
@@ -330,7 +330,7 @@ struct GamepadBindingType(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GAMEPAD_BINDTYPE_NONE = Self(0)
     alias GAMEPAD_BINDTYPE_BUTTON = Self(1)
@@ -412,7 +412,7 @@ struct GamepadBinding(Copyable, Movable):
     var output: GamepadBindingOutput
 
 
-fn add_gamepad_mapping(owned mapping: String) -> c_int:
+fn add_gamepad_mapping(var mapping: String) -> c_int:
     """Add support for gamepads that SDL is unaware of or change the binding of an
     existing gamepad.
 
@@ -491,7 +491,7 @@ fn add_gamepad_mappings_from_io(src: Ptr[IOStream, mut=True], closeio: Bool) -> 
     return _get_dylib_function[lib, "SDL_AddGamepadMappingsFromIO", fn (src: Ptr[IOStream, mut=True], closeio: Bool) -> c_int]()(src, closeio)
 
 
-fn add_gamepad_mappings_from_file(owned file: String) -> c_int:
+fn add_gamepad_mappings_from_file(var file: String) -> c_int:
     """Load a set of gamepad mappings from a file.
 
     You can call this function several times, if needed, to load different
@@ -597,7 +597,7 @@ fn get_gamepad_mapping(gamepad: Ptr[Gamepad, mut=True]) -> Ptr[c_char, mut=True]
     return _get_dylib_function[lib, "SDL_GetGamepadMapping", fn (gamepad: Ptr[Gamepad, mut=True]) -> Ptr[c_char, mut=True]]()(gamepad)
 
 
-fn set_gamepad_mapping(instance_id: JoystickID, owned mapping: String) raises:
+fn set_gamepad_mapping(instance_id: JoystickID, var mapping: String) raises:
     """Set the current mapping of a joystick or gamepad.
 
     Details about mappings are discussed with SDL_AddGamepadMapping().
@@ -1298,7 +1298,7 @@ fn update_gamepads() -> None:
     return _get_dylib_function[lib, "SDL_UpdateGamepads", fn () -> None]()()
 
 
-fn get_gamepad_type_from_string(owned str: String) -> GamepadType:
+fn get_gamepad_type_from_string(var str: String) -> GamepadType:
     """Convert a string into SDL_GamepadType enum.
 
     This function is called internally to translate SDL_Gamepad mapping strings
@@ -1336,7 +1336,7 @@ fn get_gamepad_string_for_type(type: GamepadType) -> Ptr[c_char, mut=False]:
     return _get_dylib_function[lib, "SDL_GetGamepadStringForType", fn (type: GamepadType) -> Ptr[c_char, mut=False]]()(type)
 
 
-fn get_gamepad_axis_from_string(owned str: String) -> GamepadAxis:
+fn get_gamepad_axis_from_string(var str: String) -> GamepadAxis:
     """Convert a string into SDL_GamepadAxis enum.
 
     This function is called internally to translate SDL_Gamepad mapping strings
@@ -1423,7 +1423,7 @@ fn get_gamepad_axis(gamepad: Ptr[Gamepad, mut=True], axis: GamepadAxis) -> Int16
     return _get_dylib_function[lib, "SDL_GetGamepadAxis", fn (gamepad: Ptr[Gamepad, mut=True], axis: GamepadAxis) -> Int16]()(gamepad, axis)
 
 
-fn get_gamepad_button_from_string(owned str: String) -> GamepadButton:
+fn get_gamepad_button_from_string(var str: String) -> GamepadButton:
     """Convert a string into an SDL_GamepadButton enum.
 
     This function is called internally to translate SDL_Gamepad mapping strings

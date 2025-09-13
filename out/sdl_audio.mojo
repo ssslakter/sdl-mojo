@@ -150,7 +150,7 @@ struct AudioFormat(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias AUDIO_UNKNOWN = Self(0x0000)
     """Unspecified audio format."""
@@ -2077,7 +2077,7 @@ fn load_wav_io(src: Ptr[IOStream, mut=True], closeio: Bool, spec: Ptr[AudioSpec,
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn load_wav(owned path: String, spec: Ptr[AudioSpec, mut=True], audio_buf: Ptr[Ptr[UInt8, mut=True], mut=True], audio_len: Ptr[UInt32, mut=True]) raises:
+fn load_wav(var path: String, spec: Ptr[AudioSpec, mut=True], audio_buf: Ptr[Ptr[UInt8, mut=True], mut=True], audio_len: Ptr[UInt32, mut=True]) raises:
     """Loads a WAV from a file path.
 
     This is a convenience function that is effectively the same as:

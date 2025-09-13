@@ -126,7 +126,7 @@ struct AppResult(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias APP_CONTINUE = Self(0)
     """Value that requests that the app continue from the main callbacks."""
@@ -399,7 +399,7 @@ fn run_on_main_thread(callback: MainThreadCallback, userdata: Ptr[NoneType, mut=
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn set_app_metadata(owned appname: String, owned appversion: String, owned appidentifier: String) raises:
+fn set_app_metadata(var appname: String, var appversion: String, var appidentifier: String) raises:
     """Specify basic metadata about your app.
 
     You can optionally provide metadata about your app to SDL. This is not
@@ -443,7 +443,7 @@ fn set_app_metadata(owned appname: String, owned appversion: String, owned appid
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn set_app_metadata_property(owned name: String, owned value: String) raises:
+fn set_app_metadata_property(var name: String, var value: String) raises:
     """Specify metadata about your app through a set of properties.
 
     You can optionally provide metadata about your app to SDL. This is not
@@ -511,7 +511,7 @@ fn set_app_metadata_property(owned name: String, owned value: String) raises:
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn get_app_metadata_property(owned name: String) -> Ptr[c_char, mut=False]:
+fn get_app_metadata_property(var name: String) -> Ptr[c_char, mut=False]:
     """Get metadata about your app.
 
     This returns metadata previously set using SDL_SetAppMetadata() or

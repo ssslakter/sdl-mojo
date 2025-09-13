@@ -69,7 +69,7 @@ fn guid_to_string(guid: GUID, psz_guid: Ptr[c_char, mut=True], cb_guid: c_int) -
     return _get_dylib_function[lib, "SDL_GUIDToString", fn (guid: GUID, psz_guid: Ptr[c_char, mut=True], cb_guid: c_int) -> None]()(guid, psz_guid, cb_guid)
 
 
-fn string_to_guid(owned pch_guid: String) -> GUID:
+fn string_to_guid(var pch_guid: String) -> GUID:
     """Convert a GUID string into a SDL_GUID structure.
 
     Performs no error checking. If this function is given a string containing

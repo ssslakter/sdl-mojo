@@ -309,7 +309,7 @@ struct Storage(Copyable, Movable):
     pass
 
 
-fn open_title_storage(owned override: String, props: PropertiesID, out ret: Ptr[Storage, mut=True]) raises:
+fn open_title_storage(var override: String, props: PropertiesID, out ret: Ptr[Storage, mut=True]) raises:
     """Opens up a read-only container for the application's filesystem.
 
     Args:
@@ -328,7 +328,7 @@ fn open_title_storage(owned override: String, props: PropertiesID, out ret: Ptr[
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn open_user_storage(owned org: String, owned app: String, props: PropertiesID, out ret: Ptr[Storage, mut=True]) raises:
+fn open_user_storage(var org: String, var app: String, props: PropertiesID, out ret: Ptr[Storage, mut=True]) raises:
     """Opens up a container for a user's unique read/write filesystem.
 
     While title storage can generally be kept open throughout runtime, user
@@ -353,7 +353,7 @@ fn open_user_storage(owned org: String, owned app: String, props: PropertiesID, 
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn open_file_storage(owned path: String, out ret: Ptr[Storage, mut=True]) raises:
+fn open_file_storage(var path: String, out ret: Ptr[Storage, mut=True]) raises:
     """Opens up a container for local filesystem storage.
 
     This is provided for development and tools. Portable applications should
@@ -442,7 +442,7 @@ fn storage_ready(storage: Ptr[Storage, mut=True]) -> Bool:
     return _get_dylib_function[lib, "SDL_StorageReady", fn (storage: Ptr[Storage, mut=True]) -> Bool]()(storage)
 
 
-fn get_storage_file_size(storage: Ptr[Storage, mut=True], owned path: String, length: Ptr[UInt64, mut=True]) -> Bool:
+fn get_storage_file_size(storage: Ptr[Storage, mut=True], var path: String, length: Ptr[UInt64, mut=True]) -> Bool:
     """Query the size of a file within a storage container.
 
     Args:
@@ -460,7 +460,7 @@ fn get_storage_file_size(storage: Ptr[Storage, mut=True], owned path: String, le
     return _get_dylib_function[lib, "SDL_GetStorageFileSize", fn (storage: Ptr[Storage, mut=True], path: Ptr[c_char, mut=False], length: Ptr[UInt64, mut=True]) -> Bool]()(storage, path.unsafe_cstr_ptr(), length)
 
 
-fn read_storage_file(storage: Ptr[Storage, mut=True], owned path: String, destination: Ptr[NoneType, mut=True], length: UInt64) -> Bool:
+fn read_storage_file(storage: Ptr[Storage, mut=True], var path: String, destination: Ptr[NoneType, mut=True], length: UInt64) -> Bool:
     """Synchronously read a file from a storage container into a client-provided
     buffer.
 
@@ -484,7 +484,7 @@ fn read_storage_file(storage: Ptr[Storage, mut=True], owned path: String, destin
     return _get_dylib_function[lib, "SDL_ReadStorageFile", fn (storage: Ptr[Storage, mut=True], path: Ptr[c_char, mut=False], destination: Ptr[NoneType, mut=True], length: UInt64) -> Bool]()(storage, path.unsafe_cstr_ptr(), destination, length)
 
 
-fn write_storage_file(storage: Ptr[Storage, mut=True], owned path: String, source: Ptr[NoneType, mut=False], length: UInt64) -> Bool:
+fn write_storage_file(storage: Ptr[Storage, mut=True], var path: String, source: Ptr[NoneType, mut=False], length: UInt64) -> Bool:
     """Synchronously write a file from client memory into a storage container.
 
     Args:
@@ -503,7 +503,7 @@ fn write_storage_file(storage: Ptr[Storage, mut=True], owned path: String, sourc
     return _get_dylib_function[lib, "SDL_WriteStorageFile", fn (storage: Ptr[Storage, mut=True], path: Ptr[c_char, mut=False], source: Ptr[NoneType, mut=False], length: UInt64) -> Bool]()(storage, path.unsafe_cstr_ptr(), source, length)
 
 
-fn create_storage_directory(storage: Ptr[Storage, mut=True], owned path: String) raises:
+fn create_storage_directory(storage: Ptr[Storage, mut=True], var path: String) raises:
     """Create a directory in a writable storage container.
 
     Args:
@@ -522,7 +522,7 @@ fn create_storage_directory(storage: Ptr[Storage, mut=True], owned path: String)
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn enumerate_storage_directory(storage: Ptr[Storage, mut=True], owned path: String, callback: EnumerateDirectoryCallback, userdata: Ptr[NoneType, mut=True]) raises:
+fn enumerate_storage_directory(storage: Ptr[Storage, mut=True], var path: String, callback: EnumerateDirectoryCallback, userdata: Ptr[NoneType, mut=True]) raises:
     """Enumerate a directory in a storage container through a callback function.
 
     This function provides every directory entry through an app-provided
@@ -556,7 +556,7 @@ fn enumerate_storage_directory(storage: Ptr[Storage, mut=True], owned path: Stri
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn remove_storage_path(storage: Ptr[Storage, mut=True], owned path: String) raises:
+fn remove_storage_path(storage: Ptr[Storage, mut=True], var path: String) raises:
     """Remove a file or an empty directory in a writable storage container.
 
     Args:
@@ -575,7 +575,7 @@ fn remove_storage_path(storage: Ptr[Storage, mut=True], owned path: String) rais
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn rename_storage_path(storage: Ptr[Storage, mut=True], owned oldpath: String, owned newpath: String) raises:
+fn rename_storage_path(storage: Ptr[Storage, mut=True], var oldpath: String, var newpath: String) raises:
     """Rename a file or directory in a writable storage container.
 
     Args:
@@ -595,7 +595,7 @@ fn rename_storage_path(storage: Ptr[Storage, mut=True], owned oldpath: String, o
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn copy_storage_file(storage: Ptr[Storage, mut=True], owned oldpath: String, owned newpath: String) raises:
+fn copy_storage_file(storage: Ptr[Storage, mut=True], var oldpath: String, var newpath: String) raises:
     """Copy a file in a writable storage container.
 
     Args:
@@ -615,7 +615,7 @@ fn copy_storage_file(storage: Ptr[Storage, mut=True], owned oldpath: String, own
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn get_storage_path_info(storage: Ptr[Storage, mut=True], owned path: String, info: Ptr[PathInfo, mut=True]) raises:
+fn get_storage_path_info(storage: Ptr[Storage, mut=True], var path: String, info: Ptr[PathInfo, mut=True]) raises:
     """Get information about a filesystem path in a storage container.
 
     Args:
@@ -651,7 +651,7 @@ fn get_storage_space_remaining(storage: Ptr[Storage, mut=True]) -> UInt64:
     return _get_dylib_function[lib, "SDL_GetStorageSpaceRemaining", fn (storage: Ptr[Storage, mut=True]) -> UInt64]()(storage)
 
 
-fn glob_storage_directory(storage: Ptr[Storage, mut=True], owned path: String, owned pattern: String, flags: GlobFlags, count: Ptr[c_int, mut=True], out ret: Ptr[Ptr[c_char, mut=True], mut=True]) raises:
+fn glob_storage_directory(storage: Ptr[Storage, mut=True], var path: String, var pattern: String, flags: GlobFlags, count: Ptr[c_int, mut=True], out ret: Ptr[Ptr[c_char, mut=True], mut=True]) raises:
     """Enumerate a directory tree, filtered by pattern, and return a list.
 
     Files are filtered out if they don't match the string in `pattern`, which

@@ -136,7 +136,7 @@ struct PenAxis(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias PEN_AXIS_PRESSURE = Self(0)
     """Pen pressure.  Unidirectional: 0 to 1.0."""

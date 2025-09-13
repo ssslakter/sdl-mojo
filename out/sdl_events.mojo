@@ -74,7 +74,7 @@ struct EventType(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias EVENT_FIRST = Self(0)
     """Unused (do not remove)."""
@@ -1316,7 +1316,7 @@ struct EventAction(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias ADDEVENT = Self(0x0)
     """Add events to the back of the queue."""

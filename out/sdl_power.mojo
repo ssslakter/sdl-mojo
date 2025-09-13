@@ -61,7 +61,7 @@ struct PowerState(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias POWERSTATE_ERROR = Self(-1)
     """Error determining power status."""

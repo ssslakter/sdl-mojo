@@ -102,7 +102,7 @@ struct PixelType(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias PIXELTYPE_UNKNOWN = Self(0)
     alias PIXELTYPE_INDEX1 = Self(1)
@@ -143,7 +143,7 @@ struct BitmapOrder(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias BITMAPORDER_NONE = Self(0)
     alias BITMAPORDER_4321 = Self(1)
@@ -173,7 +173,7 @@ struct PackedOrder(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias PACKEDORDER_NONE = Self(0)
     alias PACKEDORDER_XRGB = Self(1)
@@ -209,7 +209,7 @@ struct ArrayOrder(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias ARRAYORDER_NONE = Self(0)
     alias ARRAYORDER_RGB = Self(1)
@@ -243,7 +243,7 @@ struct PackedLayout(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias PACKEDLAYOUT_NONE = Self(0)
     alias PACKEDLAYOUT_332 = Self(1)
@@ -311,7 +311,7 @@ struct PixelFormat(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias PIXELFORMAT_UNKNOWN = Self(0)
     alias PIXELFORMAT_INDEX1LSB = Self(0x11100100)
@@ -489,7 +489,7 @@ struct ColorType(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias COLOR_TYPE_UNKNOWN = Self(0)
     alias COLOR_TYPE_RGB = Self(1)
@@ -520,7 +520,7 @@ struct ColorRange(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias COLOR_RANGE_UNKNOWN = Self(0)
     alias COLOR_RANGE_LIMITED = Self(1)
@@ -553,7 +553,7 @@ struct ColorPrimaries(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias COLOR_PRIMARIES_UNKNOWN = Self(0)
     alias COLOR_PRIMARIES_BT709 = Self(1)
@@ -607,7 +607,7 @@ struct TransferCharacteristics(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias TRANSFER_CHARACTERISTICS_UNKNOWN = Self(0)
     alias TRANSFER_CHARACTERISTICS_BT709 = Self(1)
@@ -668,7 +668,7 @@ struct MatrixCoefficients(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias MATRIX_COEFFICIENTS_IDENTITY = Self(0)
     alias MATRIX_COEFFICIENTS_BT709 = Self(1)
@@ -719,7 +719,7 @@ struct ChromaLocation(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias CHROMA_LOCATION_NONE = Self(0)
     """RGB, no chroma sampling."""
@@ -758,7 +758,7 @@ struct Colorspace(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias COLORSPACE_UNKNOWN = Self(0)
 

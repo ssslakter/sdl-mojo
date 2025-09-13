@@ -223,8 +223,8 @@ device features:
 - `drawIndirectFirstInstance`
 
 **D3D12:** Supported on Windows 10 or newer, Xbox One (GDK), and Xbox
-Series X|S (GDK). Requires a GPU that supports DirectX 12 Feature Level
-11_1.
+Series X|S (GDK). Requires a GPU that supports DirectX 12 Feature Level 11_0 and
+Resource Binding Tier 2 or above.
 
 **Metal:** Supported on macOS 10.14+ and iOS/tvOS 13.0+. Hardware
 requirements vary by operating system:
@@ -502,7 +502,7 @@ struct GPUPrimitiveType(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_PRIMITIVETYPE_TRIANGLELIST = Self(0)
     """A series of separate triangles."""
@@ -540,7 +540,7 @@ struct GPULoadOp(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_LOADOP_LOAD = Self(0)
     """The previous contents of the texture will be preserved."""
@@ -574,7 +574,7 @@ struct GPUStoreOp(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_STOREOP_STORE = Self(0)
     """The contents generated during the render pass will be written to memory."""
@@ -609,7 +609,7 @@ struct GPUIndexElementSize(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_INDEXELEMENTSIZE_16BIT = Self(0)
     """The index elements are 16-bit."""
@@ -717,7 +717,7 @@ struct GPUTextureFormat(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_TEXTUREFORMAT_INVALID = Self(0)
 
@@ -915,7 +915,7 @@ struct GPUTextureType(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_TEXTURETYPE_2D = Self(0)
     """The texture is a 2-dimensional image."""
@@ -955,7 +955,7 @@ struct GPUSampleCount(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_SAMPLECOUNT_1 = Self(0)
     """No multisampling."""
@@ -992,7 +992,7 @@ struct GPUCubeMapFace(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_CUBEMAPFACE_POSITIVEX = Self(0)
     alias GPU_CUBEMAPFACE_NEGATIVEX = Self(1)
@@ -1073,7 +1073,7 @@ struct GPUTransferBufferUsage(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_TRANSFERBUFFERUSAGE_UPLOAD = Self(0)
     alias GPU_TRANSFERBUFFERUSAGE_DOWNLOAD = Self(1)
@@ -1102,7 +1102,7 @@ struct GPUShaderStage(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_SHADERSTAGE_VERTEX = Self(0)
     alias GPU_SHADERSTAGE_FRAGMENT = Self(1)
@@ -1169,7 +1169,7 @@ struct GPUVertexElementFormat(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_VERTEXELEMENTFORMAT_INVALID = Self(0)
 
@@ -1251,7 +1251,7 @@ struct GPUVertexInputRate(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_VERTEXINPUTRATE_VERTEX = Self(0)
     """Attribute addressing is a function of the vertex index."""
@@ -1282,7 +1282,7 @@ struct GPUFillMode(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_FILLMODE_FILL = Self(0)
     """Polygons will be rendered via rasterization."""
@@ -1313,7 +1313,7 @@ struct GPUCullMode(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_CULLMODE_NONE = Self(0)
     """No triangles are culled."""
@@ -1347,7 +1347,7 @@ struct GPUFrontFace(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_FRONTFACE_COUNTER_CLOCKWISE = Self(0)
     """A triangle with counter-clockwise vertex winding will be considered front-facing."""
@@ -1378,7 +1378,7 @@ struct GPUCompareOp(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_COMPAREOP_INVALID = Self(0)
     alias GPU_COMPAREOP_NEVER = Self(1)
@@ -1394,7 +1394,7 @@ struct GPUCompareOp(Indexer, Intable):
     alias GPU_COMPAREOP_NOT_EQUAL = Self(6)
     """The comparison evaluates reference != test."""
     alias GPU_COMPAREOP_GREATER_OR_EQUAL = Self(7)
-    """The comparison evalutes reference >= test."""
+    """The comparison evaluates reference >= test."""
     alias GPU_COMPAREOP_ALWAYS = Self(8)
     """The comparison always evaluates true."""
 
@@ -1423,7 +1423,7 @@ struct GPUStencilOp(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_STENCILOP_INVALID = Self(0)
     alias GPU_STENCILOP_KEEP = Self(1)
@@ -1471,7 +1471,7 @@ struct GPUBlendOp(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_BLENDOP_INVALID = Self(0)
     alias GPU_BLENDOP_ADD = Self(1)
@@ -1513,7 +1513,7 @@ struct GPUBlendFactor(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_BLENDFACTOR_INVALID = Self(0)
     alias GPU_BLENDFACTOR_ZERO = Self(1)
@@ -1598,7 +1598,7 @@ struct GPUFilter(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_FILTER_NEAREST = Self(0)
     """Point filtering."""
@@ -1629,7 +1629,7 @@ struct GPUSamplerMipmapMode(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_SAMPLERMIPMAPMODE_NEAREST = Self(0)
     """Point filtering."""
@@ -1661,7 +1661,7 @@ struct GPUSamplerAddressMode(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_SAMPLERADDRESSMODE_REPEAT = Self(0)
     """Specifies that the coordinates will wrap around."""
@@ -1710,7 +1710,7 @@ struct GPUPresentMode(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_PRESENTMODE_VSYNC = Self(0)
     alias GPU_PRESENTMODE_IMMEDIATE = Self(1)
@@ -1757,7 +1757,7 @@ struct GPUSwapchainComposition(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GPU_SWAPCHAINCOMPOSITION_SDR = Self(0)
     alias GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR = Self(1)
@@ -2642,7 +2642,7 @@ struct GPUStorageTextureReadWriteBinding(Copyable, Movable):
     var padding3: UInt8
 
 
-fn gpu_supports_shader_formats(format_flags: GPUShaderFormat, owned name: String) -> Bool:
+fn gpu_supports_shader_formats(format_flags: GPUShaderFormat, var name: String) -> Bool:
     """Checks for GPU runtime support.
 
     Args:
@@ -2675,7 +2675,7 @@ fn gpu_supports_properties(props: PropertiesID) -> Bool:
     return _get_dylib_function[lib, "SDL_GPUSupportsProperties", fn (props: PropertiesID) -> Bool]()(props)
 
 
-fn create_gpu_device(format_flags: GPUShaderFormat, debug_mode: Bool, owned name: String, out ret: Ptr[GPUDevice, mut=True]) raises:
+fn create_gpu_device(format_flags: GPUShaderFormat, debug_mode: Bool, var name: String, out ret: Ptr[GPUDevice, mut=True]) raises:
     """Creates a GPU context.
 
     Args:
@@ -3126,7 +3126,7 @@ fn create_gpu_transfer_buffer(device: Ptr[GPUDevice, mut=True], createinfo: Ptr[
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn set_gpu_buffer_name(device: Ptr[GPUDevice, mut=True], buffer: Ptr[GPUBuffer, mut=True], owned text: String) -> None:
+fn set_gpu_buffer_name(device: Ptr[GPUDevice, mut=True], buffer: Ptr[GPUBuffer, mut=True], var text: String) -> None:
     """Sets an arbitrary string constant to label a buffer.
 
     You should use SDL_PROP_GPU_BUFFER_CREATE_NAME_STRING with
@@ -3147,7 +3147,7 @@ fn set_gpu_buffer_name(device: Ptr[GPUDevice, mut=True], buffer: Ptr[GPUBuffer, 
     return _get_dylib_function[lib, "SDL_SetGPUBufferName", fn (device: Ptr[GPUDevice, mut=True], buffer: Ptr[GPUBuffer, mut=True], text: Ptr[c_char, mut=False]) -> None]()(device, buffer, text.unsafe_cstr_ptr())
 
 
-fn set_gpu_texture_name(device: Ptr[GPUDevice, mut=True], texture: Ptr[GPUTexture, mut=True], owned text: String) -> None:
+fn set_gpu_texture_name(device: Ptr[GPUDevice, mut=True], texture: Ptr[GPUTexture, mut=True], var text: String) -> None:
     """Sets an arbitrary string constant to label a texture.
 
     You should use SDL_PROP_GPU_TEXTURE_CREATE_NAME_STRING with
@@ -3169,7 +3169,7 @@ fn set_gpu_texture_name(device: Ptr[GPUDevice, mut=True], texture: Ptr[GPUTextur
     return _get_dylib_function[lib, "SDL_SetGPUTextureName", fn (device: Ptr[GPUDevice, mut=True], texture: Ptr[GPUTexture, mut=True], text: Ptr[c_char, mut=False]) -> None]()(device, texture, text.unsafe_cstr_ptr())
 
 
-fn insert_gpu_debug_label(command_buffer: Ptr[GPUCommandBuffer, mut=True], owned text: String) -> None:
+fn insert_gpu_debug_label(command_buffer: Ptr[GPUCommandBuffer, mut=True], var text: String) -> None:
     """Inserts an arbitrary string label into the command buffer callstream.
 
     Useful for debugging.
@@ -3184,8 +3184,8 @@ fn insert_gpu_debug_label(command_buffer: Ptr[GPUCommandBuffer, mut=True], owned
     return _get_dylib_function[lib, "SDL_InsertGPUDebugLabel", fn (command_buffer: Ptr[GPUCommandBuffer, mut=True], text: Ptr[c_char, mut=False]) -> None]()(command_buffer, text.unsafe_cstr_ptr())
 
 
-fn push_gpu_debug_group(command_buffer: Ptr[GPUCommandBuffer, mut=True], owned name: String) -> None:
-    """Begins a debug group with an arbitary name.
+fn push_gpu_debug_group(command_buffer: Ptr[GPUCommandBuffer, mut=True], var name: String) -> None:
+    """Begins a debug group with an arbitrary name.
 
     Used for denoting groups of calls when viewing the command buffer
     callstream in a graphics debugging tool.

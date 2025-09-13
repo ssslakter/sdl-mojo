@@ -64,7 +64,7 @@ struct Scancode(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias SCANCODE_UNKNOWN = Self(0)
 

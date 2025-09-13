@@ -75,7 +75,7 @@ it doesn't support a primary selection.
 """
 
 
-fn set_clipboard_text(owned text: String) raises:
+fn set_clipboard_text(var text: String) raises:
     """Put UTF-8 text into the clipboard.
 
     Args:
@@ -133,7 +133,7 @@ fn has_clipboard_text() -> Bool:
     return _get_dylib_function[lib, "SDL_HasClipboardText", fn () -> Bool]()()
 
 
-fn set_primary_selection_text(owned text: String) raises:
+fn set_primary_selection_text(var text: String) raises:
     """Put UTF-8 text into the primary selection.
 
     Args:
@@ -280,7 +280,7 @@ fn clear_clipboard_data() raises:
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn get_clipboard_data(owned mime_type: String, size: Ptr[c_size_t, mut=True], out ret: Ptr[NoneType, mut=True]) raises:
+fn get_clipboard_data(var mime_type: String, size: Ptr[c_size_t, mut=True], out ret: Ptr[NoneType, mut=True]) raises:
     """Get the data from the clipboard for a given mime type.
 
     The size of text data does not include the terminator, but the text is
@@ -306,7 +306,7 @@ fn get_clipboard_data(owned mime_type: String, size: Ptr[c_size_t, mut=True], ou
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn has_clipboard_data(owned mime_type: String) -> Bool:
+fn has_clipboard_data(var mime_type: String) -> Bool:
     """Query whether there is data in the clipboard for the provided mime type.
 
     Args:

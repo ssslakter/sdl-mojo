@@ -86,7 +86,7 @@ struct DateFormat(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias DATE_FORMAT_YYYYMMDD = Self(0)
     """Year/Month/Day."""
@@ -119,7 +119,7 @@ struct TimeFormat(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias TIME_FORMAT_24HR = Self(0)
     """24 hour time."""

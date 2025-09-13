@@ -125,7 +125,7 @@ struct CameraSpec(Copyable, Movable):
     var framerate_numerator: c_int
     """Frame rate numerator ((num / denom) == FPS, (denom / num) == duration in seconds)."""
     var framerate_denominator: c_int
-    """Frame rate demoninator ((num / denom) == FPS, (denom / num) == duration in seconds)."""
+    """Frame rate denominator ((num / denom) == FPS, (denom / num) == duration in seconds)."""
 
 
 @register_passable("trivial")
@@ -151,7 +151,7 @@ struct CameraPosition(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias CAMERA_POSITION_UNKNOWN = Self(0x0)
     alias CAMERA_POSITION_FRONT_FACING = Self(0x1)

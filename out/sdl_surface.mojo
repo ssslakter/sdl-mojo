@@ -95,7 +95,7 @@ struct ScaleMode(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias SCALEMODE_INVALID = Self(-1)
     alias SCALEMODE_NEAREST = Self(0)
@@ -127,7 +127,7 @@ struct FlipMode(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias FLIP_NONE = Self(0)
     """Do not flip."""
@@ -598,7 +598,7 @@ fn load_bmp_io(src: Ptr[IOStream, mut=True], closeio: Bool, out ret: Ptr[Surface
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn load_bmp(owned file: String, out ret: Ptr[Surface, mut=True]) raises:
+fn load_bmp(var file: String, out ret: Ptr[Surface, mut=True]) raises:
     """Load a BMP image from a file.
 
     The new surface should be freed with SDL_DestroySurface(). Not doing so
@@ -652,7 +652,7 @@ fn save_bmp_io(surface: Ptr[Surface, mut=True], dst: Ptr[IOStream, mut=True], cl
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn save_bmp(surface: Ptr[Surface, mut=True], owned file: String) raises:
+fn save_bmp(surface: Ptr[Surface, mut=True], var file: String) raises:
     """Save a surface to a file.
 
     Surfaces with a 24-bit, 32-bit and paletted 8-bit format get saved in the

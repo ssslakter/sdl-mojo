@@ -55,7 +55,7 @@ struct IOStatus(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias IO_STATUS_READY = Self(0)
     """Everything is ready (no errors and not EOF)."""
@@ -97,7 +97,7 @@ struct IOWhence(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias IO_SEEK_SET = Self(0)
     """Seek from the beginning of data."""
@@ -191,7 +191,7 @@ struct IOStream(Copyable, Movable):
     pass
 
 
-fn io_from_file(owned file: String, owned mode: String) -> Ptr[IOStream, mut=True]:
+fn io_from_file(var file: String, var mode: String) -> Ptr[IOStream, mut=True]:
     """Use this function to create a new SDL_IOStream structure for reading from
     and/or writing to a named file.
 
@@ -696,7 +696,7 @@ fn load_file_io(src: Ptr[IOStream, mut=True], datasize: Ptr[c_size_t, mut=True],
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn load_file(owned file: String, datasize: Ptr[c_size_t, mut=True], out ret: Ptr[NoneType, mut=True]) raises:
+fn load_file(var file: String, datasize: Ptr[c_size_t, mut=True], out ret: Ptr[NoneType, mut=True]) raises:
     """Load all the data from a file path.
 
     The data is allocated with a zero byte at the end (null terminated) for
@@ -750,7 +750,7 @@ fn save_file_io(src: Ptr[IOStream, mut=True], data: Ptr[NoneType, mut=False], da
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn save_file(owned file: String, data: Ptr[NoneType, mut=False], datasize: c_size_t) raises:
+fn save_file(var file: String, data: Ptr[NoneType, mut=False], datasize: c_size_t) raises:
     """Save all the data into a file path.
 
     Args:

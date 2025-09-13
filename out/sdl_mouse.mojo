@@ -118,7 +118,7 @@ struct SystemCursor(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias SYSTEM_CURSOR_DEFAULT = Self(0)
     """Default cursor. Usually an arrow."""
@@ -186,7 +186,7 @@ struct MouseWheelDirection(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias MOUSEWHEEL_NORMAL = Self(0)
     """The scroll direction is normal."""

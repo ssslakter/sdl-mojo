@@ -280,7 +280,7 @@ fn get_scancode_from_key(key: Keycode, modstate: Ptr[Keymod, mut=True]) -> Scanc
     return _get_dylib_function[lib, "SDL_GetScancodeFromKey", fn (key: Keycode, modstate: Ptr[Keymod, mut=True]) -> Scancode]()(key, modstate)
 
 
-fn set_scancode_name(scancode: Scancode, owned name: String) raises:
+fn set_scancode_name(scancode: Scancode, var name: String) raises:
     """Set a human-readable name for a scancode.
 
     Args:
@@ -332,7 +332,7 @@ fn get_scancode_name(scancode: Scancode) -> Ptr[c_char, mut=False]:
     return _get_dylib_function[lib, "SDL_GetScancodeName", fn (scancode: Scancode) -> Ptr[c_char, mut=False]]()(scancode)
 
 
-fn get_scancode_from_name(owned name: String) -> Scancode:
+fn get_scancode_from_name(var name: String) -> Scancode:
     """Get a scancode from a human-readable name.
 
     Args:
@@ -373,7 +373,7 @@ fn get_key_name(key: Keycode) -> Ptr[c_char, mut=False]:
     return _get_dylib_function[lib, "SDL_GetKeyName", fn (key: Keycode) -> Ptr[c_char, mut=False]]()(key)
 
 
-fn get_key_from_name(owned name: String) -> Keycode:
+fn get_key_from_name(var name: String) -> Keycode:
     """Get a key code from a human-readable name.
 
     Args:
@@ -450,7 +450,7 @@ struct TextInputType(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias TEXTINPUT_TYPE_TEXT = Self(0)
     """The input is text."""
@@ -499,7 +499,7 @@ struct Capitalization(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias CAPITALIZE_NONE = Self(0)
     """No auto-capitalization will be done."""

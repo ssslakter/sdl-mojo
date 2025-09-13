@@ -87,7 +87,7 @@ struct TextureAccess(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias TEXTUREACCESS_STATIC = Self(0)
     """Changes rarely, not lockable."""
@@ -120,7 +120,7 @@ struct RendererLogicalPresentation(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias LOGICAL_PRESENTATION_DISABLED = Self(0)
     """There is no logical size in effect."""
@@ -211,7 +211,7 @@ fn get_render_driver(index: c_int) -> Ptr[c_char, mut=False]:
     return _get_dylib_function[lib, "SDL_GetRenderDriver", fn (index: c_int) -> Ptr[c_char, mut=False]]()(index)
 
 
-fn create_window_and_renderer(owned title: String, width: c_int, height: c_int, window_flags: WindowFlags, window: Ptr[Ptr[Window, mut=True], mut=True], renderer: Ptr[Ptr[Renderer, mut=True], mut=True]) raises:
+fn create_window_and_renderer(var title: String, width: c_int, height: c_int, window_flags: WindowFlags, window: Ptr[Ptr[Window, mut=True], mut=True], renderer: Ptr[Ptr[Renderer, mut=True], mut=True]) raises:
     """Create a window and default renderer.
 
     Args:
@@ -238,7 +238,7 @@ fn create_window_and_renderer(owned title: String, width: c_int, height: c_int, 
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn create_renderer(window: Ptr[Window, mut=True], owned name: String) -> Ptr[Renderer, mut=True]:
+fn create_renderer(window: Ptr[Window, mut=True], var name: String) -> Ptr[Renderer, mut=True]:
     """Create a 2D rendering context for a window.
 
     If you want a specific renderer, you can specify its name here. A list of
@@ -2885,7 +2885,7 @@ fn get_render_vsync(renderer: Ptr[Renderer, mut=True], vsync: Ptr[c_int, mut=Tru
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn render_debug_text(renderer: Ptr[Renderer, mut=True], x: c_float, y: c_float, owned str: String) raises:
+fn render_debug_text(renderer: Ptr[Renderer, mut=True], x: c_float, y: c_float, var str: String) raises:
     """Draw debug text to an SDL_Renderer.
 
     This function will render a string of text to an SDL_Renderer. Note that

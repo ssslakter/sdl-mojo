@@ -59,14 +59,14 @@ struct HintPriority(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias HINT_DEFAULT = Self(0)
     alias HINT_NORMAL = Self(1)
     alias HINT_OVERRIDE = Self(2)
 
 
-fn set_hint_with_priority(owned name: String, owned value: String, priority: HintPriority) raises:
+fn set_hint_with_priority(var name: String, var value: String, priority: HintPriority) raises:
     """Set a hint with a specific priority.
 
     The priority controls the behavior when setting a hint that already has a
@@ -93,7 +93,7 @@ fn set_hint_with_priority(owned name: String, owned value: String, priority: Hin
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn set_hint(owned name: String, owned value: String) raises:
+fn set_hint(var name: String, var value: String) raises:
     """Set a hint with normal priority.
 
     Hints will not be set if there is an existing override hint or environment
@@ -119,7 +119,7 @@ fn set_hint(owned name: String, owned value: String) raises:
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn reset_hint(owned name: String) raises:
+fn reset_hint(var name: String) raises:
     """Reset a hint to the default value.
 
     This will reset a hint to the value of the environment variable, or NULL if
@@ -160,7 +160,7 @@ fn reset_hints() -> None:
     return _get_dylib_function[lib, "SDL_ResetHints", fn () -> None]()()
 
 
-fn get_hint(owned name: String) -> Ptr[c_char, mut=False]:
+fn get_hint(var name: String) -> Ptr[c_char, mut=False]:
     """Get the value of a hint.
 
     Args:
@@ -183,7 +183,7 @@ fn get_hint(owned name: String) -> Ptr[c_char, mut=False]:
     return _get_dylib_function[lib, "SDL_GetHint", fn (name: Ptr[c_char, mut=False]) -> Ptr[c_char, mut=False]]()(name.unsafe_cstr_ptr())
 
 
-fn get_hint_boolean(owned name: String, default_value: Bool) -> Bool:
+fn get_hint_boolean(var name: String, default_value: Bool) -> Bool:
     """Get the boolean value of a hint variable.
 
     Args:
@@ -224,7 +224,7 @@ Docs: https://wiki.libsdl.org/SDL3/SDL_HintCallback.
 """
 
 
-fn add_hint_callback(owned name: String, callback: HintCallback, userdata: Ptr[NoneType, mut=True]) raises:
+fn add_hint_callback(var name: String, callback: HintCallback, userdata: Ptr[NoneType, mut=True]) raises:
     """Add a function to watch a particular hint.
 
     The callback function is called _during_ this function, to provide it an
@@ -251,7 +251,7 @@ fn add_hint_callback(owned name: String, callback: HintCallback, userdata: Ptr[N
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn remove_hint_callback(owned name: String, callback: HintCallback, userdata: Ptr[NoneType, mut=True]) -> None:
+fn remove_hint_callback(var name: String, callback: HintCallback, userdata: Ptr[NoneType, mut=True]) -> None:
     """Remove a function watching a particular hint.
 
     Args:

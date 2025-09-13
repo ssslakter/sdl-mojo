@@ -121,7 +121,7 @@ struct JoystickType(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias JOYSTICK_TYPE_UNKNOWN = Self(0)
     alias JOYSTICK_TYPE_GAMEPAD = Self(1)
@@ -162,7 +162,7 @@ struct JoystickConnectionState(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias JOYSTICK_CONNECTION_INVALID = Self(-1)
     alias JOYSTICK_CONNECTION_UNKNOWN = Self(0)

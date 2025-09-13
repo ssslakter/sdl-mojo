@@ -95,7 +95,7 @@ struct BlendOperation(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias BLENDOPERATION_ADD = Self(0x1)
     """Dst + src: supported by all renderers."""
@@ -137,7 +137,7 @@ struct BlendFactor(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias BLENDFACTOR_ZERO = Self(0x1)
     """0, 0, 0, 0."""

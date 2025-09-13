@@ -407,7 +407,7 @@ struct {drop_prefix(name)}(Indexer, Intable):
     
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 {body}
 ''')
 
@@ -559,7 +559,7 @@ def translate_function(m: re.Match):
     sdl_ret = translate_return_type(re.match(match_return, m.group('f_ret')))
     mojo_ret = re.sub(match_string_argument, r'String', sdl_ret)
     sdl_args = re.sub(match_argument, translate_argument, m.group('f_args')).removeprefix(' ')
-    mojo_args = re.sub(match_string_argument, r'owned \1: String', sdl_args)
+    mojo_args = re.sub(match_string_argument, r'var \1: String', sdl_args)
     pass_args = re.sub(match_argument_names, r'\1\2', sdl_args)
     for arg_name in re.finditer(r'\w+(?=: String)', mojo_args):
         pass_args = re.sub(r'\b' + arg_name[0] + r'\b', arg_name[0] + '.unsafe_cstr_ptr()', pass_args)

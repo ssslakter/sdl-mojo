@@ -92,7 +92,7 @@ struct PropertyType(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias PROPERTY_TYPE_INVALID = Self(0)
     alias PROPERTY_TYPE_POINTER = Self(1)
@@ -229,7 +229,7 @@ Docs: https://wiki.libsdl.org/SDL3/SDL_CleanupPropertyCallback.
 """
 
 
-fn set_pointer_property_with_cleanup(props: PropertiesID, owned name: String, value: Ptr[NoneType, mut=True], cleanup: CleanupPropertyCallback, userdata: Ptr[NoneType, mut=True]) raises:
+fn set_pointer_property_with_cleanup(props: PropertiesID, var name: String, value: Ptr[NoneType, mut=True], cleanup: CleanupPropertyCallback, userdata: Ptr[NoneType, mut=True]) raises:
     """Set a pointer property in a group of properties with a cleanup function
     that is called when the property is deleted.
 
@@ -264,7 +264,7 @@ fn set_pointer_property_with_cleanup(props: PropertiesID, owned name: String, va
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn set_pointer_property(props: PropertiesID, owned name: String, value: Ptr[NoneType, mut=True]) raises:
+fn set_pointer_property(props: PropertiesID, var name: String, value: Ptr[NoneType, mut=True]) raises:
     """Set a pointer property in a group of properties.
 
     Args:
@@ -287,7 +287,7 @@ fn set_pointer_property(props: PropertiesID, owned name: String, value: Ptr[None
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn set_string_property(props: PropertiesID, owned name: String, owned value: String) raises:
+fn set_string_property(props: PropertiesID, var name: String, var value: String) raises:
     """Set a string property in a group of properties.
 
     This function makes a copy of the string; the caller does not have to
@@ -313,7 +313,7 @@ fn set_string_property(props: PropertiesID, owned name: String, owned value: Str
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn set_number_property(props: PropertiesID, owned name: String, value: Int64) raises:
+fn set_number_property(props: PropertiesID, var name: String, value: Int64) raises:
     """Set an integer property in a group of properties.
 
     Args:
@@ -336,7 +336,7 @@ fn set_number_property(props: PropertiesID, owned name: String, value: Int64) ra
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn set_float_property(props: PropertiesID, owned name: String, value: c_float) raises:
+fn set_float_property(props: PropertiesID, var name: String, value: c_float) raises:
     """Set a floating point property in a group of properties.
 
     Args:
@@ -359,7 +359,7 @@ fn set_float_property(props: PropertiesID, owned name: String, value: c_float) r
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn set_boolean_property(props: PropertiesID, owned name: String, value: Bool) raises:
+fn set_boolean_property(props: PropertiesID, var name: String, value: Bool) raises:
     """Set a boolean property in a group of properties.
 
     Args:
@@ -382,7 +382,7 @@ fn set_boolean_property(props: PropertiesID, owned name: String, value: Bool) ra
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn has_property(props: PropertiesID, owned name: String) -> Bool:
+fn has_property(props: PropertiesID, var name: String) -> Bool:
     """Return whether a property exists in a group of properties.
 
     Args:
@@ -401,7 +401,7 @@ fn has_property(props: PropertiesID, owned name: String) -> Bool:
     return _get_dylib_function[lib, "SDL_HasProperty", fn (props: PropertiesID, name: Ptr[c_char, mut=False]) -> Bool]()(props, name.unsafe_cstr_ptr())
 
 
-fn get_property_type(props: PropertiesID, owned name: String) -> PropertyType:
+fn get_property_type(props: PropertiesID, var name: String) -> PropertyType:
     """Get the type of a property in a group of properties.
 
     Args:
@@ -421,7 +421,7 @@ fn get_property_type(props: PropertiesID, owned name: String) -> PropertyType:
     return _get_dylib_function[lib, "SDL_GetPropertyType", fn (props: PropertiesID, name: Ptr[c_char, mut=False]) -> PropertyType]()(props, name.unsafe_cstr_ptr())
 
 
-fn get_pointer_property(props: PropertiesID, owned name: String, default_value: Ptr[NoneType, mut=True]) -> Ptr[NoneType, mut=True]:
+fn get_pointer_property(props: PropertiesID, var name: String, default_value: Ptr[NoneType, mut=True]) -> Ptr[NoneType, mut=True]:
     """Get a pointer property from a group of properties.
 
     By convention, the names of properties that SDL exposes on objects will
@@ -452,7 +452,7 @@ fn get_pointer_property(props: PropertiesID, owned name: String, default_value: 
     return _get_dylib_function[lib, "SDL_GetPointerProperty", fn (props: PropertiesID, name: Ptr[c_char, mut=False], default_value: Ptr[NoneType, mut=True]) -> Ptr[NoneType, mut=True]]()(props, name.unsafe_cstr_ptr(), default_value)
 
 
-fn get_string_property(props: PropertiesID, owned name: String, owned default_value: String) -> Ptr[c_char, mut=False]:
+fn get_string_property(props: PropertiesID, var name: String, var default_value: String) -> Ptr[c_char, mut=False]:
     """Get a string property from a group of properties.
 
     Args:
@@ -478,7 +478,7 @@ fn get_string_property(props: PropertiesID, owned name: String, owned default_va
     return _get_dylib_function[lib, "SDL_GetStringProperty", fn (props: PropertiesID, name: Ptr[c_char, mut=False], default_value: Ptr[c_char, mut=False]) -> Ptr[c_char, mut=False]]()(props, name.unsafe_cstr_ptr(), default_value.unsafe_cstr_ptr())
 
 
-fn get_number_property(props: PropertiesID, owned name: String, default_value: Int64) -> Int64:
+fn get_number_property(props: PropertiesID, var name: String, default_value: Int64) -> Int64:
     """Get a number property from a group of properties.
 
     You can use SDL_GetPropertyType() to query whether the property exists and
@@ -502,7 +502,7 @@ fn get_number_property(props: PropertiesID, owned name: String, default_value: I
     return _get_dylib_function[lib, "SDL_GetNumberProperty", fn (props: PropertiesID, name: Ptr[c_char, mut=False], default_value: Int64) -> Int64]()(props, name.unsafe_cstr_ptr(), default_value)
 
 
-fn get_float_property(props: PropertiesID, owned name: String, default_value: c_float) -> c_float:
+fn get_float_property(props: PropertiesID, var name: String, default_value: c_float) -> c_float:
     """Get a floating point property from a group of properties.
 
     You can use SDL_GetPropertyType() to query whether the property exists and
@@ -526,7 +526,7 @@ fn get_float_property(props: PropertiesID, owned name: String, default_value: c_
     return _get_dylib_function[lib, "SDL_GetFloatProperty", fn (props: PropertiesID, name: Ptr[c_char, mut=False], default_value: c_float) -> c_float]()(props, name.unsafe_cstr_ptr(), default_value)
 
 
-fn get_boolean_property(props: PropertiesID, owned name: String, default_value: Bool) -> Bool:
+fn get_boolean_property(props: PropertiesID, var name: String, default_value: Bool) -> Bool:
     """Get a boolean property from a group of properties.
 
     You can use SDL_GetPropertyType() to query whether the property exists and
@@ -550,7 +550,7 @@ fn get_boolean_property(props: PropertiesID, owned name: String, default_value: 
     return _get_dylib_function[lib, "SDL_GetBooleanProperty", fn (props: PropertiesID, name: Ptr[c_char, mut=False], default_value: Bool) -> Bool]()(props, name.unsafe_cstr_ptr(), default_value)
 
 
-fn clear_property(props: PropertiesID, owned name: String) raises:
+fn clear_property(props: PropertiesID, var name: String) raises:
     """Clear a property from a group of properties.
 
     Args:

@@ -85,7 +85,7 @@ fn get_base_path() -> Ptr[c_char, mut=False]:
     return _get_dylib_function[lib, "SDL_GetBasePath", fn () -> Ptr[c_char, mut=False]]()()
 
 
-fn get_pref_path(owned org: String, owned app: String) -> Ptr[c_char, mut=True]:
+fn get_pref_path(var org: String, var app: String) -> Ptr[c_char, mut=True]:
     """Get the user-and-app-specific path where files can be written.
 
     Get the "pref dir". This is meant to be where users can write personal
@@ -188,7 +188,7 @@ struct Folder(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias FOLDER_HOME = Self(0x0)
     """The folder which contains all of the current user's data, preferences, and documents. It usually contains most of the other folders. If a requested folder does not exist, the home folder can be considered a safe fallback to store a user's documents."""
@@ -273,7 +273,7 @@ struct PathType(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias PATHTYPE_NONE = Self(0x0)
     """Path does not exist."""
@@ -328,7 +328,7 @@ struct GlobFlags(Intable):
     alias GLOB_CASEINSENSITIVE = Self(1 << 0)
 
 
-fn create_directory(owned path: String) raises:
+fn create_directory(var path: String) raises:
     """Create a directory, and any missing parent directories.
 
     This reports success if `path` already exists as a directory.
@@ -374,7 +374,7 @@ struct EnumerationResult(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias ENUM_CONTINUE = Self(0x0)
     """Value that requests that enumeration continue."""
@@ -411,7 +411,7 @@ Docs: https://wiki.libsdl.org/SDL3/SDL_EnumerateDirectoryCallback.
 """
 
 
-fn enumerate_directory(owned path: String, callback: EnumerateDirectoryCallback, userdata: Ptr[NoneType, mut=True]) raises:
+fn enumerate_directory(var path: String, callback: EnumerateDirectoryCallback, userdata: Ptr[NoneType, mut=True]) raises:
     """Enumerate a directory through a callback function.
 
     This function provides every directory entry through an app-provided
@@ -441,7 +441,7 @@ fn enumerate_directory(owned path: String, callback: EnumerateDirectoryCallback,
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn remove_path(owned path: String) raises:
+fn remove_path(var path: String) raises:
     """Remove a file or an empty directory.
 
     Directories that are not empty will fail; this function will not recursely
@@ -462,7 +462,7 @@ fn remove_path(owned path: String) raises:
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn rename_path(owned oldpath: String, owned newpath: String) raises:
+fn rename_path(var oldpath: String, var newpath: String) raises:
     """Rename a file or directory.
 
     If the file at `newpath` already exists, it will replaced.
@@ -492,7 +492,7 @@ fn rename_path(owned oldpath: String, owned newpath: String) raises:
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn copy_file(owned oldpath: String, owned newpath: String) raises:
+fn copy_file(var oldpath: String, var newpath: String) raises:
     """Copy a file.
 
     If the file at `newpath` already exists, it will be overwritten with the
@@ -539,7 +539,7 @@ fn copy_file(owned oldpath: String, owned newpath: String) raises:
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn get_path_info(owned path: String, info: Ptr[PathInfo, mut=True]) raises:
+fn get_path_info(var path: String, info: Ptr[PathInfo, mut=True]) raises:
     """Get information about a filesystem path.
 
     Args:
@@ -559,7 +559,7 @@ fn get_path_info(owned path: String, info: Ptr[PathInfo, mut=True]) raises:
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn glob_directory(owned path: String, owned pattern: String, flags: GlobFlags, count: Ptr[c_int, mut=True], out ret: Ptr[Ptr[c_char, mut=True], mut=True]) raises:
+fn glob_directory(var path: String, var pattern: String, flags: GlobFlags, count: Ptr[c_int, mut=True], out ret: Ptr[Ptr[c_char, mut=True], mut=True]) raises:
     """Enumerate a directory tree, filtered by pattern, and return a list.
 
     Files are filtered out if they don't match the string in `pattern`, which

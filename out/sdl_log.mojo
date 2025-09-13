@@ -96,7 +96,7 @@ struct LogCategory(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias LOG_CATEGORY_APPLICATION = Self(0)
     alias LOG_CATEGORY_ERROR = Self(1)
@@ -153,7 +153,7 @@ struct LogPriority(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias LOG_PRIORITY_INVALID = Self(0)
     alias LOG_PRIORITY_TRACE = Self(1)
@@ -229,7 +229,7 @@ fn reset_log_priorities() -> None:
     return _get_dylib_function[lib, "SDL_ResetLogPriorities", fn () -> None]()()
 
 
-fn set_log_priority_prefix(priority: LogPriority, owned prefix: String) raises:
+fn set_log_priority_prefix(priority: LogPriority, var prefix: String) raises:
     """Set the text prepended to log messages of a given priority.
 
     By default SDL_LOG_PRIORITY_INFO and below have no prefix, and

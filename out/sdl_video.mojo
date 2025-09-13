@@ -122,7 +122,7 @@ struct SystemTheme(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias SYSTEM_THEME_UNKNOWN = Self(0)
     """Unknown system theme."""
@@ -195,7 +195,7 @@ struct DisplayOrientation(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias ORIENTATION_UNKNOWN = Self(0)
     """The display orientation can't be determined."""
@@ -320,7 +320,7 @@ struct FlashOperation(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias FLASH_CANCEL = Self(0)
     """Cancel any window flash state."""
@@ -490,7 +490,7 @@ struct GLAttr(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias GL_RED_SIZE = Self(0)
     """The minimum number of bits for the red channel of the color buffer; defaults to 8."""
@@ -1304,7 +1304,7 @@ fn get_windows(count: Ptr[c_int, mut=True], out ret: Ptr[Ptr[Window, mut=True], 
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn create_window(owned title: String, w: c_int, h: c_int, flags: WindowFlags, out ret: Ptr[Window, mut=True]) raises:
+fn create_window(var title: String, w: c_int, h: c_int, flags: WindowFlags, out ret: Ptr[Window, mut=True]) raises:
     """Create a window with the specified dimensions and flags.
 
     The window size is a request and may be different than expected based on
@@ -1725,7 +1725,7 @@ fn get_window_properties(window: Ptr[Window, mut=True]) -> PropertiesID:
     - `SDL_PROP_WINDOW_COCOA_WINDOW_POINTER`: the `(__unsafe_unretained)`
       NSWindow associated with the window
     - `SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER`: the NSInteger tag
-      assocated with metal views on the window
+      associated with metal views on the window
 
     On OpenVR:
 
@@ -1816,7 +1816,7 @@ fn get_window_flags(window: Ptr[Window, mut=True]) -> WindowFlags:
     return _get_dylib_function[lib, "SDL_GetWindowFlags", fn (window: Ptr[Window, mut=True]) -> WindowFlags]()(window)
 
 
-fn set_window_title(window: Ptr[Window, mut=True], owned title: String) raises:
+fn set_window_title(window: Ptr[Window, mut=True], var title: String) raises:
     """Set the title of a window.
 
     This string is expected to be in UTF-8 encoding.
@@ -3163,7 +3163,7 @@ struct HitTestResult(Indexer, Intable):
 
     @always_inline("nodebug")
     fn __index__(self) -> __mlir_type.index:
-        return Int(self).value
+        return index(Int(self))
 
     alias HITTEST_NORMAL = Self(0)
     """Region is normal. No special properties."""
@@ -3395,7 +3395,7 @@ fn disable_screen_saver() raises:
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn gl_load_library(owned path: String) raises:
+fn gl_load_library(var path: String) raises:
     """Dynamically load an OpenGL library.
 
     This should be done after initializing the video driver, but before
@@ -3424,7 +3424,7 @@ fn gl_load_library(owned path: String) raises:
         raise String(unsafe_from_utf8_ptr=get_error())
 
 
-fn gl_get_proc_address(owned proc: String) -> fn () -> None:
+fn gl_get_proc_address(var proc: String) -> fn () -> None:
     """Get an OpenGL function by name.
 
     If the GL library is loaded at runtime with SDL_GL_LoadLibrary(), then all
@@ -3481,7 +3481,7 @@ fn gl_get_proc_address(owned proc: String) -> fn () -> None:
     return _get_dylib_function[lib, "SDL_GL_GetProcAddress", fn (proc: Ptr[c_char, mut=False]) -> fn () -> None]()(proc.unsafe_cstr_ptr())
 
 
-fn egl_get_proc_address(owned proc: String) -> fn () -> None:
+fn egl_get_proc_address(var proc: String) -> fn () -> None:
     """Get an EGL library function by name.
 
     If an EGL library is loaded, this function allows applications to get entry
@@ -3516,7 +3516,7 @@ fn gl_unload_library() -> None:
     return _get_dylib_function[lib, "SDL_GL_UnloadLibrary", fn () -> None]()()
 
 
-fn gl_extension_supported(owned extension: String) -> Bool:
+fn gl_extension_supported(var extension: String) -> Bool:
     """Check if an OpenGL extension is supported for the current context.
 
     This function operates on the current GL context; you must have created a
