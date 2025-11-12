@@ -406,8 +406,8 @@ struct {drop_prefix(name)}(Indexer, Intable):
         return lhs.value == rhs.value
     
     @always_inline("nodebug")
-    fn __index__(self) -> __mlir_type.index:
-        return index(Int(self))
+    fn __mlir_index__(self) -> __mlir_type.index:
+        return Int(self).__mlir_index__()
 {body}
 ''')
 
@@ -437,7 +437,7 @@ def translate_struct(m: re.Match) -> str:
     return (
 f'''
 @fieldwise_init
-struct {drop_prefix(name)}(Copyable, Movable):
+struct {drop_prefix(name)}(ImplicitlyCopyable, Movable):
     {doc_template(doc, name, '    ')}
     
 {body}
@@ -450,7 +450,7 @@ def translate_opaque_struct(m: re.Match) -> str:
     return (
 f'''
 @fieldwise_init
-struct {drop_prefix(m['os_name'])}(Copyable, Movable):
+struct {drop_prefix(m['os_name'])}(ImplicitlyCopyable, Movable):
     {doc_template(format_docblock(m['doc']), m['os_name'], '    ')}
     pass
 ''')
@@ -483,7 +483,7 @@ def translate_typedef_struct(m: re.Match) -> str:
     return (
 f'''
 @fieldwise_init
-struct {drop_prefix(m['ts_name'])}(Copyable, Movable):
+struct {drop_prefix(m['ts_name'])}(ImplicitlyCopyable, Movable):
     {doc_template(doc, name, '    ')}
     
 {body}
@@ -536,7 +536,7 @@ fn {mojo_name}({args}{', ' * bool(args) * (ret != 'None')}{f'out ret: {ret}' * (
     {doc_template(doc, sdl_name, '    ')}
     ret = {call}
     if not ret:
-        raise String(unsafe_from_utf8_ptr=get_error())
+        raise Error(String(unsafe_from_utf8_ptr=get_error()))
 
 ''')
 
@@ -563,7 +563,7 @@ def translate_function(m: re.Match):
     pass_args = re.sub(match_argument_names, r'\1\2', sdl_args)
     for arg_name in re.finditer(r'\w+(?=: String)', mojo_args):
         pass_args = re.sub(r'\b' + arg_name[0] + r'\b', arg_name[0] + '.unsafe_cstr_ptr()', pass_args)
-    call = f'_get_dylib_function[lib, "{m['f_name']}", fn ({sdl_args}) -> {sdl_ret}]()({pass_args})'
+    call = f'_get_sdl_handle()[].get_function[fn ({sdl_args}) -> {sdl_ret}]("{sdl_name}")({pass_args})'
     if mojo_ret == 'String':
         call = 'String(unsafe_from_utf8_ptr=' + call + ')'
     if re.search('Returns:\n        True on success', doc) and (mojo_ret == 'Bool'):
@@ -604,7 +604,7 @@ def translate_gamepadbinding(doc: str) -> str:
 f'''
 @fieldwise_init
 @register_passable("trivial")
-struct GamepadBindingInputAxis(Copyable, Movable):
+struct GamepadBindingInputAxis(ImplicitlyCopyable, Movable):
     var axis: c_int
     var axis_min: c_int
     var axis_max: c_int
@@ -612,14 +612,14 @@ struct GamepadBindingInputAxis(Copyable, Movable):
 
 @fieldwise_init
 @register_passable("trivial")
-struct GamepadBindingInputHat(Copyable, Movable):
+struct GamepadBindingInputHat(ImplicitlyCopyable, Movable):
     var hat: c_int
     var hat_mask: c_int
 
 
 @fieldwise_init
 @register_passable("trivial")
-struct GamepadBindingInput(Copyable, Movable):
+struct GamepadBindingInput(ImplicitlyCopyable, Movable):
     alias _mlir_type = __mlir_type[`!pop.union<`, GamepadBindingInputAxis, `, `, GamepadBindingInputHat, `>`]
     var _impl: Self._mlir_type
 
@@ -633,7 +633,7 @@ struct GamepadBindingInput(Copyable, Movable):
 
 @fieldwise_init
 @register_passable("trivial")
-struct GamepadBindingOutputAxis(Copyable, Movable):
+struct GamepadBindingOutputAxis(ImplicitlyCopyable, Movable):
     var axis: GamepadAxis
     var axis_min: c_int
     var axis_max: c_int
@@ -641,7 +641,7 @@ struct GamepadBindingOutputAxis(Copyable, Movable):
 
 @fieldwise_init
 @register_passable("trivial")
-struct GamepadBindingOutput(Copyable, Movable):
+struct GamepadBindingOutput(ImplicitlyCopyable, Movable):
     alias _mlir_type = __mlir_type[`!pop.union<`, GamepadButton, `, `, GamepadBindingOutputAxis, `>`]
     var _impl: Self._mlir_type
 
@@ -655,7 +655,7 @@ struct GamepadBindingOutput(Copyable, Movable):
 
 @fieldwise_init
 @register_passable("trivial")
-struct GamepadBinding(Copyable, Movable):
+struct GamepadBinding(ImplicitlyCopyable, Movable):
     """{doc}
 
     Docs: https://wiki.libsdl.org/SDL3/SDL_GamepadBinding.
@@ -694,9 +694,9 @@ def get_src(url: str, out: Path):
             for match in re.finditer(regex, src.read().decode('utf-8')):
                 out.write(patterns[match.lastgroup][1](match))
 
-out_dir = Path('out/')
-rmtree(out_dir)
-out_dir.mkdir()
+out_dir = Path('src/')
+rmtree(out_dir, ignore_errors=True)
+out_dir.mkdir(exist_ok=True)
 
 with open(out_dir / '__init__.mojo', 'w') as imp:
     imp.write('''
@@ -715,27 +715,33 @@ with open(out_dir / '__init__.mojo', 'w') as imp:
     imp.write(
 f'''
 
-alias Ptr = stdlib.memory.UnsafePointer
+alias Ptr = stdlib.memory.LegacyUnsafePointer
 
-
+from os import abort
 from sys import CompilationTarget, is_big_endian, is_little_endian
-from sys.ffi import _Global, _OwnedDLHandle, _get_dylib_function, c_char, c_uchar, c_int, c_uint, c_short, c_ushort, c_long, c_long_long, c_size_t, c_ssize_t, c_float, c_double
+from sys.ffi import _Global, OwnedDLHandle, c_char, c_uchar, c_int, c_uint, c_short, c_ushort, c_long, c_long_long, c_size_t, c_ssize_t, c_float, c_double
 
-alias lib = _Global["SDL", _OwnedDLHandle, _init_sdl_handle]()
+alias lib = _Global["SDL", _init_sdl_handle]()
 
-fn _init_sdl_handle() -> _OwnedDLHandle:
+fn _get_sdl_handle() -> Ptr[OwnedDLHandle]:
+    try:
+        return lib.get_or_create_ptr()
+    except:
+        return abort[Ptr[OwnedDLHandle]]("Cannot get handle to libSDL3")
+
+fn _init_sdl_handle() -> OwnedDLHandle:
     try:
         @parameter
         if CompilationTarget.is_macos():
-            return _OwnedDLHandle(".pixi/envs/default/lib/libSDL3.dylib")
+            return OwnedDLHandle(".pixi/envs/default/lib/libSDL3.dylib")
         elif CompilationTarget.is_linux():
-            return _OwnedDLHandle(".pixi/envs/default/lib/libSDL3.so")
+            return OwnedDLHandle(".pixi/envs/default/lib/libSDL3.so")
         else:
             constrained[False, "OS is not supported"]()
-            return _uninit[_OwnedDLHandle]()
+            return _uninit[OwnedDLHandle]()
     except:
         print("libSDL3 not found at .pixi/envs/default/lib/")
-        return _uninit[_OwnedDLHandle]()
+        return _uninit[OwnedDLHandle]()
 
 
 @always_inline
